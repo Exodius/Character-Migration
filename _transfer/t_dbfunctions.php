@@ -25,13 +25,29 @@
         return $row['cStatus'];
     }
 
-    function CanOrNoTransferPlayer($DBHost, $DBUser, $DBPassword, $CharactersDB, $AccountID) {
+    function CanOrNoTransferPlayer($DBHost, $DBUser, $DBPassword, $CharactersDB, $AccountDB, $AccountID) {
         $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
+
+        _SelectDB($AccountDB, $connection);
+        $query  = mysql_query("SELECT COUNT(*) FROM `account_banned` WHERE `id` = ". $AccountID ." AND active = 1;", $connection) or die(mysql_error());
+        $result = mysql_fetch_array($query);
+        
+        if ($result[0] > 0) {
+            mysql_close($connection);
+            return true;
+        }
+        
         _SelectDB($CharactersDB, $connection);
         $query  = mysql_query("SELECT COUNT(*) FROM `characters` WHERE `account` = ". $AccountID .";", $connection) or die(mysql_error());
         $result = mysql_fetch_array($query);
+        
+        if ($result[0] < 9) {
+            mysql_close($connection);
+            return false;
+        }
+        
         mysql_close($connection);
-        return $result[0] < 9 ? false : true;
+        return true;
     }
 
     function CanOrNoTransferServer($DBHost, $DBUser, $DBPassword, $AccountDB, $RealmID, $GMLevel) {
@@ -298,10 +314,14 @@
     }
 
     function RemoteCommandWithSOAP($SOAPUser, $SOAPPassword, $SOAPPort, $SOAPHost, $URI, $COMMAND) {
-        $SOAP = new SOAP(array("soap_user" => "". $SOAPUser ."", "soap_pass" => "". $SOAPPassword ."", "soap_port" => "". $SOAPPort  ."", "addr" => "". $SOAPHost ."", "uri" => "". $URI .""));
-        $SOAP->fetch($COMMAND);
-        //echo "<br>". $SOAP->fetch("". $COMMAND ."") ."<br>";
-        unset($SOAP);
+        try {
+            $SOAP = new SOAP(array("soap_user" => "". $SOAPUser ."", "soap_pass" => "". $SOAPPassword ."", "soap_port" => "". $SOAPPort  ."", "addr" => "". $SOAPHost ."", "uri" => "". $URI .""));
+            $SOAP->fetch($COMMAND);
+            //echo "<br>". $SOAP->fetch("". $COMMAND ."") ."<br>";
+            unset($SOAP);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
     }
 
     class SOAP {
@@ -309,8 +329,8 @@
     public
         function __construct($conArr) {
             if(!$this->connect($conArr['soap_user'], $conArr['soap_pass'], $conArr['addr'], $conArr['soap_port'], $conArr['uri']))
-                die("SOAP UNABAIBLE CONNECT");
-        }
+                throw new Exception ("SOAP UNABLE TO CONNECT");
+            }
     public
         function connect($soapUser, $soapPass, $soapHost, $soapPort, $soap_uri) {
             $this->client = new SoapClient(NULL, array(

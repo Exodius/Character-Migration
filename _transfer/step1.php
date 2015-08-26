@@ -11,14 +11,14 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
     $o_Password = base64_encode(trim($_POST['Password']));
     $o_URL      = trim($_POST['ServerUrl']);
     if($_FILES['file']['name'] != "chardump.lua") {
-        $realson = _RT("Wrong file!");
-        Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77], $realson);
+        $reason = _RT("Wrong file!");
+        Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77], $reason);
     } else {
         move_uploaded_file($_FILES['file']['tmp_name'], "./storage/". $_FILES['file']['name']);
         $file       = "./storage/chardump.lua";
         $fileopen   = fopen($file, 'r');
         $buffer     = '';
-        $realson    = '';
+        $reason    = '';
 
         while(!feof($fileopen)) {
             $buffer2 = fgets($fileopen);
@@ -65,27 +65,27 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
             }
 
             if(CheckGameBuild($json['ginf']['clientbuild'], $GAMEBUILD)) {
-                $realson = _RT($write[50] ." ". $GAMEBUILD);
+                $reason = _RT($write[50] ." ". $GAMEBUILD);
             } else if(((10 + $CharLevel > $AchievementsCount) || ($AchievementsCount > $AchievementsMinCount)) && $AchievementsCheck == 1) {
-                $realson = _RT("Seems bad characters, not enought achievements!");
+                $reason = _RT("Seems bad characters, not enought achievements!");
             } else if(CHECKDAY($ACHMAXTime, $ACHMINTime) < $PLAYTIME) {
-                $realson = _RT("Small playtime!");
+                $reason = _RT("Small playtime!");
             } else if(_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $o_URL) ||
                 _CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALM)     ||
                 _CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST)) {
-                $realson = _RT($write[57]);
-            } else if(CanOrNoTransferPlayer(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $CHAR_ACCOUNT_ID)) {
-                $realson = _RT($write[52] . $REALM_NAME . $write[53]);
+                $reason = _RT($write[57]);
+            } else if(CanOrNoTransferPlayer(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $AccountDB, $CHAR_ACCOUNT_ID)) {
+                $reason = _RT($write[52] . $REALM_NAME . $write[53]);
             } else if($GM_ACCOUNT_ID < 0) {
-                $realson = _RT($write[54] . $REALM_NAME . $write[55]);
+                $reason = _RT($write[54] . $REALM_NAME . $write[55]);
             } else if(strlen($o_Account) > 32) {
-                $realson = _RT($write[99]);
-            } else if(!_ServerOn($SIP, $SPT))
-                $realson = _RT("Realm: \"". $REALM_NAME ."\" <u>OFFLINE!</u>");
+                $reason = _RT($write[99]);
+            } else if(!_ServerOn($SOAPUser, $SOAPPassword, _SOAPPSwitch($CHAR_REALM), _SOAPHSwitch($CHAR_REALM), _SOAPURISwitch($CHAR_REALM)))
+                $reason = _RT("Realm: \"". $REALM_NAME ."\" <u>OFFLINE!</u>");
 
             $GUID   = CheckCharacterGuid($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, GetCharacterGuid(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM)));
 
-            if(empty($realson)) {
+            if(empty($reason)) {
                 $ID = 0;
                 $ID =
                 WriteDumpFromFileInDB($AccountDBHost, $DBUser, $DBPassword, $AccountDB,
@@ -93,9 +93,9 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
                                     $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $GUID, $GM_ACCOUNT_ID, $write[20]);
             }
         } else if(!isset($part[1]))
-            $realson = _RT($write[51]);
-         if(!empty($realson)) {
-            Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77], $realson);
+            $reason = _RT($write[51]);
+         if(!empty($reason)) {
+            Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77], $reason);
         } else {
             $_SESSION['STEP2']  = "NO";
             $char_money         = _MaxValue($json['uinf']['money'], $MaxMoney);

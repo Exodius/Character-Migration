@@ -23,7 +23,7 @@
 
         if(!isset($_SESSION['guid']) || !isset ($_SESSION['realm']) || !isset($_SESSION['dumpID']) || $_SESSION['STEP2'] != "YES") {
             $realson    = $write[98];
-        } else if(preg_match('/[\'^?$%&*()}{@#~?><>,|=_+¬-]./', $CHAR_NAME)) {
+        } else if(preg_match('/[\'^?$%&*()}{@#~?><>,|=_+Â¬-]./', $CHAR_NAME)) {
             $realson    = $write[92];
         } else if(strstr( $CHAR_NAME, " ")) {
             $realson    = $write[93];
@@ -33,7 +33,7 @@
             $realson    = $write[95];
         } else if(_CheckCharacterName(_HostDBSwitch($RealmID), $DBUser, $DBPassword, _CharacterDBSwitch($RealmID), $CHAR_NAME) > 0) {
             $realson    = $write[96] . $CHAR_NAME . $write[97];
-        } else if(!_ServerOn($SIP, $SPT))
+        } else if(!_ServerOn($SOAPUser, $SOAPPassword, _SOAPPSwitch($RealmID), _SOAPHSwitch($RealmID), _SOAPURISwitch($RealmID)))
             $realson    = "Realm: \"". $SNA ."\" <u>OFFLINE!</u>";
 
         if(!empty($realson)) {

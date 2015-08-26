@@ -1,12 +1,14 @@
 ﻿<?php
 
 
-    function _ServerOn($IP, $PORT) {
-        $STATUS = @fsockopen($IP, $PORT, $ERROR_NO, $ERROR_STR,(float)0.5);
-        if($STATUS) {
-            @fclose($STATUS);
-            return true;
-        } else return false;
+    function _ServerOn($SOAPUser, $SOAPPassword, $SOAPPort, $SOAPHost, $URI) {
+        try {
+            $SOAP = new SOAP(array("soap_user" => "". $SOAPUser ."", "soap_pass" => "". $SOAPPassword ."", "soap_port" => "". $SOAPPort  ."", "addr" => "". $SOAPHost ."", "uri" => "". $URI .""));
+        } catch (Exception $e) {
+            return false;
+        }
+        
+        return true;
     }
 
     function CheckGameBuild($DBuild, $DServer) {
@@ -36,6 +38,9 @@
         for($i = 0; $i < count($item_array); $i++) {
             $toSend .= $item_array[$i];
             $toSend .= " ";
+            
+            usleep(10000); // slow down process to avoid world freeze
+            
             if($by10 == 10) {
                 RemoteCommandWithSOAP($SOAPUser, $SOAPPassword, $SOAPPort, $SOAPHost, $URI,
                 trim(".send items ". $PlayerName ." \"". $TransferLetterTitle ."\" \"". $TransferLetterMessage ."\" ". $toSend));
