@@ -23,7 +23,7 @@
 <script type = "text/javascript">
 <?php
     if(!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $GMLevel)) {
-echo "
+    ?>
     function DoCancel( id, Realm, Guid ) {
         $.ajax({
         type : 'POST',
@@ -39,12 +39,13 @@ echo "
             alert( data );
         },
         error : function( XMLHttpRequest, textStatus, errorThrown ) {
-            alert( textStatus + \" -- \" + errorThrown );
+            alert( textStatus + " -- " + errorThrown );
         }
         });
-    }";
+    }
+    <?php
     } else {
-echo "
+    ?>
     function DoApprove( id, Realm, Guid ) {
         $.ajax({
         type : 'POST',
@@ -59,12 +60,32 @@ echo "
             location.reload( true );
         },
         error : function( XMLHttpRequest, textStatus, errorThrown ) {
-            alert( textStatus + \" -- \" + errorThrown );
+            alert( textStatus + " -- " + errorThrown );
         }
         });
     }
+    
+    function DoApproveAll( ids, Realms, Guids ) {
+        $.ajax({
+        type : 'POST',
+        url : '_transfer/b_approve_all.php',
+        timeout: 0,
+        data : {
+            Approve : JSON.stringify(ids),
+            RealmlistList: JSON.stringify(Realms),
+            GUID : JSON.stringify(Guids)
+        },
+        success : function( data ) {
+            location.reload( true );
+        },
+        error : function( XMLHttpRequest, textStatus, errorThrown ) {
+            alert( textStatus + " -- " + errorThrown );
+        }
+        });
+    }
+    
     function DoDeny( id, Realm, Guid ) {
-        var Reason = prompt( \"Reason:\", \"\" );
+        var Reason = prompt( "Reason:", "" );
         $.ajax({
         type : 'POST',
         url : '_transfer/b_deny.php',
@@ -81,10 +102,11 @@ echo "
             alert( data );
         },
         error : function( XMLHttpRequest, textStatus, errorThrown ) {
-            alert( textStatus + \" -- \" + errorThrown );
+            alert( textStatus + " -- " + errorThrown );
         }
         });
     }
+    
     function DoResend( id, Realm, Guid ) {
         $.ajax({
         type : 'POST',
@@ -100,11 +122,13 @@ echo "
             alert ( data );
         },
         error : function( XMLHttpRequest, textStatus, errorThrown ) {
-            alert( textStatus + \" -- \" + errorThrown );
+            alert( textStatus + " -- " + errorThrown );
         }
         });
-    }";
-    } ?>
+    }
+    <?php
+    } 
+    ?>
 </script>
 <table width = "700" cellpadding = "0" cellspacing = "0" border = "0" rules = "none" align = "center">
     <tr><td align = "center">
@@ -167,8 +191,13 @@ echo "
                 <td>Server URL:             </td>
                 <td>Admin Options:          </td>
             </tr>";
+            
+            $ids = array();
+            $guids=array();
+            $realms=array();
+            
             while($row = mysql_fetch_array($query)) {
-                if($row["cStatus"] == 0)
+                if($row["cStatus"] == 0) {
                     echo "
                     <tr bgcolor = #FFFFCC>
                         <td>". $row["cNameNEW"] ." / ". $row["cNameOLD"] ."</td>
@@ -183,7 +212,15 @@ echo "
                             <button name = \"Resend\" id = \"".$row["id"]."\" onclick = \"javascript:DoResend('".$row["id"]."', '".$row["cRealm"]."', '".$row["GUID"]."');\" style = \"font-size:10px\"><font color = \"purple\">Resend</font></button>
                         </td>
                     </tr>";
+                    
+                    array_push($ids, $row["id"]);
+                    array_push($realms, $row["cRealm"]);
+                    array_push($guids, $row["GUID"]);
+                }
             }
+            
+            echo "<button name = \"ApproveAll\" id = \"".$row["id"]."\" onclick = 'javascript:DoApproveAll(".json_encode($ids).", ".json_encode($realms).", ".json_encode($guids).");' style = \"font-size:10px\"><font color = \"green\">Approve All</font></button><br>";
+            echo "</table></div>";
         } else {
             echo "
                 <td>No.:            </td>
@@ -205,7 +242,8 @@ echo "
                 echo "  </td>
                     </tr>";
             }
+            echo "</table></div>";
         }
-        echo "</table></div>";
+        
     }
 ?>

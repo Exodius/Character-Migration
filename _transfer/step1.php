@@ -34,7 +34,7 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
             $DECODED_DUMP       = _DECRYPT($DUMP);
             $CHAR_REALM         = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $REALM_NAME);
             $CHAR_ACCOUNT_ID    = _GetCharacterAccountID();
-            $GM_ACCOUNT_ID      = CanOrNoTransferServer($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, $GMLevel);
+            $GM_ACCOUNT_ID      = CanOrNoTransferServer($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, $GMLevel, _CharacterDBSwitch($CHAR_REALM));
             $json               = json_decode(stripslashes($DECODED_DUMP), true);
             $CHAR_NAME          = mb_convert_case(mb_strtolower($json['uinf']['name'], 'UTF-8'), MB_CASE_TITLE, 'UTF-8');
             $O_REALMLIST        = $json['ginf']['realmlist'];
@@ -75,13 +75,16 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
                 _CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST)) {
                 $reason = _RT($write[57]);
             } else if(CanOrNoTransferPlayer(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $AccountDB, $CHAR_ACCOUNT_ID)) {
-                $reason = _RT($write[52] . $REALM_NAME . $write[53]);
+                $reason = _RT($write[52] ." ". $REALM_NAME .". ". $write[53]);
             } else if($GM_ACCOUNT_ID < 0) {
-                $reason = _RT($write[54] . $REALM_NAME . $write[55]);
+                $reason = _RT($write[54] ." ". $REALM_NAME .". ". $write[55]);
             } else if(strlen($o_Account) > 32) {
                 $reason = _RT($write[99]);
-            } else if(!_ServerOn($SOAPUser, $SOAPPassword, _SOAPPSwitch($CHAR_REALM), _SOAPHSwitch($CHAR_REALM), _SOAPURISwitch($CHAR_REALM)))
+            } else if(!_ServerOn($SOAPUser, $SOAPPassword, _SOAPPSwitch($CHAR_REALM), _SOAPHSwitch($CHAR_REALM), _SOAPURISwitch($CHAR_REALM))) {
                 $reason = _RT("Realm: \"". $REALM_NAME ."\" <u>OFFLINE!</u>");
+            } else if(!checkDelay()) {
+                $reason = _RT("Un altro porting è in corso, riprovare tra 1 minuto");
+            }
 
             $GUID   = CheckCharacterGuid($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, GetCharacterGuid(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM)));
 
@@ -94,7 +97,8 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
             }
         } else if(!isset($part[1]))
             $reason = _RT($write[51]);
-         if(!empty($reason)) {
+         
+        if(!empty($reason)) {
             Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77], $reason);
         } else {
             $_SESSION['STEP2']  = "NO";
@@ -196,6 +200,12 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
                 if(_isSpellValid($SpellID, $ClassID))
                     $QUERYFOREXECUTE    = $QUERYFOREXECUTE. "\n INSERT IGNORE /* NOT MOUNT OR CRITTER */ INTO `character_spell` VALUES (". $GUID .", ". (int)$SpellID .", 1, 0);";
             }
+            
+            foreach($json['recipes'] as $SpellID) {
+                if(_isProfessionSpell($SpellID))
+                    $QUERYFOREXECUTE    = $QUERYFOREXECUTE. "\n INSERT IGNORE /* NOT MOUNT OR CRITTER */ INTO `character_spell` VALUES (". $GUID .", ". (int)$SpellID .", 1, 0);";
+            }
+
 
             foreach($json['creature'] as $key => $SpellID) {
                 $QUERYFOREXECUTE        = $QUERYFOREXECUTE. "\n INSERT IGNORE /* MOUNT OR CRITTER */ INTO `character_spell` VALUES (". $GUID .", ". (int)$SpellID .", 1, 0);";
@@ -248,7 +258,44 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
             }
         }
     }
-} else Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77]);
+} else {
+
+    
+    if (!checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB)) {
+        ?>
+          <script type="text/javascript">
+            alert("I porting sono disabilitati");
+            window.location.href = "playerside.php";
+          </script>
+        <?php   
+        die();
+    }
+    
+
+    if (!checkDelay()) {
+        ?>
+          <script type="text/javascript">
+            alert("Un altro porting è in corso, Riprovare tra qualche minuto");
+            window.location.href = "playerside.php";
+          </script>
+        <?php   
+        die();
+    }
+    
+    $CHAR_REALM         = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, "AzerothShard");
+    if (CanOrNoTransferServer($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, $GMLevel, _CharacterDBSwitch($CHAR_REALM))<0) {
+        ?>
+        <script type="text/javascript">
+          alert("Attenzione tutte le code sono piene! Premi OK per tornare alla pagina precedente e riprovare più tardi");
+          window.location.href = "playerside.php";
+        </script>
+      <?php
+      die();
+    }
+    
+    Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77]);
+
+}
 
     function CHECKDAY($TIME1, $TIME2) {
         $DIFF = floor(($TIME1-$TIME2)/86400);

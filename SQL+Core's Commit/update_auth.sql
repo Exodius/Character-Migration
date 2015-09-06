@@ -4,6 +4,8 @@
 -- DO NOT FORGET CHANGE TO "0" TO WHICH REALM YOU DON`T WANT MAKE AVAIBLE TRANSFER
 ALTER TABLE `realmlist` ADD COLUMN `TransferAvailable` INT(1) DEFAULT 1 NULL AFTER `gamebuild`;
 
+CREATE TABLE `wowengine-hw2-auth`.`account_transfer_whitelist`( `account` INT(11) NOT NULL DEFAULT 0 COMMENT 'Account id', `quantity` TINYINT(8) DEFAULT 0 COMMENT 'Limit transfer quantity for this account', PRIMARY KEY (`account`) );
+
 DROP TABLE IF EXISTS `account_transfer`;
 CREATE TABLE `account_transfer` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Identifier',

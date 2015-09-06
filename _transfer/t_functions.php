@@ -29,6 +29,31 @@
         $count = $count > 1000 ? 1000 : $count;
         return $count;
     }
+    
+    function checkDelay() {
+        $timeFile       = "./storage/lastporting.txt";
+        $handle   = fopen($timeFile, 'r');
+        
+        if (!$handle)
+            return true;
+
+        if(!feof($handle)) {
+            $timestamp = (int)fgets($handle);
+        }
+        
+        if (!$timestamp)
+            return true;
+
+        fclose($handle);
+
+        $diff=time()-$timestamp;
+                    echo ($diff);
+        if (!$timestamp || $diff>120) {
+            return true;
+        }
+        
+        return false;
+    }
 
     function _PreparateMails($row, $PlayerName, $TransferLetterTitle, $TransferLetterMessage, $SOAPUser, $SOAPPassword, $SOAPPort, $SOAPHost, $URI) {
         $item_array = explode(" ", trim($row));
@@ -39,7 +64,7 @@
             $toSend .= $item_array[$i];
             $toSend .= " ";
             
-            usleep(10000); // slow down process to avoid world freeze
+            usleep(100000); // slow down process to avoid world freeze
             
             if($by10 == 10) {
                 RemoteCommandWithSOAP($SOAPUser, $SOAPPassword, $SOAPPort, $SOAPHost, $URI,

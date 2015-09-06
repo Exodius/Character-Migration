@@ -10,7 +10,7 @@
         $GUID       = $_SESSION['guid'];
         $RealmID    = $_SESSION['realm'];
         $ID         = $_SESSION['dumpID'];
-        $realson    = "";
+        $reason    = "";
 
         $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
         _SelectDB($AccountDB, $connection);
@@ -22,23 +22,33 @@
         mysql_close($connection);
 
         if(!isset($_SESSION['guid']) || !isset ($_SESSION['realm']) || !isset($_SESSION['dumpID']) || $_SESSION['STEP2'] != "YES") {
-            $realson    = $write[98];
+            $reason    = $write[98];
         } else if(preg_match('/[\'^?$%&*()}{@#~?><>,|=_+¬-]./', $CHAR_NAME)) {
-            $realson    = $write[92];
+            $reason    = $write[92];
         } else if(strstr( $CHAR_NAME, " ")) {
-            $realson    = $write[93];
+            $reason    = $write[93];
         } else if(preg_match("/[0-9]/", $CHAR_NAME)) {
-            $realson    = $write[94];
+            $reason    = $write[94];
         } else if(mb_strlen($CHAR_NAME, 'UTF-8') > 16 && mb_strlen($CHAR_NAME, 'UTF-8') > 1) {
-            $realson    = $write[95];
+            $reason    = $write[95];
         } else if(_CheckCharacterName(_HostDBSwitch($RealmID), $DBUser, $DBPassword, _CharacterDBSwitch($RealmID), $CHAR_NAME) > 0) {
-            $realson    = $write[96] . $CHAR_NAME . $write[97];
-        } else if(!_ServerOn($SOAPUser, $SOAPPassword, _SOAPPSwitch($RealmID), _SOAPHSwitch($RealmID), _SOAPURISwitch($RealmID)))
-            $realson    = "Realm: \"". $SNA ."\" <u>OFFLINE!</u>";
+            $reason    = $write[96] . $CHAR_NAME . $write[97];
+        } else if(!_ServerOn($SOAPUser, $SOAPPassword, _SOAPPSwitch($RealmID), _SOAPHSwitch($RealmID), _SOAPURISwitch($RealmID))) {
+            $reason    = "Realm: \"". $SNA ."\" <u>OFFLINE!</u>";
+        }  else if(!checkDelay()) {
+            $reason = _RT("Un altro porting è in corso, riprovare tra 1 minuto");
+        } else if (!checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB)) {
+            $reason = _RT("Questo account non può effettuare altri porting.");
+        }
 
-        if(!empty($realson)) {
-            Step2Form($realson, $write[90]);
+        if(!empty($reason)) {
+            Step2Form($reason, $write[90]);
         } else {
+            // save time before starting process 
+            $handle = fopen("./storage/lastporting.txt", "wa+") or die("Unable to open lastporting file!");
+            fwrite($handle, time());
+            fclose($handle);
+            
             $_SESSION['STEP2']  = "NO";
             UpdateCharacterName(_HostDBSwitch($RealmID), $DBUser, $DBPassword, _CharacterDBSwitch($RealmID), $CHAR_NAME, $GUID);
             _TalentsReset(_HostDBSwitch($RealmID), $DBUser, $DBPassword, _CharacterDBSwitch($RealmID), $GUID);
