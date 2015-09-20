@@ -14,8 +14,7 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
         $reason = _RT("Wrong file!");
         Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77], $reason);
     } else {
-        move_uploaded_file($_FILES['file']['tmp_name'], "./storage/". $_FILES['file']['name']);
-        $file       = "./storage/chardump.lua";
+        $file       = $_FILES['file']['tmp_name'];
         $fileopen   = fopen($file, 'r');
         $buffer     = '';
         $reason    = '';
@@ -323,6 +322,13 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
             echo "</select><tr><td>
             <tr><td><div align = right class = \"MythTable\">". $TEXT5 ."</div></td></tr>
                 <tr><td><b>Server URL: </b><input name=\"ServerUrl\" type=\"text\" size=\"60\" style = \"float: right;\"></td></tr>
+                <tr><td><b>Porting Type: </b>
+                <select name=\"PortingType\" style = \"float: right;\" />
+                    //IF BASIC_PORTING_NUMBER < 2
+                        <option value='0'>FREE</option>
+                    <option value='1'>BASIC</option>
+                    <option value='2'>FULL</option>
+                </select></td></tr>
             <tr><td><div align = right class = \"MythTable\">". $TEXT6 ."</div></td></tr>
             </table>
                 <div class = \"MythInput\">
