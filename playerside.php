@@ -1,5 +1,8 @@
 <?php
-
+    //ini_set('display_errors',1);
+    //ini_set('display_startup_errors',1);
+    //error_reporting(E_ALL);
+    
     ob_start();
     session_start();
 
@@ -160,7 +163,8 @@
             _SelectDB($AccountDB, $connection);
             $query = mysql_query("SELECT * FROM `account_transfer` WHERE `gmAccount` = ". $ACCOUNT_ID ." ORDER BY `id` DESC LIMIT 25;", $connection);
             mysql_close($connection);
-        } else {
+        } 
+        else {
             echo "
             <div align = right style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma'; \">". $TEXT2 ."</div>
             <br>
@@ -174,8 +178,7 @@
 
             $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
             _SelectDB($AccountDB, $connection);
-            $query = mysql_query("SELECT id FROM `account_transfer` WHERE `cAccount` = ". $ACCOUNT_ID ." ORDER BY `id` DESC LIMIT 25;", $connection);
-            
+            $query = mysql_query("SELECT * FROM `account_transfer` WHERE `cAccount` = ". $ACCOUNT_ID ." ORDER BY `id` DESC LIMIT 25;", $connection);
             mysql_close($connection);
         }
         echo "
@@ -223,7 +226,8 @@
             
             echo "<button name = \"ApproveAll\" id = \"".$row["id"]."\" onclick = 'javascript:DoApproveAll(".json_encode($ids).", ".json_encode($realms).", ".json_encode($guids).");' style = \"font-size:10px\"><font color = \"green\">Approve All</font></button><br>";
             echo "</table></div>";
-        } else {
+        } 
+        else {
             echo "
                 <td>No.:            </td>
                 <td>Character Name: </td>

@@ -1,5 +1,4 @@
 <?php
-
     include_once("t_dbfunctions.php");
     include_once("t_functions.php");
     include_once("t_config.php");
@@ -117,10 +116,11 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
             $connection         = mysql_connect(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword);
             
             _SelectDB(_CharacterDBSwitch($CHAR_REALM), $connection);
+            //Note: speccount is not present anymore in the db... Maybe has been renamed to talentsGroupCount?
             mysql_query("
-            INSERT INTO `characters`(`guid`,`name`,`level`,`gender`,`totalHonorPoints`,`arenaPoints`,`totalKills`,`money`,`class`,`race`,`at_login`,`account`,`taximask`,`speccount`,`online`) VALUES (
+            INSERT INTO `characters`(`guid`,`name`,`level`,`gender`,`totalHonorPoints`,`arenaPoints`,`totalKills`,`money`,`class`,`race`,`at_login`,`account`,`taximask`,`online`) VALUES (
             ". $GUID .",\"". _X($CHAR_NAME) ."\",". (int)$CharLevel .",". (int)$char_gender .",". (int)$char_honorpoints .",". (int)$char_arenapoints .",
-            ". (int)$char_totalkills .",".(int)$char_money .",". $ClassID .",". $RaceID .", 0x180, 1, \"0 0 0 0 0 0 0 0 0 0 0 0 0 0\",". (int)$char_speccount .", 0);", $connection);
+            ". (int)$char_totalkills .",".(int)$char_money .",". $ClassID .",". $RaceID .", 0x180, 1, \"0 0 0 0 0 0 0 0 0 0 0 0 0 0\", 0);", $connection);
             $QUERYFOREXECUTE    = $QUERYFOREXECUTE. "
             INSERT INTO `character_transfer` VALUES (". $GUID .",". $CHAR_ACCOUNT_ID .",". $PLAYER_TRANSFER_STACKS .",". $ID .");
 
@@ -133,7 +133,7 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
             `zone`          = 4395,
             `cinematic`     = 1
                 WHERE `guid` = ". $GUID .";";
-
+            
             if($char_speccount == 2) {
                 LearnSeparateSpell(63644, $GUID, $connection);
                 LearnSeparateSpell(63645, $GUID, $connection);
@@ -333,8 +333,6 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
                 </div>
         </form>";
     }
-
-    function _RT($TEXT) { return "<font color=#CC0000><b>". $TEXT ."</b></font><br>"; }
 
     function HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) {
         global $portingType;

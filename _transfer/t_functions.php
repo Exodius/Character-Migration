@@ -217,4 +217,6 @@
     function _DECRYPT($STRING) {
         return strrev(base64_decode(strrev(strrev(base64_decode(strrev($STRING))))));
     }
+    
+    function _RT($TEXT) { return "<font color=#CC0000><b>". $TEXT ."</b></font><br>"; }
 ?>
