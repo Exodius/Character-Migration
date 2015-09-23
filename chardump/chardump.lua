@@ -118,7 +118,14 @@ function private.GetIData()
     for i = 1, 74 do 
         itemLink = GetInventoryItemLink("player", i) 
         if itemLink then 
-            count = GetInventoryItemCount("player",i)
+
+            local equipSlot = select(9, GetItemInfo(itemLink))
+            if equipSlot == "INVTYPE_BAG" then
+                count = 1
+            else
+                count = GetInventoryItemCount("player",i)
+            end
+
             for entry, chant, Gem1, Gem2, Gem3, _, _, _, _ in string.gmatch(itemLink,".-Hitem:(%d+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+).*") do 
                 retTbl["0000:"..i] =  {["I"] = entry, ["C"] = count, ["G1"] = Gem1, ["G2"] = Gem2, ["G3"] = Gem3};
             end
@@ -130,6 +137,7 @@ function private.GetIData()
             if ItemLink then 
                 local _, count, _, _, _ = GetContainerItemInfo(bag, slot); 
                 local p = bag + 1000;
+
                 for entry, chant, Gem1, Gem2, Gem3, _, _, _, _ in string.gmatch(ItemLink,".-Hitem:(%d+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+).*") do 
                     retTbl[p..":"..slot] = {["I"] = entry, ["C"] = count, ["G1"] = Gem1, ["G2"] = Gem2, ["G3"] = Gem3};
                 end
@@ -165,7 +173,7 @@ function private.Log(str_in)
 end
 function private.ErrLog(err_in)
     private.errlog = private.errlog or ""
-    private.errlog = private.errlog .. "err=" .. b64_enc(err_in) .. "\n"    
+    private.errlog = private.errlog .. "err=" .. b64_enc(err_in) .. "\n"
     print("\124c00FF0000"..(err_in or "nil").."\124r");
 end
 function private.GetCharDump()
@@ -203,6 +211,7 @@ function private.TradeSkillFrame_OnShow_Hook(frame, force)
 		end
 
 		print("Profession scanned!")
+
 
         local isLink, _ = IsTradeSkillLinked();
         if isLink == nil then
