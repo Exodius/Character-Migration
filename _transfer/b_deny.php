@@ -19,7 +19,7 @@
 
         if(_CheckCharacterOnlineStatus(_HostDBSwitch($RealmID), $DBUser, $DBPassword, _CharacterDBSwitch($RealmID), $GUID)) {
             if(CheckTransferStatus($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID) == 0) {
-                if(_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $GMLevel)) {
+                if(_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels)) {
                     AddComment($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $REASON);
                     CancelORDenyCharacterTransfer(_HostDBSwitch($RealmID), $DBUser, $DBPassword, _CharacterDBSwitch($RealmID), $GUID, $STORAGE);
                     UpdateDumpStatus($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, 2);

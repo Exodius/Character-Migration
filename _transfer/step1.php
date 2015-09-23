@@ -1,9 +1,9 @@
 <?php
-
     include_once("t_dbfunctions.php");
     include_once("t_functions.php");
     include_once("t_config.php");
     include_once("f_switch.php");
+    require_once("definitions.php");
 
 if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Password'])    && !empty($_POST['Password'])
  && isset($_POST['ServerUrl'])  && !empty($_POST['ServerUrl'])  && isset($_POST['RealmlistList'])   && !empty($_POST['RealmlistList'])) {
@@ -14,8 +14,7 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
         $reason = _RT("Wrong file!");
         Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77], $reason);
     } else {
-        move_uploaded_file($_FILES['file']['tmp_name'], "./storage/". $_FILES['file']['name']);
-        $file       = "./storage/chardump.lua";
+        $file       = $_FILES['file']['tmp_name'];
         $fileopen   = fopen($file, 'r');
         $buffer     = '';
         $reason    = '';
@@ -34,7 +33,7 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
             $DECODED_DUMP       = _DECRYPT($DUMP);
             $CHAR_REALM         = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $REALM_NAME);
             $CHAR_ACCOUNT_ID    = _GetCharacterAccountID();
-            $GM_ACCOUNT_ID      = CanOrNoTransferServer($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, $GMLevel, _CharacterDBSwitch($CHAR_REALM));
+            $PLAYER_TRANSFER_STACKS      = CanOrNoTransferServer($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, $AllowedGMLevels, _CharacterDBSwitch($CHAR_REALM));
             $json               = json_decode(stripslashes($DECODED_DUMP), true);
             $CHAR_NAME          = mb_convert_case(mb_strtolower($json['uinf']['name'], 'UTF-8'), MB_CASE_TITLE, 'UTF-8');
             $O_REALMLIST        = $json['ginf']['realmlist'];
@@ -76,7 +75,7 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
                 $reason = _RT($write[57]);
             } else if(CanOrNoTransferPlayer(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $AccountDB, $CHAR_ACCOUNT_ID)) {
                 $reason = _RT($write[52] ." ". $REALM_NAME .". ". $write[53]);
-            } else if($GM_ACCOUNT_ID < 0) {
+            } else if($PLAYER_TRANSFER_STACKS < 0) {
                 $reason = _RT($write[54] ." ". $REALM_NAME .". ". $write[55]);
             } else if(strlen($o_Account) > 32) {
                 $reason = _RT($write[99]);
@@ -93,7 +92,7 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
                 $ID =
                 WriteDumpFromFileInDB($AccountDBHost, $DBUser, $DBPassword, $AccountDB,
                 $DUMP, $CHAR_NAME, $CHAR_ACCOUNT_ID, $CHAR_REALM,
-                                    $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $GUID, $GM_ACCOUNT_ID, $write[20]);
+                                    $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $GUID, $PLAYER_TRANSFER_STACKS, $write[20]);
             }
         } else if(!isset($part[1]))
             $reason = _RT($write[51]);
@@ -117,12 +116,13 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
             $connection         = mysql_connect(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword);
             
             _SelectDB(_CharacterDBSwitch($CHAR_REALM), $connection);
+            //Note: speccount is not present anymore in the db... Maybe has been renamed to talentsGroupCount?
             mysql_query("
-            INSERT INTO `characters`(`guid`,`name`,`level`,`gender`,`totalHonorPoints`,`arenaPoints`,`totalKills`,`money`,`class`,`race`,`at_login`,`account`,`taximask`,`speccount`,`online`) VALUES (
+            INSERT INTO `characters`(`guid`,`name`,`level`,`gender`,`totalHonorPoints`,`arenaPoints`,`totalKills`,`money`,`class`,`race`,`at_login`,`account`,`taximask`,`online`) VALUES (
             ". $GUID .",\"". _X($CHAR_NAME) ."\",". (int)$CharLevel .",". (int)$char_gender .",". (int)$char_honorpoints .",". (int)$char_arenapoints .",
-            ". (int)$char_totalkills .",".(int)$char_money .",". $ClassID .",". $RaceID .", 0x180, 1, \"0 0 0 0 0 0 0 0 0 0 0 0 0 0\",". (int)$char_speccount .", 0);", $connection);
+            ". (int)$char_totalkills .",".(int)$char_money .",". $ClassID .",". $RaceID .", 0x180, 1, \"0 0 0 0 0 0 0 0 0 0 0 0 0 0\", 0);", $connection);
             $QUERYFOREXECUTE    = $QUERYFOREXECUTE. "
-            INSERT INTO `character_transfer` VALUES (". $GUID .",". $CHAR_ACCOUNT_ID .",". $GM_ACCOUNT_ID .",". $ID .");
+            INSERT INTO `character_transfer` VALUES (". $GUID .",". $CHAR_ACCOUNT_ID .",". $PLAYER_TRANSFER_STACKS .",". $ID .");
 
             UPDATE `characters` SET
             `position_x`    = 5741.36,
@@ -133,7 +133,7 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
             `zone`          = 4395,
             `cinematic`     = 1
                 WHERE `guid` = ". $GUID .";";
-
+            
             if($char_speccount == 2) {
                 LearnSeparateSpell(63644, $GUID, $connection);
                 LearnSeparateSpell(63645, $GUID, $connection);
@@ -283,7 +283,7 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
     }
     
     $CHAR_REALM         = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, "AzerothShard");
-    if (CanOrNoTransferServer($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, $GMLevel, _CharacterDBSwitch($CHAR_REALM))<0) {
+    if (CanOrNoTransferServer($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, $AllowedGMLevels, _CharacterDBSwitch($CHAR_REALM))<0) {
         ?>
         <script type="text/javascript">
           alert("Attenzione tutte le code sono piene! Premi OK per tornare alla pagina precedente e riprovare più tardi");
@@ -323,6 +323,7 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
             echo "</select><tr><td>
             <tr><td><div align = right class = \"MythTable\">". $TEXT5 ."</div></td></tr>
                 <tr><td><b>Server URL: </b><input name=\"ServerUrl\" type=\"text\" size=\"60\" style = \"float: right;\"></td></tr>
+                <tr><td><b>Porting Type: </b>". HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) ."</td></tr>
             <tr><td><div align = right class = \"MythTable\">". $TEXT6 ."</div></td></tr>
             </table>
                 <div class = \"MythInput\">
@@ -333,5 +334,16 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
         </form>";
     }
 
-    function _RT($TEXT) { return "<font color=#CC0000><b>". $TEXT ."</b></font><br>"; }
+    function HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) {
+        global $portingType;
+        $output = "<select name=\"PortingType\" style = \"float: right;\" >";
+
+        for($i = 0; $i < count($portingType); $i++) {
+            if (checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $i))
+                $output .= "<option value=\"$i\">".$portingType[$i]['Type']."</option>";
+        }
+
+        $output .= "</select>";
+        return $output;
+    }
 ?>

@@ -1,5 +1,8 @@
 <?php
-
+    //ini_set('display_errors',1);
+    //ini_set('display_startup_errors',1);
+    //error_reporting(E_ALL);
+    
     ob_start();
     session_start();
 
@@ -22,7 +25,7 @@
 <script type = "text/javascript" src = "template/jquery-1.7.2.min.js"></script>
 <script type = "text/javascript">
 <?php
-    if(!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $GMLevel)) {
+    if(!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevels)) {
     ?>
     function DoCancel( id, Realm, Guid ) {
         $.ajax({
@@ -138,7 +141,7 @@
     switch($step) {
         case 1: include("_transfer/step1.php"); break;
         case 2: include("_transfer/step2.php"); break;
-        case 3: FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $GMLevel, $write[78], $write[75], $write[60], $write[65], $write[61],
+        case 3: FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevels, $write[78], $write[75], $write[60], $write[65], $write[61],
         $write[85], $write[86], $write[30], $write[31], $write[32], $write[33], $write[34], $write[84]);
             break;
     }
@@ -150,17 +153,18 @@
 <?php include ('template/t_footer.php');
     ob_end_flush();
 
-    function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $GMLevel,
+    function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels,
         $TEXT1, $TEXT2, $TEXT3, $TEXT4, $TEXT5, $TEXT6, $TEXT7, $TEXT8, $TEXT9, $TEXT10, $TEXT11, $TEXT12, $TEXT13)
     {
-        if(_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $GMLevel)) {
+        if(_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels)) {
             echo "<div align = right class = \"MythTable\" style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma';\">". $TEXT1 ."</div>
             <br>";
             $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
             _SelectDB($AccountDB, $connection);
-            $query = mysql_query("SELECT * FROM `account_transfer` WHERE `gmAccount` = ". $ID ." ORDER BY `id` DESC LIMIT 25;", $connection);
+            $query = mysql_query("SELECT * FROM `account_transfer` WHERE `gmAccount` = ". $ACCOUNT_ID ." ORDER BY `id` DESC LIMIT 25;", $connection);
             mysql_close($connection);
-        } else {
+        } 
+        else {
             echo "
             <div align = right style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma'; \">". $TEXT2 ."</div>
             <br>
@@ -174,14 +178,15 @@
 
             $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
             _SelectDB($AccountDB, $connection);
-            $query = mysql_query("SELECT * FROM `account_transfer` WHERE `cAccount` = ". $ID ." ORDER BY `id` DESC LIMIT 25;", $connection);
+            $query = mysql_query("SELECT * FROM `account_transfer` WHERE `cAccount` = ". $ACCOUNT_ID ." ORDER BY `id` DESC LIMIT 25;", $connection);
             mysql_close($connection);
         }
         echo "
             <div style = \"white-space: nowrap; border-top-width: 1px; border-top-style: solid; padding-top: 8px; margin-top: 8px;\">
             <table width = 100% align = center >
                 <tr bgcolor = #FFEAC7>";
-        if(_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $GMLevel)) {
+        if(_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels)) {
+            
             echo "
                 <td>\"OUR\" & \"OLD\" Name: </td>
                 <td>\"OUR\" & \"OLD\" Realm:</td>
@@ -221,7 +226,8 @@
             
             echo "<button name = \"ApproveAll\" id = \"".$row["id"]."\" onclick = 'javascript:DoApproveAll(".json_encode($ids).", ".json_encode($realms).", ".json_encode($guids).");' style = \"font-size:10px\"><font color = \"green\">Approve All</font></button><br>";
             echo "</table></div>";
-        } else {
+        } 
+        else {
             echo "
                 <td>No.:            </td>
                 <td>Character Name: </td>

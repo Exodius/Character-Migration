@@ -25,11 +25,11 @@ function CheckTransferStatus($DBHost, $DBUser, $DBPassword, $AccountDB, $ID) {
     return $row['cStatus'];
 }
 
-function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB) {
-    global $limitTransfer;
+function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $type = 1) {
+    global $limitTransfer, $portingType;
     
     if (!$limitTransfer) {
-        return;
+        return true;
     }
     
     $account=_GetCharacterAccountID();
@@ -37,15 +37,18 @@ function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB) {
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
 
     _SelectDB($AccountDB, $connection);
-    $query1 = mysql_query("SELECT COUNT(*) FROM `account_transfer` WHERE `cAccount` = " . (int) $account . " AND cStatus = 1;", $connection) or die(mysql_error());
+    $query1 = mysql_query("SELECT COUNT(*) FROM `account_transfer` WHERE `cAccount` = " . (int) $account . " AND cStatus = 1 AND tType = $type ;", $connection) or die(mysql_error());
     $result1 = mysql_fetch_array($query1);
-    
+
     $query2 = mysql_query("SELECT quantity FROM `account_transfer_whitelist` WHERE `account` = " . (int) $account . ";", $connection) or die(mysql_error());
     $result2 = mysql_fetch_array($query2);
     
+    if($result2 === false)
+        $result2[0] = $portingType[$type]["Quantity"];
+    
     mysql_close($connection);
 
-    if ($result1[0] > $result2[0]) {
+    if ($result1[0] >= $result2[0]) {
         return false;
     }
 
