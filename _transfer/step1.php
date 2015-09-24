@@ -41,6 +41,7 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
             $RaceID             = _GetRaceID(strtoupper($json['uinf']['race']));
             $ClassID            = _GetClassID(strtoupper($json['uinf']['class']));
             $CharLevel          = _MaxValue($json['uinf']['level'], $MaxCL);
+            $pType              = $_POST["PortingType"];
 
             $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
             _SelectDB($AccountDB, $connection);
@@ -92,7 +93,7 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
                 $ID =
                 WriteDumpFromFileInDB($AccountDBHost, $DBUser, $DBPassword, $AccountDB,
                 $DUMP, $CHAR_NAME, $CHAR_ACCOUNT_ID, $CHAR_REALM,
-                                    $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $GUID, $PLAYER_TRANSFER_STACKS, $write[20]);
+                                    $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $GUID, $PLAYER_TRANSFER_STACKS, $pType, $write[20]);
             }
         } else if(!isset($part[1]))
             $reason = _RT($write[51]);
@@ -118,9 +119,9 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
             _SelectDB(_CharacterDBSwitch($CHAR_REALM), $connection);
             //Note: speccount is not present anymore in the db... Maybe has been renamed to talentsGroupCount?
             mysql_query("
-            INSERT INTO `characters`(`guid`,`name`,`level`,`gender`,`totalHonorPoints`,`arenaPoints`,`totalKills`,`money`,`class`,`race`,`at_login`,`account`,`taximask`,`online`) VALUES (
+            INSERT INTO `characters`(`guid`,`name`,`level`,`gender`,`totalHonorPoints`,`arenaPoints`,`totalKills`,`money`,`class`,`race`,`at_login`,`account`,`taximask`, `talentGroupsCount`, `online`) VALUES (
             ". $GUID .",\"". _X($CHAR_NAME) ."\",". (int)$CharLevel .",". (int)$char_gender .",". (int)$char_honorpoints .",". (int)$char_arenapoints .",
-            ". (int)$char_totalkills .",".(int)$char_money .",". $ClassID .",". $RaceID .", 0x180, 1, \"0 0 0 0 0 0 0 0 0 0 0 0 0 0\", 0);", $connection);
+            ". (int)$char_totalkills .",".(int)$char_money .",". $ClassID .",". $RaceID .", 0x180, 1, \"0 0 0 0 0 0 0 0 0 0 0 0 0 0\",". (int)$char_speccount .", 0);", $connection);
             $QUERYFOREXECUTE    = $QUERYFOREXECUTE. "
             INSERT INTO `character_transfer` VALUES (". $GUID .",". $CHAR_ACCOUNT_ID .",". $PLAYER_TRANSFER_STACKS .",". $ID .");
 

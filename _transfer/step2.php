@@ -37,7 +37,7 @@
             $reason    = "Realm: \"". $SNA ."\" <u>OFFLINE!</u>";
         }  else if(!checkDelay()) {
             $reason = _RT("Un altro porting è in corso, riprovare tra 1 minuto");
-        } else if (!checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB)) {
+        } else if (!checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB)) {
             $reason = _RT("Questo account non può effettuare altri porting.");
         }
 
