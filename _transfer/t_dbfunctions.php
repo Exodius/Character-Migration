@@ -27,13 +27,13 @@ function CheckTransferStatus($DBHost, $DBUser, $DBPassword, $AccountDB, $ID) {
 
 function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $type) {
     global $limitTransfer, $portingType;
-    
+
     if (!$limitTransfer) {
         return 0;
     }
-    
-    $account=_GetCharacterAccountID();
-    
+
+    $account = _GetCharacterAccountID();
+
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
 
     _SelectDB($AccountDB, $connection);
@@ -42,14 +42,14 @@ function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $type) {
 
     $query2 = mysql_query("SELECT quantity FROM `account_transfer_whitelist` WHERE `account` = " . (int) $account . " AND type = $type;", $connection) or die(mysql_error());
     $result2 = mysql_fetch_array($query2);
-    
+
     mysql_close($connection);
 
-    if($result2 === false) {
-        if ($portingType[$type]["Quantity"]<0) {
+    if ($result2 === false) {
+        if ($portingType[$type]["Quantity"] < 0) {
             return -1;
         }
-        
+
         $result2[0] = $portingType[$type]["Quantity"];
     }
 
@@ -57,7 +57,7 @@ function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $type) {
         return 0;
     }
 
-    return $result2[0]-$result1[0];
+    return $result2[0] - $result1[0];
 }
 
 function CanOrNoTransferPlayer($DBHost, $DBUser, $DBPassword, $CharactersDB, $AccountDB, $AccountID) {
@@ -368,7 +368,7 @@ function WriteDumpFromFileInDB($DBHost, $DBUser, $DBPassword, $AccountDB, $DUMP,
     $query = mysql_query("INSERT INTO `account_transfer`(
         `cStatus`,`cRealm`,`oAccount`,`oPassword`,`oRealmlist`,`oRealm`,`oServer`,`cDump`,`cNameOLD`,`cNameNEW`,`cAccount`,`GUID`,`gmAccount`,`tType`) VALUES (
         5,\"" . _X($CHAR_REALM) . "\",\"" . _X($o_Account) . "\",\"" . _X($o_Password) . "\",\"" . _X($O_REALMLIST) . "\",\"" . _X($O_REALM) . "\",\"" . _X($o_URL) . "\"
-        ,\"" . _X($DUMP) . "\",\"" . _X($CHAR_NAME) . "\",\"" . _X($CHAR_NAME) . "\"," . $CHAR_ACCOUNT_ID . "," . $GUID . "," . $GM_ACCOUNT . ",".$PTYPE.");", $connection) or die(mysql_error());
+        ,\"" . _X($DUMP) . "\",\"" . _X($CHAR_NAME) . "\",\"" . _X($CHAR_NAME) . "\"," . $CHAR_ACCOUNT_ID . "," . $GUID . "," . $GM_ACCOUNT . "," . $PTYPE . ");", $connection) or die(mysql_error());
     $ID = mysql_insert_id($connection);
     mysql_close($connection);
     return $ID;

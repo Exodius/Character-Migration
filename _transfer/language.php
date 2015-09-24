@@ -54,7 +54,7 @@ switch ($language) {
             $write[98] = 'Sitzungsfehler, Lösche deine Cookies, Versuche es erneut, wenn dies noch einmal passiert, kontaktiere bitte einen Admin';
             $write[99] = 'Die Maximale Länge des Benutzernamen beträgt 32 Buchstaben';
             break;
-    }
+        }
     case "en": {
             $write[1] = 'Log in';
             $write[2] = 'You must enter your username and password to log into your account.';
@@ -107,7 +107,7 @@ switch ($language) {
             $write[98] = 'Session Error, clean Cookie, try again, if happen again contact with adminstrator';
             $write[99] = 'Max username lenght 32 letters';
             break;
-    }
+        }
     case "es": {
             $write[1] = 'Acceder';
             $write[2] = 'Debes introducir el usuario y contraseña para acceder a tu cuenta.';
@@ -160,7 +160,7 @@ switch ($language) {
             $write[98] = 'Error en la sesión, limpia cookies, y prueba de nuevo (si te sigue pasando contacta con un administrador)';
             $write[99] = 'Los caracteres máximos permitidos para el usuario es de 32 letras';
             break;
-    }
+        }
     case "fr": {
             $write[1] = 'Connexion';
             $write[2] = 'Vous devez entrer votre nom d\'\'utilisateur et mot de passe pour vous connecter à votre compte.';
@@ -213,7 +213,7 @@ switch ($language) {
             $write[98] = 'Érreur de Session, Supprimer vos Cookies, puis refaite un essai, si le problème persiste, merci de contacter un Administrateur';
             $write[99] = 'La longueur maximum pour le compte est de 32 characters';
             break;
-    }
+        }
     case "it": {
             $write[1] = 'Accesso';
             $write[2] = 'Devi immettere il tuo username e la tua password per accedere al tuo account';
@@ -266,7 +266,7 @@ switch ($language) {
             $write[98] = 'Errore sessione, pulisci i cookie e prova di nuovo, se accada ancora contatta l\'amministratore';
             $write[99] = 'La lunghezza massima dell\'username è di 32 caratteri';
             break;
-    }
+        }
     case "ru": {
             $write[1] = 'Вход';
             $write[2] = 'Вы должны ввести свой логин и пароль, чтобы войти в Личный Кабинет.';
@@ -319,6 +319,6 @@ switch ($language) {
             $write[98] = 'Ошибка сессии, удалите Cookie, если это не помогло, обратитесь к Администрации сервера';
             $write[99] = 'Максимальная длинна имени пользователя 32 буквы';
             break;
-    }
+        }
 }
 ?>
