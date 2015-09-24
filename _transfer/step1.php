@@ -262,7 +262,7 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
 } else {
 
     
-    if (!checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB)) {
+    if ($disableTransfer) {
         ?>
           <script type="text/javascript">
             alert("I porting sono disabilitati");
@@ -337,14 +337,21 @@ if(isset($_POST['Account']) && !empty($_POST['Account'])    && isset($_POST['Pas
 
     function HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) {
         global $portingType;
-        $output = "<select name=\"PortingType\" style = \"float: right;\" >";
-
+        $output = "<br>";
+        $dCnt=0;
+        
         for($i = 0; $i < count($portingType); $i++) {
-            if (checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $i))
-                $output .= "<option value=\"$i\">".$portingType[$i]['Type']."</option>";
+            $limit=checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $i);
+            $isDisabled=$limit==0 ? "disabled" : "";
+            if ($limit == 0)
+                $dCnt++;
+            
+            $output .= "<input type='radio' name='PortingType' value='$i' $isDisabled required/> ".$portingType[$i]['Type']." (".($limit < 0 ? "∞" : $limit).")<br>";
+        }
+        
+        if ($dCnt==count($portingType)) {
+            $output .= "<br> <b style='color:red'>ATTENZIONE!! QUESTO ACCOUNT NON HA PIU' SLOT DISPONIBILI PER IL TRANSFER!</b>";
         }
 
-        $output .= "</select>";
         return $output;
     }
-?>

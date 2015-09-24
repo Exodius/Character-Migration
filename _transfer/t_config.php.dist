@@ -5,6 +5,8 @@
     $TransferLetterTitle    = "Transfer System";                    // Letter Title
     $TransferLetterMessage  = "Items from Character Transfer";      // Letter Message
 
+    $limitTransfer          = true;
+    $disableTransfer        = false;
     $language               = "en";         // WebPage Language "en" - English, "de" - German, "es" - Spanish, "ru" - Russian.
     $captchaEnable          = 0;            // ENABLE (1) / DISABLE (0) Captcha
     $AchievementsCheck      = 0;            // ENABLE (1) / DISABLE (0) FORMULA: must have more then Level > 10 OR AchievementsMinCount param
