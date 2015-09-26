@@ -46,12 +46,14 @@ function checkDelay() {
     fclose($handle);
 
     $diff = time() - $timestamp;
-    echo ($diff);
+    //echo ($diff);
     if (!$timestamp || $diff > 120) {
         return true;
     }
 
-    return false;
+    $remain= -1*abs(120-$diff);
+
+    return $remain;
 }
 
 function _PreparateMails($row, $PlayerName, $TransferLetterTitle, $TransferLetterMessage, $SOAPUser, $SOAPPassword, $SOAPPort, $SOAPHost, $URI) {
@@ -218,4 +220,3 @@ function _DECRYPT($STRING) {
 function _RT($TEXT) {
     return "<font color=#CC0000><b>" . $TEXT . "</b></font><br>";
 }
-?>

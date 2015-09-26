@@ -3,20 +3,20 @@ body {
     text-align      : center;
     vertical-align  : middle;
     font-family     : Tahoma, Helvetica, sans-serif, Verdana, Geneva, sans-serif;
-    font-size       : 12px;
+    font-size       : 14pt;
     overflow-x      : hidden !important;
 }
 
 .generallink {
     color           : #339933;
     text-decoration : none;
-    font-size       : 13px;
+    font-size       : 13pt;
 }
 
 th#caption {
     background      : url('images/table_nadpis.jpg');
     height          : 29px;
-    font-size       : 14pt;
+    font-size       : 16pt;
     font-family     : Arial, sans-serif;
     font-weight     : normal;
     text-align      : left;
@@ -24,14 +24,14 @@ th#caption {
 }
 
 td  {
-    font-size       : 11px;
+    font-size       : 12px;
     color           : #271103;
 }
 
 .caption {
     font-family     : Arial, sans-serif;
     color           : #232d39;
-    font-size       : 24px;
+    font-size       : 26pt;
 }
 
 input.EnterData {
@@ -47,7 +47,7 @@ input.EnterData {
 }
 
 a.login {
-    font-size       : 11pt;
+    font-size       : 13pt;
     font-weight     : bold;
     line-height     : 36px;
     display         : block;
@@ -68,12 +68,17 @@ a.login:hover {
 
 .MythTable {
     color           : #505070 !important;
-    font-size       : 12px !important;
+    font-size       : 14pt !important;
     border          : 1px dotted #8080A0 !important;
     padding-right   : 2px !important; 
+    margin-top: 15px;
 }
 
 .MythInput {
     white-space     : nowrap;
     margin-bottom   : 20px;
+}
+
+td b {
+    font-size: 14pt;
 }

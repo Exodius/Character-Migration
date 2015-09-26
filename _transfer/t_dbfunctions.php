@@ -37,7 +37,7 @@ function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $type) {
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
 
     _SelectDB($AccountDB, $connection);
-    $query1 = mysql_query("SELECT COUNT(*) FROM `account_transfer` WHERE `cAccount` = " . (int) $account . " AND cStatus = 1 AND tType = $type ;", $connection) or die(mysql_error());
+    $query1 = mysql_query("SELECT COUNT(*) FROM `account_transfer` WHERE `cAccount` = " . (int) $account . " AND ( cStatus = 1 OR cStatus = 0 ) AND tType = $type ;", $connection) or die(mysql_error());
     $result1 = mysql_fetch_array($query1);
 
     $query2 = mysql_query("SELECT quantity FROM `account_transfer_whitelist` WHERE `account` = " . (int) $account . " AND type = $type;", $connection) or die(mysql_error());

@@ -3258,7 +3258,7 @@ function _GetRaceID($race) {
 
 function _isProfessionSpell($SpellID) {
     global $ProfessionSpells;
-    return !empty($ProfessionSpells);
+    return !empty($ProfessionSpells) && array_key_exists($SpellID, $ProfessionSpells);
 }
 
 function _isSpellValid($SpellID, $ClassID) {
@@ -6990,4 +6990,3 @@ $ProfessionSpells = array(
     71102 => 773, //Glyph of Quick Decay
     71015 => 773, //Glyph of Rapid Rejuvenation
 );
-?>

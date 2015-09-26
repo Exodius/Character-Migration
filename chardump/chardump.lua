@@ -206,7 +206,6 @@ function private.TradeSkillFrame_OnShow_Hook(frame, force)
 			if link then
 				local spellId = tonumber(link:match("enchant:(%d+)")); 
 				private.dmp.recipes[spellId] = spellId;
-				print(spellId)
 			end
 		end
 

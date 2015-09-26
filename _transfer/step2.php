@@ -19,6 +19,8 @@ if (isset($_POST['rename'])) {
     $SNA = $row["name"];
     $SIP = $row["address"];
     mysql_close($connection);
+    
+    $delay=checkDelay();
 
     if (!isset($_SESSION['guid']) || !isset($_SESSION['realm']) || !isset($_SESSION['dumpID']) || $_SESSION['STEP2'] != "YES") {
         $reason = $write[98];
@@ -34,8 +36,8 @@ if (isset($_POST['rename'])) {
         $reason = $write[96] . $CHAR_NAME . $write[97];
     } else if (!_ServerOn($SOAPUser, $SOAPPassword, _SOAPPSwitch($RealmID), _SOAPHSwitch($RealmID), _SOAPURISwitch($RealmID))) {
         $reason = "Realm: \"" . $SNA . "\" <u>OFFLINE!</u>";
-    } else if (!checkDelay()) {
-        $reason = _RT("Un altro porting è in corso, riprovare tra 1 minuto");
+    } else if ($delay<0) {
+        $reason = _RT("Un altro porting è in corso, riprovare tra ".abs($delay)." secondi");
     }
 
     if (!empty($reason)) {
