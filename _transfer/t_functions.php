@@ -1,5 +1,7 @@
 ﻿<?php
 
+require_once("item_list.php");
+
 function _ServerOn($SOAPUser, $SOAPPassword, $SOAPPort, $SOAPHost, $URI) {
     try {
         $SOAP = new SOAP(array("soap_user" => "" . $SOAPUser . "", "soap_pass" => "" . $SOAPPassword . "", "soap_port" => "" . $SOAPPort . "", "addr" => "" . $SOAPHost . "", "uri" => "" . $URI . ""));
@@ -30,6 +32,8 @@ function CheckItemCount($count) {
 }
 
 function checkDelay() {
+    $delay=120;
+    
     $timeFile = "./storage/lastporting.txt";
     $handle = fopen($timeFile, 'r');
 
@@ -47,11 +51,11 @@ function checkDelay() {
 
     $diff = time() - $timestamp;
     //echo ($diff);
-    if (!$timestamp || $diff > 120) {
+    if (!$timestamp || $diff > $delay) {
         return true;
     }
 
-    $remain= -1*abs(120-$diff);
+    $remain= -1*abs($delay-$diff);
 
     return $remain;
 }
@@ -62,6 +66,15 @@ function _PreparateMails($row, $PlayerName, $TransferLetterTitle, $TransferLette
     $toSend = "";
     $needSend = count($item_array);
     for ($i = 0; $i < count($item_array); $i++) {
+        $item=explode(":", $item_array[$i]);
+        if (!checkItemExists($item[0])) {
+                $needSend--;
+                if ($needSend==0)
+                    return;
+                
+                continue;
+        }
+        
         $toSend .= $item_array[$i];
         $toSend .= " ";
 
@@ -72,7 +85,7 @@ function _PreparateMails($row, $PlayerName, $TransferLetterTitle, $TransferLette
             $needSend = $needSend - $by10;
             $by10 = 1;
             $toSend = "";
-        } else if ($needSend - $by10 == 0) {
+        } else if ($needSend && (($needSend - $by10) == 0)) {
             RemoteCommandWithSOAP($SOAPUser, $SOAPPassword, $SOAPPort, $SOAPHost, $URI, trim(".send items " . $PlayerName . " \"" . $TransferLetterTitle . "\" \"" . $TransferLetterMessage . "\" " . $toSend));
             $toSend = "";
         } else

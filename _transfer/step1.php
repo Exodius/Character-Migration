@@ -4,6 +4,7 @@ include_once("t_dbfunctions.php");
 include_once("t_functions.php");
 include_once("t_config.php");
 include_once("f_switch.php");
+require_once("item_list.php");
 require_once("definitions.php");
 
 if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Password']) && !empty($_POST['Password']) && isset($_POST['ServerUrl']) && !empty($_POST['ServerUrl']) && isset($_POST['RealmlistList']) && !empty($_POST['RealmlistList'])) {
@@ -220,7 +221,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         }
 
         foreach ($json['inventory'] as $key => $value) {
-            $item = _GetChangedItem($CHAR_REALM, $value['I']);
+            $item = _GetChangedItem($CHAR_REALM, $value['I'], $pType);
             $count = CheckItemCount($value['C']);
 
             $INVrow .= $item . ":" . $count . " ";

@@ -3,6 +3,7 @@
 include_once("t_dbfunctions.php");
 include_once("t_functions.php");
 include_once("t_config.php");
+require_once("item_list.php");
 
 if (isset($_POST['rename'])) {
     $CHAR_NAME = mb_convert_case(trim($_POST['rename']), MB_CASE_TITLE, 'UTF-8');

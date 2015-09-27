@@ -6990,3 +6990,43 @@ $ProfessionSpells = array(
     71102 => 773, //Glyph of Quick Decay
     71015 => 773, //Glyph of Rapid Rejuvenation
 );
+
+
+function itemChange($pType,$ID) {
+    switch ($pType) {
+        case PBASIC:
+            // 284 - 271
+            switch ($ID) {
+                // RUBY SANCTUM
+                case 54583: return 53489;   // Clock of burning Dust
+                case 54582: return 53486;   // Bracers of fiery night 
+                case 54584: return 53134;   // Phaseshifter's bracers
+                case 54580: return 53126;   // Umbrage armbands
+                case 54587: return 53488;   // Split shape belt
+                case 54577: return 53127;   // Returning Footfalls 
+                case 54578: return 53125;   // Apocalypse's advance  
+                case 54586: return 53487;   // Foreshadow steps  
+                case 54579: return 53129;   // Treads of impeding resurection 
+                case 54581: return 53132;   // penumbra pendant
+                case 54585: return 53490;   // Ring of phased regeneration
+                case 54576: return 53133;   // Sighet of twilight
+                case 54588: return 54572;   // Charred twilight scale
+                case 54589: return 54573;   // Glowing twilight scale
+                case 54591: return 54571;   // Petrifed twilight scale
+                case 54590: return 54569;   // Sharpned twilight scale 
+                // ICC
+                case 50737: return 50012;   // Sharpned twilight scale 
+                case 50733: return 49981;   // Fal'inrush, defender of quel'thalas
+                case 50730: return 50070;   // Glorenzelg, high-blade of the silver hand
+                case 50735: return 50425;   // Oathbrinder, charge of the ranger-general 
+                case 50734: return 50428;   // Royal scepter of terenas 
+                case 50731: return 50429;   // Archeus,Greatstaff of antonidas 
+                case 50732: return 50427;   // Bloodsurge , Kel'thusad's Blade of agony
+                case 50736: return 50426;   // Heaven's fall, kryss of a thousend lies
+                case 50738: return 49997;   // Mithrios, bronzebeard's legacy 
+            }
+        break;
+    }
+    
+    return false;
+}

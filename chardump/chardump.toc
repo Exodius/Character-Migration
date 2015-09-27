@@ -2,7 +2,7 @@
 ## Title: AzerothShard |r|c0080ff80 Character |r|cFFE0E080 Dumper|r for 3.3.5a(12340) game version
 ## Author: Yehonal and someone else
 ## Notes: |TEnvironments\Stars\Nexus_data_curtain_blur:180:120|t
-## Version: 303.664
+## Version: 303.700
 ## SavedVariables: CHDMP_DATA, CHDMP_KEY
 
 luaglobal.lua

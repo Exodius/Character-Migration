@@ -44,6 +44,9 @@ function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $type) {
     $result2 = mysql_fetch_array($query2);
 
     mysql_close($connection);
+    
+    if ($result2[0]<0)
+        return -1;
 
     if ($result2 === false) {
         if ($portingType[$type]["Quantity"] < 0) {
