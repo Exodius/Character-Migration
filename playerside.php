@@ -18,6 +18,7 @@ if (!isset($_SESSION['loged']))
 include('template/t_header.php');
 include('_transfer/language.php');
 include_once("_transfer/t_dbfunctions.php");
+include_once("_transfer/definitions.php");
 include_once("_transfer/t_config.php");
 
 $ID = $_SESSION['id'];
@@ -132,6 +133,12 @@ if (!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $Allo
                 }
             });
         }
+        
+        function popUp(content) {
+            var win = window.open("", "Items", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=780, height=200, top="+(screen.height-400)+", left="+(screen.width-840));
+            win.document.body.innerHTML = content;
+        }
+
     <?php
 }
 ?>
@@ -159,6 +166,8 @@ include ('template/t_footer.php');
 ob_end_flush();
 
 function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels, $TEXT1, $TEXT2, $TEXT3, $TEXT4, $TEXT5, $TEXT6, $TEXT7, $TEXT8, $TEXT9, $TEXT10, $TEXT11, $TEXT12, $TEXT13) {
+    global $portingType;
+    
     if (_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels)) {
         echo "<div align = right class = \"MythTable\" style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma';\">" . $TEXT1 . "</div>
             <br>";
@@ -190,12 +199,16 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
     if (_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels)) {
 
         echo "
-                <td>\"OUR\" & \"OLD\" Name: </td>
-                <td>\"OUR\" & \"OLD\" Realm:</td>
+                <td>\"OUR\" & <br>\"OLD\" Name: </td>
+                <td>\"OUR\" & <br>\"OLD\" Realm:</td>
                 <td>Realmlist:              </td>
                 <td>Account:                </td>
                 <td>Password:               </td>
                 <td>Server URL:             </td>
+                <td>Type:                   </td>
+                <td>Items:                  </td>
+                <td>Date:                   </td>
+                <td>To Account:                </td>
                 <td>Admin Options:          </td>
             </tr>";
 
@@ -207,12 +220,16 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
             if ($row["cStatus"] == 0) {
                 echo "
                     <tr bgcolor = #FFFFCC>
-                        <td>" . $row["cNameNEW"] . " / " . $row["cNameOLD"] . "</td>
+                        <td>" . $row["cNameNEW"] . " / <br> " . $row["cNameOLD"] . "</td>
                         <td>" . _CheckRealm($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $row["cRealm"]) . " / " . $row["oRealm"] . "</td>
                         <td>" . $row["oRealmlist"] . "</td>
                         <td>" . $row["oAccount"] . "</td>
-                        <td>" . base64_decode($row["oPassword"]) . "</td>
+                        <td>" . $row["oPassword"] . "</td>
                         <td>" . $row["oServer"] . "</td>
+                        <td>" . $portingType[$row["tType"]]["Type"] . "</td>
+                        <td><button onclick='popUp(\"" . str_replace(' ',"<br>",$row["cItemRow"]) . "\")'>Open</button></td>
+                        <td>" . $row["date_created"] . "</td>
+                        <td>" . $row["cAccount"] . "</td>
                         <td align = center>
                             <button name = \"Approve\" id = \"" . $row["id"] . "\" onclick = \"javascript:DoApprove('" . $row["id"] . "', '" . $row["cRealm"] . "', '" . $row["GUID"] . "');\" style = \"font-size:10px\"><font color = \"green\">" . $TEXT6 . "</font></button><br>
                             <button name = \"Deny\" id = \"" . $row["id"] . "\" onclick = \"javascript:DoDeny('" . $row["id"] . "', '" . $row["cRealm"] . "', '" . $row["GUID"] . "');\" style = \"font-size:10px\"><font color = \"red\">" . $TEXT7 . "</font></button><br>

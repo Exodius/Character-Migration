@@ -153,6 +153,22 @@ function CanOrNoTransferServer($DBHost, $DBUser, $DBPassword, $AccountDB, $Realm
     }
 }
 
+function checkDuplicate($DBHost, $DBUser, $DBPassword, $AccountDB, $charNameOld,$realm,$realmlist) {
+    $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
+    _SelectDB($AccountDB, $connection);
+    $query = mysql_query("SELECT count(*) "
+            . "FROM `account_transfer` "
+            . "WHERE `cNameOLD` = '$charNameOld' "
+            . "AND oRealm = '$realm' "
+            . "AND oRealmList = '$realmlist' "
+            . "AND ( cStatus = 1 OR cStatus = 0 )", $connection) or die(mysql_error());
+    
+    $row = mysql_fetch_array($query);
+    mysql_close($connection);
+    
+    return $row[0]>0;
+}
+
 function _CheckBlackList($DBHost, $DBUser, $DBPassword, $AccountDB, $VALUE) {
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);
@@ -297,7 +313,7 @@ function _CheckGMAccess($DBHost, $DBUser, $DBPassword, $AccountDB, $ID, $GMLevel
 function _CheckCharacterName($DBHost, $DBUser, $DBPassword, $CharactersDB, $NAME) {
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($CharactersDB, $connection);
-    $query = mysql_query("SELECT COUNT(*) AS `AMOUNT` FROM `characters` WHERE `name` = \"" . _X($NAME) . "\";", $connection) or die(mysql_error());
+    $query = mysql_query("SELECT COUNT(*) AS `AMOUNT` FROM `characters` WHERE account <> 1 AND `name` = \"" . _X($NAME) . "\";", $connection) or die(mysql_error());
     $row = mysql_fetch_array($query);
     mysql_close($connection);
     return $row["AMOUNT"];

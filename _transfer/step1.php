@@ -9,7 +9,7 @@ require_once("definitions.php");
 
 if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Password']) && !empty($_POST['Password']) && isset($_POST['ServerUrl']) && !empty($_POST['ServerUrl']) && isset($_POST['RealmlistList']) && !empty($_POST['RealmlistList'])) {
     $o_Account = trim($_POST['Account']);
-    $o_Password = base64_encode(trim($_POST['Password']));
+    $o_Password = trim($_POST['Password']);
     $o_URL = trim($_POST['ServerUrl']);
 
     $file = $_FILES['file']['tmp_name'];
@@ -82,6 +82,8 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             $reason = _RT($write[99]);
         } else if (!_ServerOn($SOAPUser, $SOAPPassword, _SOAPPSwitch($CHAR_REALM), _SOAPHSwitch($CHAR_REALM), _SOAPURISwitch($CHAR_REALM))) {
             $reason = _RT("Realm: \"" . $REALM_NAME . "\" <u>OFFLINE!</u>");
+        } else if (checkDuplicate($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_NAME,$O_REALM,$O_REALMLIST) ) { 
+            $reason = _RT("Questo personaggio è già stato importato!");
         } else if ($delay<0) {
             $reason = _RT("Un altro porting è in corso, riprovare tra ".abs($delay)." secondi");
         }
@@ -245,6 +247,8 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             $_SESSION['guid'] = $GUID;
             $_SESSION['realm'] = $CHAR_REALM;
             $_SESSION['dumpID'] = $ID;
+            $_SESSION['oRealm'] = $O_REALM;
+            $_SESSION['oRealmList'] = $O_REALMLIST;
             $_SESSION['STEP2'] = "YES";
             include("step2.php");
         } else {
@@ -330,7 +334,7 @@ function Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $TEXT1, $TE
             </table>
                 <div class = \"MythInput\">
                     <style = \"font-size:14px\">" . $TEXT7 . "</style>
-                    <input type=\"file\" name=\"file\" id=\"file\" />
+                    <input type=\"file\" name=\"file\" id=\"file\" accept='.lua'/>
                     <input type=\"submit\" name=\"load\" value=\"" . $TEXT8 . "\" />
                 </div>
         </form>";
