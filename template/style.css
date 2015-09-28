@@ -24,7 +24,7 @@ th#caption {
 }
 
 td  {
-    font-size       : 12px;
+    font-size       : 16px;
     color           : #271103;
 }
 
@@ -81,4 +81,8 @@ a.login:hover {
 
 td b {
     font-size: 14pt;
+}
+
+.gm-character-list td {
+    font-size: 12px;
 }

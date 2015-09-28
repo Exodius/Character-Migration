@@ -48,10 +48,7 @@ if (isset($_POST['rename'])) {
     if (!empty($reason)) {
         Step2Form($reason, $write[90]);
     } else {
-        // save time before starting process 
-        $handle = fopen("./storage/lastporting.txt", "wa+") or die("Unable to open lastporting file!");
-        fwrite($handle, time());
-        fclose($handle);
+        saveLastPortingTime();
 
         $_SESSION['STEP2'] = "NO";
         UpdateCharacterName(_HostDBSwitch($RealmID), $DBUser, $DBPassword, _CharacterDBSwitch($RealmID), $CHAR_NAME, $GUID);

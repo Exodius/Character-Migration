@@ -252,6 +252,8 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             $_SESSION['STEP2'] = "YES";
             include("step2.php");
         } else {
+            saveLastPortingTime();
+            
             UpdateDumpStatus($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, 0);
             _PreparateMails($row, $CHAR_NAME, $TransferLetterTitle, $TransferLetterMessage, $SOAPUser, $SOAPPassword, _SOAPPSwitch($CHAR_REALM), _SOAPHSwitch($CHAR_REALM), _SOAPURISwitch($CHAR_REALM));
             _TalentsReset(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $GUID);

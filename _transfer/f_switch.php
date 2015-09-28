@@ -6991,12 +6991,14 @@ $ProfessionSpells = array(
     71015 => 773, //Glyph of Rapid Rejuvenation
 );
 
-
-function itemChange($pType,$ID) {
-    switch ($pType) {
-        case PBASIC:
-            // 284 - 271
+function itemChange($pType, $ID) {
+    if ($pType == PBASIC || $pType == PFREE) {
             switch ($ID) {
+                // special
+                case 49623: return 50070;   // Shadowmourne 284 -> Glorenzelg, High-Blade of the Silver Hand 271
+                case 49888: return 49919;   // 	Shadow's Edge	264	-->	Cryptmaker	264
+                case 46017: return 50028;   // 	Val'anyr\, Hammer of Ancient Kings	245	-->	Trauma	264
+                // 284 - 271
                 // RUBY SANCTUM
                 case 54583: return 53489;   // Clock of burning Dust
                 case 54582: return 53486;   // Bracers of fiery night 
@@ -7025,8 +7027,262 @@ function itemChange($pType,$ID) {
                 case 50736: return 50426;   // Heaven's fall, kryss of a thousend lies
                 case 50738: return 49997;   // Mithrios, bronzebeard's legacy 
             }
-        break;
     }
     
+    if ($pType==PFREE) {
+            switch($ID) {
+                case 50679 : return 50026; // 	Helm of the Elder Moon	277	-->	Helm of the Elder Moon	264
+                case 51236 : return 51203; // 	Sanctified Frost Witch's Kilt	277	-->	Sanctified Frost Witch's Kilt	264
+                case 50727 : return 50178; // 	Bloodfall	277	-->	Bloodfall	264
+                case 51432 : return 51431; // 	Wrathful Gladiator's Greatstaff	277	-->	Wrathful Gladiator's Staff	264
+                case 50644 : return 49990; // 	Ring of Maddening Whispers	277	-->	Ring of Maddening Whispers	264
+                case 50695 : return 50040; // 	Distant Land	277	-->	Distant Land	264
+                case 51252 : return 51187; // 	Sanctified Shadowblade Helmet	277	-->	Sanctified Shadowblade Helmet	264
+                case 50610 : return 49967; // 	Marrowgar's Frigid Eye	277	-->	Marrowgar's Frigid Eye	264
+                case 51287 : return 51152; // 	Sanctified Ahn'Kahar Blood Hunter's Legguards	277	-->	Sanctified Ahn'Kahar Blood Hunter's Legguards	264
+                case 51526 : return 51525; // 	Wrathful Gladiator's Splitter	277	-->	Wrathful Gladiator's Chopper	264
+                case 50660 : return 50003; // 	Boneguard Commander's Pauldrons	277	-->	Boneguard Commander's Pauldrons	264
+                case 51220 : return 51219; // 	Sanctified Ymirjar Lord's Breastplate	277	-->	Sanctified Ymirjar Lord's Breastplate	264
+                case 50711 : return 50071; // 	Treads of the Wasteland	277	-->	Treads of the Wasteland	264
+                case 51268 : return 51171; // 	Sanctified Lightsworn Legguards	277	-->	Sanctified Lightsworn Legguards	264
+                case 50626 : return 50202; // 	Snowstorm Helm	277	-->	Snowstorm Helm	264
+                case 51303 : return 51136; // 	Sanctified Lasherweave Legplates	277	-->	Sanctified Lasherweave Legplates	264
+                case 50680 : return 50027; // 	Rot-Resistant Breastplate	277	-->	Rot-Resistant Breastplate	264
+                case 51237 : return 51202; // 	Sanctified Frost Witch's Helm	277	-->	Sanctified Frost Witch's Helm	264
+                case 50728 : return 50180; // 	Lana'thel's Chain of Flagellation	277	-->	Lana'thel's Chain of Flagellation	264
+                case 51440 : return 51439; // 	Wrathful Gladiator's Dicer	277	-->	Wrathful Gladiator's Hacker	264
+                case 50645 : return 49988; // 	Leggings of Northern Lights	277	-->	Leggings of Northern Lights	264
+                case 50696 : return 50041; // 	Leather of Stitched Scourge Parts	277	-->	Leather of Stitched Scourge Parts	264
+                case 51253 : return 51186; // 	Sanctified Shadowblade Legplates	277	-->	Sanctified Shadowblade Legplates	264
+                case 50611 : return 49960; // 	Bracers of Dark Reckoning	277	-->	Bracers of Dark Reckoning	264
+                case 51288 : return 51151; // 	Sanctified Ahn'Kahar Blood Hunter's Spaulders	277	-->	Sanctified Ahn'Kahar Blood Hunter's Spaulders	264
+                case 51528 : return 51527; // 	Wrathful Gladiator's Eviscerator	277	-->	Wrathful Gladiator's Mutilator	264
+                case 50661 : return 50006; // 	Corp'rethar Ceremonial Crown	277	-->	Corp'rethar Ceremonial Crown	264
+                case 51221 : return 51218; // 	Sanctified Ymirjar Lord's Greathelm	277	-->	Sanctified Ymirjar Lord's Greathelm	264
+                case 50712 : return 50072; // 	Landsoul's Horned Greathelm	277	-->	Landsoul's Horned Greathelm	264
+                case 51269 : return 51170; // 	Sanctified Lightsworn Shoulderguards	277	-->	Sanctified Lightsworn Shoulderguards	264
+                case 50627 : return 50195; // 	Noose of Malachite	277	-->	Noose of Malachite	264
+                case 51304 : return 51135; // 	Sanctified Lasherweave Pauldrons	277	-->	Sanctified Lasherweave Pauldrons	264
+                case 50681 : return 50024; // 	Blightborne Warplate	277	-->	Blightborne Warplate	264
+                case 51238 : return 51201; // 	Sanctified Frost Witch's Gloves	277	-->	Sanctified Frost Witch's Gloves	264
+                case 50729 : return 50065; // 	Icecrown Glacial Wall	277	-->	Icecrown Glacial Wall	264
+                case 51442 : return 51441; // 	Wrathful Gladiator's Dirk	277	-->	Wrathful Gladiator's Shiv	264
+                case 50646 : return 49987; // 	Cultist's Bloodsoaked Spaulders	277	-->	Cultist's Bloodsoaked Spaulders	264
+                case 50697 : return 50042; // 	Gangrenous Leggings	277	-->	Gangrenous Leggings	264
+                case 51254 : return 51185; // 	Sanctified Shadowblade Pauldrons	277	-->	Sanctified Shadowblade Pauldrons	264
+                case 50612 : return 49964; // 	Legguards of Lost Hope	277	-->	Legguards of Lost Hope	264
+                case 51289 : return 51150; // 	Sanctified Ahn'Kahar Blood Hunter's Tunic	277	-->	Sanctified Ahn'Kahar Blood Hunter's Tunic	264
+                case 51529 : return 51530; // 	Wrathful Gladiator's Left Claw	277	-->	Wrathful Gladiator's Left Render	264
+                case 50663 : return 50011; // 	Gunship Captain's Mittens	277	-->	Gunship Captain's Mittens	264
+                case 51222 : return 51217; // 	Sanctified Ymirjar Lord's Handguards	277	-->	Sanctified Ymirjar Lord's Handguards	264
+                case 50713 : return 50073; // 	Geistlord's Punishment Sack	277	-->	Geistlord's Punishment Sack	264
+                case 51270 : return 51169; // 	Sanctified Lightsworn Gloves	277	-->	Sanctified Lightsworn Gloves	264
+                case 50628 : return 50205; // 	Frostbinder's Shredded Cape	277	-->	Frostbinder's Shredded Cape	264
+                case 51305 : return 51134; // 	Sanctified Scourgelord Chestguard	277	-->	Sanctified Scourgelord Chestguard	264
+                case 51306 : return 51133; // 	Sanctified Scourgelord Faceguard	277	-->	Sanctified Scourgelord Faceguard	264
+                case 51239 : return 51200; // 	Sanctified Frost Witch's Hauberk	277	-->	Sanctified Frost Witch's Hauberk	264
+                case 50348 : return 50353; // 	Dislodged Foreign Object	277	-->	Dislodged Foreign Object	264
+                case 51274 : return 51165; // 	Sanctified Lightsworn Tunic	277	-->	Sanctified Lightsworn Tunic	264
+                case 51444 : return 51443; // 	Wrathful Gladiator's Left Razor	277	-->	Wrathful Gladiator's Left Ripper	264
+                case 50647 : return 49989; // 	Ahn'kahar Onyx Neckguard	277	-->	Ahn'kahar Onyx Neckguard	264
+                case 50698 : return 50059; // 	Horrific Flesh Epaulets	277	-->	Horrific Flesh Epaulets	264
+                case 51255 : return 51184; // 	Sanctified Crimson Acolyte Cowl	277	-->	Sanctified Crimson Acolyte Cowl	264
+                case 50613 : return 49978; // 	Crushing Coldwraith Belt	277	-->	Crushing Coldwraith Belt	264
+                case 51290 : return 51149; // 	Sanctified Lasherweave Cover	277	-->	Sanctified Lasherweave Cover	264
+                case 50664 : return 50008; // 	Ring of Rapid Ascent	277	-->	Ring of Rapid Ascent	264
+                case 51223 : return 51216; // 	Sanctified Ymirjar Lord's Legguards	277	-->	Sanctified Ymirjar Lord's Legguards	264
+                case 50714 : return 50170; // 	Valanar's Other Signet Ring	277	-->	Valanar's Other Signet Ring	264
+                case 51271 : return 51168; // 	Sanctified Lightsworn Greaves	277	-->	Sanctified Lightsworn Greaves	264
+                case 50629 : return 50418; // 	Robe of the Waking Nightmare	277	-->	Robe of the Waking Nightmare	264
+                case 50630 : return 50417; // 	Bracers of Eternal Dreaming	277	-->	Bracers of Eternal Dreaming	264
+                case 51307 : return 51132; // 	Sanctified Scourgelord Handguards	277	-->	Sanctified Scourgelord Handguards	264
+                case 50682 : return 50023; // 	Bile-Encrusted Medallion	277	-->	Bile-Encrusted Medallion	264
+                case 51240 : return 51199; // 	Sanctified Frost Witch's Shoulderguards	277	-->	Sanctified Frost Witch's Shoulderguards	264
+                case 50349 : return 50352; // 	Corpse Tongue Coin	277	-->	Corpse Tongue Coin	264
+                case 51275 : return 51164; // 	Sanctified Lightsworn Battleplate	277	-->	Sanctified Lightsworn Battleplate	264
+                case 51446 : return 51445; // 	Wrathful Gladiator's Punisher	277	-->	Wrathful Gladiator's Bonecracker	264
+                case 50648 : return 49992; // 	Nibelung	277	-->	Nibelung	264
+                case 50699 : return 50062; // 	Plague Scientist's Boots	277	-->	Plague Scientist's Boots	264
+                case 51256 : return 51183; // 	Sanctified Crimson Acolyte Handwraps	277	-->	Sanctified Crimson Acolyte Handwraps	264
+                case 50614 : return 49977; // 	Loop of the Endless Labyrinth	277	-->	Loop of the Endless Labyrinth	264
+                case 51291 : return 51148; // 	Sanctified Lasherweave Gloves	277	-->	Sanctified Lasherweave Gloves	264
+                case 50665 : return 50009; // 	Boots of Unnatural Growth	277	-->	Boots of Unnatural Growth	264
+                case 51224 : return 51215; // 	Sanctified Ymirjar Lord's Pauldrons	277	-->	Sanctified Ymirjar Lord's Pauldrons	264
+                case 50715 : return 50171; // 	Shoulders of Frost-Tipped Thorns	277	-->	Shoulders of Frost-Tipped Thorns	264
+                case 51272 : return 51167; // 	Sanctified Lightsworn Headpiece	277	-->	Sanctified Lightsworn Headpiece	264
+                case 50631 : return 50472; // 	Nightmare Ender	277	-->	Nightmare Ender	264
+                case 51308 : return 51131; // 	Sanctified Scourgelord Legguards	277	-->	Sanctified Scourgelord Legguards	264
+                case 50684 : return 50033; // 	Corpse-Impaling Spike	277	-->	Corpse-Impaling Spike	264
+                case 51241 : return 51198; // 	Sanctified Frost Witch's War-Kilt	277	-->	Sanctified Frost Witch's War-Kilt	264
+                case 50363 : return 50362; // 	Deathbringer's Will	277	-->	Deathbringer's Will	264
+                case 51276 : return 51163; // 	Sanctified Lightsworn Gauntlets	277	-->	Sanctified Lightsworn Gauntlets	264
+                case 51448 : return 51447; // 	Wrathful Gladiator's Swiftblade	277	-->	Wrathful Gladiator's Quickblade	264
+                case 50649 : return 49996; // 	Deathwhisper Raiment	277	-->	Deathwhisper Raiment	264
+                case 50700 : return 50061; // 	Holiday's Grace	277	-->	Holiday's Grace	264
+                case 51257 : return 51182; // 	Sanctified Crimson Acolyte Mantle	277	-->	Sanctified Crimson Acolyte Mantle	264
+                case 50615 : return 49979; // 	Handguards of Winter's Respite	277	-->	Handguards of Winter's Respite	264
+                case 51292 : return 51147; // 	Sanctified Lasherweave Mantle	277	-->	Sanctified Lasherweave Mantle	264
+                case 50667 : return 50010; // 	Waistband of Righteous Fury	277	-->	Waistband of Righteous Fury	264
+                case 51225 : return 51214; // 	Sanctified Ymirjar Lord's Battleplate	277	-->	Sanctified Ymirjar Lord's Battleplate	264
+                case 50716 : return 50075; // 	Taldaram's Plated Fists	277	-->	Taldaram's Plated Fists	264
+                case 51273 : return 51166; // 	Sanctified Lightsworn Spaulders	277	-->	Sanctified Lightsworn Spaulders	264
+                case 51389 : return 51388; // 	Wrathful Gladiator's Sunderer	277	-->	Wrathful Gladiator's Decapitator	264
+                case 50632 : return 50416; // 	Boots of the Funeral March	277	-->	Boots of the Funeral March	264
+                case 50685 : return 50028; // 	Trauma	277	-->	Trauma	264
+                case 51242 : return 51197; // 	Sanctified Frost Witch's Faceguard	277	-->	Sanctified Frost Witch's Faceguard	264
+                case 50364 : return 50361; // 	Sindragosa's Flawless Fang	277	-->	Sindragosa's Flawless Fang	264
+                case 51277 : return 51162; // 	Sanctified Lightsworn Helmet	277	-->	Sanctified Lightsworn Helmet	264
+                case 51450 : return 51449; // 	Wrathful Gladiator's Shotgun	277	-->	Wrathful Gladiator's Rifle	264
+                case 50650 : return 49995; // 	Fallen Lord's Handguards	277	-->	Fallen Lord's Handguards	264
+                case 50701 : return 50060; // 	Faceplate of the Forgotten	277	-->	Faceplate of the Forgotten	264
+                case 51258 : return 51181; // 	Sanctified Crimson Acolyte Pants	277	-->	Sanctified Crimson Acolyte Pants	264
+                case 50616 : return 49976; // 	Bulwark of Smouldering Steel	277	-->	Bulwark of Smouldering Steel	264
+                case 51293 : return 51146; // 	Sanctified Lasherweave Trousers	277	-->	Sanctified Lasherweave Trousers	264
+                case 50668 : return 50014; // 	Greatcloak of the Turned Champion	277	-->	Greatcloak of the Turned Champion	264
+                case 51226 : return 51213; // 	Sanctified Ymirjar Lord's Gauntlets	277	-->	Sanctified Ymirjar Lord's Gauntlets	264
+                case 50717 : return 50172; // 	Sanguine Silk Robes	277	-->	Sanguine Silk Robes	264
+                case 51391 : return 51390; // 	Wrathful Gladiator's Crusher	277	-->	Wrathful Gladiator's Bonegrinder	264
+                case 50633 : return 50421; // 	Sindragosa's Cruel Claw	277	-->	Sindragosa's Cruel Claw	264
+                case 50686 : return 50032; // 	Death Surgeon's Sleeves	277	-->	Death Surgeon's Sleeves	264
+                case 51243 : return 51196; // 	Sanctified Frost Witch's Grips	277	-->	Sanctified Frost Witch's Grips	264
+                case 50365 : return 50360; // 	Phylactery of the Nameless Lich	277	-->	Phylactery of the Nameless Lich	264
+                case 51278 : return 51161; // 	Sanctified Lightsworn Legplates	277	-->	Sanctified Lightsworn Legplates	264
+                case 51454 : return 51453; // 	Wrathful Gladiator's Salvation	277	-->	Wrathful Gladiator's Gavel	264
+                case 50651 : return 49994; // 	The Lady's Brittle Bracers	277	-->	The Lady's Brittle Bracers	264
+                case 50702 : return 50063; // 	Lingering Illness	277	-->	Lingering Illness	264
+                case 51259 : return 51180; // 	Sanctified Crimson Acolyte Raiments	277	-->	Sanctified Crimson Acolyte Raiments	264
+                case 50617 : return 49980; // 	Rusted Bonespike Pauldrons	277	-->	Rusted Bonespike Pauldrons	264
+                case 51294 : return 51145; // 	Sanctified Lasherweave Vestment	277	-->	Sanctified Lasherweave Vestment	264
+                case 50670 : return 50333; // 	Toskk's Maximized Wristguards	277	-->	Toskk's Maximized Wristguards	264
+                case 51227 : return 51212; // 	Sanctified Ymirjar Lord's Helmet	277	-->	Sanctified Ymirjar Lord's Helmet	264
+                case 50718 : return 50074; // 	Royal Crimson Cloak	277	-->	Royal Crimson Cloak	264
+                case 51393 : return 51392; // 	Wrathful Gladiator's Claymore	277	-->	Wrathful Gladiator's Greatsword	264
+                case 50635 : return 50423; // 	Sundial of Eternal Dusk	277	-->	Sundial of Eternal Dusk	264
+                case 50687 : return 50030; // 	Bloodsunder's Bracers	277	-->	Bloodsunder's Bracers	264
+                case 51244 : return 51195; // 	Sanctified Frost Witch's Chestguard	277	-->	Sanctified Frost Witch's Chestguard	264
+                case 50366 : return 50359; // 	Althor's Abacus	277	-->	Althor's Abacus	264
+                case 51279 : return 51160; // 	Sanctified Lightsworn Shoulderplates	277	-->	Sanctified Lightsworn Shoulderplates	264
+                case 51457 : return 51456; // 	Wrathful Gladiator's Light Staff	277	-->	Wrathful Gladiator's Energy Staff	264
+                case 50652 : return 49993; // 	Necrophotic Greaves	277	-->	Necrophotic Greaves	264
+                case 50703 : return 50064; // 	Unclean Surgical Gloves	277	-->	Unclean Surgical Gloves	264
+                case 51260 : return 51179; // 	Sanctified Crimson Acolyte Gloves	277	-->	Sanctified Crimson Acolyte Gloves	264
+                case 50618 : return 50186; // 	Frostbrood Sapphire Ring	277	-->	Frostbrood Sapphire Ring	264
+                case 51295 : return 51144; // 	Sanctified Lasherweave Handgrips	277	-->	Sanctified Lasherweave Handgrips	264
+                case 50671 : return 50015; // 	Belt of the Blood Nova	277	-->	Belt of the Blood Nova	264
+                case 51228 : return 51211; // 	Sanctified Ymirjar Lord's Legplates	277	-->	Sanctified Ymirjar Lord's Legplates	264
+                case 50719 : return 50173; // 	Shadow Silk Spindle	277	-->	Shadow Silk Spindle	264
+                case 50720 : return 50174; // 	Incarnadine Band of Mending	277	-->	Incarnadine Band of Mending	264
+                case 51395 : return 51394; // 	Wrathful Gladiator's Recurve	277	-->	Wrathful Gladiator's Longbow	264
+                case 50636 : return 50424; // 	Memory of Malygos	277	-->	Memory of Malygos	264
+                case 50688 : return 50413; // 	Nerub'ar Stalker's Cord	277	-->	Nerub'ar Stalker's Cord	264
+                case 51245 : return 51194; // 	Sanctified Frost Witch's Spaulders	277	-->	Sanctified Frost Witch's Spaulders	264
+                case 50603 : return 49919; // 	Cryptmaker	277	-->	Cryptmaker	264
+                case 51280 : return 51159; // 	Sanctified Bloodmage Gloves	277	-->	Sanctified Bloodmage Gloves	264
+                case 51481 : return 51480; // 	Wrathful Gladiator's Halberd	277	-->	Wrathful Gladiator's Pike	264
+                case 50653 : return 49998; // 	Shadowvault Slayer's Cloak	277	-->	Shadowvault Slayer's Cloak	264
+                case 50704 : return 50068; // 	Rigormortis	277	-->	Rigormortis	264
+                case 51261 : return 51178; // 	Sanctified Crimson Acolyte Hood	277	-->	Sanctified Crimson Acolyte Hood	264
+                case 50619 : return 50188; // 	Anub'ar Stalker's Gloves	277	-->	Anub'ar Stalker's Gloves	264
+                case 51296 : return 51143; // 	Sanctified Lasherweave Headguard	277	-->	Sanctified Lasherweave Headguard	264
+                case 50672 : return 50412; // 	Bloodvenom Blade	277	-->	Bloodvenom Blade	264
+                case 51229 : return 51210; // 	Sanctified Ymirjar Lord's Shoulderplates	277	-->	Sanctified Ymirjar Lord's Shoulderplates	264
+                case 50721 : return 50175; // 	Crypt Keeper's Bracers	277	-->	Crypt Keeper's Bracers	264
+                case 51398 : return 51406; // 	Wrathful Gladiator's Blade of Celerity	277	-->	Wrathful Gladiator's Blade of Alacrity	264
+                case 50638 : return 50034; // 	Zod's Repeating Longbow	277	-->	Zod's Repeating Longbow	264
+                case 50689 : return 50038; // 	Carapace of Forgotten Kings	277	-->	Carapace of Forgotten Kings	264
+                case 51246 : return 51193; // 	Sanctified Frost Witch's Legguards	277	-->	Sanctified Frost Witch's Legguards	264
+                case 50604 : return 49949; // 	Band of the Bone Colossus	277	-->	Band of the Bone Colossus	264
+                case 51281 : return 51158; // 	Sanctified Bloodmage Hood	277	-->	Sanctified Bloodmage Hood	264
+                case 51516 : return 51515; // 	Wrathful Gladiator's Handaxe	277	-->	Wrathful Gladiator's Cleaver	264
+                case 50654 : return 50411; // 	Scourgeborne Waraxe	277	-->	Scourgeborne Waraxe	264
+                case 51309 : return 51130; // 	Sanctified Scourgelord Pauldrons	277	-->	Sanctified Scourgelord Pauldrons	264
+                case 50705 : return 50069; // 	Professor's Bloodied Smock	277	-->	Professor's Bloodied Smock	264
+                case 51262 : return 51177; // 	Sanctified Crimson Acolyte Leggings	277	-->	Sanctified Crimson Acolyte Leggings	264
+                case 50620 : return 50187; // 	Coldwraith Links	277	-->	Coldwraith Links	264
+                case 51297 : return 51142; // 	Sanctified Lasherweave Legguards	277	-->	Sanctified Lasherweave Legguards	264
+                case 50673 : return 50022; // 	Dual-Bladed Pauldrons	277	-->	Dual-Bladed Pauldrons	264
+                case 51230 : return 51209; // 	Sanctified Dark Coven Gloves	277	-->	Sanctified Dark Coven Gloves	264
+                case 51231 : return 51208; // 	Sanctified Dark Coven Hood	277	-->	Sanctified Dark Coven Hood	264
+                case 50722 : return 50176; // 	San'layn Ritualist Gloves	277	-->	San'layn Ritualist Gloves	264
+                case 51399 : return 51397; // 	Wrathful Gladiator's Mageblade	277	-->	Wrathful Gladiator's Spellblade	264
+                case 50639 : return 49983; // 	Blood-Soaked Saronite Stompers	277	-->	Blood-Soaked Saronite Stompers	264
+                case 50690 : return 50037; // 	Fleshrending Gauntlets	277	-->	Fleshrending Gauntlets	264
+                case 51247 : return 51192; // 	Sanctified Frost Witch's Headpiece	277	-->	Sanctified Frost Witch's Headpiece	264
+                case 50605 : return 49952; // 	Snowserpent Mail Helm	277	-->	Snowserpent Mail Helm	264
+                case 51282 : return 51157; // 	Sanctified Bloodmage Leggings	277	-->	Sanctified Bloodmage Leggings	264
+                case 51518 : return 51517; // 	Wrathful Gladiator's Spike	277	-->	Wrathful Gladiator's Shanker	264
+                case 50655 : return 50000; // 	Scourge Hunter's Vambraces	277	-->	Scourge Hunter's Vambraces	264
+                case 51310 : return 51129; // 	Sanctified Scourgelord Battleplate	277	-->	Sanctified Scourgelord Battleplate	264
+                case 50706 : return 50351; // 	Tiny Abomination in a Jar	277	-->	Tiny Abomination in a Jar	264
+                case 51263 : return 51176; // 	Sanctified Crimson Acolyte Robe	277	-->	Sanctified Crimson Acolyte Robe	264
+                case 50621 : return 50183; // 	Lungbreaker	277	-->	Lungbreaker	264
+                case 51298 : return 51141; // 	Sanctified Lasherweave Raiment	277	-->	Sanctified Lasherweave Raiment	264
+                case 50674 : return 50020; // 	Raging Behemoth's Shoulderplates	277	-->	Raging Behemoth's Shoulderplates	264
+                case 51232 : return 51207; // 	Sanctified Dark Coven Leggings	277	-->	Sanctified Dark Coven Leggings	264
+                case 50723 : return 50177; // 	Mail of Crimson Coins	277	-->	Mail of Crimson Coins	264
+                case 51401 : return 51400; // 	Wrathful Gladiator's Combat Staff	277	-->	Wrathful Gladiator's War Staff	264
+                case 50640 : return 49986; // 	Broken Ram Skull Helm	277	-->	Broken Ram Skull Helm	264
+                case 50691 : return 50036; // 	Belt of Broken Bones	277	-->	Belt of Broken Bones	264
+                case 51248 : return 51191; // 	Sanctified Frost Witch's Handguards	277	-->	Sanctified Frost Witch's Handguards	264
+                case 50606 : return 49951; // 	Gendarme's Cuirass	277	-->	Gendarme's Cuirass	264
+                case 51283 : return 51156; // 	Sanctified Bloodmage Robe	277	-->	Sanctified Bloodmage Robe	264
+                case 50656 : return 50001; // 	Ikfirus's Sack of Wonder	277	-->	Ikfirus's Sack of Wonder	264
+                case 51311 : return 51128; // 	Sanctified Scourgelord Gauntlets	277	-->	Sanctified Scourgelord Gauntlets	264
+                case 50707 : return 50067; // 	Astrylian's Sutured Cinch	277	-->	Astrylian's Sutured Cinch	264
+                case 51264 : return 51175; // 	Sanctified Crimson Acolyte Shoulderpads	277	-->	Sanctified Crimson Acolyte Shoulderpads	264
+                case 50622 : return 50185; // 	Devium's Eternally Cold Ring	277	-->	Devium's Eternally Cold Ring	264
+                case 51299 : return 51140; // 	Sanctified Lasherweave Shoulderpads	277	-->	Sanctified Lasherweave Shoulderpads	264
+                case 50675 : return 50021; // 	Aldriana's Gloves of Secrecy	277	-->	Aldriana's Gloves of Secrecy	264
+                case 51233 : return 51206; // 	Sanctified Dark Coven Robe	277	-->	Sanctified Dark Coven Robe	264
+                case 50724 : return 50182; // 	Blood Queen's Crimson Choker	277	-->	Blood Queen's Crimson Choker	264
+                case 51403 : return 51402; // 	Wrathful Gladiator's Acute Staff	277	-->	Wrathful Gladiator's Focus Staff	264
+                case 50641 : return 49982; // 	Heartpierce	277	-->	Heartpierce	264
+                case 50692 : return 50035; // 	Black Bruise	277	-->	Black Bruise	264
+                case 51249 : return 51190; // 	Sanctified Frost Witch's Tunic	277	-->	Sanctified Frost Witch's Tunic	264
+                case 50607 : return 49950; // 	Frostbitten Fur Boots	277	-->	Frostbitten Fur Boots	264
+                case 51284 : return 51155; // 	Sanctified Bloodmage Shoulderpads	277	-->	Sanctified Bloodmage Shoulderpads	264
+                case 51520 : return 51519; // 	Wrathful Gladiator's Truncheon	277	-->	Wrathful Gladiator's Pummeler	264
+                case 50657 : return 49999; // 	Skeleton Lord's Circle	277	-->	Skeleton Lord's Circle	264
+                case 51312 : return 51127; // 	Sanctified Scourgelord Helmet	277	-->	Sanctified Scourgelord Helmet	264
+                case 50708 : return 50179; // 	Last Word	277	-->	Last Word	264
+                case 51265 : return 51174; // 	Sanctified Lightsworn Chestguard	277	-->	Sanctified Lightsworn Chestguard	264
+                case 50623 : return 50199; // 	Leggings of Dying Candles	277	-->	Leggings of Dying Candles	264
+                case 51300 : return 51139; // 	Sanctified Lasherweave Robes	277	-->	Sanctified Lasherweave Robes	264
+                case 50676 : return 50016; // 	Rib Spreader	277	-->	Rib Spreader	264
+                case 50677 : return 50019; // 	Winding Sheet	277	-->	Winding Sheet	264
+                case 51234 : return 51205; // 	Sanctified Dark Coven Shoulderpads	277	-->	Sanctified Dark Coven Shoulderpads	264
+                case 50725 : return 50181; // 	Dying Light	277	-->	Dying Light	264
+                case 51405 : return 51404; // 	Wrathful Gladiator's Skirmish Staff	277	-->	Wrathful Gladiator's Battle Staff	264
+                case 50642 : return 49985; // 	Juggernaut Band	277	-->	Juggernaut Band	264
+                case 50693 : return 50414; // 	Might of Blight	277	-->	Might of Blight	264
+                case 51250 : return 51189; // 	Sanctified Shadowblade Breastplate	277	-->	Sanctified Shadowblade Breastplate	264
+                case 50608 : return 49968; // 	Frozen Bonespike	277	-->	Frozen Bonespike	264
+                case 51285 : return 51154; // 	Sanctified Ahn'Kahar Blood Hunter's Handguards	277	-->	Sanctified Ahn'Kahar Blood Hunter's Handguards	264
+                case 51522 : return 51521; // 	Wrathful Gladiator's Longblade	277	-->	Wrathful Gladiator's Slicer	264
+                case 50658 : return 50005; // 	Amulet of the Silent Eulogy	277	-->	Amulet of the Silent Eulogy	264
+                case 51313 : return 51126; // 	Sanctified Scourgelord Legplates	277	-->	Sanctified Scourgelord Legplates	264
+                case 50709 : return 50415; // 	Bryntroll\, the Bone Arbiter	277	-->	Bryntroll\, the Bone Arbiter	264
+                case 51266 : return 51173; // 	Sanctified Lightsworn Faceguard	277	-->	Sanctified Lightsworn Faceguard	264
+                case 50624 : return 50192; // 	Scourge Reaver's Legplates	277	-->	Scourge Reaver's Legplates	264
+                case 51301 : return 51138; // 	Sanctified Lasherweave Gauntlets	277	-->	Sanctified Lasherweave Gauntlets	264
+                case 50678 : return 50025; // 	Seal of Many Mouths	277	-->	Seal of Many Mouths	264
+                case 51235 : return 51204; // 	Sanctified Frost Witch's Shoulderpads	277	-->	Sanctified Frost Witch's Shoulderpads	264
+                case 50726 : return 50354; // 	Bauble of True Blood	277	-->	Bauble of True Blood	264
+                case 51412 : return 51411; // 	Wrathful Gladiator's Repeater	277	-->	Wrathful Gladiator's Heavy Crossbow	264
+                case 50643 : return 49991; // 	Shoulders of Mercy Killing	277	-->	Shoulders of Mercy Killing	264
+                case 50694 : return 50056; // 	Plaguebringer's Stained Pants	277	-->	Plaguebringer's Stained Pants	264
+                case 51251 : return 51188; // 	Sanctified Shadowblade Gauntlets	277	-->	Sanctified Shadowblade Gauntlets	264
+                case 50609 : return 49975; // 	Bone Sentinel's Amulet	277	-->	Bone Sentinel's Amulet	264
+                case 51286 : return 51153; // 	Sanctified Ahn'Kahar Blood Hunter's Headpiece	277	-->	Sanctified Ahn'Kahar Blood Hunter's Headpiece	264
+                case 51524 : return 51523; // 	Wrathful Gladiator's Grasp	277	-->	Wrathful Gladiator's Right Ripper	264
+                case 50659 : return 50002; // 	Polar Bear Claw Bracers	277	-->	Polar Bear Claw Bracers	264
+                case 51314 : return 51125; // 	Sanctified Scourgelord Shoulderplates	277	-->	Sanctified Scourgelord Shoulderplates	264
+                case 50710 : return 50184; // 	Keleseth's Seducer	277	-->	Keleseth's Seducer	264
+                case 51267 : return 51172; // 	Sanctified Lightsworn Handguards	277	-->	Sanctified Lightsworn Handguards	264
+                case 50625 : return 50190; // 	Grinning Skull Greatboots	277	-->	Grinning Skull Greatboots	264
+                case 51302 : return 51137; // 	Sanctified Lasherweave Helmet	277	-->	Sanctified Lasherweave Helmet	264
+            }
+    }
+
     return false;
 }

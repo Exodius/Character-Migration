@@ -143,7 +143,7 @@ if (!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $Allo
 }
 ?>
 </script>
-<table width = "700" cellpadding = "0" cellspacing = "0" border = "0" rules = "none" align = "center">
+<table width = "850" cellpadding = "0" cellspacing = "0" border = "0" rules = "none" align = "center">
     <tr><td align = "center">
             <table align = "center">
                 <tr><td align = "left">
@@ -194,7 +194,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
     }
     echo "
             <div style = \"white-space: nowrap; border-top-width: 1px; border-top-style: solid; padding-top: 8px; margin-top: 8px;\">
-            <table width = 100% align = center >
+            <table width = 100% align = center class = 'gm-character-list'>
                 <tr bgcolor = #FFEAC7>";
     if (_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels)) {
 

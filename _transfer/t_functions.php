@@ -60,6 +60,13 @@ function checkDelay() {
     return $remain;
 }
 
+function saveLastPortingTime() {
+    // save time before starting process 
+    $handle = fopen("./storage/lastporting.txt", "wa+") or die("Unable to open lastporting file!");
+    fwrite($handle, time());
+    fclose($handle);
+}
+
 function _PreparateMails($row, $PlayerName, $TransferLetterTitle, $TransferLetterMessage, $SOAPUser, $SOAPPassword, $SOAPPort, $SOAPHost, $URI) {
     $item_array = explode(" ", trim($row));
     $by10 = 1;
