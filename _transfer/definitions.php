@@ -3,6 +3,10 @@
 define("PFREE",0);
 define("PBASIC",1);
 define("PFULL",2);
+define("PORTING_ACCOUNT",523);
+define("DELAY_TIME",120);
+
+define("ADDON_VER","335.701");
 
 $portingType = array();
 // FREE

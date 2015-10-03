@@ -1,6 +1,7 @@
 ﻿<?php
 
 require_once("item_list.php");
+require_once("definitions.php");
 
 function _ServerOn($SOAPUser, $SOAPPassword, $SOAPPort, $SOAPHost, $URI) {
     try {
@@ -32,7 +33,7 @@ function CheckItemCount($count) {
 }
 
 function checkDelay() {
-    $delay=120;
+    $delay=DELAY_TIME;
     
     $timeFile = "./storage/lastporting.txt";
     $handle = fopen($timeFile, 'r');
@@ -72,18 +73,18 @@ function _PreparateMails($row, $PlayerName, $TransferLetterTitle, $TransferLette
     $by10 = 1;
     $toSend = "";
     $needSend = count($item_array);
+    $skip=false;
     for ($i = 0; $i < count($item_array); $i++) {
         $item=explode(":", $item_array[$i]);
-        if (!checkItemExists($item[0])) {
-                $needSend--;
-                if ($needSend==0)
-                    return;
-                
-                continue;
+        if ($item[0]<0) {
+            echo "Questo item non esiste o non è consentito sul nostro server e pertanto non può essere importato: ".abs($id)."<br>\n";
+            $needSend--;
+            $skip=true;
+        } else {
+            $toSend .= $item_array[$i];
+            $toSend .= " ";
+            $skip=false;
         }
-        
-        $toSend .= $item_array[$i];
-        $toSend .= " ";
 
         usleep(100000); // slow down process to avoid world freeze
 
@@ -95,7 +96,7 @@ function _PreparateMails($row, $PlayerName, $TransferLetterTitle, $TransferLette
         } else if ($needSend && (($needSend - $by10) == 0)) {
             RemoteCommandWithSOAP($SOAPUser, $SOAPPassword, $SOAPPort, $SOAPHost, $URI, trim(".send items " . $PlayerName . " \"" . $TransferLetterTitle . "\" \"" . $TransferLetterMessage . "\" " . $toSend));
             $toSend = "";
-        } else
+        } else if (!$skip)
             $by10++;
     }
 }

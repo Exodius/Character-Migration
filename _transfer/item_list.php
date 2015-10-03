@@ -1,10 +1,10 @@
 <?php
 
-function checkItemExists($id) {
+function checkItemExists($id,$env="mail") {
     global $originalItemList;
     
     if (!array_key_exists(intval($id), $originalItemList)) {
-        echo "Questo item non esiste sul nostro server e pertanto non può essere importato: ".$id."<br>\n";
+        //echo "[".$env."] Questo item non esiste sul nostro server e pertanto non può essere importato: ".$id."<br>\n";
         return false;
     }
     

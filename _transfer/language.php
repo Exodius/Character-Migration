@@ -1,5 +1,6 @@
 ﻿<?php
 include_once("t_config.php");
+include_once("definitions.php");
 
 switch ($language) {
     case "de": {
@@ -19,7 +20,7 @@ switch ($language) {
             $write[41] = 'Du hast dich erfolgreich ausgeloggt';
             $write[42] = 'Zurück';
             $write[50] = 'Deine Datei war fehlerhaft.';
-            $write[51] = 'Dein Chardump ist fehlerhaft, bitte <a href = "v303.700.rar">downloade</a> ein neues Addon.';
+            $write[51] = 'Dein Chardump ist fehlerhaft, bitte <a href = "chardump.zip">downloade</a> ein neues Addon.';
             $write[52] = 'Deine Anzahl an Characteren auf dem Realm: "';
             $write[53] = '" (Mehr als 9)';
             $write[54] = 'Für den Realm: ';
@@ -35,7 +36,7 @@ switch ($language) {
             $write[73] = 'Nur komplette Angaben: <b>Beispiel:</b> <i>set realmlist 127.0.0.1</i>';
             $write[74] = 'Server Adresse, mit der der GM den "Alten" Server überprüfen kann. <br> <b>Beispiel:</b> ';
             $write[76] = 'Lade nur den erstellten Chardump hoch! "chardump.lua"';
-            $write[75] = 'Lade folgendes Addon herunter um einen Chardump zu erstellen <b><a href = "v303.700.rar">v303.700.rar</a></b><br> Gib /chardump  im Chatfenster ein um einen DUMP durchzuführen. <br> Um die Sachen aus der Bank zu transferieren müssen diese Seiten auch geöffnet sein. <br> Logge dich as und der Dump wird wie folgt gespeichert: WTF \ Account \ %Username% \ SavedVariables \ chardump.lua <br></a>';
+            $write[75] = 'Lade folgendes Addon herunter um einen Chardump zu erstellen <b><a href = "chardump.zip">'.ADDON_VER.'</a></b><br> Gib /chardump  im Chatfenster ein um einen DUMP durchzuführen. <br> Um die Sachen aus der Bank zu transferieren müssen diese Seiten auch geöffnet sein. <br> Logge dich as und der Dump wird wie folgt gespeichert: WTF \ Account \ %Username% \ SavedVariables \ chardump.lua <br></a>';
             $write[77] = 'Transfer starten, Schritt 2';
             $write[78] = 'Willkommen im  <b>ADMIN PANEL</b>. Wenn du Transfers prüfst, dann bitte klicke entweder  "<font color = "green">Bestätigen</font>" oder "<font color = "red">Ablehnen</font>" um die Transfers zu Bestätigen oder Abzulehnen.';
             $write[79] = 'Wähle zu welchem Realm soll dein Character transferiert werden.';
@@ -72,7 +73,7 @@ switch ($language) {
             $write[41] = 'You have successfully left your account';
             $write[42] = 'Go Back';
             $write[50] = 'Your file corrupted, or your client build not';
-            $write[51] = 'Your chardump corrupted, Please <a href = "v303.700.rar">download</a> new addon.';
+            $write[51] = 'Your chardump corrupted, Please <a href = "chardump.zip">download</a> new addon.';
             $write[52] = '<b><font color="red">You have so much characters on Realm: "';
             $write[53] = '" (More then 9) , or maybe your account is locked';
             $write[54] = 'For Realm: ';
@@ -88,7 +89,7 @@ switch ($language) {
             $write[73] = 'Only full string: <b>Example:</b> <i>set realmlist 127.0.0.1</i>';
             $write[74] = 'Server URL, where Game Master can read info or identify your "old" server <br> <b>Example:</b> http://myoldwowserver.com/index.php';
             $write[76] = 'Upload created character dump ONLY! "chardump.lua"';
-            $write[75] = 'Download the game addon to dump the character <b><a href = "v303.700.rar">v303.700.rar</a></b><br> Enter /chardump in the chat frame to dump. <br> To dump things out of the bank to bank so that the window was also open. <br> To dump recipes professions in turn open the frames of the professions. <br> Make logout and the dump file will be saved in the WTF \ Account \ %Username% \ SavedVariables \ chardump.lua <br></a>';
+            $write[75] = 'Download the game addon to dump the character <b><a href = "chardump.zip">chardump.zip</a></b><br> Enter /chardump in the chat frame to dump. <br> To dump things out of the bank to bank so that the window was also open. <br> To dump recipes professions in turn open the frames of the professions. <br> Make logout and the dump file will be saved in the WTF \ Account \ %Username% \ SavedVariables \ chardump.lua <br></a>';
             $write[77] = 'Start Transfer, STEP 2';
             $write[78] = 'Welcome to <b>ADMIN PANEL</b> When you check Player Characters, Please click "<font color = "green">Approve</font>" or "<font color = "red">Deny</font>" for approving or deny their transfers';
             $write[79] = 'Select in which realm you want to tranfer your character';
@@ -125,7 +126,7 @@ switch ($language) {
             $write[41] = 'Has salido de tu cuenta';
             $write[42] = 'Volver';
             $write[50] = 'Tu archivo esta corrupto';
-            $write[51] = 'Tu dump esta corrupto no es valido, Por favor <a href="v303.700.rar">descarga</a> el nuevo addon.';
+            $write[51] = 'Tu dump esta corrupto no es valido, Por favor <a href="chardump.zip">descarga</a> el nuevo addon.';
             $write[52] = '<b><font color="red">Personajes en el reino: "';
             $write[53] = '" (Mas de 9)';
             $write[54] = 'Para el reino: ';
@@ -141,7 +142,7 @@ switch ($language) {
             $write[73] = 'Realmlist entero: <b>Ejemplo:</b> <i>set realmlist 127.0.0.1</i>';
             $write[74] = 'Web del servidor antiguo, donde el MJ puede leer informacion o identificar tu antigua cuenta (servidor del que provienes) <br> <b>Ejemplo:</b> http://myoldwowserver.com/index.php';
             $write[76] = 'Sube el dump "chardump.lua"';
-            $write[75] = 'Descarga el addon para hacer dump de tu PJ <b><a href = "v303.700.rar">v303.700.rar</a></b><br> Escribe /chardump en el chat. <br> Para guardar las cosas de fuera del banco debes tener la ventana abierta. <br> Para conservar las recetas de tus profesiones debes abrir las profesiones. <br> Desconecta del servidor y sube el dump, (se encuentra en WTF \ Account \ %Username% \ SavedVariables \ chardump.lua) <br></a>';
+            $write[75] = 'Descarga el addon para hacer dump de tu PJ <b><a href = "chardump.zip">'.ADDON_VER.'</a></b><br> Escribe /chardump en el chat. <br> Para guardar las cosas de fuera del banco debes tener la ventana abierta. <br> Para conservar las recetas de tus profesiones debes abrir las profesiones. <br> Desconecta del servidor y sube el dump, (se encuentra en WTF \ Account \ %Username% \ SavedVariables \ chardump.lua) <br></a>';
             $write[77] = 'Empezar con la migracion, PASO 2';
             $write[78] = 'Bienvenido al <b>PANEL DE ADMINISTRACION</b> donde puedes administrar los PJs de la gente, haz click en "<font color="green">Aprobar</font>" o "<font color = "red">Denegar</font>" para aprobar o denegar las migraciones';
             $write[79] = 'Selecciona el reino al cual quieres migrar tu personaje';
@@ -178,7 +179,7 @@ switch ($language) {
             $write[41] = 'Vous êtes déconnecté.';
             $write[42] = 'Retour';
             $write[50] = 'Votre fichier est corrompu, ou votre DUMP de personnage n\'\'a pas été fait sous la bonne version (3.3.5)';
-            $write[51] = 'Votre DUMP de personnage est corrompu, Merci de <a href = "v303.700.rar">télécharger</a> le nouvel addon.';
+            $write[51] = 'Votre DUMP de personnage est corrompu, Merci de <a href = "chardump.zip">télécharger</a> le nouvel addon.';
             $write[52] = '<b><font color="red">Vous avez trop de personnages sur le Royaume: "';
             $write[53] = '" (pas plus de 9)';
             $write[54] = 'Pour le Royaume: ';
@@ -194,7 +195,7 @@ switch ($language) {
             $write[73] = 'Realmlist de votre serveur. <b>Exemple:</b> <i>set realmlist pandaria-games.com</i>';
             $write[74] = 'Adresse URL de votre serveur, où le MJ pourra voir les informations de votre serveur <br> <b>Exemple:</b> <i>http://myoldwowserver.com/index.php/</i>';
             $write[76] = 'Uploader SEULEMENT un fichier généré par notre Addon! "chardump.lua"';
-            $write[75] = 'Télécharger notre Addon pour créer votre DUMP de personnage <b><a href = "v303.700.rar">v303.700.rar</a></b><br> Tapez /chardump dans la fenêtre de chat pour générer le fichier DUMP de votre personnage. <br> Pour récupérer votre Banque, pensez à ouvrir la fenêtre de votre Banque avant de taper la commande /chardump. <br> Pour récupérer vos recettes de métier, pensez à ouvrir la fenêtre de vos Métiers avant de taper la commande /chardump. <br> Une fois le DUMP crée par l\'\'addon vous trouverez le fichier à nous envoyer dans votre dossier WTF \ Account \ %Username% \ SavedVariables \ chardump.lua <br></a>';
+            $write[75] = 'Télécharger notre Addon pour créer votre DUMP de personnage <b><a href = "chardump.zip">'.ADDON_VER.'</a></b><br> Tapez /chardump dans la fenêtre de chat pour générer le fichier DUMP de votre personnage. <br> Pour récupérer votre Banque, pensez à ouvrir la fenêtre de votre Banque avant de taper la commande /chardump. <br> Pour récupérer vos recettes de métier, pensez à ouvrir la fenêtre de vos Métiers avant de taper la commande /chardump. <br> Une fois le DUMP crée par l\'\'addon vous trouverez le fichier à nous envoyer dans votre dossier WTF \ Account \ %Username% \ SavedVariables \ chardump.lua <br></a>';
             $write[77] = 'Démarrer la récupération, Étape 2';
             $write[78] = 'Bienvenue dans le <b>GESTIONNAIRE ADMIN</b> lorsque la vérification de récupération est faite, merci de cliquer sur "<font color = "green">Approuvé</font>" ou "<font color = "red">Refusé</font>" pour autoriser ou refuser une récupération.';
             $write[79] = 'Sélectionner le royaume dans lequel vous voulez tranférer votre personnage';
@@ -231,7 +232,7 @@ switch ($language) {
             $write[41] = 'Avete eseguito con successo il log out';
             $write[42] = 'Torna indietro';
             $write[50] = 'File corrotto, o il vostro client non è della giusta build';
-            $write[51] = 'Il tuo chardump è corrotto, perfavore <a href = "v303.700.rar"> scaricate l\'addon corretto </a> ';
+            $write[51] = 'Il tuo chardump è corrotto, perfavore <a href = "chardump.zip"> scaricate l\'addon corretto </a> ';
             $write[52] = '<b> <font color = "red"> Hai molti personaggi sul Realm: "';
             $write[53] = '"(Più di 9) , oppure il tuo account è bloccato';
             $write[54] = 'Per Realm:';
@@ -247,7 +248,13 @@ switch ($language) {
             $write[73] = 'Solo la stringa completa: <b> Esempio: </b> <i> set realmlist 127.0.0.1</i>';
             $write[74] = 'URL del server dove il Game Master può leggere le informazioni o identificare il server "vecchio" <b>Esempio:</b> <i>http://myoldwowserver.com/index.php/</i>';
             $write[76] = 'Carica solo il dump del personaggio! "chardump.lua" ';
-            $write[75] = '<span style="font-size:18px">Scarica l\'addon del gioco per estrarre il personaggio <b> <a href = "v303.700.rar"> v303.700.rar </a> </b> <br> Per estrarre "alcune" delle <b>ricette delle professioni</b> aprite le finestre delle professioni e delle ricette per "mostrarle all\'addon" <br> e poi chiudetele <br> Aprite la finestra dell\'equip e passate il mouse sugli items che avete indossato per mostrarli all\'addon <br> Per estrarre gli oggetti della <b>banca</b> , aprire la finestra della banca e tutte le borse all\'interno ( questa deve restare aperta mentre si lancia il successivo comando ).  <br>. <br> Scrivere <b>/chardump</b> nella finestra della chat in gioco. <br> Effettuare il logout e il file dump verrà salvato dove avete installato il gioco, esattamente nella sottocartella <b>WTF\Account\%username%\SavedVariables\chardump.lua</b> <br> </a> dove %username% è il nome del tuo vecchio account </span>';
+            $write[75] = '<span style="font-size:18px"><ol>'
+                    . '<li>Scarica l\'addon del gioco per estrarre il personaggio QUI: <b> <a href = "chardump.zip">  Addon versione '.ADDON_VER.' </a> , installalo nel tuo client, avvia il gioco ed abilitalo </b> <br> </li>'
+                    . '<li>Per estrarre "alcune" delle <b>ricette delle professioni</b> aprite le finestre delle professioni e delle ricette per "mostrarle all\'addon" e poi chiudetele</li> <br><li> Aprite la finestra dell\'equip per mostrare gli items che avete indossato all\'addon <br></li>'
+                    . '<li>Per estrarre gli oggetti della <b>banca</b> , aprire la finestra della banca e tutte le borse all\'interno ( questa deve restare aperta mentre si lancia il successivo comando ). <br></li><li> Scrivere <b>/chardump</b> nella finestra della chat in gioco. <br></li>'
+                    . '<li> Effettuare il logout e il file dump verrà salvato dove avete installato il gioco, esattamente nella sottocartella <b>WTF\Account\%username%\SavedVariables\chardump.lua</b> <br> </a> dove %username% è il nome del tuo vecchio account </li>'
+                    . '</ol>'
+                    . '</span>';
             $write[77] = 'Avvia il trasferimento, FASE 2';
             $write[78] = 'Benvenuti nel <b> pannello di amministrazione </b> dove puoi controllare i personaggi, cliccate "<font color =" verde "> Approva </font>" o "<font color =" red " > Nega </font> "per approvare o negare i loro trasferimenti';
             $write[79] = 'Seleziona in quale realm desideri trasferire il tuo personaggio';
@@ -284,7 +291,7 @@ switch ($language) {
             $write[41] = 'Вы удачно покинули Личный Кабинет';
             $write[42] = 'Вернутся на сайт';
             $write[50] = 'Формат файла не верен, нужна другая версия игры';
-            $write[51] = 'Ваш аддон chardump устарел, пожалуйста <a href = "v303.700.rar">скачайте</a> более новую версию аддона.';
+            $write[51] = 'Ваш аддон chardump устарел, пожалуйста <a href = "chardump.zip">скачайте</a> более новую версию аддона.';
             $write[52] = 'Слишком много персонажей на аккунте: "';
             $write[53] = '" (не более 9)';
             $write[54] = 'На выбеном мире: ';
@@ -300,7 +307,7 @@ switch ($language) {
             $write[73] = 'Реалмлист старого сервера. Только полностью: <b>Пример:</b> <i>set realmlist 127.0.0.1</i>';
             $write[74] = 'Адрес сайта "старого" сервера, где Гейм Мастер сможет прочесть информацию о нем <br> <b>"старом":</b>';
             $write[76] = 'Использовать <b>ТОЛЬКО</b> файл <b>"chardump.lua"</b>!';
-            $write[75] = 'Скачать аддон(игровое расширение) для получения  dump персонажа <b><a href = "v303.700.rar">v303.700.rar</a></b><br> Введите /chardump в чате игры зайдя на вашего персонажа для начала переноса персонажа.<br> Отройте сумки инвентаря и банка, чтобы они перенеслись на новый сервер. <br> Для переноса рецептов и профессий - откройте окна профессии. <br> Выйдите из игры и найдите файла дампа, он будет сохранен в  WTF \ Account \ %Username% \ SavedVariables \ chardump.lua <br>Все выше сказаное есть в видео </a>';
+            $write[75] = 'Скачать аддон(игровое расширение) для получения  dump персонажа <b><a href = "chardump.zip">'.ADDON_VER.'</a></b><br> Введите /chardump в чате игры зайдя на вашего персонажа для начала переноса персонажа.<br> Отройте сумки инвентаря и банка, чтобы они перенеслись на новый сервер. <br> Для переноса рецептов и профессий - откройте окна профессии. <br> Выйдите из игры и найдите файла дампа, он будет сохранен в  WTF \ Account \ %Username% \ SavedVariables \ chardump.lua <br>Все выше сказаное есть в видео </a>';
             $write[77] = 'Начало переноса, ШАГ 2';
             $write[78] = 'Добро пожаловать в  <b>Панель Администратора</b> Установите статус персонажа, Please click "<font color = "green">Одобрено</font>" или "<font color = "red">Отклонено</font>" что-бы изменить статус переноса.';
             $write[79] = 'Выберите мир, в который хотите перенести персонажа';

@@ -28,6 +28,7 @@ CREATE TABLE `account_transfer` (
   `oServer` TEXT,
   `oRealm` TEXT,
   `oRealmlist` TEXT,
+  `accountVersion` TEXT,
   `GUID` INT(11) UNSIGNED NOT NULL DEFAULT 0,
    PRIMARY KEY (`id`)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;

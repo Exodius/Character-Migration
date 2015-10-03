@@ -6991,7 +6991,15 @@ $ProfessionSpells = array(
     71015 => 773, //Glyph of Rapid Rejuvenation
 );
 
-function itemChange($pType, $ID) {
+function pTypeItemCheck($pType, $ID) {
+    /*[TODO]
+    if ($pType == FULL) {
+        // if we found the shadowmourne maybe we need to add 
+        // quests in character_queststatus
+    }     
+    */
+    
+    
     if ($pType == PBASIC || $pType == PFREE) {
             switch ($ID) {
                 // special

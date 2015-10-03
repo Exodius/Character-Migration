@@ -26,7 +26,21 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
     unlink($file);
     $part = explode('"', $buffer);
     if (isset($part[1])) {
-        $DUMP = $part[1];
+        $DUMP = $part[1];      
+        $arrDump=parse_ini_string ( $buffer  );
+
+        $VER = isset($arrDump["CHDMP_VER"]) ? $arrDump["CHDMP_VER"] : "<335.700";
+        
+        if ($VER!=ADDON_VER && (!isset($_POST["obsolete"]) || $_POST["obsolete"]!="enable")) {
+        ?>
+            <script>
+            alert("!!ATTENZIONE!!\n\nLa versione dell'addon con cui è stato estratto questo chardump è obsoleta:<?=$VER?>\n\n La nuova versione è la: <?=ADDON_VER?>\n\nPotresti avere problemi al termine del porting!\n\nSe vuoi comunque proseguire, premi su ok ed abilita il caricamento dei chardump obsoleti nella pagina precedente!");
+            window.location.href = "playerside.php";
+            </script>
+        <?php
+            die();
+        }
+        
         $REALM_NAME = $_POST['RealmlistList'];
         $DECODED_DUMP = _DECRYPT($DUMP);
         $CHAR_REALM = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $REALM_NAME);
@@ -86,13 +100,13 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             $reason = _RT("Questo personaggio è già stato importato!");
         } else if ($delay<0) {
             $reason = _RT("Un altro porting è in corso, riprovare tra ".abs($delay)." secondi");
-        }
+        } 
 
         $GUID = CheckCharacterGuid($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, GetCharacterGuid(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM)));
 
         if (empty($reason)) {
             $ID = 0;
-            $ID = WriteDumpFromFileInDB($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $DUMP, $CHAR_NAME, $CHAR_ACCOUNT_ID, $CHAR_REALM, $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $GUID, $PLAYER_TRANSFER_STACKS, $pType, $write[20]);
+            $ID = WriteDumpFromFileInDB($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $DUMP, $CHAR_NAME, $CHAR_ACCOUNT_ID, $CHAR_REALM, $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $VER, $GUID, $PLAYER_TRANSFER_STACKS, $pType, $write[20]);
         }
     } else if (!isset($part[1]))
         $reason = _RT($write[51]);
@@ -116,11 +130,13 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         $connection = mysql_connect(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword);
 
         _SelectDB(_CharacterDBSwitch($CHAR_REALM), $connection);
-        //Note: speccount is not present anymore in the db... Maybe has been renamed to talentsGroupCount?
+
+        // Note , we're storing it temporary in storage account with dumpid as char name
+        // it will be updated after
         mysql_query("
-        INSERT INTO `characters`(`guid`,`name`,`level`,`gender`,`totalHonorPoints`,`arenaPoints`,`totalKills`,`money`,`class`,`race`,`at_login`,`account`,`taximask`, `talentGroupsCount`, `online`) VALUES (
-        " . $GUID . ",\"" . _X($CHAR_NAME) . "\"," . (int) $CharLevel . "," . (int) $char_gender . "," . (int) $char_honorpoints . "," . (int) $char_arenapoints . ",
-        " . (int) $char_totalkills . "," . (int) $char_money . "," . $ClassID . "," . $RaceID . ", 0x180, 1, \"0 0 0 0 0 0 0 0 0 0 0 0 0 0\"," . (int) $char_speccount . ", 0);", $connection);
+        INSERT INTO `characters`(`guid`,`name`,`level`,`gender`,`totalHonorPoints`,`arenaPoints`,`totalKills`,`money`,`class`,`race`,`at_login`,`account`,`deleteInfos_Account`,`deleteInfos_Name`,`taximask`, `talentGroupsCount`, `online`) VALUES (
+        " . $GUID . ",\"".$ID."\"," . (int) $CharLevel . "," . (int) $char_gender . "," . (int) $char_honorpoints . "," . (int) $char_arenapoints . ",
+        " . (int) $char_totalkills . "," . (int) $char_money . "," . $ClassID . "," . $RaceID . ", 0x180, $STORAGE, $CHAR_ACCOUNT_ID, \"" . _X($CHAR_NAME) . "\", \"0 0 0 0 0 0 0 0 0 0 0 0 0 0\"," . (int) $char_speccount . ", 0);", $connection);
         $QUERYFOREXECUTE = $QUERYFOREXECUTE . "
         INSERT INTO `character_transfer` VALUES (" . $GUID . "," . $CHAR_ACCOUNT_ID . "," . $PLAYER_TRANSFER_STACKS . "," . $ID . ");
 
@@ -223,7 +239,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         }
 
         foreach ($json['inventory'] as $key => $value) {
-            $item = _GetChangedItem($CHAR_REALM, $value['I'], $pType);
+            $item = _itemCheck($CHAR_REALM, $value['I'], $pType);
             $count = CheckItemCount($value['C']);
 
             $INVrow .= $item . ":" . $count . " ";
@@ -243,7 +259,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
 
         $row = trim($INVrow . $GEMrow . $CURrow);
         UpdateDumpITEMROW($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $row);
-        if (_CheckCharacterName(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $CHAR_NAME) > 1) {
+        if (_CheckCharacterName(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $CHAR_NAME) > 0) {
             $_SESSION['guid'] = $GUID;
             $_SESSION['realm'] = $CHAR_REALM;
             $_SESSION['dumpID'] = $ID;
@@ -255,6 +271,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             saveLastPortingTime();
             
             UpdateDumpStatus($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, 0);
+            UpdateCharacterName(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $CHAR_NAME, $GUID);
             _PreparateMails($row, $CHAR_NAME, $TransferLetterTitle, $TransferLetterMessage, $SOAPUser, $SOAPPassword, _SOAPPSwitch($CHAR_REALM), _SOAPHSwitch($CHAR_REALM), _SOAPURISwitch($CHAR_REALM));
             _TalentsReset(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $GUID);
             MoveToGMAccount(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $GUID);
@@ -320,7 +337,7 @@ function Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $TEXT1, $TE
             <tr><td><b>Password: </b><input name=\"Password\" type=\"password\" size=\"32\" style = \"float: right;\"></tr>
             <tr><td><br></td></tr>
             <tr><td><div align = right class = \"MythTable\">" . $TEXT4 . "</div></td></tr>
-            <tr><td><b>I want transfer to Realm: </b><select name=\"RealmlistList\">";
+            <tr><td><b>Voglio trasferirlo al realm: </b><select name=\"RealmlistList\">";
     $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
     _SelectDB($AccountDB, $connection);
     $result = mysql_query("SELECT `id`,`name` FROM `realmlist` WHERE `TransferAvailable` = 1;");
@@ -328,10 +345,13 @@ function Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $TEXT1, $TE
     while ($row = mysql_fetch_array($result))
         echo "<option name=\"" . $row['id'] . "\">" . $row['name'] . "</option>";
     echo "</select><tr><td>
-                <tr><td><div align = right class = \"MythTable\">" . $TEXT5 . "</div></td></tr>
-                <tr><td><b>Server URL: </b><input name=\"ServerUrl\" type=\"text\" size=\"60\" style = \"float: right;\"></td></tr>
+                <br><br>
+                <tr><td><br><br><div align = left class = \"MythTable\">" . $TEXT5 . "</div></td></tr>
+                <tr><td><b>Server URL ( Sito ): </b><input name=\"ServerUrl\" type=\"text\" size=\"60\" style = \"float: right;\"></td></tr>
+                <tr><td><br><br><div align = left class = \"MythTable\">( Sconsigliato ) Abilita il caricamento di chardump effettuati con un addon obsoleto:</div></td></tr>
+                <tr><td><b>Abilita chardump obsoleti:</b> <input type='checkbox' name='obsolete' value='enable'/></tr></td>
                 <tr><td><div align = left class = \"MythTable\"> Scegli la tipologia di porting da effettuare:</div></td></tr>
-                <tr><td><b>Porting Type: </b>" . HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) . "</td></tr>
+                <tr><td><b>Tipologia di porting: </b>" . HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) . "</td></tr>
             <tr><td><div align = right class = \"MythTable\">" . $TEXT6 . "</div></td></tr>
             </table>
                 <div class = \"MythInput\">

@@ -136,7 +136,7 @@ if (!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $Allo
         
         function popUp(content) {
             var win = window.open("", "Items", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=780, height=200, top="+(screen.height-400)+", left="+(screen.width-840));
-            win.document.body.innerHTML = content;
+            win.document.body.innerHTML = "<span style='word-wrap: break-word;'>"+content+"</span>";
         }
 
     <?php
@@ -177,7 +177,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
         mysql_close($connection);
     } else {
         echo "
-            <div align = right style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma'; \">" . $TEXT2 . "</div>
+            <div align = left style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma'; \">" . $TEXT2 . "</div>
             <br>
             <div style = \"font-size:17px\">" . $TEXT3 . "</div>
             <div class = \"MythInput\">
@@ -206,7 +206,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
                 <td>Password:               </td>
                 <td>Server URL:             </td>
                 <td>Type:                   </td>
-                <td>Items:                  </td>
+                <td>Info:                  </td>
                 <td>Date:                   </td>
                 <td>To Account:                </td>
                 <td>Admin Options:          </td>
@@ -227,7 +227,9 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
                         <td>" . $row["oPassword"] . "</td>
                         <td>" . $row["oServer"] . "</td>
                         <td>" . $portingType[$row["tType"]]["Type"] . "</td>
-                        <td><button onclick='popUp(\"" . str_replace(' ',"<br>",$row["cItemRow"]) . "\")'>Open</button></td>
+                        <td>Addon Rev: ".($row["addonVersion"] ? $row["addonVersion"] : "<Empty>")." <br><br>
+                        <button onclick='popUp(\"" . str_replace(' ',"<br>",$row["cItemRow"]) . "\")'>Item List</button><br>
+                        <button onclick='popUp(\"" . $row["cDump"]. "\")'>Dump</button></td>
                         <td>" . $row["date_created"] . "</td>
                         <td>" . $row["cAccount"] . "</td>
                         <td align = center>

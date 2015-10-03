@@ -2,6 +2,7 @@
 include_once('t_config.php');
 include_once('language.php');
 include_once('t_functions.php');
+include_once('definitions.php');
 
 function _X($A) {
     return get_magic_quotes_gpc() ? stripslashes(mysql_real_escape_string($A)) : mysql_real_escape_string($A);
@@ -107,7 +108,7 @@ function CanOrNoTransferServer($DBHost, $DBUser, $DBPassword, $AccountDB, $Realm
     }
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);
-    $REVIEWER_ID = 523;
+    $REVIEWER_ID = PORTING_ACCOUNT;
     $MIN = 8;
     /*
       //echo "<br> SELECT `id`,`Realm". $ID ."` FROM `account_transfer_queue`";
@@ -160,7 +161,7 @@ function checkDuplicate($DBHost, $DBUser, $DBPassword, $AccountDB, $charNameOld,
             . "FROM `account_transfer` "
             . "WHERE `cNameOLD` = '$charNameOld' "
             . "AND oRealm = '$realm' "
-            . "AND oRealmList = '$realmlist' "
+            . "AND oRealmList != 'azerothshard.servegame.com' AND  oRealmList = '$realmlist' "
             . "AND ( cStatus = 1 OR cStatus = 0 )", $connection) or die(mysql_error());
     
     $row = mysql_fetch_array($query);
@@ -331,7 +332,8 @@ function _GetCharacterName($DBHost, $DBUser, $DBPassword, $CharactersDB, $GUID) 
 function UpdateCharacterName($DBHost, $DBUser, $DBPassword, $CharactersDB, $Name, $GUID) {
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($CharactersDB, $connection);
-    mysql_query("UPDATE `characters` SET `name` = \"" . _X($Name) . "\" WHERE `guid` = " . $GUID . ";", $connection) or die(mysql_error());
+    // set new name and clean useless Infos
+    mysql_query("UPDATE `characters` SET `name` = \"" . _X($Name) . "\" , `deleteInfos_Account` = NULL, `deleteInfos_Name` = NULL WHERE `guid` = " . $GUID . ";", $connection) or die(mysql_error());
     mysql_close($connection);
     return $Name;
 }
@@ -381,13 +383,13 @@ function LoadDump($DBHost, $DBUser, $DBPassword, $AccountDB, $ID) {
     return $row[0];
 }
 
-function WriteDumpFromFileInDB($DBHost, $DBUser, $DBPassword, $AccountDB, $DUMP, $CHAR_NAME, $CHAR_ACCOUNT_ID, $CHAR_REALM, $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $GUID, $GM_ACCOUNT, $PTYPE, $ERROR) {
+function WriteDumpFromFileInDB($DBHost, $DBUser, $DBPassword, $AccountDB, $DUMP, $CHAR_NAME, $CHAR_ACCOUNT_ID, $CHAR_REALM, $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $VER, $GUID, $GM_ACCOUNT, $PTYPE, $ERROR) {
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);
     $query = mysql_query("INSERT INTO `account_transfer`(
-        `cStatus`,`cRealm`,`oAccount`,`oPassword`,`oRealmlist`,`oRealm`,`oServer`,`cDump`,`cNameOLD`,`cNameNEW`,`cAccount`,`GUID`,`gmAccount`,`tType`) VALUES (
+        `cStatus`,`cRealm`,`oAccount`,`oPassword`,`oRealmlist`,`oRealm`,`oServer`,`cDump`,`cNameOLD`,`cNameNEW`,`cAccount`,`addonVersion`,`GUID`,`gmAccount`,`tType`) VALUES (
         5,\"" . _X($CHAR_REALM) . "\",\"" . _X($o_Account) . "\",\"" . _X($o_Password) . "\",\"" . _X($O_REALMLIST) . "\",\"" . _X($O_REALM) . "\",\"" . _X($o_URL) . "\"
-        ,\"" . _X($DUMP) . "\",\"" . _X($CHAR_NAME) . "\",\"" . _X($CHAR_NAME) . "\"," . $CHAR_ACCOUNT_ID . "," . $GUID . "," . $GM_ACCOUNT . "," . $PTYPE . ");", $connection) or die(mysql_error());
+        ,\"" . _X($DUMP) . "\",\"" . _X($CHAR_NAME) . "\",\"" . _X($CHAR_NAME) . "\"," . $CHAR_ACCOUNT_ID . ",\""._X($VER)."\"," . $GUID . "," . $GM_ACCOUNT . "," . $PTYPE . ");", $connection) or die(mysql_error());
     $ID = mysql_insert_id($connection);
     mysql_close($connection);
     return $ID;
