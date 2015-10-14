@@ -10,6 +10,8 @@ if (isset($_POST['load']))
     $step = 1;
 else if (isset($_POST['rename']))
     $step = 2;
+else if (isset($_POST['basic'])
+    $step = 4;
 else
     $step = 3;
 if (!isset($_SESSION['loged']))
@@ -153,6 +155,8 @@ if (!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $Allo
                                 break;
                             case 2: include("_transfer/step2.php");
                                 break;
+                            case 4: include("_transfer/step1-basic.php"); // BASIC 80
+                                break;
                             case 3: FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevels, $write[78], $write[75], $write[60], $write[65], $write[61], $write[85], $write[86], $write[30], $write[31], $write[32], $write[33], $write[34], $write[84]);
                                 break;
                         }
@@ -183,6 +187,10 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
             <div class = \"MythInput\">
                 <form action=\"" . $_SERVER["SCRIPT_NAME"] . "\" method=\"post\" enctype=\"multipart/form-data\">
                     <input type=\"submit\" name = \"load\" value=\"" . $TEXT4 . "\"/>
+                </form>
+                <br>
+                <form action=\"" . $_SERVER["SCRIPT_NAME"] . "\" method=\"post\" enctype=\"multipart/form-data\">
+                    <input type=\"submit\" name = \"basic\" value=\" 80 Basic\"/>
                 </form>
             </div>
             <div align = right class = \"MythTable\" style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma';\">" . $TEXT5 . "</div>";
