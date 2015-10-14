@@ -10,7 +10,7 @@ if (isset($_POST['load']))
     $step = 1;
 else if (isset($_POST['rename']))
     $step = 2;
-else if (isset($_POST['basic'])
+else if (isset($_POST['basic']))
     $step = 4;
 else
     $step = 3;
