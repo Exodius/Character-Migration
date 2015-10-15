@@ -173,26 +173,37 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
     global $portingType;
     
     if (_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels)) {
-        echo "<div align = right class = \"MythTable\" style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma';\">" . $TEXT1 . "</div>
+        echo "
+        <div align = right class = \"MythTable\" style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma';\">" . $TEXT1 . "</div>
             <br>";
         $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
         _SelectDB($AccountDB, $connection);
         $query = mysql_query("SELECT * FROM `account_transfer` WHERE `gmAccount` = " . $ACCOUNT_ID . " ORDER BY `id` DESC LIMIT 25;", $connection);
         mysql_close($connection);
     } else {
-        echo "
+        echo "<center><h1>Porting Standard</h1></center>
             <div align = left style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma'; \">" . $TEXT2 . "</div>
             <br>
             <div style = \"font-size:17px\">" . $TEXT3 . "</div>
+            <br>
+            <br>
             <div class = \"MythInput\">
                 <form action=\"" . $_SERVER["SCRIPT_NAME"] . "\" method=\"post\" enctype=\"multipart/form-data\">
                     <input type=\"submit\" name = \"load\" value=\"" . $TEXT4 . "\"/>
                 </form>
                 <br>
-                <form action=\"" . $_SERVER["SCRIPT_NAME"] . "\" method=\"post\" enctype=\"multipart/form-data\">
-                    <input type=\"submit\" name = \"basic\" value=\" 80 Basic\"/>
-                </form>
             </div>
+
+            <center><h1>Caricamento chardump speciali</h1></center>
+            <div align = left style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma'; \">
+            Questa procedura è riservata esclusivamente a coloro che hanno ordinato il chardump dal catalogo del sito
+            </div>
+            <br>
+            <br>
+            <form action=\"" . $_SERVER["SCRIPT_NAME"] . "\" method=\"post\" enctype=\"multipart/form-data\">
+                <input type=\"submit\" name = \"basic\" value=\"Avvia trasferimento 80 Basic\"/>
+            </form>
+
             <div align = right class = \"MythTable\" style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma';\">" . $TEXT5 . "</div>";
 
         $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);

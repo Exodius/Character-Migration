@@ -170,6 +170,17 @@ function checkDuplicate($DBHost, $DBUser, $DBPassword, $AccountDB, $charNameOld,
     return $row[0]>0;
 }
 
+function checkHas80($DBHost, $DBUser, $DBPassword, $charDB, $accountId) {
+    $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
+    _SelectDB($charDB, $connection);
+    $query = mysql_query("SELECT COUNT(*) FROM `characters` WHERE level = 80 AND account = $accountId;");
+    
+    $row = mysql_fetch_array($query);
+    mysql_close($connection);
+    
+    return $row[0]>0;
+}
+
 function _CheckBlackList($DBHost, $DBUser, $DBPassword, $AccountDB, $VALUE) {
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);

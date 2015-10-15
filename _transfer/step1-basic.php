@@ -7,9 +7,9 @@ include_once("f_switch.php");
 require_once("item_list.php");
 require_once("definitions.php");
 
-if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Password']) && !empty($_POST['Password']) && isset($_POST['ServerUrl']) && !empty($_POST['ServerUrl']) && isset($_POST['RealmlistList']) && !empty($_POST['RealmlistList'])) {
-    $o_Account = trim($_POST['Account']);
-    $o_Password = trim($_POST['Password']);
+if (isset($_POST['RealmlistList']) && !empty($_POST['RealmlistList'])) {
+    $o_Account = "azthinstant80";
+    $o_Password = "azthinstant80";
     $o_URL = trim($_POST['ServerUrl']);
 
     $file = $_FILES['file']['tmp_name'];
@@ -31,6 +31,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
 
         $VER = isset($arrDump["CHDMP_VER"]) ? $arrDump["CHDMP_VER"] : "<335.700";
         
+        /*
         if ($VER!=ADDON_VER && (!isset($_POST["obsolete"]) || $_POST["obsolete"]!="enable")) {
         ?>
             <script>
@@ -40,6 +41,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         <?php
             die();
         }
+         */
         
         $REALM_NAME = $_POST['RealmlistList'];
         $DECODED_DUMP = _DECRYPT($DUMP);
@@ -327,54 +329,53 @@ function CHECKDAY($TIME1, $TIME2) {
 }
 
 function Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $TEXT1, $TEXT2, $TEXT3, $TEXT4, $TEXT5, $TEXT6, $TEXT7, $TEXT8, $REALSON = "") {
-    echo $REALSON . "<div align = center class = \"MythTable\">" . $TEXT1 . "</div>
+    echo "
+        <br>
+        <br>
         <br>
         <form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"post\" enctype=\"multipart/form-data\">
             <table width=\"100%\">
-            <tr><td><div align = right class = \"MythTable\">" . $TEXT2 . "</div></td></tr>
-            <tr><td><br></td></tr>
             <tr><td><div align = right class = \"MythTable\">" . $TEXT4 . "</div></td></tr>
             <tr><td><b>Voglio trasferirlo al realm: </b><select name=\"RealmlistList\">";
-    $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
-    _SelectDB($AccountDB, $connection);
-    $result = mysql_query("SELECT `id`,`name` FROM `realmlist` WHERE `TransferAvailable` = 1;");
-    mysql_close($connection);
-    while ($row = mysql_fetch_array($result))
-        echo "<option name=\"" . $row['id'] . "\">" . $row['name'] . "</option>";
-    echo "</select><tr><td>
-                <br><br>
-                <tr><td><br><br><div align = left class = \"MythTable\">" . $TEXT5 . "</div></td></tr>
-                <tr><td><b>Server URL ( Sito ): </b><input name=\"Server di provenienza\" type=\"text\" size=\"60\" style = \"float: right;\"></td></tr>
-                <tr><td><b>Abilita chardump obsoleti:</b> <input type='checkbox' name='obsolete' value='enable'/></tr></td>
-            <tr><td><div align = right class = \"MythTable\">" . $TEXT6 . "</div></td></tr>
-            </table>
+            $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
+            _SelectDB($AccountDB, $connection);
+            $result = mysql_query("SELECT `id`,`name` FROM `realmlist` WHERE `TransferAvailable` = 1;");
+            mysql_close($connection);
+            while ($row = mysql_fetch_array($result))
+                echo "<option name=\"" . $row['id'] . "\">" . $row['name'] . "</option>";
+        
+            echo "
+            </select><tr><td>";
+            
+            $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB, PINSTANT80);
+            $isDisabled = $limit == 0;
+            
+            if (checkHas80($DBHost, $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $accountId)) {
+                echo "
+                    <tr><td></td></tr>
+                    <tr><td>Non hai slot disponibili, devi ordinarne altri per eseguire il trasferimento</tr></td>
+                    </table>";
+            }
+            
+
+            if ($isDisabled) {
+                echo "
+                    <tr><td></td></tr>
+                    <tr><td>Non hai slot disponibili, devi ordinarne altri per eseguire il trasferimento</tr></td>
+                    </table>";
+            } else {
+                echo "<tr><td>Slot instant 80 disponibili: ".($limit < 0 ? "∞" : $limit)."</td></tr>
+                    <br><br>
+                    <tr><td><br><br><div align = left class = \"MythTable\">" . $TEXT5 . "</div></td></tr>
+                    <tr><td><b>Da dove arrivi?: </b><input name=\"ServerUrl\" type=\"text\" size=\"60\" style = \"float: right;\"></td></tr>
+                <tr><td><div align = right class = \"MythTable\">" . $TEXT6 . "</div></td></tr>
+                </table>
                 <div class = \"MythInput\">
                     <style = \"font-size:14px\">" . $TEXT7 . "</style>
                     <input type=\"file\" name=\"file\" id=\"file\" accept='.lua'/>
                     <input type=\"submit\" name=\"load\" value=\"" . $TEXT8 . "\" />
-                </div>
-        </form>";
-}
-
-function HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) {
-    global $portingType;
-    $output = "<br>";
-    $dCnt = 0;
-
-    for ($i = 0; $i < count($portingType); $i++) {
-        $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $i);
-        $isDisabled = $limit == 0 ? "disabled" : "";
-        if ($limit == 0)
-            $dCnt++;
-
-        $output .= "<input type='radio' name='PortingType' value='$i' $isDisabled required/> <b><span class='porting-type'>" . $portingType[$i]['Type'] . "</span></b> ( Slot disponibili: " . ($limit < 0 ? "∞" : $limit) . ")<br>";
-        $output .= $portingType[$i]['Descr']."<br><br>";
-        
-    }
-
-    if ($dCnt == count($portingType)) {
-        $output .= "<br> <b style='color:red'>ATTENZIONE!! QUESTO ACCOUNT NON HA PIU' SLOT DISPONIBILI PER IL TRANSFER!</b>";
-    }
-
-    return $output;
+                </div>";
+            }
+       
+        echo "</form>";
 }

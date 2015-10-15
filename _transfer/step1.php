@@ -366,8 +366,14 @@ function HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) {
     global $portingType;
     $output = "<br>";
     $dCnt = 0;
+    $portingTypesCnt=0;
 
     for ($i = 0; $i < count($portingType); $i++) {
+        if (!$portingType["isPorting"])
+            continue;
+        
+        $portingTypesCnt++;
+        
         $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $i);
         $isDisabled = $limit == 0 ? "disabled" : "";
         if ($limit == 0)
@@ -378,7 +384,7 @@ function HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) {
         
     }
 
-    if ($dCnt == count($portingType)) {
+    if ($dCnt == $portingTypesCnt) {
         $output .= "<br> <b style='color:red'>ATTENZIONE!! QUESTO ACCOUNT NON HA PIU' SLOT DISPONIBILI PER IL TRANSFER!</b>";
     }
 
