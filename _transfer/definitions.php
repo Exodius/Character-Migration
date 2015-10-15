@@ -6,6 +6,7 @@ define("PFULL",2);
 define("PINSTANT80",3);
 define("PORTING_ACCOUNT",523);
 define("DELAY_TIME",120);
+define("REALM_NAME","AzerothShard"); // you need to call your realm with this name
 
 define("ADDON_VER","335.701");
 

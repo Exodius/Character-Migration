@@ -306,7 +306,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         die();
     }
 
-    $CHAR_REALM = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, "AzerothShard");
+    $CHAR_REALM = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, REALM_NAME);
     if (CanOrNoTransferServer($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, $AllowedGMLevels, _CharacterDBSwitch($CHAR_REALM)) < 0) {
         ?>
         <script type="text/javascript">
