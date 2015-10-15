@@ -116,6 +116,9 @@ error_reporting(E_ERROR | E_PARSE);
     }
 
     function _CheckWrongOrNoItem($REALMID, $ID) {
+        if (!checkItemExists($ID,"conf"))
+            return true; // true is wrong
+        
         switch($REALMID) {      // case ID: = realm id from realmlist table
             case 1:
             case 2:
@@ -143,30 +146,31 @@ error_reporting(E_ERROR | E_PARSE);
         }
     }
 
-    function _GetChangedItem($REALMID, $ID) {
-        if(_CheckWrongOrNoItem($REALMID, $ID))
-            return -1;
+    function _itemCheck($REALMID, $ID, $P_TYPE) {
+        if (_CheckWrongOrNoItem($REALMID, $ID))
+            return -1*$ID; // negative items will not be added
 
-        switch($REALMID) {      // case ID: = realm id from realmlist table
+        switch ($REALMID) {      // case ID: = realm id from realmlist table
             case 1:
             case 2:
             case 3:
             case 4:
             case 5:
             default:
-                switch($ID) {   // IF YOU WANT CHANGE ITEM. ADD CASE <ID> : RETURN < NEW ID>. ITEM WILL BE CHANGED IN DELIVERY LIST.
-                    case 49623: return 49888;   // Shadowmourne to Shadow's Edge
-                    default:
-                        return $ID;
+                $res= pTypeItemCheck($P_TYPE, $ID);
+
+                if ($res) {
+                    return $res;
                 }
-                break;
+            break;
         }
+
+        return $ID;
     }
 
     function _CheckWrongOrNoAchievement($ID) {
-        switch($ID) {
+        switch ($ID) {
             //case XX: return false;
             default: return true;
         }
     }
-?>
