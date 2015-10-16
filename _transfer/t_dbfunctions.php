@@ -189,10 +189,13 @@ function checkHas80($DBHost, $DBUser, $DBPassword, $charDB, $accountId) {
     return $row[0]>0;
 }
 
-function _CheckBlackList($DBHost, $DBUser, $DBPassword, $AccountDB, $VALUE) {
+function _CheckBlackList($DBHost, $DBUser, $DBPassword, $AccountDB, $realmlist,$realm,$url) {
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);
-    $query = mysql_query("SELECT `b_address` FROM `account_transfer_blacklist` WHERE `b_address` LIKE \"%" . _X(trim($VALUE)) . "%\";", $connection) or die(mysql_error());
+    $query = mysql_query("SELECT * FROM `account_transfer_blacklist` WHERE "
+            . " ( `b_address` = \"" . _X($realmlist) . "\" "
+            . " AND `b_realmName` = \""._X($realm)."\" ) "
+            . " OR `b_url` LIKE \"%" . _X(trim($url)) . "%\";", $connection) or die(mysql_error());
     $row = mysql_fetch_array($query);
     mysql_close($connection);
     return $row ? true : false;

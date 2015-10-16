@@ -88,9 +88,7 @@ if (isset($_POST['RealmlistList']) && !empty($_POST['RealmlistList'])) {
             $reason = _RT("Seems bad characters, not enought achievements!");
         } else if (CHECKDAY($ACHMAXTime, $ACHMINTime) < $PLAYTIME) {
             $reason = _RT("Small playtime!");
-        } else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $o_URL) ||
-                _CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALM) ||
-                _CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST)) {
+        } else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST, $O_REALM, $o_URL)) {
             $reason = _RT($write[57]);
         } else if (CanOrNoTransferPlayer(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $AccountDB, $CHAR_ACCOUNT_ID)) {
             $reason = _RT($write[52] . " " . $REALM_NAME . ". " . $write[53]);
