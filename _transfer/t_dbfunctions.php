@@ -41,7 +41,7 @@ function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $charDb, $type) {
     
     // skip db check if we've this feature disabled
     if ($limitTransfer) {
-        $query2 = mysql_query("SELECT quantity FROM `account_transfer_whitelist` WHERE `account` = " . (int) $account . " AND type = $type;", $connection) or die(mysql_error());
+        $query2 = mysql_query("SELECT quantity FROM `account_transfer_slots` WHERE `account` = " . (int) $account . " AND type = $type;", $connection) or die(mysql_error());
         $result2 = mysql_fetch_array($query2);
     }
 
