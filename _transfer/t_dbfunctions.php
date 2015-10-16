@@ -26,12 +26,8 @@ function CheckTransferStatus($DBHost, $DBUser, $DBPassword, $AccountDB, $ID) {
     return $row['cStatus'];
 }
 
-function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $type) {
-    global $limitTransfer, $portingType;
-
-    if (!$limitTransfer) {
-        return 0;
-    }
+function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $charDb, $type) {
+    global $limitTransfer, $transferType;
 
     $account = _GetCharacterAccountID();
 
@@ -41,8 +37,13 @@ function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $type) {
     $query1 = mysql_query("SELECT COUNT(*) FROM `account_transfer` WHERE `cAccount` = " . (int) $account . " AND ( cStatus = 1 OR cStatus = 0 ) AND tType = $type ;", $connection) or die(mysql_error());
     $result1 = mysql_fetch_array($query1);
 
-    $query2 = mysql_query("SELECT quantity FROM `account_transfer_whitelist` WHERE `account` = " . (int) $account . " AND type = $type;", $connection) or die(mysql_error());
-    $result2 = mysql_fetch_array($query2);
+    $result2=false;
+    
+    // skip db check if we've this feature disabled
+    if ($limitTransfer) {
+        $query2 = mysql_query("SELECT quantity FROM `account_transfer_whitelist` WHERE `account` = " . (int) $account . " AND type = $type;", $connection) or die(mysql_error());
+        $result2 = mysql_fetch_array($query2);
+    }
 
     mysql_close($connection);
     
@@ -50,11 +51,18 @@ function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $type) {
         return -1;
 
     if ($result2 === false) {
-        if ($portingType[$type]["Quantity"] < 0) {
+        if ($type == PINSTANT80 && ENABLE_I80_COUPON 
+                && ( $result1[0]===false || $result1[0] < ENABLE_I80_COUPON )
+                    && !checkHas80($DBHost, $DBUser, $DBPassword, $charDb, (int) $account)) {
+                return ENABLE_I80_COUPON; // free slot 
+        }
+        
+        
+        if ($transferType[$type]["Quantity"] < 0) {
             return -1;
         }
 
-        $result2[0] = $portingType[$type]["Quantity"];
+        $result2[0] = $transferType[$type]["Quantity"];
     }
 
     if ($result1[0] >= $result2[0]) {
@@ -173,11 +181,11 @@ function checkDuplicate($DBHost, $DBUser, $DBPassword, $AccountDB, $charNameOld,
 function checkHas80($DBHost, $DBUser, $DBPassword, $charDB, $accountId) {
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($charDB, $connection);
-    $query = mysql_query("SELECT COUNT(*) FROM `characters` WHERE level = 80 AND account = $accountId;");
-    
+    $sql="SELECT COUNT(*) FROM `characters` WHERE level = 80 AND account = $accountId;";
+    $query = mysql_query($sql, $connection) or die(mysql_error());
     $row = mysql_fetch_array($query);
     mysql_close($connection);
-    
+
     return $row[0]>0;
 }
 

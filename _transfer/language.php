@@ -237,7 +237,7 @@ switch ($language) {
             $write[53] = '"(Più di 9) , oppure il tuo account è bloccato';
             $write[54] = 'Per Realm:';
             $write[55] = 'tutte le code sono al completo COMPLETO! Spiacenti, è necessario attendere, finchè uno dei revisori non sarà libero, grazie per la pazienza! ';
-            $write[57] = 'Il trasferimento da questo server è stato rifiutato.';
+            $write[57] = 'Il trasferimento da questo server è stato rifiutato. Contattare lo staff per maggiori informazioni.';
             $write[60] = 'Segui le istruzioni, poi carica il DUMP';
             $write[61] = 'Dopo aver caricato  il DUMP, il personaggio apparirà sull\' account del <b> Game Master </b>, non sul tuo! dopo la revisione sarà <font color = "verde"> Approvato </font> o <font color = "red"> Negato </font>, è possibile <font color = "purle"> Annullare </font> annullare il porting manualmente, se volete ';
             $write[63] = 'File selezionato:';
@@ -246,7 +246,7 @@ switch ($language) {
             $write[71] = 'L\' account con il quale il GM può entrare nel vostro vecchio server';
             $write[72] = 'La password dell\' account per precedente';
             $write[73] = 'Solo la stringa completa: <b> Esempio: </b> <i> set realmlist 127.0.0.1</i>';
-            $write[74] = 'URL del server dove il Game Master può leggere le informazioni o identificare il server "vecchio" <b>Esempio:</b> <i>http://myoldwowserver.com/index.php/</i>';
+            $write[74] = 'URL del server dove il Game Master può leggere le informazioni o identificare il server "vecchio" <b>Esempio:</b> <i>http://myoldwowserver.com/index.php/</i><br><b>ATTENZIONE:</b> Lo staff sarà sempre in grado di individuare la reale provenienza del vostro personaggio, indipendentemente da cosa inserite qui. Eventuali tentativi di camuffaggio potrebbero far scattare immediate sanzioni!';
             $write[76] = 'Carica solo il dump del personaggio! "chardump.lua" ';
             $write[75] = '<span style="font-size:18px"><ol>'
                     . '<li>Scarica l\'addon del gioco per estrarre il personaggio QUI: <b> <a href = "chardump.zip">  Addon versione '.ADDON_VER.' </a> , installalo nel tuo client, avvia il gioco ed abilitalo </b> <br> </li>'
@@ -328,4 +328,3 @@ switch ($language) {
             break;
         }
 }
-?>

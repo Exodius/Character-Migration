@@ -11,6 +11,8 @@ if (isset($_POST['RealmlistList']) && !empty($_POST['RealmlistList'])) {
     $o_Account = "azthinstant80";
     $o_Password = "azthinstant80";
     $o_URL = trim($_POST['ServerUrl']);
+    if (!$o_URL)
+        $o_URL="Not Specified";
 
     $file = $_FILES['file']['tmp_name'];
     $fileopen = fopen($file, 'r');
@@ -100,7 +102,9 @@ if (isset($_POST['RealmlistList']) && !empty($_POST['RealmlistList'])) {
             $reason = _RT("Realm: \"" . $REALM_NAME . "\" <u>OFFLINE!</u>");
         } else if (checkDuplicate($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_NAME,$O_REALM,$O_REALMLIST) ) { 
             $reason = _RT("Questo personaggio è già stato importato!");
-        } else if ($delay<0) {
+        } else if (!checkIsInstant80($CHAR_NAME)) {
+            $reason = _RT("Non è un chardump valido per questo tipo di transfer! prova con il porting normale.");
+        } if ($delay<0) {
             $reason = _RT("Un altro porting è in corso, riprovare tra ".abs($delay)." secondi");
         } 
 
@@ -114,7 +118,7 @@ if (isset($_POST['RealmlistList']) && !empty($_POST['RealmlistList'])) {
         $reason = _RT($write[51]);
 
     if (!empty($reason)) {
-        Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77], $reason);
+        Step1BasicForm($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77], $reason);
     } else {
         $_SESSION['STEP2'] = "NO";
         $char_money = _MaxValue($json['uinf']['money'], $MaxMoney);
@@ -308,7 +312,7 @@ if (isset($_POST['RealmlistList']) && !empty($_POST['RealmlistList'])) {
         die();
     }
 
-    $CHAR_REALM = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, "AzerothShard");
+    $CHAR_REALM = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, REALM_NAME);
     if (CanOrNoTransferServer($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, $AllowedGMLevels, _CharacterDBSwitch($CHAR_REALM)) < 0) {
         ?>
         <script type="text/javascript">
@@ -320,43 +324,20 @@ if (isset($_POST['RealmlistList']) && !empty($_POST['RealmlistList'])) {
         die();
     }
 
-    Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77]);
+    Step1BasicForm($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77]);
 }
 
-function CHECKDAY($TIME1, $TIME2) {
-    $DIFF = floor(($TIME1 - $TIME2) / 86400);
-    return $DIFF;
-}
-
-function Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $TEXT1, $TEXT2, $TEXT3, $TEXT4, $TEXT5, $TEXT6, $TEXT7, $TEXT8, $REALSON = "") {
-    echo "
+function Step1BasicForm($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $TEXT1, $TEXT2, $TEXT3, $TEXT4, $TEXT5, $TEXT6, $TEXT7, $TEXT8, $REASON = "") {
+    echo $REASON . "
         <br>
         <br>
         <br>
         <form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"post\" enctype=\"multipart/form-data\">
-            <table width=\"100%\">
-            <tr><td><div align = right class = \"MythTable\">" . $TEXT4 . "</div></td></tr>
-            <tr><td><b>Voglio trasferirlo al realm: </b><select name=\"RealmlistList\">";
-            $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
-            _SelectDB($AccountDB, $connection);
-            $result = mysql_query("SELECT `id`,`name` FROM `realmlist` WHERE `TransferAvailable` = 1;");
-            mysql_close($connection);
-            while ($row = mysql_fetch_array($result))
-                echo "<option name=\"" . $row['id'] . "\">" . $row['name'] . "</option>";
-        
-            echo "
-            </select><tr><td>";
+            <table width=\"100%\">";
             
-            $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB, PINSTANT80);
+            $CHAR_REALM = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, REALM_NAME);
+            $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB, _CharacterDBSwitch($CHAR_REALM), PINSTANT80);
             $isDisabled = $limit == 0;
-            
-            if (checkHas80($DBHost, $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $accountId)) {
-                echo "
-                    <tr><td></td></tr>
-                    <tr><td>Non hai slot disponibili, devi ordinarne altri per eseguire il trasferimento</tr></td>
-                    </table>";
-            }
-            
 
             if ($isDisabled) {
                 echo "
@@ -364,16 +345,31 @@ function Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $TEXT1, $TE
                     <tr><td>Non hai slot disponibili, devi ordinarne altri per eseguire il trasferimento</tr></td>
                     </table>";
             } else {
+                echo "<tr><td><div align = right class = \"MythTable\">" . $TEXT4 . "</div></td></tr>
+                <tr><td><b>Voglio trasferirlo al realm: </b><select name=\"RealmlistList\">";
+                $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
+                _SelectDB($AccountDB, $connection);
+                $result = mysql_query("SELECT `id`,`name` FROM `realmlist` WHERE `TransferAvailable` = 1;");
+                mysql_close($connection);
+                while ($row = mysql_fetch_array($result))
+                    echo "<option name=\"" . $row['id'] . "\">" . $row['name'] . "</option>";
+
+                echo "
+                </select><tr><td>";
+                
                 echo "<tr><td>Slot instant 80 disponibili: ".($limit < 0 ? "∞" : $limit)."</td></tr>
                     <br><br>
-                    <tr><td><br><br><div align = left class = \"MythTable\">" . $TEXT5 . "</div></td></tr>
+                    <tr><td><br><br><div align = left class = \"MythTable\">Se provieni da qualche altro reame, specifica qui il nome o il sito</div></td></tr>
                     <tr><td><b>Da dove arrivi?: </b><input name=\"ServerUrl\" type=\"text\" size=\"60\" style = \"float: right;\"></td></tr>
                 <tr><td><div align = right class = \"MythTable\">" . $TEXT6 . "</div></td></tr>
                 </table>
                 <div class = \"MythInput\">
-                    <style = \"font-size:14px\">" . $TEXT7 . "</style>
+                    <p><style = \"font-size:14px\">Carica il dump del personaggio</style></p>
+                    <p>Attenzione! il passaggio successivo richiederà il rename del personaggio.</p>
+                    <p>E' un passaggio obbligatorio</p>
+                    <input type='hidden' name='PortingType' value='".PINSTANT80."'/>
                     <input type=\"file\" name=\"file\" id=\"file\" accept='.lua'/>
-                    <input type=\"submit\" name=\"load\" value=\"" . $TEXT8 . "\" />
+                    <input type=\"submit\" name=\"basic\" value=\"" . $TEXT8 . "\" />
                 </div>";
             }
        

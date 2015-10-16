@@ -98,6 +98,8 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             $reason = _RT("Realm: \"" . $REALM_NAME . "\" <u>OFFLINE!</u>");
         } else if (checkDuplicate($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_NAME,$O_REALM,$O_REALMLIST) ) { 
             $reason = _RT("Questo personaggio è già stato importato!");
+        } else if (checkIsInstant80($CHAR_NAME)) {
+            $reason = _RT("Questo è un chardump valido solo per il transfer speciale!");
         } else if ($delay<0) {
             $reason = _RT("Un altro porting è in corso, riprovare tra ".abs($delay)." secondi");
         } 
@@ -279,8 +281,6 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         }
     }
 } else {
-
-
     if ($disableTransfer) {
         ?>
         <script type="text/javascript">
@@ -321,20 +321,15 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
     Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77]);
 }
 
-function CHECKDAY($TIME1, $TIME2) {
-    $DIFF = floor(($TIME1 - $TIME2) / 86400);
-    return $DIFF;
-}
-
-function Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $TEXT1, $TEXT2, $TEXT3, $TEXT4, $TEXT5, $TEXT6, $TEXT7, $TEXT8, $REALSON = "") {
-    echo $REALSON . "<div align = center class = \"MythTable\">" . $TEXT1 . "</div>
+function Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $TEXT1, $TEXT2, $TEXT3, $TEXT4, $TEXT5, $TEXT6, $TEXT7, $TEXT8, $REASON = "") {
+    echo $REASON . "<div align = center class = \"MythTable\">" . $TEXT1 . "</div>
         <br>
         <form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"post\" enctype=\"multipart/form-data\">
             <table width=\"100%\">
             <tr><td><div align = right class = \"MythTable\">" . $TEXT2 . "</div></td></tr>
-            <tr><td><b>Account: </b><input name=\"Account\" type=\"text\" size=\"32\" style = \"float: right;\"></td></tr>
+            <tr><td><b>Account: </b><input required name=\"Account\" type=\"text\" size=\"32\" style = \"float: right;\"></td></tr>
             <tr><td><div align = right class = \"MythTable\">" . $TEXT3 . "</div></td></tr>
-            <tr><td><b>Password: </b><input name=\"Password\" type=\"password\" size=\"32\" style = \"float: right;\"></tr>
+            <tr><td><b>Password: </b><input required name=\"Password\" type=\"password\" size=\"32\" style = \"float: right;\"></tr>
             <tr><td><br></td></tr>
             <tr><td><div align = right class = \"MythTable\">" . $TEXT4 . "</div></td></tr>
             <tr><td><b>Voglio trasferirlo al realm: </b><select name=\"RealmlistList\">";
@@ -344,10 +339,10 @@ function Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $TEXT1, $TE
     mysql_close($connection);
     while ($row = mysql_fetch_array($result))
         echo "<option name=\"" . $row['id'] . "\">" . $row['name'] . "</option>";
-    echo "</select><tr><td>
+        echo "</select><tr><td>
                 <br><br>
                 <tr><td><br><br><div align = left class = \"MythTable\">" . $TEXT5 . "</div></td></tr>
-                <tr><td><b>Server URL ( Sito ): </b><input name=\"ServerUrl\" type=\"text\" size=\"60\" style = \"float: right;\"></td></tr>
+                <tr><td><b>Server URL ( Sito ): </b><input required name=\"ServerUrl\" type=\"text\" size=\"60\" style = \"float: right;\"></td></tr>
                 <tr><td><br><br><div align = left class = \"MythTable\">( Sconsigliato ) Abilita il caricamento di chardump effettuati con un addon obsoleto:</div></td></tr>
                 <tr><td><b>Abilita chardump obsoleti:</b> <input type='checkbox' name='obsolete' value='enable'/></tr></td>
                 <tr><td><div align = left class = \"MythTable\"> Scegli la tipologia di porting da effettuare:</div></td></tr>
@@ -363,28 +358,28 @@ function Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $TEXT1, $TE
 }
 
 function HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) {
-    global $portingType;
+    global $transferType;
     $output = "<br>";
     $dCnt = 0;
-    $portingTypesCnt=0;
-
-    for ($i = 0; $i < count($portingType); $i++) {
-        if (!$portingType["isPorting"])
+    $transferTypesCnt=0;
+    for ($i = 0; $i < count($transferType); $i++) {
+        if (!$transferType[$i]["isPorting"]) 
             continue;
         
-        $portingTypesCnt++;
+        $transferTypesCnt++;
         
-        $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $i);
+        $CHAR_REALM = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, REALM_NAME);
+        $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB,_CharacterDBSwitch($CHAR_REALM), $i);
         $isDisabled = $limit == 0 ? "disabled" : "";
         if ($limit == 0)
             $dCnt++;
 
-        $output .= "<input type='radio' name='PortingType' value='$i' $isDisabled required/> <b><span class='porting-type'>" . $portingType[$i]['Type'] . "</span></b> ( Slot disponibili: " . ($limit < 0 ? "∞" : $limit) . ")<br>";
-        $output .= $portingType[$i]['Descr']."<br><br>";
+        $output .= "<input type='radio' name='PortingType' value='$i' $isDisabled required/> <b><span class='porting-type'>" . $transferType[$i]['Type'] . "</span></b> ( Slot disponibili: " . ($limit < 0 ? "∞" : $limit) . ")<br>";
+        $output .= $transferType[$i]['Descr']."<br><br>";
         
     }
 
-    if ($dCnt == $portingTypesCnt) {
+    if ($dCnt == $transferTypesCnt) {
         $output .= "<br> <b style='color:red'>ATTENZIONE!! QUESTO ACCOUNT NON HA PIU' SLOT DISPONIBILI PER IL TRANSFER!</b>";
     }
 

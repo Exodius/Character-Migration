@@ -26,6 +26,13 @@ function _CheckCurrency($ID) {
     }
 }
 
+
+function CHECKDAY($TIME1, $TIME2) {
+    $DIFF = floor(($TIME1 - $TIME2) / 86400);
+    return $DIFF;
+}
+
+
 function checkIsInstant80($name) {
     $names=array(
         "Ptddwbalance",

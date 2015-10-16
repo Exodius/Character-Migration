@@ -24,7 +24,15 @@ include_once("_transfer/definitions.php");
 include_once("_transfer/t_config.php");
 
 $ID = $_SESSION['id'];
+
+/* //maintenance advice
+echo "
+    <h1>IL TOOL DEL PORTING ATTUALMENTE IN MANUTENZIONE, NON UTILIZZARLO!</h1>
+    <h2>Torna più tardi</h2>";
+*/
+
 ?>
+
 <table width = "800" align = "center" cellpadding = "0" cellspacing = "0">
     <tr><td align = "right"><?php echo $write[5] . "<strong> " . mb_strtoupper($_SESSION['user'], 'UTF-8') . "</strong>! || <a href=\"playerside.php\" class='generallink'>$write[6]</a> || <a href=\"logout.php\" class='generallink'>$write[7]</a>"; ?></td></tr>
 </table><br>
@@ -170,7 +178,7 @@ include ('template/t_footer.php');
 ob_end_flush();
 
 function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels, $TEXT1, $TEXT2, $TEXT3, $TEXT4, $TEXT5, $TEXT6, $TEXT7, $TEXT8, $TEXT9, $TEXT10, $TEXT11, $TEXT12, $TEXT13) {
-    global $portingType;
+    global $transferType;
     
     if (_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels)) {
         echo "
@@ -245,7 +253,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
                         <td>" . $row["oAccount"] . "</td>
                         <td>" . $row["oPassword"] . "</td>
                         <td>" . $row["oServer"] . "</td>
-                        <td>" . $portingType[$row["tType"]]["Type"] . "</td>
+                        <td>" . $transferType[$row["tType"]]["Type"] . "</td>
                         <td>Addon Rev: ".($row["addonVersion"] ? $row["addonVersion"] : "<Empty>")." <br><br>
                         <button onclick='popUp(\"" . str_replace(' ',"<br>",$row["cItemRow"]) . "\")'>Item List</button><br>
                         <button onclick='popUp(\"" . $row["cDump"]. "\")'>Dump</button></td>
