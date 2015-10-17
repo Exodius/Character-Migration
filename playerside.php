@@ -12,8 +12,12 @@ else if (isset($_POST['rename']))
     $step = 2;
 else if (isset($_POST['basic']))
     $step = 4;
+else if (isset($_POST['viewer']))
+    $step = 5;
 else
     $step = 3;
+    
+
 if (!isset($_SESSION['loged']))
     Header('Location: index.php');
 
@@ -165,6 +169,8 @@ if (!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $Allo
                                 break;
                             case 4: include("_transfer/step1-basic.php"); // BASIC 80
                                 break;
+                            case 5: include("_transfer/chardump_viewer.php"); // BASIC 80
+                                break;
                             case 3: FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevels, $write[78], $write[75], $write[60], $write[65], $write[61], $write[85], $write[86], $write[30], $write[31], $write[32], $write[33], $write[34], $write[84]);
                                 break;
                         }
@@ -189,7 +195,21 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
         $query = mysql_query("SELECT * FROM `account_transfer` WHERE `gmAccount` = " . $ACCOUNT_ID . " ORDER BY `id` DESC LIMIT 25;", $connection);
         mysql_close($connection);
     } else {
-        echo "<center><h1>Porting Standard</h1></center>
+        echo "
+            <center><h1>Visualizzatore Chardump</h1></center>
+            <div align = left style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma'; \">" . $TEXT2 . "</div>
+            <br>
+            <div style = \"font-size:17px\">Prima di iniziare, controlla cosa verrà importato utilizzando questo visualizzatore</div>
+            <br>
+            <br>
+            <div class = \"MythInput\">
+                <form action=\"" . $_SERVER["SCRIPT_NAME"] . "\" method=\"post\" enctype=\"multipart/form-data\">
+                    <input type='submit' name = 'viewer' value='Avvia Visualizzatore'/>
+                </form>
+                <br>
+            </div>
+        
+            <center><h1>Porting Standard</h1></center>
             <div align = left style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma'; \">" . $TEXT2 . "</div>
             <br>
             <div style = \"font-size:17px\">" . $TEXT3 . "</div>
