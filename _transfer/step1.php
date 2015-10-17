@@ -359,13 +359,8 @@ function HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) {
     global $transferType;
     $output = "<br>";
     $dCnt = 0;
-    $transferTypesCnt=0;
+
     for ($i = 0; $i < count($transferType); $i++) {
-        if (!$transferType[$i]["isPorting"]) 
-            continue;
-        
-        $transferTypesCnt++;
-        
         $CHAR_REALM = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, REALM_NAME);
         $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB,_CharacterDBSwitch($CHAR_REALM), $i);
         $isDisabled = $limit == 0 ? "disabled" : "";
@@ -377,7 +372,7 @@ function HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) {
         
     }
 
-    if ($dCnt == $transferTypesCnt) {
+    if ($dCnt == count($transferType)) {
         $output .= "<br> <b style='color:red'>ATTENZIONE!! QUESTO ACCOUNT NON HA PIU' SLOT DISPONIBILI PER IL TRANSFER!</b>";
     }
 

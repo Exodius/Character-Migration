@@ -7000,7 +7000,7 @@ function pTypeItemCheck($pType, $ID) {
     */
     
     
-    if ($pType == PBASIC || $pType == PFREE || $pType == PINSTANT80) {
+    if ($pType == PBASIC || $pType == PFREE) {
             switch ($ID) {
                 // special
                 case 49623: return 50070;   // Shadowmourne 284 -> Glorenzelg, High-Blade of the Silver Hand 271
@@ -7037,7 +7037,7 @@ function pTypeItemCheck($pType, $ID) {
             }
     }
     
-    if ($pType==PFREE || $pType == PINSTANT80) {
+    if ($pType==PFREE) {
             switch($ID) {
                 case 50679 : return 50026; // 	Helm of the Elder Moon	277	-->	Helm of the Elder Moon	264
                 case 51236 : return 51203; // 	Sanctified Frost Witch's Kilt	277	-->	Sanctified Frost Witch's Kilt	264

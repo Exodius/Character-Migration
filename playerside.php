@@ -192,8 +192,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
         mysql_close($connection);
     } else {
         echo "
-            <center><h1>Visualizzatore Chardump</h1></center>
-            <div align = left style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma'; \">" . $TEXT2 . "</div>
+            <center><h1>Visualizzatore Chardump ( In lavorazione )</h1></center>
             <br>
             <div style = \"font-size:17px\">Prima di iniziare, controlla cosa verrà importato utilizzando questo visualizzatore</div>
             <br>

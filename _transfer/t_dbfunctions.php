@@ -51,13 +51,6 @@ function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $charDb, $type) {
         return -1;
 
     if ($result2 === false) {
-        if ($type == PINSTANT80 && ENABLE_I80_COUPON 
-                && ( $result1[0]===false || $result1[0] < ENABLE_I80_COUPON )
-                    && !checkHas80($DBHost, $DBUser, $DBPassword, $charDb, (int) $account)) {
-                return ENABLE_I80_COUPON; // free slot 
-        }
-        
-        
         if ($transferType[$type]["Quantity"] < 0) {
             return -1;
         }

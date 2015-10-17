@@ -4,8 +4,7 @@ error_reporting(E_ERROR | E_PARSE);
 
     // AZTH hacks ;)
     define("PORTING_ACCOUNT",523);       // force porting to this account
-    define("DELAY_TIME",120);            // delay time between portings
-    define("ENABLE_I80_COUPON",1);       
+    define("DELAY_TIME",120);            // delay time between portings 
     define("REALM_NAME","AzerothShard"); // you need to call your realm with this name
 
     $TransferLetterTitle    = "Transfer System";                    // Letter Title
