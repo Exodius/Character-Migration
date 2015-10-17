@@ -183,6 +183,9 @@ function checkHas80($DBHost, $DBUser, $DBPassword, $charDB, $accountId) {
 }
 
 function _CheckBlackList($DBHost, $DBUser, $DBPassword, $AccountDB, $realmlist,$realm,$url) {
+    if (isEmpty($realmlist) || isEmpty($realm))
+        return false;
+    
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);
     $query = mysql_query("SELECT * FROM `account_transfer_blacklist` WHERE "
