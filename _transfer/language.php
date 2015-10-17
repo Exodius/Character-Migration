@@ -247,7 +247,7 @@ switch ($language) {
             $write[72] = 'La password dell\' account per precedente';
             $write[73] = 'Solo la stringa completa: <b> Esempio: </b> <i> set realmlist 127.0.0.1</i>';
             $write[74] = 'URL del server dove il Game Master può leggere le informazioni o identificare il server "vecchio" <b>Esempio:</b> <i>http://myoldwowserver.com/index.php/</i><br><b>ATTENZIONE:</b> Lo staff sarà sempre in grado di individuare la reale provenienza del vostro personaggio, indipendentemente da cosa inserite qui. Eventuali tentativi di camuffaggio potrebbero far scattare immediate sanzioni!';
-            $write[76] = 'Carica solo il dump del personaggio! "chardump.lua" ';
+            $write[76] = 'Carica solo il dump del personaggio! ';
             $write[75] = '<span style="font-size:18px"><ol>'
                     . '<li>Scarica l\'addon del gioco per estrarre il personaggio QUI: <b> <a href = "chardump.zip">  Addon versione '.ADDON_VER.' </a> , installalo nel tuo client, avvia il gioco ed abilitalo </b> <br> </li>'
                     . '<li>Per estrarre "alcune" delle <b>ricette delle professioni</b> aprite le finestre delle professioni e delle ricette per "mostrarle all\'addon" e poi chiudetele</li> <br><li> Aprite la finestra dell\'equip per mostrare gli items che avete indossato all\'addon <br></li>'
