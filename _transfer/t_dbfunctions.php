@@ -51,13 +51,6 @@ function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $charDb, $type) {
         return -1;
 
     if ($result2 === false) {
-        if ($type == PINSTANT80 && ENABLE_I80_COUPON 
-                && ( $result1[0]===false || $result1[0] < ENABLE_I80_COUPON )
-                    && !checkHas80($DBHost, $DBUser, $DBPassword, $charDb, (int) $account)) {
-                return ENABLE_I80_COUPON; // free slot 
-        }
-        
-        
         if ($transferType[$type]["Quantity"] < 0) {
             return -1;
         }
@@ -190,6 +183,9 @@ function checkHas80($DBHost, $DBUser, $DBPassword, $charDB, $accountId) {
 }
 
 function _CheckBlackList($DBHost, $DBUser, $DBPassword, $AccountDB, $realmlist,$realm,$url) {
+    if (isEmpty($realmlist) || isEmpty($realm))
+        return false;
+    
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);
     $query = mysql_query("SELECT * FROM `account_transfer_blacklist` WHERE "

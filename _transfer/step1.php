@@ -85,7 +85,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         } else if (CHECKDAY($ACHMAXTime, $ACHMINTime) < $PLAYTIME) {
             $reason = _RT("Small playtime!");
         } else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST, $O_REALM, $o_URL)) {
-            $reason = _RT($write[57]);
+            $reason = _RT($write[57]." [ realm: <$O_REALMLIST> --- <$O_REALM> ]");
         } else if (CanOrNoTransferPlayer(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $AccountDB, $CHAR_ACCOUNT_ID)) {
             $reason = _RT($write[52] . " " . $REALM_NAME . ". " . $write[53]);
         } else if ($PLAYER_TRANSFER_STACKS < 0) {
@@ -96,8 +96,6 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             $reason = _RT("Realm: \"" . $REALM_NAME . "\" <u>OFFLINE!</u>");
         } else if (checkDuplicate($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_NAME,$O_REALM,$O_REALMLIST) ) { 
             $reason = _RT("Questo personaggio è già stato importato!");
-        } else if (checkIsInstant80($CHAR_NAME)) {
-            $reason = _RT("Questo è un chardump valido solo per il transfer speciale!");
         } else if ($delay<0) {
             $reason = _RT("Un altro porting è in corso, riprovare tra ".abs($delay)." secondi");
         } 
@@ -359,13 +357,8 @@ function HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) {
     global $transferType;
     $output = "<br>";
     $dCnt = 0;
-    $transferTypesCnt=0;
+
     for ($i = 0; $i < count($transferType); $i++) {
-        if (!$transferType[$i]["isPorting"]) 
-            continue;
-        
-        $transferTypesCnt++;
-        
         $CHAR_REALM = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, REALM_NAME);
         $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB,_CharacterDBSwitch($CHAR_REALM), $i);
         $isDisabled = $limit == 0 ? "disabled" : "";
@@ -377,7 +370,7 @@ function HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) {
         
     }
 
-    if ($dCnt == $transferTypesCnt) {
+    if ($dCnt == count($transferType)) {
         $output .= "<br> <b style='color:red'>ATTENZIONE!! QUESTO ACCOUNT NON HA PIU' SLOT DISPONIBILI PER IL TRANSFER!</b>";
     }
 

@@ -10,8 +10,6 @@ if (isset($_POST['load']))
     $step = 1;
 else if (isset($_POST['rename']))
     $step = 2;
-else if (isset($_POST['basic']))
-    $step = 4;
 else if (isset($_POST['viewer']))
     $step = 5;
 else
@@ -167,9 +165,7 @@ if (!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $Allo
                                 break;
                             case 2: include("_transfer/step2.php");
                                 break;
-                            case 4: include("_transfer/step1-basic.php"); // BASIC 80
-                                break;
-                          case 5: header("Location: _transfer/chardump_viewer.php"); // BASIC 80
+                            case 5: header("Location: _transfer/chardump_viewer.php");
                                 break;
                             case 3: FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevels, $write[78], $write[75], $write[60], $write[65], $write[61], $write[85], $write[86], $write[30], $write[31], $write[32], $write[33], $write[34], $write[84]);
                                 break;
@@ -196,8 +192,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
         mysql_close($connection);
     } else {
         echo "
-            <center><h1>Visualizzatore Chardump</h1></center>
-            <div align = left style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma'; \">" . $TEXT2 . "</div>
+            <center><h1>Visualizzatore Chardump ( In lavorazione )</h1></center>
             <br>
             <div style = \"font-size:17px\">Prima di iniziare, controlla cosa verrà importato utilizzando questo visualizzatore</div>
             <br>
@@ -221,16 +216,6 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
                 </form>
                 <br>
             </div>
-
-            <center><h1>Caricamento chardump speciali</h1></center>
-            <div align = left style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma'; \">
-            Questa procedura è riservata esclusivamente a coloro che hanno ordinato il chardump dal catalogo del sito
-            </div>
-            <br>
-            <br>
-            <form action=\"" . $_SERVER["SCRIPT_NAME"] . "\" method=\"post\" enctype=\"multipart/form-data\">
-                <input type=\"submit\" name = \"basic\" value=\"Avvia trasferimento 80 Basic\"/>
-            </form>
 
             <div align = right class = \"MythTable\" style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma';\">" . $TEXT5 . "</div>";
 

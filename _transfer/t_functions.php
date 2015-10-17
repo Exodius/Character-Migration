@@ -32,35 +32,6 @@ function CHECKDAY($TIME1, $TIME2) {
     return $DIFF;
 }
 
-
-function checkIsInstant80($name) {
-    $names=array(
-        "Ptddwbalance",
-        "Ptddwferal",
-        "Ptddwresto",
-        "Ptddwtank",
-        "Ptdkwfrost",
-        "Ptdkwunholy",
-        "Pthunterw",
-        "Ptmgw",
-        "Ptplwholy",
-        "Ptplwprot",
-        "Ptplwretry",
-        "Ptptwdisci",
-        "Ptptwshadow",
-        "Ptroguew",
-        "Ptshwele",
-        "Ptshwenha",
-        "Ptshwresto",
-        "Ptwarlokw",
-        "Ptwarwarms",
-        "Ptwarwfury",
-        "Ptwrwprot"
-    );
-    
-    return in_array($name, $names);
-}
-
 function CheckItemCount($count) {
     $count = $count < 1 ? 1 : $count;
     $count = $count > 1000 ? 1000 : $count;
