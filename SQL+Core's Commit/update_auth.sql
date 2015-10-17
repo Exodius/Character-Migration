@@ -1,7 +1,7 @@
 
 
 -- Comment it -- if not 1st time use this SQL
--- DO NOT FORGET CHANGE TO "0" TO WHICH REALM YOU DON`T WANT MAKE AVAIBLE TRANSFER
+-- DO NOT FORGET CHANGE TO "0" TO WHICH REALM YOU DON`T WANT MAKE AVAIBLE 
 ALTER TABLE `realmlist` ADD COLUMN `TransferAvailable` INT(1) DEFAULT 1 NULL AFTER `gamebuild`;
 
 DROP TABLE IF EXISTS `account_transfer_slots`;
@@ -40,7 +40,7 @@ CREATE TABLE `account_transfer` (
 
 
 -- FOR COMMENTS
-ALTER TABLE `account_transfer` ADD COLUMN `Reason` TEXT AFTER `GUID`;
+-- ALTER TABLE `account_transfer` ADD COLUMN `Reason` TEXT AFTER `GUID`;
 UPDATE `account_transfer` SET `Reason` = "Not meet requirements";
 
 

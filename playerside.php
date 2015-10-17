@@ -165,7 +165,7 @@ if (!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $Allo
                                 break;
                             case 2: include("_transfer/step2.php");
                                 break;
-                            case 5: include("_transfer/chardump_viewer.php"); // BASIC 80
+                            case 5: header("Location: _transfer/chardump_viewer.php");
                                 break;
                             case 3: FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevels, $write[78], $write[75], $write[60], $write[65], $write[61], $write[85], $write[86], $write[30], $write[31], $write[32], $write[33], $write[34], $write[84]);
                                 break;
