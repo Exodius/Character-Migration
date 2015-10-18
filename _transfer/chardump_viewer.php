@@ -92,7 +92,7 @@ if (isset($_POST["PortingType"]))
     } else if (!isset($part[1]))
         $reason = _RT($write[51]);
 
-        if (!empty($reason)) {
+    if (!empty($reason)) {
         viewerForm($reason);
     } else {
         $_SESSION['STEP2'] = "NO";
@@ -161,16 +161,22 @@ if (isset($_POST["PortingType"]))
             //" . (int) $GlyphID1 . "," . (int) $GlyphID4 . "," . (int) $GlyphID5 . "," . (int) $GlyphID2 . "," . (int) $GlyphID6 . "," . (int) $GlyphID3 . ");";
         }
 
-        foreach ($json['achiev'] as $key => $value) {
+        $ach_invalid = "";
+        foreach ($json['achiev'] as $key => $value)
+        {
             $achievement = $value['I'];
             $date = $value['D'];
             if (_CheckWrongOrNoAchievement($achievement))
-                echo "<br>hai degli achievements non validi";
+                $ach_invalid .= $achievement." ";
             //$QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* ACHIEVEMENT */ INTO `character_achievement` VALUES (" . $GUID . ", " . (int) $achievement . ", " . (int) $date . ");";
         }
 
+        if ($ach_invalid != "")
+            echo "I seguenti achievements non sono validi: $ach_invalid <br><br>";
+
         $locale = trim(strtoupper($json['ginf']['locale']));
-        foreach ($json['rep'] as $key => $value) {
+        foreach ($json['rep'] as $key => $value)
+        {
             $reputation = $value['V'];
             $faction = GetFactionID(mb_strtoupper($value['N'], 'UTF-8'), $locale);
             if ($faction < 1 || $reputation < 1)
@@ -185,7 +191,7 @@ if (isset($_POST["PortingType"]))
                 $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n " . SonsOfHordirTransfer($GUID);
             $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* REPUTATION */ INTO `character_reputation` VALUES (" . $GUID . ", " . $faction . ", " . (int) $reputation . "," . (int) $flag . ");";
         }
-/*
+        /*
         foreach ($json['skills'] as $key => $value)
         {
             $SkillName = mb_strtoupper($value['N'], 'UTF-8');
@@ -204,14 +210,14 @@ if (isset($_POST["PortingType"]))
             if (CheckExtraSpell($SkillID))
                 LearnSeparateSpell(GetExtraSpellForSkill($SkillID, $cur, $GUID, $connection), $GUID, $connection);
 */
-  //          $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* SKILL */ INTO `character_skills` VALUES (" . $GUID . ", " . (int) $SkillID . "," . (int) $cur . "," . (int) $max . ");";
-/*
+        //          $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* SKILL */ INTO `character_skills` VALUES (" . $GUID . ", " . (int) $SkillID . "," . (int) $cur . "," . (int) $max . ");";
+        /*
             if ($SpellID < 3)
                 continue;
 */
-    //        $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* SPELL FOR SKILL */ INTO `character_spell` VALUES (" . $GUID . ", " . (int) $SpellID . ", 1, 0);";
+        //        $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* SPELL FOR SKILL */ INTO `character_spell` VALUES (" . $GUID . ", " . (int) $SpellID . ", 1, 0);";
 
-  //      }
+        //      }
 
 
         foreach ($json['spells'] as $SpellID => $value) {
@@ -264,7 +270,25 @@ if (isset($_POST["PortingType"]))
             // UN AVVISO (character con lo stesso nome)
         }
 
-//        print_r($json);
+        echo "<b>Glyphs</b> <br>";
+        echo "first spec<br>";
+        echo "<b>major</b><br>";
+        echo $json['glyphs'][0][0][0] . "<br>";
+        echo $json['glyphs'][0][0][1] . "<br>";
+        echo $json['glyphs'][0][0][2] . "<br>";
+        echo "<b>minor</b><br>";
+        echo $json['glyphs'][0][1][0] . "<br>";
+        echo $json['glyphs'][0][1][1] . "<br>";
+        echo $json['glyphs'][0][1][2] . "<br>";
+        echo "<br>second spec<br>";
+        echo "<b>major</b><br>";
+        echo $json['glyphs'][1][0][0] . "<br>";
+        echo $json['glyphs'][1][0][1] . "<br>";
+        echo $json['glyphs'][1][0][2] . "<br>";
+        echo "<b>minor</b><br>";
+        echo $json['glyphs'][1][1][0] . "<br>";
+        echo $json['glyphs'][1][1][1] . "<br>";
+        echo $json['glyphs'][1][1][2] . "<br>";
 
         // il risultato sarà stampato qui
         // le chiavi da estrarre sono:
