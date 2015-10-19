@@ -183,7 +183,8 @@ function checkHas80($DBHost, $DBUser, $DBPassword, $charDB, $accountId) {
 }
 
 function _CheckBlackList($DBHost, $DBUser, $DBPassword, $AccountDB, $realmlist,$realm,$url) {
-    if (empty($realmlist) || empty($realm))
+    if (empty($realmlist) || empty($realm)  // empty realm or realmlist
+            || $realmlist=="127.0.0.1" || $realmlist=="localhost") // localhost case
         return false;
     
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());

@@ -190,7 +190,7 @@ function private.trycall(f,herr)
     return status;
 end
 function private.SaveCharData(data_in)
-    private.ILog("AzerothShard chardump DONE: you can find dump here: WoW Folder \WTF\Account\%Username%\SavedVariables\chardump.lua ");    
+    private.ILog("AzerothShard chardump DONE: you can find dump here: WoW Folder \\WTF\\Account\\%Username%\\SavedVariables\\chardump.lua ");    
     CHDMP_DATA  = data_in
     CHDMP_KEY   = "f7519722aa975a5dab2e49c18d9b175cd8047a36"
     CHDMP_VER   = GetAddOnMetadata("chardump", "Version")
