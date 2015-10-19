@@ -108,52 +108,6 @@ if (isset($_POST["PortingType"]))
     $CURrow = "";
     $row = "";
 
-    foreach ($json['spells'] as $SpellID => $value) {
-      if (_isSpellValid($SpellID, $ClassID))
-        $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* NOT MOUNT OR CRITTER */ INTO `character_spell` VALUES (" . $GUID . ", " . (int) $SpellID . ", 1, 0);";
-    }
-
-    foreach ($json['recipes'] as $SpellID) {
-      if (_isProfessionSpell($SpellID))
-        $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* NOT MOUNT OR CRITTER */ INTO `character_spell` VALUES (" . $GUID . ", " . (int) $SpellID . ", 1, 0);";
-    }
-
-
-    foreach ($json['creature'] as $key => $SpellID) {
-      $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* MOUNT OR CRITTER */ INTO `character_spell` VALUES (" . $GUID . ", " . (int) $SpellID . ", 1, 0);";
-    }
-
-    //    mysql_close($connection);
-
-    foreach ($json['currency'] as $key => $value) {
-      $CurrencyID = $value['I'];
-      $COUNT = $value['C'];
-      if ($COUNT < 1)
-        continue;
-
-      // questi dovrebbero essere tutti i token / emblemi del player
-      // l'unico filtro che fa è sugli arena / honor points che vengono aggiunti già prima
-      if (_CheckCurrency($CurrencyID))
-        $CURrow .= $CurrencyID . ":" . $COUNT . " ";
-    }
-
-    foreach ($json['inventory'] as $key => $value) {
-      // qui vengono eseguiti tutti i check e i downgrade degli items
-      $item = _itemCheck($CHAR_REALM, $value['I'], $pType);
-      $count = CheckItemCount($value['C']);
-
-      $INVrow .= $item . ":" . $count . " ";
-      $GEM1 = _GetGemID($value['G1']);
-      $GEM2 = _GetGemID($value['G2']);
-      $GEM3 = _GetGemID($value['G3']);
-      if ($GEM1 > 1)
-        $GEMrow .= $GEM1 . ":1 ";
-      if ($GEM2 > 1)
-        $GEMrow .= $GEM2 . ":1 ";
-      if ($GEM3 > 1)
-        $GEMrow .= $GEM3 . ":1 ";
-    }
-
     if (_CheckCharacterName(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $CHAR_NAME) > 0) {
       // UN AVVISO (character con lo stesso nome)
     }
@@ -183,36 +137,96 @@ if (isset($_POST["PortingType"]))
       echo "I seguenti achievements non sono validi: $ach_invalid <br><br>";
 
     /* GLYPHS */
+    $Glyph[0] = $json['glyphs'][0][0][0];
+    $Glyph[1] = $json['glyphs'][0][0][1];
+    $Glyph[2] = $json['glyphs'][0][0][2];
+    $Glyph[3] = $json['glyphs'][0][1][0];
+    $Glyph[4] = $json['glyphs'][0][1][1];
+    $Glyph[5] = $json['glyphs'][0][1][2];
+    $Glyph[6] = $json['glyphs'][1][0][0];
+    $Glyph[7] = $json['glyphs'][1][0][1];
+    $Glyph[8] = $json['glyphs'][1][0][2];
+    $Glyph[9] = $json['glyphs'][1][1][0];
+    $Glyph[10] = $json['glyphs'][1][1][1];
+    $Glyph[11] = $json['glyphs'][1][1][2];
     echo "<b>Glyphs</b> <br>";
     echo "first spec<br>";
     echo "<b>major</b><br>";
-    echo ($json['glyphs'][0][0][0] != -1 ? $json['glyphs'][0][0][0] : "Nessun glyph") . "<br>";
-    echo ($json['glyphs'][0][0][1] != -1 ? $json['glyphs'][0][0][1] : "Nessun glyph") . "<br>";
-    echo ($json['glyphs'][0][0][2] != -1 ? $json['glyphs'][0][0][2] : "Nessun glyph") . "<br>";
+    echo ($Glyph[0] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[0].'">'.$Glyph[0].'</a>' : "Nessun glyph") . "<br>";
+    echo ($Glyph[1] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[1].'">'.$Glyph[1].'</a>' : "Nessun glyph") . "<br>";
+    echo ($Glyph[2] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[2].'">'.$Glyph[2].'</a>' : "Nessun glyph") . "<br>";
     echo "<b>minor</b><br>";
-    echo ($json['glyphs'][0][1][0] != -1 ? $json['glyphs'][0][1][0] : "Nessun glyph") . "<br>";
-    echo ($json['glyphs'][0][1][1] != -1 ? $json['glyphs'][0][1][1] : "Nessun glyph") . "<br>";
-    echo ($json['glyphs'][0][1][2] != -1 ? $json['glyphs'][0][1][2] : "Nessun glyph") . "<br>";
+    echo ($Glyph[3] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[3].'">'.$Glyph[3].'</a>' : "Nessun glyph") . "<br>";
+    echo ($Glyph[4] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[4].'">'.$Glyph[4].'</a>' : "Nessun glyph") . "<br>";
+    echo ($Glyph[5] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[5].'">'.$Glyph[5].'</a>' : "Nessun glyph") . "<br>";
     echo "<br>second spec<br>";
     echo "<b>major</b><br>";
-    echo ($json['glyphs'][1][0][0] != -1 ? $json['glyphs'][1][0][0] : "Nessun glyph") . "<br>";
-    echo ($json['glyphs'][1][0][1] != -1 ? $json['glyphs'][1][0][1] : "Nessun glyph") . "<br>";
-    echo ($json['glyphs'][1][0][2] != -1 ? $json['glyphs'][1][0][2] : "Nessun glyph") . "<br>";
+    echo ($Glyph[6] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[6].'">'.$Glyph[6].'</a>' : "Nessun glyph") . "<br>";
+    echo ($Glyph[7] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[7].'">'.$Glyph[7].'</a>' : "Nessun glyph") . "<br>";
+    echo ($Glyph[8] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[8].'">'.$Glyph[8].'</a>' : "Nessun glyph") . "<br>";
     echo "<b>minor</b><br>";
-    echo ($json['glyphs'][1][1][0] != -1 ? $json['glyphs'][1][1][0] : "Nessun glyph") . "<br>";
-    echo ($json['glyphs'][1][1][1] != -1 ? $json['glyphs'][1][1][1] : "Nessun glyph") . "<br>";
-    echo ($json['glyphs'][1][1][2] != -1 ? $json['glyphs'][1][1][2] : "Nessun glyph") . "<br>";
+    echo ($Glyph[9] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[9].'">'.$Glyph[9].'</a>' : "Nessun glyph") . "<br>";
+    echo ($Glyph[10] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[10].'">'.$Glyph[10].'</a>' : "Nessun glyph") . "<br>";
+    echo ($Glyph[11] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[11].'">'.$Glyph[11].'</a>' : "Nessun glyph") . "<br>";
 
     /* REPUTATIONS */
     echo "<br><b>Reputazioni</b><br>";
     foreach ($json['rep'] as $key => $value)
-      echo ($value['V'] != 0 ? "<i style=\"color: #777;\">".$value['V']."</i> " . $value['N']."<br>" : "");
+      echo ($value['V'] != 0 ? "<i style=\"color: #777;\">".$value['V']."</i> <a href=\"http://wotlk.openwow.com/faction=".$value['V']."\">" . $value['N']."</a><br>" : "");
 
     /* SKILLS */
     echo "<br><b>Skills</b>";
     foreach ($json['skills'] as $key => $value)
       if ($value['M'] != 0 and $value['M'] != 1 and strpos($value['N'], "Language") === false)
         echo "<br>".$value['N']." ".$value['M']." ".$value['C'];
+
+    /* RECIPES */
+    echo "<br><br><b>Recipes<br></b>";
+    foreach ($json['recipes'] as $SpellID)
+      if (_isProfessionSpell($SpellID))
+        echo '<a href="http://wotlk.openwow.com/spell='.$SpellID.'">'.$SpellID.'</a> ';
+    echo "<br>";
+
+    /* MOUNTS/COMPANIONS */
+    echo "<br><b>Mounts/Companions<br></b>";
+    foreach ($json['creature'] as $key => $SpellID)
+      echo '<a href="http://wotlk.openwow.com/spell='.$SpellID.'">'.$SpellID.'</a> ';
+
+    /* INVENTORY */
+    foreach ($json['inventory'] as $key => $value)
+    {
+      // qui vengono eseguiti tutti i check e i downgrade degli items
+      $item = _itemCheck($CHAR_REALM, $value['I'], $pType);
+      $count = CheckItemCount($value['C']);
+
+      $INVrow .= '<a href="http://wotlk.openwow.com/item='.$item.'">'.$item.'</a>' . "x" . $count . " ";
+      $GEM1 = _GetGemID($value['G1']);
+      $GEM2 = _GetGemID($value['G2']);
+      $GEM3 = _GetGemID($value['G3']);
+      if ($GEM1 > 1)
+        $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM1.'">'.$GEM1.'</a>x1 ';
+      if ($GEM2 > 1)
+        $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM2.'">'.$GEM2.'</a>x1 ';
+      if ($GEM3 > 1)
+        $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM3.'">'.$GEM3.'</a>x1 ';
+    }
+    echo "<br><br><b>Inventory</b><br>".$INVrow."<br><br>";
+    echo "<b>Gems</b><br>".$GEMrow."<br><br>";
+
+    /* CURRENCY */
+    foreach ($json['currency'] as $key => $value)
+    {
+      $CurrencyID = $value['I'];
+      $COUNT = $value['C'];
+      if ($COUNT < 1)
+        continue;
+
+      // questi dovrebbero essere tutti i token / emblemi del player
+      // l'unico filtro che fa è sugli arena / honor points che vengono aggiunti già prima
+      if (_CheckCurrency($CurrencyID))
+        $CURrow .= '<a href="http://wotlk.openwow.com/item='.$CurrencyID.'">'.$CurrencyID.'</a>' . "x" . $COUNT . " ";
+    }
+    echo "<b>Currency</b><br>".$CURrow;
 
   }
 } else {
@@ -239,3 +253,6 @@ if (isset($_POST["PortingType"]))
 function viewerForm($err="") {
   echo "$err";
 }
+?>
+
+
