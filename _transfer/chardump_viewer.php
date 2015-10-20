@@ -12,11 +12,7 @@ require_once("definitions.php");
 
 if (isset($_POST["PortingType"]))
 {
-  echo '<script type="text/javascript" src="http://cdn.openwow.com/api/tooltip.js"></script>';
-  //    $o_Account = trim($_POST['Account']);
-  //    $o_Password = trim($_POST['Password']);
-  //    $o_URL = trim($_POST['ServerUrl']);
-
+?><script type="text/javascript" src="http://cdn.openwow.com/api/tooltip.js"></script><?php
   $file = $_FILES['file']['tmp_name'];
   $fileopen = fopen($file, 'r');
   $buffer = '';
@@ -35,33 +31,19 @@ if (isset($_POST["PortingType"]))
     $arrDump=parse_ini_string ( $buffer  );
 
     $VER = isset($arrDump["CHDMP_VER"]) ? $arrDump["CHDMP_VER"] : "<335.700";
-    /*
     if ($VER!=ADDON_VER)
       echo "<h2>!!ATTENZIONE!!</h2> <br><br> La versione dell'addon con cui è stato estratto questo chardump è obsoleta: $VER <br> La nuova versione è la: <?=ADDON_VER?><br><br>Potresti avere problemi al termine del porting!<br>Se vuoi comunque proseguire, premi su ok ed abilita il caricamento dei chardump obsoleti nella pagina precedente!";
-*/
+
     $REALM_NAME = REALM_NAME;
     $DECODED_DUMP = _DECRYPT($DUMP);
     $CHAR_REALM = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $REALM_NAME);
-    $CHAR_ACCOUNT_ID = _GetCharacterAccountID();
-
     $json = json_decode(stripslashes($DECODED_DUMP), true);
     $CHAR_NAME = mb_convert_case(mb_strtolower($json['uinf']['name'], 'UTF-8'), MB_CASE_TITLE, 'UTF-8');
+    $CharLevel = _MaxValue($json['uinf']['level'], $MaxCL);
     $O_REALMLIST = $json['ginf']['realmlist'];
     $O_REALM = $json['ginf']['realm'];
-    $RaceID = _GetRaceID(strtoupper($json['uinf']['race']));
-    $ClassID = _GetClassID(strtoupper($json['uinf']['class']));
-    $CharLevel = _MaxValue($json['uinf']['level'], $MaxCL);
     $pType = $_POST["PortingType"];
 
-    /*
-        $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
-        _SelectDB($AccountDB, $connection);
-        $result = mysql_query("SELECT `address`,`port` FROM `realmlist` WHERE `id` = " . $CHAR_REALM . ";", $connection) or die(mysql_error());
-        $row = mysql_fetch_array($result);
-        $SPT = $row['port'];
-        $SIP = $row['address'];
-        mysql_close($connection);
-        */
 
     $AchievementsCount = 0;
     $ACHMINTime = 0;
@@ -96,7 +78,6 @@ if (isset($_POST["PortingType"]))
   if (!empty($reason)) {
     viewerForm($reason);
   } else {
-    $_SESSION['STEP2'] = "NO";
     $char_money = _MaxValue($json['uinf']['money'], $MaxMoney);
     $char_speccount = $json['uinf']['specs'];
     $char_gender = $json['uinf']['gender'] - 2 == 1 ? 1 : 0;
@@ -106,7 +87,6 @@ if (isset($_POST["PortingType"]))
     $INVrow = "";
     $GEMrow = "";
     $CURrow = "";
-    $row = "";
 
     if (_CheckCharacterName(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $CHAR_NAME) > 0) {
       // UN AVVISO (character con lo stesso nome)
@@ -119,13 +99,23 @@ if (isset($_POST["PortingType"]))
     echo "<b>locale:</b> ".$json['ginf']['locale']."<br>";
     echo "<b>clientbuild:</b>".$json['ginf']['clientbuild']."<br><br>";
 
+    /* CHARACTER */
+    echo "<b>Character</b><br>";
+    echo "<b>Name:</b> ".$json['uinf']['name']."<br>";
+    echo "<b>Level:</b> ".$json['uinf']['level']."<br>";
+    echo "<b>Race:</b> ".$json['uinf']['race']."<br>";
+    echo "<b>Class:</b> ".$json['uinf']['class']."<br>";
+    echo "<b>ArenaPoints:</b> ".$json['uinf']['arenapoints']."<br>";
+    echo "<b>Honor:</b> ".$json['uinf']['honor']."<br>";
+    
+
     /* ACHIEVEMENTS */
-    echo "<b>Achievements:</b><br>";
+    echo "<br><b>Achievements</b><br>";
     $ach_invalid = "";
     $ach_valid = "";
     foreach ($json['achiev'] as $key => $value)
     {
-      $achievement = '<a href="http://wotlk.openwow.com/achievement='.$value['I'].'>'.$value['I'].'</a>';
+      $achievement = '<a href="http://wotlk.openwow.com/achievement='.$value['I'].'">'.$value['I'].'</a>';
       $date = $value['D'];
       if (_CheckWrongOrNoAchievement($achievement))
         $ach_invalid .= $achievement." ";
@@ -135,20 +125,15 @@ if (isset($_POST["PortingType"]))
     echo "$ach_valid <br>";
     if ($ach_invalid != "")
       echo "I seguenti achievements non sono validi: $ach_invalid <br><br>";
-
+    
     /* GLYPHS */
+    /* spec 1 */
     $Glyph[0] = $json['glyphs'][0][0][0];
     $Glyph[1] = $json['glyphs'][0][0][1];
     $Glyph[2] = $json['glyphs'][0][0][2];
     $Glyph[3] = $json['glyphs'][0][1][0];
     $Glyph[4] = $json['glyphs'][0][1][1];
     $Glyph[5] = $json['glyphs'][0][1][2];
-    $Glyph[6] = $json['glyphs'][1][0][0];
-    $Glyph[7] = $json['glyphs'][1][0][1];
-    $Glyph[8] = $json['glyphs'][1][0][2];
-    $Glyph[9] = $json['glyphs'][1][1][0];
-    $Glyph[10] = $json['glyphs'][1][1][1];
-    $Glyph[11] = $json['glyphs'][1][1][2];
     echo "<b>Glyphs</b> <br>";
     echo "first spec<br>";
     echo "<b>major</b><br>";
@@ -159,15 +144,25 @@ if (isset($_POST["PortingType"]))
     echo ($Glyph[3] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[3].'">'.$Glyph[3].'</a>' : "Nessun glyph") . "<br>";
     echo ($Glyph[4] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[4].'">'.$Glyph[4].'</a>' : "Nessun glyph") . "<br>";
     echo ($Glyph[5] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[5].'">'.$Glyph[5].'</a>' : "Nessun glyph") . "<br>";
-    echo "<br>second spec<br>";
-    echo "<b>major</b><br>";
-    echo ($Glyph[6] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[6].'">'.$Glyph[6].'</a>' : "Nessun glyph") . "<br>";
-    echo ($Glyph[7] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[7].'">'.$Glyph[7].'</a>' : "Nessun glyph") . "<br>";
-    echo ($Glyph[8] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[8].'">'.$Glyph[8].'</a>' : "Nessun glyph") . "<br>";
-    echo "<b>minor</b><br>";
-    echo ($Glyph[9] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[9].'">'.$Glyph[9].'</a>' : "Nessun glyph") . "<br>";
-    echo ($Glyph[10] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[10].'">'.$Glyph[10].'</a>' : "Nessun glyph") . "<br>";
-    echo ($Glyph[11] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[11].'">'.$Glyph[11].'</a>' : "Nessun glyph") . "<br>";
+    /* spec 2 */
+    if ($char_speccount == 2)
+    {
+      $Glyph[6] = $json['glyphs'][1][0][0];
+      $Glyph[7] = $json['glyphs'][1][0][1];
+      $Glyph[8] = $json['glyphs'][1][0][2];
+      $Glyph[9] = $json['glyphs'][1][1][0];
+      $Glyph[10] = $json['glyphs'][1][1][1];
+      $Glyph[11] = $json['glyphs'][1][1][2];
+      echo "<br>second spec<br>";
+      echo "<b>major</b><br>";
+      echo ($Glyph[6] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[6].'">'.$Glyph[6].'</a>' : "Nessun glyph") . "<br>";
+      echo ($Glyph[7] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[7].'">'.$Glyph[7].'</a>' : "Nessun glyph") . "<br>";
+      echo ($Glyph[8] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[8].'">'.$Glyph[8].'</a>' : "Nessun glyph") . "<br>";
+      echo "<b>minor</b><br>";
+      echo ($Glyph[9] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[9].'">'.$Glyph[9].'</a>' : "Nessun glyph") . "<br>";
+      echo ($Glyph[10] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[10].'">'.$Glyph[10].'</a>' : "Nessun glyph") . "<br>";
+      echo ($Glyph[11] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[11].'">'.$Glyph[11].'</a>' : "Nessun glyph") . "<br>";
+    }
 
     /* REPUTATIONS */
     echo "<br><b>Reputazioni</b><br>";
@@ -231,23 +226,22 @@ if (isset($_POST["PortingType"]))
   }
 } else {
   viewerForm();
-  echo '
+?> 
+<form action="" method="POST" enctype="multipart/form-data">
   <h1>Visualizzatore Chardump</h1>
-  <form action="" method="POST" enctype="multipart/form-data">
-<div>
-  <b>Tipologia di porting: </b><br><input name="PortingType" value="0" required type="radio">
-  <b><span class="porting-type">Free</span></b>
-  <b><input name="PortingType" value="1" required type="radio"> <b><span class="porting-type">Basic</span></b>
-  <b><input name="PortingType" value="2" required type="radio"> <b><span class="porting-type">Full</span></b>
-</div>
+  <div>
+    <b>Tipologia di porting: </b><br><input name="PortingType" value="0" required type="radio">
+    <b><span class="porting-type">Free</span></b>
+    <input name="PortingType" value="1" required type="radio"> <b><span class="porting-type">Basic</span></b>
+    <input name="PortingType" value="2" required type="radio"> <b><span class="porting-type">Full</span></b>
+  </div>
 
-<div class="MythInput">
-    <style =="" "font-size:14px"="">File selezionato:</style>
-      <input name="file" id="file" accept=".lua" type="file">
-      <input name="load" value="Visualizza chardump" type="submit">
-</div>
+  <div class="MythInput">
+    <input name="file" id="file" accept=".lua" type="file">
+    <input name="load" value="Visualizza chardump" type="submit">
+  </div>
 </form>
-';
+<?php
 }
 
 function viewerForm($err="") {
