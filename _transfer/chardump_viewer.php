@@ -236,17 +236,18 @@ require_once("definitions.php");
     viewerForm();
   ?> 
   <form action="" method="POST" enctype="multipart/form-data">
-    <h1>Visualizzatore Chardump</h1>
+    <h1 class="text-success">Visualizzatore Chardump</h1>
     <div>
-      <b>Tipologia di porting: </b><br><input name="PortingType" value="0" required type="radio">
-      <b><span class="porting-type">Free</span></b>
-      <input name="PortingType" value="1" required type="radio"> <b><span class="porting-type">Basic</span></b>
-      <input name="PortingType" value="2" required type="radio"> <b><span class="porting-type">Full</span></b>
+      <b class="text-primary">Tipologia di porting: </b><br><input name="PortingType" value="0" required type="radio">
+      <b><span class="porting-type text-info">Free</span></b>
+      <input name="PortingType" value="1" required type="radio"> <b><span class="porting-type text-success">Basic</span></b>
+      <input name="PortingType" value="2" required type="radio"> <b><span class="porting-type text-danger">Full</span></b>
     </div>
 
     <div class="MythInput">
-      <input name="file" id="file" accept=".lua" type="file">
-      <input name="load" value="Visualizza chardump" type="submit">
+      <input name="file" id="file" accept=".lua" type="file" class="text-warning">
+      <br>
+      <input name="load" value="Visualizza chardump" type="submit" class="btn btn-success">
     </div>
   </form>
   <?php
