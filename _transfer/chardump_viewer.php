@@ -33,7 +33,7 @@ require_once("definitions.php");
 
       $VER = isset($arrDump["CHDMP_VER"]) ? $arrDump["CHDMP_VER"] : "<335.700";
       if ($VER!=ADDON_VER)
-        echo "<h2>!!ATTENZIONE!!</h2> <br><br> La versione dell'addon con cui è stato estratto questo chardump è obsoleta: $VER <br> La nuova versione è la: <?=ADDON_VER?><br><br>Potresti avere problemi al termine del porting!<br>Se vuoi comunque proseguire, premi su ok ed abilita il caricamento dei chardump obsoleti nella pagina precedente!";
+        echo "<h2>!!ATTENZIONE!!</h2> <br><br> La versione dell'addon con cui è stato estratto questo chardump è obsoleta: $VER <br> La nuova versione è la: ".ADDON_VER."<br><br>Potresti avere problemi al termine del porting!.<br><br>";
 
       $REALM_NAME = REALM_NAME;
       $DECODED_DUMP = _DECRYPT($DUMP);
