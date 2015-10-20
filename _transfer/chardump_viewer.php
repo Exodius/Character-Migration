@@ -67,7 +67,7 @@ require_once("definitions.php");
       $reason = _RT("Small playtime!");
     }
     else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST, $O_REALM, $o_URL)) {
-      $reason = _RT($write[57]);
+      $reason = _RT($write[57]." [ realm: ".(empty($O_REALMLIST) ? "No realmlist" : $O_REALMLIST)." --- ".(empty($O_REALM) ? "No realmn name" : $O_REALM)." ]");
     }
 */
 

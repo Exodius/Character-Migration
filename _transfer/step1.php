@@ -85,7 +85,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         } else if (CHECKDAY($ACHMAXTime, $ACHMINTime) < $PLAYTIME) {
             $reason = _RT("Small playtime!");
         } else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST, $O_REALM, $o_URL)) {
-            $reason = _RT($write[57]." [ realm: <$O_REALMLIST> --- <$O_REALM> ]");
+            $reason = _RT($write[57]." [ realm: ".(empty($O_REALMLIST) ? "No realmlist" : $O_REALMLIST)." --- ".(empty($O_REALM) ? "No realmn name" : $O_REALM)." ]");
         } else if (CanOrNoTransferPlayer(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $AccountDB, $CHAR_ACCOUNT_ID)) {
             $reason = _RT($write[52] . " " . $REALM_NAME . ". " . $write[53]);
         } else if ($PLAYER_TRANSFER_STACKS < 0) {
