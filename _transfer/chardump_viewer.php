@@ -104,7 +104,7 @@ require_once("definitions.php");
       /* CHARACTER */
       /* apply some filters */
       if ($json['uinf']['honor']> $MaxHP) $json['uinf']['honor'] = $MaxHP;
-      if ($json['uinf']['arenapoints']> $MaxAP) $json['uinf']['honor'] = $MaxAP;
+      if ($json['uinf']['arenapoints']> $MaxAP) $json['uinf']['arenapoints'] = $MaxAP;
       if ($json['uinf']['level']> $MaxCL) $json['uinf']['level'] = $MaxCL;
       
       echo '<b class="text-warning">Character</b><br>';
