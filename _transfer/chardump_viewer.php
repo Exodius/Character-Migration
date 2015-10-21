@@ -33,7 +33,8 @@ require_once("definitions.php");
 
       $VER = isset($arrDump["CHDMP_VER"]) ? $arrDump["CHDMP_VER"] : "<335.700";
       if ($VER!=ADDON_VER)
-        echo "<h2>!!ATTENZIONE!!</h2> <br><br> La versione dell'addon con cui è stato estratto questo chardump è obsoleta: $VER <br> La nuova versione è la: ".ADDON_VER."<br><br>Potresti avere problemi al termine del porting!.<br><br>";
+        echo "<h2 class=\"text-warning\">!!ATTENZIONE!!</h2>
+        <p class=\"text-danger\">La versione dell'addon con cui è stato estratto questo chardump è obsoleta: $VER <br> La nuova versione è la: ".ADDON_VER."<br><br>Potresti avere problemi al termine del porting!.<br><br></p>";
 
       $REALM_NAME = REALM_NAME;
       $DECODED_DUMP = _DECRYPT($DUMP);
@@ -108,6 +109,17 @@ require_once("definitions.php");
       echo "<b class=\"text-info\">Class:</b> ".$json['uinf']['class']."<br>";
       echo "<b class=\"text-info\">ArenaPoints:</b> ".$json['uinf']['arenapoints']."<br>";
       echo "<b class=\"text-info\">Honor:</b> ".$json['uinf']['honor']."<br>";
+      echo "<b class=\"text-info\">Kills:</b> ".$json['uinf']['kills']."<br>";
+
+      /* MONEY */
+      $money = $json['uinf']['money'];
+      if ($money > 9999)
+        $money = substr($money, 0, -4) . " <span style=\"color: yellow;\">gold</span> " . substr($money, -4, 2) . " <span style=\"color: grey;\">silver</span> " . substr($money, -2) . " <span class=\"text-danger\">copper</span>";
+      elseif ($money > 99)
+        $money = "00 <span style=\"color: yellow;\">gold</span> " . substr($money, -4, 2) . " <span style=\"color: grey;\">silver</span> " . substr($money, -2) . " <span class=\"text-danger\">copper</span>";
+      else
+        $money = "00 <span style=\"color: yellow;\">gold</span> 00 <span style=\"color: grey;\">silver</span> " . substr($money, -2) . " <span class=\"text-danger\">copper</span>";
+      echo "<b class=\"text-info\">Money:</b> ".$money."<br>";
 
 
       /* ACHIEVEMENTS */
@@ -228,7 +240,7 @@ require_once("definitions.php");
       echo "<br><br><b class=\"text-warning\">Reputazioni</b><br>";
       foreach ($json['rep'] as $key => $value)
         echo ($value['V'] != 0 ? "<i style=\"color: #777;\">".$value['V']."</i> <a href=\"http://wotlk.openwow.com/faction=".$value['V']."\">" . $value['N']."</a><br>" : "");
-      
+
       echo "</div>";
 
     }
