@@ -102,6 +102,11 @@ require_once("definitions.php");
       echo "<b class=\"text-info\">clientbuild:</b>".$json['ginf']['clientbuild']."<br><br>";
 
       /* CHARACTER */
+      /* apply some filters */
+      if ($json['uinf']['honor']> $MaxHP) $json['uinf']['honor'] = $MaxHP;
+      if ($json['uinf']['arenapoints']> $MaxAP) $json['uinf']['honor'] = $MaxAP;
+      if ($json['uinf']['level']> $MaxCL) $json['uinf']['level'] = $MaxCL;
+      
       echo '<b class="text-warning">Character</b><br>';
       echo "<b class=\"text-info\">Name:</b> ".$json['uinf']['name']."<br>";
       echo "<b class=\"text-info\">Level:</b> ".$json['uinf']['level']."<br>";
@@ -113,6 +118,8 @@ require_once("definitions.php");
 
       /* MONEY */
       $money = $json['uinf']['money'];
+      if ($money > $MaxMoney)
+        $money = $MaxMoney;
       if ($money > 9999)
         $money = substr($money, 0, -4) . " <span style=\"color: yellow;\">gold</span> " . substr($money, -4, 2) . " <span style=\"color: grey;\">silver</span> " . substr($money, -2) . " <span class=\"text-danger\">copper</span>";
       elseif ($money > 99)
