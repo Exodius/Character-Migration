@@ -63,10 +63,10 @@ require_once("definitions.php");
         $reason = _RT($write[50] . " " . $GAMEBUILD);
       } else if (((10 + $CharLevel > $AchievementsCount) || ($AchievementsCount > $AchievementsMinCount)) && $AchievementsCheck == 1) {
         $reason = _RT("Seems bad characters, not enought achievements!");
+      }
+      else if (CHECKDAY($ACHMAXTime, $ACHMINTime) < $PLAYTIME) {
+        $reason = _RT("Small playtime!");
       }/*
-    else if (CHECKDAY($ACHMAXTime, $ACHMINTime) < $PLAYTIME) {
-      $reason = _RT("Small playtime!");
-    }
     else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST, $O_REALM, $o_URL)) {
       $reason = _RT($write[57]." [ realm: ".(empty($O_REALMLIST) ? "No realmlist" : $O_REALMLIST)." --- ".(empty($O_REALM) ? "No realmn name" : $O_REALM)." ]");
     }
@@ -106,7 +106,7 @@ require_once("definitions.php");
       if ($json['uinf']['honor']> $MaxHP) $json['uinf']['honor'] = $MaxHP;
       if ($json['uinf']['arenapoints']> $MaxAP) $json['uinf']['arenapoints'] = $MaxAP;
       if ($json['uinf']['level']> $MaxCL) $json['uinf']['level'] = $MaxCL;
-      
+
       echo '<b class="text-warning">Character</b><br>';
       echo "<b class=\"text-info\">Name:</b> ".$json['uinf']['name']."<br>";
       echo "<b class=\"text-info\">Level:</b> ".$json['uinf']['level']."<br>";
@@ -156,7 +156,7 @@ require_once("definitions.php");
       $Glyph[5] = $json['glyphs'][0][1][2];
       echo '<div class="col-xs-4 col-sm-3 col-lg-2">';
       echo '<b class="text-warning">Glyphs</b> <br>';
-      echo '<span class="text-success">first spec</span><br>';
+//    echo '<span class="text-success">first spec</span><br>';
       echo '<b class="text-primary">major</b><br>';
       echo ($Glyph[0] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[0].'">'.$Glyph[0].'</a>' : '<span class="text-danger">No glyph</span>') . "<br>";
       echo ($Glyph[1] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[1].'">'.$Glyph[1].'</a>' : '<span class="text-danger">No glyph</span>') . "<br>";
@@ -167,6 +167,7 @@ require_once("definitions.php");
       echo ($Glyph[5] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[5].'">'.$Glyph[5].'</a>' : '<span class="text-danger">No glyph</span>') . "<br>";
       echo "</div>";
       /* spec 2 */
+      /*
       if ($char_speccount == 2)
       {
         $Glyph[6] = $json['glyphs'][1][0][0];
@@ -187,6 +188,7 @@ require_once("definitions.php");
         echo ($Glyph[11] != -1 ? '<a href="http://wotlk.openwow.com/spell='.$Glyph[11].'">'.$Glyph[11].'</a>' : '<span class="text-danger">No glyph</span>') . "<br>";
         echo "</div>";
       }
+      */
 
       echo '<div class="col-xs-12">';
       /* SKILLS */
@@ -207,6 +209,7 @@ require_once("definitions.php");
       foreach ($json['creature'] as $key => $SpellID)
         echo '<a href="http://wotlk.openwow.com/spell='.$SpellID.'">'.$SpellID.'</a> ';
 
+      echo '<div id="items">';
       /* INVENTORY */
       foreach ($json['inventory'] as $key => $value)
       {
@@ -242,6 +245,7 @@ require_once("definitions.php");
           $CURrow .= '<a href="http://wotlk.openwow.com/item='.$CurrencyID.'">'.$CurrencyID.'</a>' . "<span class=\"text-danger\">x" . $COUNT . "</span> ";
       }
       echo "<b class=\"text-warning\">Currency</b><br>".$CURrow;
+      echo '</div>';
 
       /* REPUTATIONS */
       echo "<br><br><b class=\"text-warning\">Reputazioni</b><br>";
@@ -249,7 +253,9 @@ require_once("definitions.php");
         echo ($value['V'] != 0 ? "<i style=\"color: #777;\">".$value['V']."</i> <a href=\"http://wotlk.openwow.com/faction=".$value['V']."\">" . $value['N']."</a><br>" : "");
 
       echo "</div>";
+  ?>
 
+  <?php
     }
   } else {
     viewerForm();
