@@ -61,7 +61,7 @@ require_once("definitions.php");
       }
       if (CheckGameBuild($json['ginf']['clientbuild'], $GAMEBUILD)) {
         $reason = _RT($write[50] . " " . $GAMEBUILD);
-      } else if (((10 + $CharLevel > $AchievementsCount) || ($AchievementsCount > $AchievementsMinCount)) && $AchievementsCheck == 1) {
+      } else if (((10 + $CharLevel > $AchievementsCount) || ($AchievementsCount > $AchievementsMinCount)) && $AchievementsCheck == 1)       {
         $reason = _RT("Seems bad characters, not enought achievements!");
       }
       else if (CHECKDAY($ACHMAXTime, $ACHMINTime) < $PLAYTIME) {
@@ -87,6 +87,7 @@ require_once("definitions.php");
       $char_arenapoints = _MaxValue($json['uinf']['arenapoints'], $MaxAP);
       $char_honorpoints = _MaxValue($json['uinf']['honor'], $MaxHP);
       $INVrow = "";
+      $downgrade = "<b class=\"text-warning\">Downgrade:</b> <br>";
       $GEMrow = "";
       $CURrow = "";
 
@@ -127,10 +128,10 @@ require_once("definitions.php");
       else
         $money = "00 <span style=\"color: yellow;\">gold</span> 00 <span style=\"color: grey;\">silver</span> " . substr($money, -2) . " <span class=\"text-danger\">copper</span>";
       echo "<b class=\"text-info\">Money:</b> ".$money."<br>";
+      echo "<br><br>";
 
 
       /* ACHIEVEMENTS */
-      echo "<br><b class=\"text-warning\">Achievements</b><br>";
       $ach_invalid = "";
       $ach_valid = "";
       foreach ($json['achiev'] as $key => $value)
@@ -142,9 +143,14 @@ require_once("definitions.php");
         else
           $ach_valid .= $achievement." ";
       }
-      echo "$ach_valid <br>";
-      if ($ach_invalid != "")
-        echo "$ach_invalid <br><br>";
+
+      if($ach_invalid != "" and $ach_valid != "")
+      {
+        echo "<br><b class=\"text-warning\">Achievements</b><br>";
+        echo "$ach_valid <br>";
+        if ($ach_invalid != "")
+          echo "$ach_invalid <br><br>";
+      }
 
       /* GLYPHS */
       /* spec 1 */
@@ -198,16 +204,24 @@ require_once("definitions.php");
           echo "<br><span class=\"text-success\">".$value['N']."</span> <span class=\"text-info\">".$value['M']." ".$value['C']."</span>";
 
       /* RECIPES */
-      echo "<br><br><b class=\"text-warning\">Recipes<br></b>";
+      $recipes = "";
       foreach ($json['recipes'] as $SpellID)
         if (_isProfessionSpell($SpellID))
-          echo '<a href="http://wotlk.openwow.com/spell='.$SpellID.'">'.$SpellID.'</a> ';
+          $recipes .= '<a href="http://wotlk.openwow.com/spell='.$SpellID.'">'.$SpellID.'</a> ';
+      
+      if ($recipes != "")
+        echo "<br><br><b class=\"text-warning\">Recipes<br></b><br>$recipes";
+
       echo "<br>";
 
       /* MOUNTS/COMPANIONS */
-      echo "<br><b class=\"text-warning\">Mounts/Companions<br></b>";
+      $Mounts = "";
       foreach ($json['creature'] as $key => $SpellID)
-        echo '<a href="http://wotlk.openwow.com/spell='.$SpellID.'">'.$SpellID.'</a> ';
+        $Mounts .= '<a href="http://wotlk.openwow.com/spell='.$SpellID.'">'.$SpellID.'</a> ';
+
+      if ($Mounts != "")
+        echo "<br><b class=\"text-warning\">Mounts/Companions<br></b><br>$Mounts";
+      
 
       echo '<div id="items">';
       /* INVENTORY */
@@ -216,20 +230,30 @@ require_once("definitions.php");
         // qui vengono eseguiti tutti i check e i downgrade degli items
         $item = _itemCheck($CHAR_REALM, $value['I'], $pType);
         $count = CheckItemCount($value['C']);
-
-        $INVrow .= '<a href="http://wotlk.openwow.com/item='.$item.'">'.$item.'</a>' . "<span class=\"text-danger\">x" . $count . "</span> ";
-        $GEM1 = _GetGemID($value['G1']);
-        $GEM2 = _GetGemID($value['G2']);
-        $GEM3 = _GetGemID($value['G3']);
-        if ($GEM1 > 1)
-          $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM1.'">'.$GEM1.'</a><span class="text-danger">x1</span> ';
-        if ($GEM2 > 1)
-          $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM2.'">'.$GEM2.'</a><span class="text-danger">x1</span> ';
-        if ($GEM3 > 1)
-          $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM3.'">'.$GEM3.'</a><span class="text-danger">x1</span> ';
+        
+        if ($item != $value['I'])
+          $downgrade .= '<a href="http://wotlk.openwow.com/item='.$value['I'].'">'.$value['I'].'</a>' . "<span class=\"text-danger\">x" . $count . "</span> => ".'<a href="http://wotlk.openwow.com/item='.$item.'">'.$item.'</a>' . "<span class=\"text-danger\">x" . $count . "</span><br>";
+        else
+        {
+          $INVrow .= '<a href="http://wotlk.openwow.com/item='.$item.'">'.$item.'</a>' . "<span class=\"text-danger\">x" . $count . "</span> ";
+          $GEM1 = _GetGemID($value['G1']);
+          $GEM2 = _GetGemID($value['G2']);
+          $GEM3 = _GetGemID($value['G3']);
+          if ($GEM1 > 1)
+            $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM1.'">'.$GEM1.'</a><span class="text-danger">x1</span> ';
+          if ($GEM2 > 1)
+            $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM2.'">'.$GEM2.'</a><span class="text-danger">x1</span> ';
+          if ($GEM3 > 1)
+            $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM3.'">'.$GEM3.'</a><span class="text-danger">x1</span> ';
+        }
       }
       echo "<br><br><b class=\"text-warning\">Inventory</b><br>".$INVrow."<br><br>";
-      echo "<b class=\"text-warning\">Gems</b><br>".$GEMrow."<br><br>";
+      
+      if ($downgrade != "<b class=\"text-warning\">Downgrade:</b> <br>")
+        echo "$downgrade<br><br>";
+      
+      if ($GEMrow != "")
+        echo "<b class=\"text-warning\">Gems</b><br>".$GEMrow."<br><br>";
 
       /* CURRENCY */
       foreach ($json['currency'] as $key => $value)
@@ -244,15 +268,18 @@ require_once("definitions.php");
         if (_CheckCurrency($CurrencyID))
           $CURrow .= '<a href="http://wotlk.openwow.com/item='.$CurrencyID.'">'.$CurrencyID.'</a>' . "<span class=\"text-danger\">x" . $COUNT . "</span> ";
       }
-      echo "<b class=\"text-warning\">Currency</b><br>".$CURrow;
+
+      if ($CURrow != "")
+        echo "<b class=\"text-warning\">Currency</b><br>".$CURrow."<br><br>";
+
       echo '</div>';
 
       /* REPUTATIONS */
-      echo "<br><br><b class=\"text-warning\">Reputazioni</b><br>";
+      echo "<b class=\"text-warning\">Reputations</b><br>";
       foreach ($json['rep'] as $key => $value)
         echo ($value['V'] != 0 ? "<i style=\"color: #777;\">".$value['V']."</i> <a href=\"http://wotlk.openwow.com/faction=".$value['V']."\">" . $value['N']."</a><br>" : "");
 
-      echo "</div>";
+      echo "<br><br><br></div>";
   ?>
 
   <?php
