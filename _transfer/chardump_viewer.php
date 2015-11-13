@@ -1,4 +1,6 @@
 <?php
+session_start();
+$ID = $_SESSION['id'];
 include_once("t_dbfunctions.php");
 include_once("t_functions.php");
 include_once("t_config.php");
@@ -14,8 +16,25 @@ require_once("definitions.php");
   if (isset($_POST["PortingType"]))
   {
   ?><script type="text/javascript" src="http://cdn.openwow.com/api/tooltip.js"></script><?php
+    
+    if (isset($_POST['chardump']) and strpos($_POST['chardump'], "CHDMP") and isset($_SESSION['id']) and _CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevels))
+      $buffer = $_POST['chardump'];
+    else
+    {
+      $file = $_FILES['file']['tmp_name'];
+      $fileopen = fopen($file, 'r');
+      $buffer = '';
+      $reason = '';
 
-    $buffer = $_POST['chardump'];
+      while (!feof($fileopen)) {
+        $buffer2 = fgets($fileopen);
+        $buffer .= $buffer2;
+      }
+
+      fclose($fileopen);
+      unlink($file);
+    }
+
     $part = explode('"', $buffer);
     if (isset($part[1])) {
       $DUMP = $part[1];      
@@ -53,7 +72,7 @@ require_once("definitions.php");
         $reason = _RT($write[50] . " " . $GAMEBUILD);
       } else if (((10 + $CharLevel > $AchievementsCount) || ($AchievementsCount > $AchievementsMinCount)) && $AchievementsCheck == 1)       {
         $reason = _RT("Seems bad characters, not enought achievements!");
-      }
+      }/*
       else if (CHECKDAY($ACHMAXTime, $ACHMINTime) < $PLAYTIME) {
         $reason = _RT("Small playtime!");
       }/*
@@ -287,9 +306,12 @@ require_once("definitions.php");
     </div>
     <br>
     <div class="MythInput">
-      <span class="text-warning">Inserisci il contenuto del file chardump.lua</span>
+      <input name="file" id="file" accept=".lua" type="file" class="text-warning">
+      <?php if (isset($_SESSION['id']) and _CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevels)) { ?>
       <br><br>
-      <textarea rows="5" class="form-control" name="chardump" required></textarea>
+      <span class="text-warning">Inserisci il contenuto del file chardump.lua</span>
+      <textarea rows="5" class="form-control" name="chardump"></textarea>
+      <?php } ?>
       <br><br>
       <input name="load" value="Visualizza chardump" type="submit" class="btn btn-success">
     </div>
