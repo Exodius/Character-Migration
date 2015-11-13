@@ -14,18 +14,8 @@ require_once("definitions.php");
   if (isset($_POST["PortingType"]))
   {
   ?><script type="text/javascript" src="http://cdn.openwow.com/api/tooltip.js"></script><?php
-    $file = $_FILES['file']['tmp_name'];
-    $fileopen = fopen($file, 'r');
-    $buffer = '';
-    $reason = '';
 
-    while (!feof($fileopen)) {
-      $buffer2 = fgets($fileopen);
-      $buffer .= $buffer2;
-    }
-
-    fclose($fileopen);
-    unlink($file);
+    $buffer = $_POST['chardump'];
     $part = explode('"', $buffer);
     if (isset($part[1])) {
       $DUMP = $part[1];      
@@ -295,10 +285,12 @@ require_once("definitions.php");
       <input name="PortingType" value="1" required type="radio"> <b><span class="porting-type text-success">Basic</span></b>
       <input name="PortingType" value="2" required type="radio"> <b><span class="porting-type text-danger">Full</span></b>
     </div>
-
+    <br>
     <div class="MythInput">
-      <input name="file" id="file" accept=".lua" type="file" class="text-warning">
-      <br>
+      <span class="text-warning">Inserisci il contenuto del file chardump.lua</span>
+      <br><br>
+      <textarea rows="5" class="form-control" name="chardump" required></textarea>
+      <br><br>
       <input name="load" value="Visualizza chardump" type="submit" class="btn btn-success">
     </div>
   </form>
