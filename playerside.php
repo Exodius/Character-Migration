@@ -184,6 +184,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
     
     if (_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels)) {
         echo "
+        <a href='http://azerothshard.ga/wow-char-migration/_transfer/chardump_viewer.php'>Vai al visualizzatore dei dumps</a>
         <div align = right class = \"MythTable\" style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma';\">" . $TEXT1 . "</div>
             <br>";
         $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
@@ -192,7 +193,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
         mysql_close($connection);
     } else {
         echo "
-            <center><h1>Visualizzatore Chardump ( In lavorazione )</h1></center>
+            <center><h1>Visualizzatore Chardump ( Beta )</h1></center>
             <br>
             <div style = \"font-size:17px\">Prima di iniziare, controlla cosa verrà importato utilizzando questo visualizzatore</div>
             <br>
