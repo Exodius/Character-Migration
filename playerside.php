@@ -262,7 +262,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
                         <td>" . $transferType[$row["tType"]]["Type"] . "</td>
                         <td>Addon Rev: ".($row["addonVersion"] ? $row["addonVersion"] : "<Empty>")." <br><br>
                         <button onclick='popUp(\"" . str_replace(' ',"<br>",$row["cItemRow"]) . "\")'>Item List</button><br>
-                        <button onclick='popUp(\"" . $row["cDump"]. "\")'>Dump</button></td>
+                        <button onclick='popUp(\"CHDMP_DATA = \\\"" . $row["cDump"]. "\\\" \")'>Dump</button></td>
                         <td>" . $row["date_created"] . "</td>
                         <td>" . $row["cAccount"] . "</td>
                         <td align = center>

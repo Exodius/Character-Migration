@@ -17,7 +17,7 @@ require_once("definitions.php");
   {
   ?><script type="text/javascript" src="http://cdn.openwow.com/api/tooltip.js"></script><?php
     
-    if (isset($_POST['chardump']) and strpos($_POST['chardump'], "CHDMP") and isset($_SESSION['id']) and _CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevels))
+    if (isset($_POST['chardump']))
       $buffer = $_POST['chardump'];
     else
     {
