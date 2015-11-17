@@ -78,7 +78,10 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         
         $delay=checkDelay();
 
-        if (CheckGameBuild($json['ginf']['clientbuild'], $GAMEBUILD)) {
+        $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB,_CharacterDBSwitch($CHAR_REALM), $pType);
+        if ($limit==0) {
+            $reason = "Questa tipologia di porting non è disponibile per il tuo account!";
+        } else if (CheckGameBuild($json['ginf']['clientbuild'], $GAMEBUILD)) {
             $reason = _RT($write[50] . " " . $GAMEBUILD);
         } else if (((10 + $CharLevel > $AchievementsCount) || ($AchievementsCount > $AchievementsMinCount)) && $AchievementsCheck == 1) {
             $reason = _RT("Seems bad characters, not enought achievements!");
