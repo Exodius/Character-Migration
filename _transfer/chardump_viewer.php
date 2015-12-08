@@ -17,7 +17,7 @@ require_once("definitions.php");
   {
   ?><script type="text/javascript" src="http://cdn.openwow.com/api/tooltip.js"></script><?php
     
-    if (isset($_POST['chardump']))
+    if (isset($_POST['chardump']) && !empty($_POST['chardump']))
       $buffer = $_POST['chardump'];
     else
     {
