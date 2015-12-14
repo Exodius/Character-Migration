@@ -1,6 +1,6 @@
 <?php
 session_start();
-$ID = $_SESSION['id'];
+//$ID = $_SESSION['id'];
 include_once("t_dbfunctions.php");
 include_once("t_functions.php");
 include_once("t_config.php");
@@ -239,22 +239,24 @@ require_once("definitions.php");
         // qui vengono eseguiti tutti i check e i downgrade degli items
         $item = _itemCheck($CHAR_REALM, $value['I'], $pType);
         $count = CheckItemCount($value['C']);
-        
-        if ($item != $value['I'])
-          $downgrade .= '<a href="http://wotlk.openwow.com/item='.$value['I'].'">'.$value['I'].'</a>' . "<span class=\"text-danger\">x" . $count . "</span> => ".'<a href="http://wotlk.openwow.com/item='.$item.'">'.$item.'</a>' . "<span class=\"text-danger\">x" . $count . "</span><br>";
-        else
-        {
-          $INVrow .= '<a href="http://wotlk.openwow.com/item='.$item.'">'.$item.'</a>' . "<span class=\"text-danger\">x" . $count . "</span> ";
-          $GEM1 = _GetGemID($value['G1']);
-          $GEM2 = _GetGemID($value['G2']);
-          $GEM3 = _GetGemID($value['G3']);
-          if ($GEM1 > 1)
-            $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM1.'">'.$GEM1.'</a><span class="text-danger">x1</span> ';
-          if ($GEM2 > 1)
-            $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM2.'">'.$GEM2.'</a><span class="text-danger">x1</span> ';
-          if ($GEM3 > 1)
-            $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM3.'">'.$GEM3.'</a><span class="text-danger">x1</span> ';
-        }
+        if ($item > 0)
+	{
+		if ($item != $value['I'])
+		  $downgrade .= '<a href="http://wotlk.openwow.com/item='.$value['I'].'">'.$value['I'].'</a>' . "<span class=\"text-danger\">x" . $count . "</span> => ".'<a href="http://wotlk.openwow.com/item='.$item.'">'.$item.'</a>' . "<span class=\"text-danger\">x" . $count . "</span><br>";
+		else
+		{
+		  $INVrow .= '<a href="http://wotlk.openwow.com/item='.$item.'">'.$item.'</a>' . "<span class=\"text-danger\">x" . $count . "</span> ";
+		  $GEM1 = _GetGemID($value['G1']);
+		  $GEM2 = _GetGemID($value['G2']);
+		  $GEM3 = _GetGemID($value['G3']);
+		  if ($GEM1 > 1)
+		    $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM1.'">'.$GEM1.'</a><span class="text-danger">x1</span> ';
+		  if ($GEM2 > 1)
+		    $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM2.'">'.$GEM2.'</a><span class="text-danger">x1</span> ';
+		  if ($GEM3 > 1)
+		    $GEMrow .= '<a href="http://wotlk.openwow.com/item='.$GEM3.'">'.$GEM3.'</a><span class="text-danger">x1</span> ';
+		}
+	}
       }
       echo "<br><br><b class=\"text-warning\">Inventory</b><br>".$INVrow."<br><br>";
       
