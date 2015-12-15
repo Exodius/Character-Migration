@@ -1,6 +1,6 @@
 <?php
 session_start();
-//$ID = $_SESSION['id'];
+$ID = $_SESSION['id'];
 include_once("t_dbfunctions.php");
 include_once("t_functions.php");
 include_once("t_config.php");
