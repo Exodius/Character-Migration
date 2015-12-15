@@ -14,7 +14,7 @@ function _ServerOn($SOAPUser, $SOAPPassword, $SOAPPort, $SOAPHost, $URI) {
 }
 
 function CheckGameBuild($DBuild, $DServer) {
-    return $DBuild != $DServer ? true : false;
+    return in_array($DBuild, $DServer) ? true : false;
 }
 
 function _CheckCurrency($ID) {
