@@ -15,6 +15,7 @@ $transferType[PFREE]["Descr"] = "<ul>"
         . "<li>Downgrading items lvl <b>277</b> -> <b>264</b></li>"
         . "<li>Cambio <b>Shadow's Edge</b> -> <b>Cryptmaker</b></li>"
         . "<li>Cambio <b>Val'anyr, Hammer of Ancient Kings</b> -> <b>Trauma</b></li>"
+        . "<li>Cambio <b>Shoulders/Head Wrathful</b> -> <b>Shoulders/Head Relentless</b></li>"
         . "</ul>";
 // BASIC
 $transferType[PBASIC]["Quantity"] = 2;

@@ -1,223 +1,223 @@
-﻿<?php
+<?php
 
 function GetSkillID($skill, $locale) {
     switch ($locale) {
         case "FRFR": {
-                switch ($skill) {
-                    case "EPÉES": return 43;
-                    case "HACHES": return 44;
-                    case "ARCS": return 45;
-                    case "ARMES À FEU": return 46;
-                    case "MASSE": return 54;
-                    case "EPÉES À DEUX MAINS": return 55;
-                    case "DÉFENSE": return 95;
-                    case "SECOURISME": return 129;
-                    case "BÂTONS": return 136;
-                    case "MASSES À DEUX MAINS": return 160;
-                    case "MAINS NUES": return 162;
-                    case "FORGE": return 164;
-                    case "TRAVAIL DU CUIR": return 165;
-                    case "ALCHIMIE": return 171;
-                    case "HACHES À DEUX MAINS": return 172;
-                    case "DAGUES": return 173;
-                    case "ARMES DE JET": return 176;
-                    case "HERBORISTERIE": return 182;
-                    case "CUISINE": return 185;
-                    case "MINAGE": return 186;
-                    case "COUTURE": return 197;
-                    case "INGÉNIERIE": return 202;
-                    case "ARBALÈTES": return 226;
-                    case "BAGUETTES": return 228;
-                    case "ARMES D'HAST": return 229;
-                    case "ARMURE EN PLAQUES": return 293;
-                    case "ENCHANTEMENT": return 333;
-                    case "PÊCHE": return 356;
-                    case "DÉPEÇAGE": return 393;
-                    case "MAILLES": return 413;
-                    case "CUIR": return 414;
-                    case "TISSU": return 415;
-                    case "BOUCLIER": return 433;
-                    case "ARMES DE PUGILAT": return 473;
-                    case "CROCHETAGE": return 633;
-                    case "JOAILLERIE": return 755;
-                    case "CALLIGRAPHIE": return 773;
-                    case "RUNEFORGER": return 776;
-                    default: return -1;
-                }
+            switch ($skill) {
+                case "EPÉES": return 43;
+                case "HACHES": return 44;
+                case "ARCS": return 45;
+                case "ARMES À FEU": return 46;
+                case "MASSE": return 54;
+                case "EPÉES À DEUX MAINS": return 55;
+                case "DÉFENSE": return 95;
+                case "SECOURISME": return 129;
+                case "BÂTONS": return 136;
+                case "MASSES À DEUX MAINS": return 160;
+                case "MAINS NUES": return 162;
+                case "FORGE": return 164;
+                case "TRAVAIL DU CUIR": return 165;
+                case "ALCHIMIE": return 171;
+                case "HACHES À DEUX MAINS": return 172;
+                case "DAGUES": return 173;
+                case "ARMES DE JET": return 176;
+                case "HERBORISTERIE": return 182;
+                case "CUISINE": return 185;
+                case "MINAGE": return 186;
+                case "COUTURE": return 197;
+                case "INGÉNIERIE": return 202;
+                case "ARBALÈTES": return 226;
+                case "BAGUETTES": return 228;
+                case "ARMES D'HAST": return 229;
+                case "ARMURE EN PLAQUES": return 293;
+                case "ENCHANTEMENT": return 333;
+                case "PÊCHE": return 356;
+                case "DÉPEÇAGE": return 393;
+                case "MAILLES": return 413;
+                case "CUIR": return 414;
+                case "TISSU": return 415;
+                case "BOUCLIER": return 433;
+                case "ARMES DE PUGILAT": return 473;
+                case "CROCHETAGE": return 633;
+                case "JOAILLERIE": return 755;
+                case "CALLIGRAPHIE": return 773;
+                case "RUNEFORGER": return 776;
+                default: return -1;
             }
+        }
         case "DEDE": {
-                switch ($skill) {
-                    case "SCHWERTER": return 43;
-                    case "AXTE": return 44;
-                    case "BOGEN": return 45;
-                    case "SCHUSSWAFFEN": return 46;
-                    case "STREITKOLBEN": return 54;
-                    case "ZWEIHANDSCHWERTER": return 55;
-                    case "VERTEIDIGUNG": return 95;
-                    case "ERSTE HILFE": return 129;
-                    case "STABE": return 136;
-                    case "ZWEIHANDSTREITKOLBEN":return 160;
-                    case "UNBEWAFFNET": return 162;
-                    case "SCHMIEDEKUNST": return 164;
-                    case "LEDERVERARBEITUNG": return 165;
-                    case "ALCHEMIE": return 171;
-                    case "ZWEIHANDAXTE": return 172;
-                    case "DOLCHE": return 173;
-                    case "WURFWAFFEN": return 176;
-                    case "KRAUTERKUNDE": return 182;
-                    case "KOCHKUNST": return 185;
-                    case "BERGBAU": return 186;
-                    case "SCHNEIDEREI": return 197;
-                    case "INGENIEURSKUNST": return 202;
-                    case "ARMBRUSTE": return 226;
-                    case "ZAUBERSTABE": return 228;
-                    case "STANGENWAFFEN": return 229;
-                    case "PLATTENPANZER": return 293;
-                    case "VERZAUBERKUNST": return 333;
-                    case "ANGELN": return 356;
-                    case "KURSCHNEREI": return 393;
-                    case "SCHWERE RUSTUNG": return 413;
-                    case "LEDER": return 414;
-                    case "STOFF": return 415;
-                    case "SCHILD": return 433;
-                    case "FAUSTWAFFEN": return 473;
-                    case "SCHLOSSKNACKEN": return 633;
-                    case "JUWELENSCHLEIFEN": return 755;
-                    case "INSCHRIFTENKUNDE": return 773;
-                    case "RUNEN SCHMIEDEN": return 776;
-                    default: return -1;
-                }
+            switch ($skill) {
+                case "SCHWERTER": return 43;
+                case "AXTE": return 44;
+                case "BOGEN": return 45;
+                case "SCHUSSWAFFEN": return 46;
+                case "STREITKOLBEN": return 54;
+                case "ZWEIHANDSCHWERTER": return 55;
+                case "VERTEIDIGUNG": return 95;
+                case "ERSTE HILFE": return 129;
+                case "STABE": return 136;
+                case "ZWEIHANDSTREITKOLBEN":return 160;
+                case "UNBEWAFFNET": return 162;
+                case "SCHMIEDEKUNST": return 164;
+                case "LEDERVERARBEITUNG": return 165;
+                case "ALCHEMIE": return 171;
+                case "ZWEIHANDAXTE": return 172;
+                case "DOLCHE": return 173;
+                case "WURFWAFFEN": return 176;
+                case "KRAUTERKUNDE": return 182;
+                case "KOCHKUNST": return 185;
+                case "BERGBAU": return 186;
+                case "SCHNEIDEREI": return 197;
+                case "INGENIEURSKUNST": return 202;
+                case "ARMBRUSTE": return 226;
+                case "ZAUBERSTABE": return 228;
+                case "STANGENWAFFEN": return 229;
+                case "PLATTENPANZER": return 293;
+                case "VERZAUBERKUNST": return 333;
+                case "ANGELN": return 356;
+                case "KURSCHNEREI": return 393;
+                case "SCHWERE RUSTUNG": return 413;
+                case "LEDER": return 414;
+                case "STOFF": return 415;
+                case "SCHILD": return 433;
+                case "FAUSTWAFFEN": return 473;
+                case "SCHLOSSKNACKEN": return 633;
+                case "JUWELENSCHLEIFEN": return 755;
+                case "INSCHRIFTENKUNDE": return 773;
+                case "RUNEN SCHMIEDEN": return 776;
+                default: return -1;
             }
+        }
         case "RURU": {
-                switch ($skill) {
-                    case "МЕЧИ": return 43;
-                    case "ТОПОРЫ": return 44;
-                    case "ЛУКИ": return 45;
-                    case "ОГНЕСТРЕЛЬНОЕ ОРУЖИЕ": return 46;
-                    case "ДРОБЯЩЕЕ ОРУЖИЕ": return 54;
-                    case "ДВУРУЧНЫЕ МЕЧИ": return 55;
-                    case "ЗАЩИТА": return 95;
-                    case "ПЕРВАЯ ПОМОЩЬ": return 129;
-                    case "ПОСОХИ": return 136;
-                    case "ДВУРУЧНОЕ ДРОБЯЩЕЕ ОРУЖИЕ": return 160;
-                    case "РУКОПАШНЫЙ БОЙ": return 162;
-                    case "КУЗНЕЧНОЕ ДЕЛО": return 164;
-                    case "КОЖЕВНИЧЕСТВО": return 165;
-                    case "АЛХИМИЯ": return 171;
-                    case "ДВУРУЧНЫЕ ТОПОРЫ": return 172;
-                    case "КИНЖАЛЫ": return 173;
-                    case "МЕТАТЕЛЬНОЕ ОРУЖИЕ": return 176;
-                    case "ТРАВНИЧЕСТВО": return 182;
-                    case "КУЛИНАРИЯ": return 185;
-                    case "ГОРНОЕ ДЕЛО": return 186;
-                    case "ПОРТНЯЖНОЕ ДЕЛО": return 197;
-                    case "ИНЖЕНЕРНОЕ ДЕЛО": return 202;
-                    case "АРБАЛЕТЫ": return 226;
-                    case "ЖЕЗЛЫ": return 228;
-                    case "ДРЕВКОВОЕ ОРУЖИЕ": return 229;
-                    case "ЛАТЫ": return 293;
-                    case "НАЛОЖЕНИЕ ЧАР": return 333;
-                    case "РЫБНАЯ ЛОВЛЯ": return 356;
-                    case "СНЯТИЕ ШКУР": return 393;
-                    case "КОЛЬЧУЖНЫЕ ДОСПЕХИ": return 413;
-                    case "КОЖАНЫЕ ДОСПЕХИ": return 414;
-                    case "ТКАНЕВЫЕ ДОСПЕХИ": return 415;
-                    case "ЩИТ": return 433;
-                    case "КИСТЕВОЕ ОРУЖИЕ": return 473;
-                    case "ВЗЛОМ": return 633;
-                    case "ЮВЕЛИРНОЕ ДЕЛО": return 755;
-                    case "НАЧЕРТАНИЕ": return 773;
-                    case "КОВКА РУН": return 776;
-                    default: return -1;
-                }
+            switch ($skill) {
+                case "МЕЧИ": return 43;
+                case "ТОПОРЫ": return 44;
+                case "ЛУКИ": return 45;
+                case "ОГНЕСТРЕЛЬНОЕ ОРУЖИЕ": return 46;
+                case "ДРОБЯЩЕЕ ОРУЖИЕ": return 54;
+                case "ДВУРУЧНЫЕ МЕЧИ": return 55;
+                case "ЗАЩИТА": return 95;
+                case "ПЕРВАЯ ПОМОЩЬ": return 129;
+                case "ПОСОХИ": return 136;
+                case "ДВУРУЧНОЕ ДРОБЯЩЕЕ ОРУЖИЕ": return 160;
+                case "РУКОПАШНЫЙ БОЙ": return 162;
+                case "КУЗНЕЧНОЕ ДЕЛО": return 164;
+                case "КОЖЕВНИЧЕСТВО": return 165;
+                case "АЛХИМИЯ": return 171;
+                case "ДВУРУЧНЫЕ ТОПОРЫ": return 172;
+                case "КИНЖАЛЫ": return 173;
+                case "МЕТАТЕЛЬНОЕ ОРУЖИЕ": return 176;
+                case "ТРАВНИЧЕСТВО": return 182;
+                case "КУЛИНАРИЯ": return 185;
+                case "ГОРНОЕ ДЕЛО": return 186;
+                case "ПОРТНЯЖНОЕ ДЕЛО": return 197;
+                case "ИНЖЕНЕРНОЕ ДЕЛО": return 202;
+                case "АРБАЛЕТЫ": return 226;
+                case "ЖЕЗЛЫ": return 228;
+                case "ДРЕВКОВОЕ ОРУЖИЕ": return 229;
+                case "ЛАТЫ": return 293;
+                case "НАЛОЖЕНИЕ ЧАР": return 333;
+                case "РЫБНАЯ ЛОВЛЯ": return 356;
+                case "СНЯТИЕ ШКУР": return 393;
+                case "КОЛЬЧУЖНЫЕ ДОСПЕХИ": return 413;
+                case "КОЖАНЫЕ ДОСПЕХИ": return 414;
+                case "ТКАНЕВЫЕ ДОСПЕХИ": return 415;
+                case "ЩИТ": return 433;
+                case "КИСТЕВОЕ ОРУЖИЕ": return 473;
+                case "ВЗЛОМ": return 633;
+                case "ЮВЕЛИРНОЕ ДЕЛО": return 755;
+                case "НАЧЕРТАНИЕ": return 773;
+                case "КОВКА РУН": return 776;
+                default: return -1;
             }
+        }
         case "ESES": {
-                switch ($skill) {
-                    case "ESPADAS": return 43;
-                    case "HACHAS": return 44;
-                    case "ARCOS": return 45;
-                    case "ARMAS DE FUEGO": return 46;
-                    case "MAZAS": return 54;
-                    case "ESPADAS DE DOS MANOS":return 55;
-                    case "DEFENSA": return 95;
-                    case "PRIMEROS AUXILIOS": return 129;
-                    case "BASTONES": return 136;
-                    case "MAZAS DE DOS MANOS": return 160;
-                    case "SIN ARMAS": return 162;
-                    case "HERRERÍA": return 164;
-                    case "PELETERÍA": return 165;
-                    case "ALQUIMIA": return 171;
-                    case "HACHAS DE DOS MANOS": return 172;
-                    case "DAGAS": return 173;
-                    case "ARMAS ARROJADIZAS": return 176;
-                    case "HERBORISTERÍA": return 182;
-                    case "COCINA": return 185;
-                    case "MINERÍA": return 186;
-                    case "SASTRERÍA": return 197;
-                    case "INGENIERÍA": return 202;
-                    case "BALLESTAS": return 226;
-                    case "VARITAS": return 228;
-                    case "ARMAS DE ASTA": return 229;
-                    case "MALLA DE PLACAS": return 293;
-                    case "ENCANTAMIENTO": return 333;
-                    case "PESCA": return 356;
-                    case "DESOLLAR": return 393;
-                    case "MALLA": return 413;
-                    case "CUERO": return 414;
-                    case "TELA": return 415;
-                    case "ESCUDO": return 433;
-                    case "ARMAS DE PUÑO": return 473;
-                    case "GANZÚA": return 633;
-                    case "JOYERÍA": return 755;
-                    case "INSCRIPCIÓN": return 773;
-                    case "FORJA DE RUNAS": return 776;
-                    default: return -1;
-                }
+            switch ($skill) {
+                case "ESPADAS": return 43;
+                case "HACHAS": return 44;
+                case "ARCOS": return 45;
+                case "ARMAS DE FUEGO": return 46;
+                case "MAZAS": return 54;
+                case "ESPADAS DE DOS MANOS":return 55;
+                case "DEFENSA": return 95;
+                case "PRIMEROS AUXILIOS": return 129;
+                case "BASTONES": return 136;
+                case "MAZAS DE DOS MANOS": return 160;
+                case "SIN ARMAS": return 162;
+                case "HERRERÍA": return 164;
+                case "PELETERÍA": return 165;
+                case "ALQUIMIA": return 171;
+                case "HACHAS DE DOS MANOS": return 172;
+                case "DAGAS": return 173;
+                case "ARMAS ARROJADIZAS": return 176;
+                case "HERBORISTERÍA": return 182;
+                case "COCINA": return 185;
+                case "MINERÍA": return 186;
+                case "SASTRERÍA": return 197;
+                case "INGENIERÍA": return 202;
+                case "BALLESTAS": return 226;
+                case "VARITAS": return 228;
+                case "ARMAS DE ASTA": return 229;
+                case "MALLA DE PLACAS": return 293;
+                case "ENCANTAMIENTO": return 333;
+                case "PESCA": return 356;
+                case "DESOLLAR": return 393;
+                case "MALLA": return 413;
+                case "CUERO": return 414;
+                case "TELA": return 415;
+                case "ESCUDO": return 433;
+                case "ARMAS DE PUÑO": return 473;
+                case "GANZÚA": return 633;
+                case "JOYERÍA": return 755;
+                case "INSCRIPCIÓN": return 773;
+                case "FORJA DE RUNAS": return 776;
+                default: return -1;
             }
+        }
         case "ENUS":
         case "ENGB": {
-                switch ($skill) {
-                    case "SWORDS": return 43;
-                    case "AXES": return 44;
-                    case "BOWS": return 45;
-                    case "GUNS": return 46;
-                    case "MACES": return 54;
-                    case "TWO-HANDED SWORDS": return 55;
-                    case "DEFENSE": return 95;
-                    case "FIRST AID": return 129;
-                    case "STAVES": return 136;
-                    case "TWO-HANDED MACES": return 160;
-                    case "UNARMED": return 162;
-                    case "BLACKSMITHING": return 164;
-                    case "LEATHERWORKING": return 165;
-                    case "ALCHEMY": return 171;
-                    case "TWO-HANDED AXES": return 172;
-                    case "DAGGERS": return 173;
-                    case "THROWN": return 176;
-                    case "HERBALISM": return 182;
-                    case "COOKING": return 185;
-                    case "MINING": return 186;
-                    case "TAILORING": return 197;
-                    case "ENGINEERING": return 202;
-                    case "CROSSBOWS": return 226;
-                    case "WANDS": return 228;
-                    case "POLEARMS": return 229;
-                    case "PLATE MAIL": return 293;
-                    case "ENCHANTING": return 333;
-                    case "FISHING": return 356;
-                    case "SKINNING": return 393;
-                    case "MAIL": return 413;
-                    case "LEATHER": return 414;
-                    case "CLOTH": return 415;
-                    case "SHIELD": return 433;
-                    case "FIST WEAPONS": return 473;
-                    case "LOCKPICKING": return 633;
-                    case "JEWELCRAFTING": return 755;
-                    case "INSCRIPTION": return 773;
-                    case "RUNEFORGING": return 776;
-                    default: return -1;
-                }
+            switch ($skill) {
+                case "SWORDS": return 43;
+                case "AXES": return 44;
+                case "BOWS": return 45;
+                case "GUNS": return 46;
+                case "MACES": return 54;
+                case "TWO-HANDED SWORDS": return 55;
+                case "DEFENSE": return 95;
+                case "FIRST AID": return 129;
+                case "STAVES": return 136;
+                case "TWO-HANDED MACES": return 160;
+                case "UNARMED": return 162;
+                case "BLACKSMITHING": return 164;
+                case "LEATHERWORKING": return 165;
+                case "ALCHEMY": return 171;
+                case "TWO-HANDED AXES": return 172;
+                case "DAGGERS": return 173;
+                case "THROWN": return 176;
+                case "HERBALISM": return 182;
+                case "COOKING": return 185;
+                case "MINING": return 186;
+                case "TAILORING": return 197;
+                case "ENGINEERING": return 202;
+                case "CROSSBOWS": return 226;
+                case "WANDS": return 228;
+                case "POLEARMS": return 229;
+                case "PLATE MAIL": return 293;
+                case "ENCHANTING": return 333;
+                case "FISHING": return 356;
+                case "SKINNING": return 393;
+                case "MAIL": return 413;
+                case "LEATHER": return 414;
+                case "CLOTH": return 415;
+                case "SHIELD": return 433;
+                case "FIST WEAPONS": return 473;
+                case "LOCKPICKING": return 633;
+                case "JEWELCRAFTING": return 755;
+                case "INSCRIPTION": return 773;
+                case "RUNEFORGING": return 776;
+                default: return -1;
             }
+        }
     }
 }
 
@@ -1365,323 +1365,323 @@ function GetSpellIDForSkill($SkillID, $max) {
 function GetFactionID($faction, $locale) {
     switch ($locale) {
         case "FRFR": {
-                switch ($faction) {
-                    case "BAIE-DU-BUTIN": return 21;
-                    case "FORGEFER": return 47;
-                    case "EXILÉS DE GNOMEREGAN": return 54;
-                    case "CONFRÉRIE DU THORIUM": return 59;
-                    case "FOSSOYEUSE": return 68;
-                    case "DARNASSUS": return 69;
-                    case "SYNDICAT": return 70;
-                    case "HURLEVENT": return 72;
-                    case "ORGRIMMAR": return 76;
-                    case "LES PITONS DU TONNERRE": return 81;
-                    case "LA VOILE SANGLANTE": return 87;
-                    case "CENTAURES (GELKIS)": return 92;
-                    case "CENTAURES (MAGRAM)": return 93;
-                    case "TRIBU ZANDALAR": return 270;
-                    case "RAVENHOLDT": return 349;
-                    case "GADGETZAN": return 369;
-                    case "CABESTAN": return 470;
-                    case "LA LIGUE D'ARATHOR": return 509;
-                    case "LES PROFANATEURS": return 510;
-                    case "AUBE D'ARGENT": return 529;
-                    case "LES GRUMEGUEULES": return 576;
-                    case "LONG-GUET": return 577;
-                    case "ÉLEVEURS DE SABRES-D'HIVER": return 589;
-                    case "CERCLE CÉNARIEN": return 609;
-                    case "CLAN LOUP-DE-GIVRE": return 729;
-                    case "GARDE FOUDREPIQUE": return 730;
-                    case "LES HYDRAXIENS": return 749;
-                    case "SHEN'DRALAR": return 809;
-                    case "SENTINELLES D'AILE-ARGENT": return 890;
-                    case "FOIRE DE SOMBRELUNE": return 909;
-                    case "PROGÉNITURE DE NOZDORMU": return 910;
-                    case "LUNE-D'ARGENT": return 911;
-                    case "TRANQUILLIEN": return 922;
-                    case "EXODAR": return 930;
-                    case "L'ALDOR": return 932;
-                    case "LE CONSORTIUM": return 933;
-                    case "LES CLAIRVOYANTS": return 934;
-                    case "LES SHA'TAR": return 935;
-                    case "SHATTRATH": return 936;
-                    case "MAG'HAR": return 941;
-                    case "EXPÉDITION CÉNARIENNE": return 942;
-                    case "BASTION DE L'HONNEUR": return 946;
-                    case "THRALLMAR": return 947;
-                    case "L'ŒIL POURPRE": return 967;
-                    case "SPOREGGAR": return 970;
-                    case "KURENAÏ": return 978;
-                    case "GARDIENS DU TEMPS": return 989;
-                    case "LA BALANCE DES SABLES": return 990;
-                    case "VILLE BASSE": return 1011;
-                    case "LIGEMORT CENDRELANGUE": return 1012;
-                    case "AILE-DU-NÉANT": return 1015;
-                    case "GARDE-CIEL SHA'TARI": return 1031;
-                    case "AVANT-GARDE DE L'ALLIANCE": return 1037;
-                    case "OGRI'LA": return 1038;
-                    case "EXPÉDITION DE LA BRAVOURE": return 1050;
-                    case "EXPÉDITION DE LA HORDE": return 1052;
-                    case "LES TAUNKAS": return 1064;
-                    case "LA MAIN DE LA VENGEANCE": return 1067;
-                    case "LIGUE DES EXPLORATEURS": return 1068;
-                    case "LES KALU'AKS": return 1073;
-                    case "OPÉRATION SOLEIL BRISÉ": return 1077;
-                    case "OFFENSIVE CHANTEGUERRE": return 1085;
-                    case "KIRIN TOR": return 1090;
-                    case "L'ACCORD DU REPOS DU VER": return 1091;
-                    case "LE CONCORDAT ARGENTÉ": return 1094;
-                    case "CHEVALIERS DE LA LAME D'ÉBÈNE": return 1098;
-                    case "TRIBU FRÉNÉCŒUR": return 1104;
-                    case "LES ORACLES": return 1105;
-                    case "LA CROISADE D'ARGENT": return 1106;
-                    case "LES FILS DE HODIR": return 1119;
-                    case "LES SACCAGE-SOLEIL": return 1124;
-                    case "LES GIVRE-NÉS": return 1126;
-                    case "HAIT TOUT ET TOUT LE MONDE": return 1145;
-                    case "LE VERDICT DES CENDRES": return 1156;
-                    default: return -1;
-                }
+            switch ($faction) {
+                case "BAIE-DU-BUTIN": return 21;
+                case "FORGEFER": return 47;
+                case "EXILÉS DE GNOMEREGAN": return 54;
+                case "CONFRÉRIE DU THORIUM": return 59;
+                case "FOSSOYEUSE": return 68;
+                case "DARNASSUS": return 69;
+                case "SYNDICAT": return 70;
+                case "HURLEVENT": return 72;
+                case "ORGRIMMAR": return 76;
+                case "LES PITONS DU TONNERRE": return 81;
+                case "LA VOILE SANGLANTE": return 87;
+                case "CENTAURES (GELKIS)": return 92;
+                case "CENTAURES (MAGRAM)": return 93;
+                case "TRIBU ZANDALAR": return 270;
+                case "RAVENHOLDT": return 349;
+                case "GADGETZAN": return 369;
+                case "CABESTAN": return 470;
+                case "LA LIGUE D'ARATHOR": return 509;
+                case "LES PROFANATEURS": return 510;
+                case "AUBE D'ARGENT": return 529;
+                case "LES GRUMEGUEULES": return 576;
+                case "LONG-GUET": return 577;
+                case "ÉLEVEURS DE SABRES-D'HIVER": return 589;
+                case "CERCLE CÉNARIEN": return 609;
+                case "CLAN LOUP-DE-GIVRE": return 729;
+                case "GARDE FOUDREPIQUE": return 730;
+                case "LES HYDRAXIENS": return 749;
+                case "SHEN'DRALAR": return 809;
+                case "SENTINELLES D'AILE-ARGENT": return 890;
+                case "FOIRE DE SOMBRELUNE": return 909;
+                case "PROGÉNITURE DE NOZDORMU": return 910;
+                case "LUNE-D'ARGENT": return 911;
+                case "TRANQUILLIEN": return 922;
+                case "EXODAR": return 930;
+                case "L'ALDOR": return 932;
+                case "LE CONSORTIUM": return 933;
+                case "LES CLAIRVOYANTS": return 934;
+                case "LES SHA'TAR": return 935;
+                case "SHATTRATH": return 936;
+                case "MAG'HAR": return 941;
+                case "EXPÉDITION CÉNARIENNE": return 942;
+                case "BASTION DE L'HONNEUR": return 946;
+                case "THRALLMAR": return 947;
+                case "L'ŒIL POURPRE": return 967;
+                case "SPOREGGAR": return 970;
+                case "KURENAÏ": return 978;
+                case "GARDIENS DU TEMPS": return 989;
+                case "LA BALANCE DES SABLES": return 990;
+                case "VILLE BASSE": return 1011;
+                case "LIGEMORT CENDRELANGUE": return 1012;
+                case "AILE-DU-NÉANT": return 1015;
+                case "GARDE-CIEL SHA'TARI": return 1031;
+                case "AVANT-GARDE DE L'ALLIANCE": return 1037;
+                case "OGRI'LA": return 1038;
+                case "EXPÉDITION DE LA BRAVOURE": return 1050;
+                case "EXPÉDITION DE LA HORDE": return 1052;
+                case "LES TAUNKAS": return 1064;
+                case "LA MAIN DE LA VENGEANCE": return 1067;
+                case "LIGUE DES EXPLORATEURS": return 1068;
+                case "LES KALU'AKS": return 1073;
+                case "OPÉRATION SOLEIL BRISÉ": return 1077;
+                case "OFFENSIVE CHANTEGUERRE": return 1085;
+                case "KIRIN TOR": return 1090;
+                case "L'ACCORD DU REPOS DU VER": return 1091;
+                case "LE CONCORDAT ARGENTÉ": return 1094;
+                case "CHEVALIERS DE LA LAME D'ÉBÈNE": return 1098;
+                case "TRIBU FRÉNÉCŒUR": return 1104;
+                case "LES ORACLES": return 1105;
+                case "LA CROISADE D'ARGENT": return 1106;
+                case "LES FILS DE HODIR": return 1119;
+                case "LES SACCAGE-SOLEIL": return 1124;
+                case "LES GIVRE-NÉS": return 1126;
+                case "HAIT TOUT ET TOUT LE MONDE": return 1145;
+                case "LE VERDICT DES CENDRES": return 1156;
+                default: return -1;
             }
+        }
         case "DEDE": {
-                switch ($faction) {
-                    case "BEUTEBUCHT": return 21;
-                    case "EISENSCHMIEDE": return 47;
-                    case "GNOMEREGANGNOME": return 54;
-                    case "THORIUMBRUDERSCHAFT": return 59;
-                    case "UNTERSTADT": return 68;
-                    case "DARNASSUS": return 69;
-                    case "SYNDIKAT": return 70;
-                    case "STURMWIND": return 72;
-                    case "ORGRIMMAR": return 76;
-                    case "DONNERFELS": return 81;
-                    case "BLUTSEGELBUKANIERE": return 87;
-                    case "GELKISKLAN": return 92;
-                    case "MAGRAMKLAN": return 93;
-                    case "STAMM DER ZANDALARI": return 270;
-                    case "RABENHOLDT": return 349;
-                    case "GADGETZAN": return 369;
-                    case "RATSCHET": return 470;
-                    case "DER BUND VON ARATHOR": return 509;
-                    case "DIE ENTWEIHTEN": return 510;
-                    case "ARGENTUMDÄMMERUNG": return 529;
-                    case "HOLZSCHLUNDFESTE": return 576;
-                    case "EWIGE WARTE": return 577;
-                    case "WINTERSÄBLERAUSBILDER": return 589;
-                    case "ZIRKEL DES CENARIUS": return 609;
-                    case "FROSTWOLFKLAN": return 729;
-                    case "STURMLANZENGARDE": return 730;
-                    case "HYDRAXIANER": return 749;
-                    case "SHEN'DRALAR": return 809;
-                    case "SILBERSCHWINGEN": return 890;
-                    case "DUNKELMOND-JAHRMARKT": return 909;
-                    case "BRUT NOZDORMUS": return 910;
-                    case "SILBERMOND": return 911;
-                    case "TRISTESSA": return 922;
-                    case "DIE EXODAR": return 930;
-                    case "DIE ALDOR": return 932;
-                    case "DAS KONSORTIUM": return 933;
-                    case "DIE SEHER": return 934;
-                    case "DIE SHA'TAR": return 935;
-                    case "SHATTRATH": return 936;
-                    case "DIE MAG'HAR": return 941;
-                    case "EXPEDITION DES CENARIUS": return 942;
-                    case "EHRENFESTE": return 946;
-                    case "THRALLMAR": return 947;
-                    case "DAS VIOLETTE AUGE": return 967;
-                    case "SPOREGGAR": return 970;
-                    case "KURENAI": return 978;
-                    case "HÜTER DER ZEIT": return 989;
-                    case "DIE WÄCHTER DER SANDE": return 990;
-                    case "UNTERES VIERTEL": return 1011;
-                    case "DIE TODESHÖRIGEN": return 1012;
-                    case "NETHERSCHWINGEN": return 1015;
-                    case "HIMMELSWACHE DER SHA'TARI": return 1031;
-                    case "VORPOSTEN DER ALLIANZ": return 1037;
-                    case "OGRI'LA": return 1038;
-                    case "EXPEDITION VALIANZ": return 1050;
-                    case "EXPEDITION DER HORDE": return 1052;
-                    case "DIE TAUNKA": return 1064;
-                    case "DIE HAND DER RACHE": return 1067;
-                    case "FORSCHERLIGA": return 1068;
-                    case "DIE KALU'AK": return 1073;
-                    case "OFFENSIVE DER ZERSCHMETTERTEN SONNE": return 1077;
-                    case "KRIEGSHYMNENOFFENSIVE": return 1085;
-                    case "KIRIN TOR": return 1090;
-                    case "DER WYRMRUHPAKT": return 1091;
-                    case "DER SILBERBUND": return 1094;
-                    case "RITTER DER SCHWARZEN KLINGE": return 1098;
-                    case "STAMM DER WILDHERZEN": return 1104;
-                    case "DIE ORAKEL": return 1105;
-                    case "ARGENTUMKREUZZUG": return 1106;
-                    case "DIE SÖHNE HODIRS": return 1119;
-                    case "DIE SONNENHÄSCHER": return 1124;
-                    case "DIE FROSTERBEN": return 1126;
-                    case "HASST ALLES": return 1145;
-                    case "DAS ÄSCHERNE VERDIKT": return 1156;
-                    default: return -1;
-                }
+            switch ($faction) {
+                case "BEUTEBUCHT": return 21;
+                case "EISENSCHMIEDE": return 47;
+                case "GNOMEREGANGNOME": return 54;
+                case "THORIUMBRUDERSCHAFT": return 59;
+                case "UNTERSTADT": return 68;
+                case "DARNASSUS": return 69;
+                case "SYNDIKAT": return 70;
+                case "STURMWIND": return 72;
+                case "ORGRIMMAR": return 76;
+                case "DONNERFELS": return 81;
+                case "BLUTSEGELBUKANIERE": return 87;
+                case "GELKISKLAN": return 92;
+                case "MAGRAMKLAN": return 93;
+                case "STAMM DER ZANDALARI": return 270;
+                case "RABENHOLDT": return 349;
+                case "GADGETZAN": return 369;
+                case "RATSCHET": return 470;
+                case "DER BUND VON ARATHOR": return 509;
+                case "DIE ENTWEIHTEN": return 510;
+                case "ARGENTUMDÄMMERUNG": return 529;
+                case "HOLZSCHLUNDFESTE": return 576;
+                case "EWIGE WARTE": return 577;
+                case "WINTERSÄBLERAUSBILDER": return 589;
+                case "ZIRKEL DES CENARIUS": return 609;
+                case "FROSTWOLFKLAN": return 729;
+                case "STURMLANZENGARDE": return 730;
+                case "HYDRAXIANER": return 749;
+                case "SHEN'DRALAR": return 809;
+                case "SILBERSCHWINGEN": return 890;
+                case "DUNKELMOND-JAHRMARKT": return 909;
+                case "BRUT NOZDORMUS": return 910;
+                case "SILBERMOND": return 911;
+                case "TRISTESSA": return 922;
+                case "DIE EXODAR": return 930;
+                case "DIE ALDOR": return 932;
+                case "DAS KONSORTIUM": return 933;
+                case "DIE SEHER": return 934;
+                case "DIE SHA'TAR": return 935;
+                case "SHATTRATH": return 936;
+                case "DIE MAG'HAR": return 941;
+                case "EXPEDITION DES CENARIUS": return 942;
+                case "EHRENFESTE": return 946;
+                case "THRALLMAR": return 947;
+                case "DAS VIOLETTE AUGE": return 967;
+                case "SPOREGGAR": return 970;
+                case "KURENAI": return 978;
+                case "HÜTER DER ZEIT": return 989;
+                case "DIE WÄCHTER DER SANDE": return 990;
+                case "UNTERES VIERTEL": return 1011;
+                case "DIE TODESHÖRIGEN": return 1012;
+                case "NETHERSCHWINGEN": return 1015;
+                case "HIMMELSWACHE DER SHA'TARI": return 1031;
+                case "VORPOSTEN DER ALLIANZ": return 1037;
+                case "OGRI'LA": return 1038;
+                case "EXPEDITION VALIANZ": return 1050;
+                case "EXPEDITION DER HORDE": return 1052;
+                case "DIE TAUNKA": return 1064;
+                case "DIE HAND DER RACHE": return 1067;
+                case "FORSCHERLIGA": return 1068;
+                case "DIE KALU'AK": return 1073;
+                case "OFFENSIVE DER ZERSCHMETTERTEN SONNE": return 1077;
+                case "KRIEGSHYMNENOFFENSIVE": return 1085;
+                case "KIRIN TOR": return 1090;
+                case "DER WYRMRUHPAKT": return 1091;
+                case "DER SILBERBUND": return 1094;
+                case "RITTER DER SCHWARZEN KLINGE": return 1098;
+                case "STAMM DER WILDHERZEN": return 1104;
+                case "DIE ORAKEL": return 1105;
+                case "ARGENTUMKREUZZUG": return 1106;
+                case "DIE SÖHNE HODIRS": return 1119;
+                case "DIE SONNENHÄSCHER": return 1124;
+                case "DIE FROSTERBEN": return 1126;
+                case "HASST ALLES": return 1145;
+                case "DAS ÄSCHERNE VERDIKT": return 1156;
+                default: return -1;
             }
+        }
         case "ESES": {
-                switch ($faction) {
-                    case "BAHÍA DEL BOTÍN": return 21;
-                    case "FORJAZ": return 47;
-                    case "EXILIADOS DE GNOMEREGAN": return 54;
-                    case "HERMANDAD DEL TORIO": return 59;
-                    case "ENTRAÑAS": return 68;
-                    case "DARNASSUS": return 69;
-                    case "LA HERMANDAD": return 70;
-                    case "VENTORMENTA": return 72;
-                    case "ORGRIMMAR": return 76;
-                    case "CIMA DEL TRUENO": return 81;
-                    case "BUCANEROS VELASANGRE": return 87;
-                    case "CENTAUROS DEL CLAN GELKIS": return 92;
-                    case "CENTAUROS DEL CLAN MAGRAM": return 93;
-                    case "TRIBU ZANDALAR": return 270;
-                    case "RAVENHOLDT": return 349;
-                    case "TRINQUETE": return 470;
-                    case "LIGA DE ARATHOR": return 509;
-                    case "LOS RAPIÑADORES": return 510;
-                    case "EL ALBA ARGENTA": return 529;
-                    case "TROLS LANZA NEGRA": return 530;
-                    case "BASTIÓN FAUCES DE MADERA": return 576;
-                    case "VISTA ETERNA": return 577;
-                    case "INSTRUCTORES DE SABLEINVERNALES": return 589;
-                    case "CÍRCULO CENARION": return 609;
-                    case "CLAN LOBO GÉLIDO": return 729;
-                    case "GUARDIA PICO TORMENTA": return 730;
-                    case "SRS. DEL AGUA DE HYDRAXIS": return 749;
-                    case "SEÑORES DEL FUEGO DE SULFURON": return 750;
-                    case "SHEN'DRALAR": return 809;
-                    case "CENTINELAS ALA DE PLATA": return 890;
-                    case "FERIA DE LA LUNA NEGRA": return 909;
-                    case "LINAJE DE NOZDORMU": return 910;
-                    case "CIUDAD DE LUNARGENTA": return 911;
-                    case "TRANQUILLIEN": return 922;
-                    case "EL EXODAR": return 930;
-                    case "LOS ALDOR": return 932;
-                    case "EL CONSORCIO": return 933;
-                    case "LOS ARÚSPICES": return 934;
-                    case "LOS SHA'TAR": return 935;
-                    case "CIUDAD DE SHATTRATH": return 936;
-                    case "LOS MAG'HAR": return 941;
-                    case "EXPEDICIÓN CENARION": return 942;
-                    case "BASTIÓN DEL HONOR": return 946;
-                    case "THRALLMAR": return 947;
-                    case "EL OJO VIOLETA": return 967;
-                    case "ESPORAGGAR": return 970;
-                    case "KURENAI": return 978;
-                    case "VIGILANTES DEL TIEMPO": return 989;
-                    case "LA ESCAMA DE LAS ARENAS": return 990;
-                    case "BAJO ARRABAL": return 1011;
-                    case "JURAMORTE LENGUA DE CENIZA": return 1012;
-                    case "ALA ABISAL": return 1015;
-                    case "GUARDIA DEL CIELO SHA'TARI": return 1031;
-                    case "VANGUARDIA DE LA ALIANZA": return 1037;
-                    case "OGRI'LA": return 1038;
-                    case "EXPEDICIÓN DE DENUEDO": return 1050;
-                    case "EXPEDICIÓN DE LA HORDA": return 1052;
-                    case "LOS TAUNKA": return 1064;
-                    case "LA MANO DE LA VENGANZA": return 1067;
-                    case "LIGA DE EXPEDICIONARIOS": return 1068;
-                    case "LOS KALU'AK": return 1073;
-                    case "OFENSIVA SOL DEVASTADO": return 1077;
-                    case "OFENSIVA GRITO DE GUERRA": return 1085;
-                    case "KIRIN TOR": return 1090;
-                    case "EL ACUERDO DEL REPOSO DEL DRAGÓN": return 1091;
-                    case "EL PACTO DE PLATA": return 1094;
-                    case "CABALLEROS DE LA ESPADA DE ÉBANO": return 1098;
-                    case "TRIBU CORAZÓN FRENÉTICO": return 1104;
-                    case "LOS ORÁCULOS": return 1105;
-                    case "CRUZADA ARGENTA": return 1106;
-                    case "LOS HIJOS DE HODIR": return 1119;
-                    case "LOS ATRACASOL": return 1124;
-                    case "LOS NATOESCARCHA": return 1126;
-                    case "ODIA TODO": return 1145;
-                    case "EL VEREDICTO CINÉREO": return 1156;
-                    default: return -1;
-                }
+            switch ($faction) {
+                case "BAHÍA DEL BOTÍN": return 21;
+                case "FORJAZ": return 47;
+                case "EXILIADOS DE GNOMEREGAN": return 54;
+                case "HERMANDAD DEL TORIO": return 59;
+                case "ENTRAÑAS": return 68;
+                case "DARNASSUS": return 69;
+                case "LA HERMANDAD": return 70;
+                case "VENTORMENTA": return 72;
+                case "ORGRIMMAR": return 76;
+                case "CIMA DEL TRUENO": return 81;
+                case "BUCANEROS VELASANGRE": return 87;
+                case "CENTAUROS DEL CLAN GELKIS": return 92;
+                case "CENTAUROS DEL CLAN MAGRAM": return 93;
+                case "TRIBU ZANDALAR": return 270;
+                case "RAVENHOLDT": return 349;
+                case "TRINQUETE": return 470;
+                case "LIGA DE ARATHOR": return 509;
+                case "LOS RAPIÑADORES": return 510;
+                case "EL ALBA ARGENTA": return 529;
+                case "TROLS LANZA NEGRA": return 530;
+                case "BASTIÓN FAUCES DE MADERA": return 576;
+                case "VISTA ETERNA": return 577;
+                case "INSTRUCTORES DE SABLEINVERNALES": return 589;
+                case "CÍRCULO CENARION": return 609;
+                case "CLAN LOBO GÉLIDO": return 729;
+                case "GUARDIA PICO TORMENTA": return 730;
+                case "SRS. DEL AGUA DE HYDRAXIS": return 749;
+                case "SEÑORES DEL FUEGO DE SULFURON": return 750;
+                case "SHEN'DRALAR": return 809;
+                case "CENTINELAS ALA DE PLATA": return 890;
+                case "FERIA DE LA LUNA NEGRA": return 909;
+                case "LINAJE DE NOZDORMU": return 910;
+                case "CIUDAD DE LUNARGENTA": return 911;
+                case "TRANQUILLIEN": return 922;
+                case "EL EXODAR": return 930;
+                case "LOS ALDOR": return 932;
+                case "EL CONSORCIO": return 933;
+                case "LOS ARÚSPICES": return 934;
+                case "LOS SHA'TAR": return 935;
+                case "CIUDAD DE SHATTRATH": return 936;
+                case "LOS MAG'HAR": return 941;
+                case "EXPEDICIÓN CENARION": return 942;
+                case "BASTIÓN DEL HONOR": return 946;
+                case "THRALLMAR": return 947;
+                case "EL OJO VIOLETA": return 967;
+                case "ESPORAGGAR": return 970;
+                case "KURENAI": return 978;
+                case "VIGILANTES DEL TIEMPO": return 989;
+                case "LA ESCAMA DE LAS ARENAS": return 990;
+                case "BAJO ARRABAL": return 1011;
+                case "JURAMORTE LENGUA DE CENIZA": return 1012;
+                case "ALA ABISAL": return 1015;
+                case "GUARDIA DEL CIELO SHA'TARI": return 1031;
+                case "VANGUARDIA DE LA ALIANZA": return 1037;
+                case "OGRI'LA": return 1038;
+                case "EXPEDICIÓN DE DENUEDO": return 1050;
+                case "EXPEDICIÓN DE LA HORDA": return 1052;
+                case "LOS TAUNKA": return 1064;
+                case "LA MANO DE LA VENGANZA": return 1067;
+                case "LIGA DE EXPEDICIONARIOS": return 1068;
+                case "LOS KALU'AK": return 1073;
+                case "OFENSIVA SOL DEVASTADO": return 1077;
+                case "OFENSIVA GRITO DE GUERRA": return 1085;
+                case "KIRIN TOR": return 1090;
+                case "EL ACUERDO DEL REPOSO DEL DRAGÓN": return 1091;
+                case "EL PACTO DE PLATA": return 1094;
+                case "CABALLEROS DE LA ESPADA DE ÉBANO": return 1098;
+                case "TRIBU CORAZÓN FRENÉTICO": return 1104;
+                case "LOS ORÁCULOS": return 1105;
+                case "CRUZADA ARGENTA": return 1106;
+                case "LOS HIJOS DE HODIR": return 1119;
+                case "LOS ATRACASOL": return 1124;
+                case "LOS NATOESCARCHA": return 1126;
+                case "ODIA TODO": return 1145;
+                case "EL VEREDICTO CINÉREO": return 1156;
+                default: return -1;
             }
+        }
         case "RURU": {
-                switch ($faction) {
-                    case "ПИРАТСКАЯ БУХТА": return 21;
-                    case "СТАЛЬГОРН": return 47;
-                    case "ИЗГНАННИКИ ГНОМРЕГАНА": return 54;
-                    case "БРАТСТВО ТОРИЯ": return 59;
-                    case "ПОДГОРОД": return 68;
-                    case "ДАРНАС": return 69;
-                    case "СИНДИКАТ": return 70;
-                    case "ШТОРМГРАД": return 72;
-                    case "ОРГРИММАР": return 76;
-                    case "ГРОМОВОЙ УТЕС": return 81;
-                    case "ПИРАТЫ КРОВАВОГО ПАРУСА": return 87;
-                    case "КЕНТАВРЫ ИЗ ПЛЕМЕНИ ГЕЛКИС": return 92;
-                    case "КЕНТАВРЫ ИЗ ПЛЕМЕНИ МАГРАМ": return 93;
-                    case "ПЛЕМЯ ЗАНДАЛАР": return 270;
-                    case "ЧЕРНЫЙ ВОРОН": return 349;
-                    case "ПРИБАМБАССК": return 369;
-                    case "КАБЕСТАН": return 470;
-                    case "ЛИГА АРАТОРА": return 509;
-                    case "ОСКВЕРНИТЕЛИ": return 510;
-                    case "СЕРЕБРЯНЫЙ РАССВЕТ": return 529;
-                    case "ТРОЛЛИ ЧЕРНОГО КОПЬЯ": return 530;
-                    case "ДРЕВОБРЮХИ": return 576;
-                    case "КРУГОВЗОР": return 577;
-                    case "УКРОТИТЕЛИ ЛЕДОПАРДОВ": return 589;
-                    case "КРУГ КЕНАРИЯ": return 609;
-                    case "КЛАН СЕВЕРНОГО ВОЛКА": return 729;
-                    case "СТРАЖА ГРОЗОВОЙ ВЕРШИНЫ": return 730;
-                    case "ГИДРАКСИАНСКИЕ ПОВЕЛИТЕЛИ ВОД": return 749;
-                    case "ШЕН'ДРАЛАР": return 809;
-                    case "СРЕБРОКРЫЛЫЕ ЧАСОВЫЕ": return 890;
-                    case "ЯРМАРКА НОВОЛУНИЯ": return 909;
-                    case "РОД НОЗДОРМУ": return 910;
-                    case "ЛУНОСВЕТ": return 911;
-                    case "ТРАНКВИЛЛИОН": return 922;
-                    case "ЭКЗОДАР": return 930;
-                    case "АЛДОРЫ": return 932;
-                    case "КОНСОРЦИУМ": return 933;
-                    case "ПРОВИДЦЫ": return 934;
-                    case "ША'ТАР": return 935;
-                    case "ГОРОД ШАТТРАТ": return 936;
-                    case "МАГ'ХАРЫ": return 941;
-                    case "КЕНАРИЙСКАЯ ЭКСПЕДИЦИЯ": return 942;
-                    case "ОПЛОТ ЧЕСТИ": return 946;
-                    case "ТРАЛЛМАР": return 947;
-                    case "АМЕТИСТОВОЕ ОКО": return 967;
-                    case "СПОРЕГГАР": return 970;
-                    case "КУРЕНАЙ": return 978;
-                    case "ХРАНИТЕЛИ ВРЕМЕНИ": return 989;
-                    case "ПЕСЧАНАЯ ЧЕШУЯ": return 990;
-                    case "НИЖНИЙ ГОРОД": return 1011;
-                    case "ПЕПЛОУСТЫ-СЛУЖИТЕЛИ": return 1012;
-                    case "КРЫЛЬЯ ПУСТОТЫ": return 1015;
-                    case "СТРАЖИ НЕБЕС ША'ТАР": return 1031;
-                    case "АВАНГАРД АЛЬЯНСА": return 1037;
-                    case "ОГРИ'ЛА": return 1038;
-                    case "ЭКСПЕДИЦИЯ ОТВАЖНЫХ": return 1050;
-                    case "ЭКСПЕДИЦИЯ ОРДЫ": return 1052;
-                    case "ТАУНКА": return 1064;
-                    case "КАРАЮЩАЯ ДЛАНЬ": return 1067;
-                    case "ЛИГА ИССЛЕДОВАТЕЛЕЙ": return 1068;
-                    case "КАЛУ'АК": return 1073;
-                    case "АРМИЯ РАСКОЛОТОГО СОЛНЦА": return 1077;
-                    case "АРМИЯ ПЕСНИ ВОЙНЫ": return 1085;
-                    case "КИРИН-ТОР": return 1090;
-                    case "ДРАКОНИЙ СОЮЗ": return 1091;
-                    case "СЕРЕБРЯНЫЙ СОЮЗ": return 1094;
-                    case "РЫЦАРИ ЧЕРНОГО КЛИНКА": return 1098;
-                    case "ПЛЕМЯ БЕШЕНОГО СЕРДЦА": return 1104;
-                    case "ОРАКУЛЫ": return 1105;
-                    case "СЕРЕБРЯНЫЙ АВАНГАРД": return 1106;
-                    case "СЫНЫ ХОДИРА": return 1119;
-                    case "ПОХИТИТЕЛИ СОЛНЦА": return 1124;
-                    case "ЗИМОРОЖДЕННЫЕ": return 1126;
-                    case "НЕНАВИДИТ ВСЕ": return 1145;
-                    case "ПЕПЕЛЬНЫЙ СОЮЗ": return 1156;
-                    default: return -1;
-                }
+            switch ($faction) {
+                case "ПИРАТСКАЯ БУХТА": return 21;
+                case "СТАЛЬГОРН": return 47;
+                case "ИЗГНАННИКИ ГНОМРЕГАНА": return 54;
+                case "БРАТСТВО ТОРИЯ": return 59;
+                case "ПОДГОРОД": return 68;
+                case "ДАРНАС": return 69;
+                case "СИНДИКАТ": return 70;
+                case "ШТОРМГРАД": return 72;
+                case "ОРГРИММАР": return 76;
+                case "ГРОМОВОЙ УТЕС": return 81;
+                case "ПИРАТЫ КРОВАВОГО ПАРУСА": return 87;
+                case "КЕНТАВРЫ ИЗ ПЛЕМЕНИ ГЕЛКИС": return 92;
+                case "КЕНТАВРЫ ИЗ ПЛЕМЕНИ МАГРАМ": return 93;
+                case "ПЛЕМЯ ЗАНДАЛАР": return 270;
+                case "ЧЕРНЫЙ ВОРОН": return 349;
+                case "ПРИБАМБАССК": return 369;
+                case "КАБЕСТАН": return 470;
+                case "ЛИГА АРАТОРА": return 509;
+                case "ОСКВЕРНИТЕЛИ": return 510;
+                case "СЕРЕБРЯНЫЙ РАССВЕТ": return 529;
+                case "ТРОЛЛИ ЧЕРНОГО КОПЬЯ": return 530;
+                case "ДРЕВОБРЮХИ": return 576;
+                case "КРУГОВЗОР": return 577;
+                case "УКРОТИТЕЛИ ЛЕДОПАРДОВ": return 589;
+                case "КРУГ КЕНАРИЯ": return 609;
+                case "КЛАН СЕВЕРНОГО ВОЛКА": return 729;
+                case "СТРАЖА ГРОЗОВОЙ ВЕРШИНЫ": return 730;
+                case "ГИДРАКСИАНСКИЕ ПОВЕЛИТЕЛИ ВОД": return 749;
+                case "ШЕН'ДРАЛАР": return 809;
+                case "СРЕБРОКРЫЛЫЕ ЧАСОВЫЕ": return 890;
+                case "ЯРМАРКА НОВОЛУНИЯ": return 909;
+                case "РОД НОЗДОРМУ": return 910;
+                case "ЛУНОСВЕТ": return 911;
+                case "ТРАНКВИЛЛИОН": return 922;
+                case "ЭКЗОДАР": return 930;
+                case "АЛДОРЫ": return 932;
+                case "КОНСОРЦИУМ": return 933;
+                case "ПРОВИДЦЫ": return 934;
+                case "ША'ТАР": return 935;
+                case "ГОРОД ШАТТРАТ": return 936;
+                case "МАГ'ХАРЫ": return 941;
+                case "КЕНАРИЙСКАЯ ЭКСПЕДИЦИЯ": return 942;
+                case "ОПЛОТ ЧЕСТИ": return 946;
+                case "ТРАЛЛМАР": return 947;
+                case "АМЕТИСТОВОЕ ОКО": return 967;
+                case "СПОРЕГГАР": return 970;
+                case "КУРЕНАЙ": return 978;
+                case "ХРАНИТЕЛИ ВРЕМЕНИ": return 989;
+                case "ПЕСЧАНАЯ ЧЕШУЯ": return 990;
+                case "НИЖНИЙ ГОРОД": return 1011;
+                case "ПЕПЛОУСТЫ-СЛУЖИТЕЛИ": return 1012;
+                case "КРЫЛЬЯ ПУСТОТЫ": return 1015;
+                case "СТРАЖИ НЕБЕС ША'ТАР": return 1031;
+                case "АВАНГАРД АЛЬЯНСА": return 1037;
+                case "ОГРИ'ЛА": return 1038;
+                case "ЭКСПЕДИЦИЯ ОТВАЖНЫХ": return 1050;
+                case "ЭКСПЕДИЦИЯ ОРДЫ": return 1052;
+                case "ТАУНКА": return 1064;
+                case "КАРАЮЩАЯ ДЛАНЬ": return 1067;
+                case "ЛИГА ИССЛЕДОВАТЕЛЕЙ": return 1068;
+                case "КАЛУ'АК": return 1073;
+                case "АРМИЯ РАСКОЛОТОГО СОЛНЦА": return 1077;
+                case "АРМИЯ ПЕСНИ ВОЙНЫ": return 1085;
+                case "КИРИН-ТОР": return 1090;
+                case "ДРАКОНИЙ СОЮЗ": return 1091;
+                case "СЕРЕБРЯНЫЙ СОЮЗ": return 1094;
+                case "РЫЦАРИ ЧЕРНОГО КЛИНКА": return 1098;
+                case "ПЛЕМЯ БЕШЕНОГО СЕРДЦА": return 1104;
+                case "ОРАКУЛЫ": return 1105;
+                case "СЕРЕБРЯНЫЙ АВАНГАРД": return 1106;
+                case "СЫНЫ ХОДИРА": return 1119;
+                case "ПОХИТИТЕЛИ СОЛНЦА": return 1124;
+                case "ЗИМОРОЖДЕННЫЕ": return 1126;
+                case "НЕНАВИДИТ ВСЕ": return 1145;
+                case "ПЕПЕЛЬНЫЙ СОЮЗ": return 1156;
+                default: return -1;
             }
+        }
         case "ENUS":
         case "ENGB":
             switch ($faction) {
@@ -1765,1462 +1765,1462 @@ function GetFactionID($faction, $locale) {
 function _isClassSpellValid($SpellID, $ClassID) {
     switch ($ClassID) {
         case 1: { // Warrior
-                switch ($SpellID) {
-                    case 768:
-                    case 770:
-                    case 783:
-                    case 1066:
-                    case 2782:
-                    case 2893:
-                    case 5209:
-                    case 5215:
-                    case 5225:
-                    case 5229:
-                    case 6795:
-                    case 8983:
-                    case 16081:
-                    case 16835:
-                    case 16857:
-                    case 16860:
-                    case 16864:
-                    case 16931:
-                    case 16935:
-                    case 16941:
-                    case 16944:
-                    case 16949:
-                    case 16975:
-                    case 16979:
-                    case 17007:
-                    case 17051:
-                    case 17061:
-                    case 17070:
-                    case 18658:
-                    case 18990:
-                    case 20719:
-                    case 22812:
-                    case 22842:
-                    case 24242:
-                    case 24866:
-                    case 24894:
-                    case 25953:
-                    case 26054:
-                    case 26055:
-                    case 26056:
-                    case 26995:
-                    case 27004:
-                    case 27006:
-                    case 29166:
-                    case 33357:
-                    case 33786:
-                    case 33867:
-                    case 33873:
-                    case 33878:
-                    case 33917:
-                    case 33943:
-                    case 33957:
-                    case 33982:
-                    case 34300:
-                    case 48378:
-                    case 48412:
-                    case 48441:
-                    case 48443:
-                    case 48447:
-                    case 48451:
-                    case 48461:
-                    case 48463:
-                    case 48465:
-                    case 48467:
-                    case 48469:
-                    case 48470:
-                    case 48477:
-                    case 48479:
-                    case 48491:
-                    case 48495:
-                    case 48559:
-                    case 48561:
-                    case 48567:
-                    case 48570:
-                    case 48571:
-                    case 48573:
-                    case 48576:
-                    case 48578:
-                    case 49376:
-                    case 49377:
-                    case 49799:
-                    case 49802:
-                    case 50212:
-                    case 50334:
-                    case 50464:
-                    case 50763:
-                    case 51269:
-                    case 51412:
-                    case 52610:
-                    case 53307:
-                    case 53308:
-                    case 53312:
-                    case 54753:
-                    case 57881:
-                    case 60119:
-                    case 61336:
-                    case 61467:
-                    case 62078:
-                    case 62600:
-                    case 63503:
-                    case 71:
-                    case 72:
-                    case 197:
-                    case 200:
-                    case 201:
-                    case 202:
-                    case 227:
-                    case 264:
-                    case 266:
-                    case 355:
-                    case 674:
-                    case 676:
-                    case 694:
-                    case 750:
-                    case 871:
-                    case 1161:
-                    case 1180:
-                    case 1680:
-                    case 1715:
-                    case 1719:
-                    case 2458:
-                    case 2565:
-                    case 2567:
-                    case 2687:
-                    case 3127:
-                    case 3411:
-                    case 5011:
-                    case 5246:
-                    case 6552:
-                    case 7384:
-                    case 7386:
-                    case 7420:
-                    case 7426:
-                    case 7454:
-                    case 7457:
-                    case 7745:
-                    case 7748:
-                    case 7771:
-                    case 7779:
-                    case 7788:
-                    case 7795:
-                    case 7857:
-                    case 7861:
-                    case 7863:
-                    case 11578:
-                    case 12292:
-                    case 12658:
-                    case 12664:
-                    case 12666:
-                    case 12678:
-                    case 12727:
-                    case 12753:
-                    case 12764:
-                    case 12803:
-                    case 12809:
-                    case 12818:
-                    case 12835:
-                    case 12856:
-                    case 12861:
-                    case 12958:
-                    case 12960:
-                    case 12974:
-                    case 12975:
-                    case 13002:
-                    case 13048:
-                    case 13378:
-                    case 13421:
-                    case 13485:
-                    case 13501:
-                    case 13503:
-                    case 13529:
-                    case 13538:
-                    case 13607:
-                    case 13622:
-                    case 13626:
-                    case 13628:
-                    case 13631:
-                    case 13635:
-                    case 13637:
-                    case 13640:
-                    case 13642:
-                    case 13644:
-                    case 13648:
-                    case 13657:
-                    case 13659:
-                    case 13661:
-                    case 13663:
-                    case 13693:
-                    case 13695:
-                    case 13700:
-                    case 13702:
-                    case 13746:
-                    case 13794:
-                    case 13815:
-                    case 13822:
-                    case 13836:
-                    case 13858:
-                    case 13887:
-                    case 13890:
-                    case 13905:
-                    case 13917:
-                    case 13935:
-                    case 13937:
-                    case 13939:
-                    case 13941:
-                    case 13943:
-                    case 13948:
-                    case 14293:
-                    case 14807:
-                    case 14809:
-                    case 14810:
-                    case 15590:
-                    case 16463:
-                    case 16492:
-                    case 16542:
-                    case 17180:
-                    case 17181:
-                    case 18499:
-                    case 20008:
-                    case 20012:
-                    case 20013:
-                    case 20014:
-                    case 20016:
-                    case 20023:
-                    case 20028:
-                    case 20230:
-                    case 20252:
-                    case 23588:
-                    case 23881:
-                    case 23920:
-                    case 27899:
-                    case 27905:
-                    case 27944:
-                    case 27947:
-                    case 27957:
-                    case 27958:
-                    case 27961:
-                    case 28027:
-                    case 28028:
-                    case 29144:
-                    case 29592:
-                    case 29594:
-                    case 29599:
-                    case 29763:
-                    case 29792:
-                    case 29801:
-                    case 29889:
-                    case 32664:
-                    case 32667:
-                    case 33990:
-                    case 33991:
-                    case 33993:
-                    case 33995:
-                    case 33996:
-                    case 34001:
-                    case 34002:
-                    case 34004:
-                    case 34090:
-                    case 34428:
-                    case 42613:
-                    case 42615:
-                    case 44383:
-                    case 44484:
-                    case 44488:
-                    case 44489:
-                    case 44492:
-                    case 44500:
-                    case 44506:
-                    case 44508:
-                    case 44509:
-                    case 44510:
-                    case 44513:
-                    case 44528:
-                    case 44529:
-                    case 44555:
-                    case 44582:
-                    case 44584:
-                    case 44589:
-                    case 44592:
-                    case 44593:
-                    case 44598:
-                    case 44616:
-                    case 44623:
-                    case 44629:
-                    case 44630:
-                    case 44633:
-                    case 44635:
-                    case 44636:
-                    case 44645:
-                    case 46917:
-                    case 46949:
-                    case 46953:
-                    case 46968:
-                    case 47296:
-                    case 47436:
-                    case 47437:
-                    case 47440:
-                    case 47450:
-                    case 47465:
-                    case 47471:
-                    case 47475:
-                    case 47488:
-                    case 47498:
-                    case 47502:
-                    case 47520:
-                    case 47766:
-                    case 47900:
-                    case 50720:
-                    case 51313:
-                    case 54197:
-                    case 55531:
-                    case 55694:
-                    case 56924:
-                    case 56932:
-                    case 57499:
-                    case 57755:
-                    case 57823:
-                    case 58874:
-                    case 59089:
-                    case 59636:
-                    case 60606:
-                    case 60609:
-                    case 60616:
-                    case 60619:
-                    case 60621:
-                    case 60623:
-                    case 60653:
-                    case 60663:
-                    case 60668:
-                    case 60767:
-                    case 60970:
-                    case 61222:
-                    case 62959:
-                    case 63644:
-                    case 63645:
-                    case 63746:
-                    case 64382:
-                        return true;
-                    default:
-                        return false;
-                }
+            switch ($SpellID) {
+                case 768:
+                case 770:
+                case 783:
+                case 1066:
+                case 2782:
+                case 2893:
+                case 5209:
+                case 5215:
+                case 5225:
+                case 5229:
+                case 6795:
+                case 8983:
+                case 16081:
+                case 16835:
+                case 16857:
+                case 16860:
+                case 16864:
+                case 16931:
+                case 16935:
+                case 16941:
+                case 16944:
+                case 16949:
+                case 16975:
+                case 16979:
+                case 17007:
+                case 17051:
+                case 17061:
+                case 17070:
+                case 18658:
+                case 18990:
+                case 20719:
+                case 22812:
+                case 22842:
+                case 24242:
+                case 24866:
+                case 24894:
+                case 25953:
+                case 26054:
+                case 26055:
+                case 26056:
+                case 26995:
+                case 27004:
+                case 27006:
+                case 29166:
+                case 33357:
+                case 33786:
+                case 33867:
+                case 33873:
+                case 33878:
+                case 33917:
+                case 33943:
+                case 33957:
+                case 33982:
+                case 34300:
+                case 48378:
+                case 48412:
+                case 48441:
+                case 48443:
+                case 48447:
+                case 48451:
+                case 48461:
+                case 48463:
+                case 48465:
+                case 48467:
+                case 48469:
+                case 48470:
+                case 48477:
+                case 48479:
+                case 48491:
+                case 48495:
+                case 48559:
+                case 48561:
+                case 48567:
+                case 48570:
+                case 48571:
+                case 48573:
+                case 48576:
+                case 48578:
+                case 49376:
+                case 49377:
+                case 49799:
+                case 49802:
+                case 50212:
+                case 50334:
+                case 50464:
+                case 50763:
+                case 51269:
+                case 51412:
+                case 52610:
+                case 53307:
+                case 53308:
+                case 53312:
+                case 54753:
+                case 57881:
+                case 60119:
+                case 61336:
+                case 61467:
+                case 62078:
+                case 62600:
+                case 63503:
+                case 71:
+                case 72:
+                case 197:
+                case 200:
+                case 201:
+                case 202:
+                case 227:
+                case 264:
+                case 266:
+                case 355:
+                case 674:
+                case 676:
+                case 694:
+                case 750:
+                case 871:
+                case 1161:
+                case 1180:
+                case 1680:
+                case 1715:
+                case 1719:
+                case 2458:
+                case 2565:
+                case 2567:
+                case 2687:
+                case 3127:
+                case 3411:
+                case 5011:
+                case 5246:
+                case 6552:
+                case 7384:
+                case 7386:
+                case 7420:
+                case 7426:
+                case 7454:
+                case 7457:
+                case 7745:
+                case 7748:
+                case 7771:
+                case 7779:
+                case 7788:
+                case 7795:
+                case 7857:
+                case 7861:
+                case 7863:
+                case 11578:
+                case 12292:
+                case 12658:
+                case 12664:
+                case 12666:
+                case 12678:
+                case 12727:
+                case 12753:
+                case 12764:
+                case 12803:
+                case 12809:
+                case 12818:
+                case 12835:
+                case 12856:
+                case 12861:
+                case 12958:
+                case 12960:
+                case 12974:
+                case 12975:
+                case 13002:
+                case 13048:
+                case 13378:
+                case 13421:
+                case 13485:
+                case 13501:
+                case 13503:
+                case 13529:
+                case 13538:
+                case 13607:
+                case 13622:
+                case 13626:
+                case 13628:
+                case 13631:
+                case 13635:
+                case 13637:
+                case 13640:
+                case 13642:
+                case 13644:
+                case 13648:
+                case 13657:
+                case 13659:
+                case 13661:
+                case 13663:
+                case 13693:
+                case 13695:
+                case 13700:
+                case 13702:
+                case 13746:
+                case 13794:
+                case 13815:
+                case 13822:
+                case 13836:
+                case 13858:
+                case 13887:
+                case 13890:
+                case 13905:
+                case 13917:
+                case 13935:
+                case 13937:
+                case 13939:
+                case 13941:
+                case 13943:
+                case 13948:
+                case 14293:
+                case 14807:
+                case 14809:
+                case 14810:
+                case 15590:
+                case 16463:
+                case 16492:
+                case 16542:
+                case 17180:
+                case 17181:
+                case 18499:
+                case 20008:
+                case 20012:
+                case 20013:
+                case 20014:
+                case 20016:
+                case 20023:
+                case 20028:
+                case 20230:
+                case 20252:
+                case 23588:
+                case 23881:
+                case 23920:
+                case 27899:
+                case 27905:
+                case 27944:
+                case 27947:
+                case 27957:
+                case 27958:
+                case 27961:
+                case 28027:
+                case 28028:
+                case 29144:
+                case 29592:
+                case 29594:
+                case 29599:
+                case 29763:
+                case 29792:
+                case 29801:
+                case 29889:
+                case 32664:
+                case 32667:
+                case 33990:
+                case 33991:
+                case 33993:
+                case 33995:
+                case 33996:
+                case 34001:
+                case 34002:
+                case 34004:
+                case 34090:
+                case 34428:
+                case 42613:
+                case 42615:
+                case 44383:
+                case 44484:
+                case 44488:
+                case 44489:
+                case 44492:
+                case 44500:
+                case 44506:
+                case 44508:
+                case 44509:
+                case 44510:
+                case 44513:
+                case 44528:
+                case 44529:
+                case 44555:
+                case 44582:
+                case 44584:
+                case 44589:
+                case 44592:
+                case 44593:
+                case 44598:
+                case 44616:
+                case 44623:
+                case 44629:
+                case 44630:
+                case 44633:
+                case 44635:
+                case 44636:
+                case 44645:
+                case 46917:
+                case 46949:
+                case 46953:
+                case 46968:
+                case 47296:
+                case 47436:
+                case 47437:
+                case 47440:
+                case 47450:
+                case 47465:
+                case 47471:
+                case 47475:
+                case 47488:
+                case 47498:
+                case 47502:
+                case 47520:
+                case 47766:
+                case 47900:
+                case 50720:
+                case 51313:
+                case 54197:
+                case 55531:
+                case 55694:
+                case 56924:
+                case 56932:
+                case 57499:
+                case 57755:
+                case 57823:
+                case 58874:
+                case 59089:
+                case 59636:
+                case 60606:
+                case 60609:
+                case 60616:
+                case 60619:
+                case 60621:
+                case 60623:
+                case 60653:
+                case 60663:
+                case 60668:
+                case 60767:
+                case 60970:
+                case 61222:
+                case 62959:
+                case 63644:
+                case 63645:
+                case 63746:
+                case 64382:
+                    return true;
+                default:
+                    return false;
             }
+        }
         case 2: { // Paladin
-                switch ($SpellID) {
-                    case 196:
-                    case 197:
-                    case 200:
-                    case 201:
-                    case 202:
-                    case 498:
-                    case 642:
-                    case 750:
-                    case 1038:
-                    case 1044:
-                    case 1152:
-                    case 3127:
-                    case 4987:
-                    case 5502:
-                    case 6940:
-                    case 10278:
-                    case 10308:
-                    case 10326:
-                    case 13819:
-                    case 19746:
-                    case 19752:
-                    case 20045:
-                    case 20057:
-                    case 20100:
-                    case 20105:
-                    case 20113:
-                    case 20121:
-                    case 20146:
-                    case 20164:
-                    case 20165:
-                    case 20166:
-                    case 20217:
-                    case 20266:
-                    case 20271:
-                    case 20332:
-                    case 20337:
-                    case 20375:
-                    case 23214:
-                    case 25780:
-                    case 25898:
-                    case 25957:
-                    case 26016:
-                    case 31789:
-                    case 31801:
-                    case 31868:
-                    case 31872:
-                    case 31878:
-                    case 31884:
-                    case 32223:
-                    case 34091:
-                    case 35395:
-                    case 35397:
-                    case 48782:
-                    case 48785:
-                    case 48788:
-                    case 48801:
-                    case 48806:
-                    case 48817:
-                    case 48819:
-                    case 48932:
-                    case 48934:
-                    case 48936:
-                    case 48938:
-                    case 48942:
-                    case 48943:
-                    case 48945:
-                    case 48947:
-                    case 48950:
-                    case 53376:
-                    case 53382:
-                    case 53385:
-                    case 53407:
-                    case 53408:
-                    case 53488:
-                    case 53503:
-                    case 53601:
-                    case 53648:
-                    case 54043:
-                    case 54197:
-                    case 54428:
-                    case 59571:
-                    case 61411:
-                    case 62124:
-                    case 34767:
-                    case 34769:
-                    case 53736:
-                        return true;
-                    default:
-                        return false;
-                }
+            switch ($SpellID) {
+                case 196:
+                case 197:
+                case 200:
+                case 201:
+                case 202:
+                case 498:
+                case 642:
+                case 750:
+                case 1038:
+                case 1044:
+                case 1152:
+                case 3127:
+                case 4987:
+                case 5502:
+                case 6940:
+                case 10278:
+                case 10308:
+                case 10326:
+                case 13819:
+                case 19746:
+                case 19752:
+                case 20045:
+                case 20057:
+                case 20100:
+                case 20105:
+                case 20113:
+                case 20121:
+                case 20146:
+                case 20164:
+                case 20165:
+                case 20166:
+                case 20217:
+                case 20266:
+                case 20271:
+                case 20332:
+                case 20337:
+                case 20375:
+                case 23214:
+                case 25780:
+                case 25898:
+                case 25957:
+                case 26016:
+                case 31789:
+                case 31801:
+                case 31868:
+                case 31872:
+                case 31878:
+                case 31884:
+                case 32223:
+                case 34091:
+                case 35395:
+                case 35397:
+                case 48782:
+                case 48785:
+                case 48788:
+                case 48801:
+                case 48806:
+                case 48817:
+                case 48819:
+                case 48932:
+                case 48934:
+                case 48936:
+                case 48938:
+                case 48942:
+                case 48943:
+                case 48945:
+                case 48947:
+                case 48950:
+                case 53376:
+                case 53382:
+                case 53385:
+                case 53407:
+                case 53408:
+                case 53488:
+                case 53503:
+                case 53601:
+                case 53648:
+                case 54043:
+                case 54197:
+                case 54428:
+                case 59571:
+                case 61411:
+                case 62124:
+                case 34767:
+                case 34769:
+                case 53736:
+                    return true;
+                default:
+                    return false;
             }
+        }
         case 3: { // Hunter
-                switch ($SpellID) {
-                    case 674:
-                    case 781:
-                    case 883:
-                    case 982:
-                    case 1002:
-                    case 1462:
-                    case 1494:
-                    case 1515:
-                    case 1543:
-                    case 2641:
-                    case 2974:
-                    case 3034:
-                    case 3043:
-                    case 3045:
-                    case 3127:
-                    case 5116:
-                    case 5118:
-                    case 5149:
-                    case 5384:
-                    case 6197:
-                    case 6991:
-                    case 8737:
-                    case 13159:
-                    case 13161:
-                    case 13163:
-                    case 13809:
-                    case 14311:
-                    case 14327:
-                    case 19263:
-                    case 19801:
-                    case 19878:
-                    case 19879:
-                    case 19880:
-                    case 19882:
-                    case 19883:
-                    case 19884:
-                    case 19885:
-                    case 20736:
-                    case 27044:
-                    case 34026:
-                    case 34074:
-                    case 34477:
-                    case 34600:
-                    case 48990:
-                    case 48996:
-                    case 49001:
-                    case 49045:
-                    case 49048:
-                    case 49052:
-                    case 49056:
-                    case 49067:
-                    case 49071:
-                    case 53271:
-                    case 53338:
-                    case 53339:
-                    case 58434:
-                    case 60192:
-                    case 61006:
-                    case 61847:
-                        return true;
-                    default:
-                        return false;
-                }
+            switch ($SpellID) {
+                case 674:
+                case 781:
+                case 883:
+                case 982:
+                case 1002:
+                case 1462:
+                case 1494:
+                case 1515:
+                case 1543:
+                case 2641:
+                case 2974:
+                case 3034:
+                case 3043:
+                case 3045:
+                case 3127:
+                case 5116:
+                case 5118:
+                case 5149:
+                case 5384:
+                case 6197:
+                case 6991:
+                case 8737:
+                case 13159:
+                case 13161:
+                case 13163:
+                case 13809:
+                case 14311:
+                case 14327:
+                case 19263:
+                case 19801:
+                case 19878:
+                case 19879:
+                case 19880:
+                case 19882:
+                case 19883:
+                case 19884:
+                case 19885:
+                case 20736:
+                case 27044:
+                case 34026:
+                case 34074:
+                case 34477:
+                case 34600:
+                case 48990:
+                case 48996:
+                case 49001:
+                case 49045:
+                case 49048:
+                case 49052:
+                case 49056:
+                case 49067:
+                case 49071:
+                case 53271:
+                case 53338:
+                case 53339:
+                case 58434:
+                case 60192:
+                case 61006:
+                case 61847:
+                    return true;
+                default:
+                    return false;
             }
+        }
         case 4: { // Rogue
-                switch ($SpellID) {
-                    case 921:
-                    case 1725:
-                    case 1766:
-                    case 1776:
-                    case 1784:
-                    case 1804:
-                    case 1833:
-                    case 1842:
-                    case 1860:
-                    case 2094:
-                    case 2836:
-                    case 2842:
-                    case 3127:
-                    case 5938:
-                    case 6774:
-                    case 8643:
-                    case 8647:
-                    case 11305:
-                    case 26669:
-                    case 26889:
-                    case 31224:
-                    case 48638:
-                    case 48657:
-                    case 48659:
-                    case 48668:
-                    case 48672:
-                    case 48674:
-                    case 48676:
-                    case 48691:
-                    case 51722:
-                    case 51723:
-                    case 51724:
-                    case 57934:
-                    case 57993:
-                        return true;
-                    default:
-                        return false;
-                }
+            switch ($SpellID) {
+                case 921:
+                case 1725:
+                case 1766:
+                case 1776:
+                case 1784:
+                case 1804:
+                case 1833:
+                case 1842:
+                case 1860:
+                case 2094:
+                case 2836:
+                case 2842:
+                case 3127:
+                case 5938:
+                case 6774:
+                case 8643:
+                case 8647:
+                case 11305:
+                case 26669:
+                case 26889:
+                case 31224:
+                case 48638:
+                case 48657:
+                case 48659:
+                case 48668:
+                case 48672:
+                case 48674:
+                case 48676:
+                case 48691:
+                case 51722:
+                case 51723:
+                case 51724:
+                case 57934:
+                case 57993:
+                    return true;
+                default:
+                    return false;
             }
+        }
         case 5: { // Priest
-                switch ($SpellID) {
-                    case 453:
-                    case 528:
-                    case 552:
-                    case 586:
-                    case 605:
-                    case 988:
-                    case 1180:
-                    case 1706:
-                    case 2053:
-                    case 6064:
-                    case 6346:
-                    case 8129:
-                    case 10890:
-                    case 10909:
-                    case 10955:
-                    case 14767:
-                    case 14791:
-                    case 15012:
-                    case 15286:
-                    case 15310:
-                    case 15316:
-                    case 15317:
-                    case 15328:
-                    case 15332:
-                    case 15448:
-                    case 15473:
-                    case 15487:
-                    case 17191:
-                    case 17323:
-                    case 27840:
-                    case 27901:
-                    case 32375:
-                    case 33193:
-                    case 33215:
-                    case 33225:
-                    case 33371:
-                    case 34433:
-                    case 47570:
-                    case 47582:
-                    case 47585:
-                    case 48063:
-                    case 48066:
-                    case 48068:
-                    case 48071:
-                    case 48072:
-                    case 48073:
-                    case 48074:
-                    case 48078:
-                    case 48113:
-                    case 48120:
-                    case 48123:
-                    case 48125:
-                    case 48127:
-                    case 48135:
-                    case 48156:
-                    case 48158:
-                    case 48160:
-                    case 48161:
-                    case 48162:
-                    case 48168:
-                    case 48169:
-                    case 48170:
-                    case 48171:
-                    case 48300:
-                    case 51167:
-                    case 53023:
-                    case 63627:
-                    case 64044:
-                    case 64843:
-                    case 64901:
-                        return true;
-                    default:
-                        return false;
-                }
+            switch ($SpellID) {
+                case 453:
+                case 528:
+                case 552:
+                case 586:
+                case 605:
+                case 988:
+                case 1180:
+                case 1706:
+                case 2053:
+                case 6064:
+                case 6346:
+                case 8129:
+                case 10890:
+                case 10909:
+                case 10955:
+                case 14767:
+                case 14791:
+                case 15012:
+                case 15286:
+                case 15310:
+                case 15316:
+                case 15317:
+                case 15328:
+                case 15332:
+                case 15448:
+                case 15473:
+                case 15487:
+                case 17191:
+                case 17323:
+                case 27840:
+                case 27901:
+                case 32375:
+                case 33193:
+                case 33215:
+                case 33225:
+                case 33371:
+                case 34433:
+                case 47570:
+                case 47582:
+                case 47585:
+                case 48063:
+                case 48066:
+                case 48068:
+                case 48071:
+                case 48072:
+                case 48073:
+                case 48074:
+                case 48078:
+                case 48113:
+                case 48120:
+                case 48123:
+                case 48125:
+                case 48127:
+                case 48135:
+                case 48156:
+                case 48158:
+                case 48160:
+                case 48161:
+                case 48162:
+                case 48168:
+                case 48169:
+                case 48170:
+                case 48171:
+                case 48300:
+                case 51167:
+                case 53023:
+                case 63627:
+                case 64044:
+                case 64843:
+                case 64901:
+                    return true;
+                default:
+                    return false;
             }
+        }
         case 6: { // Death Knight
-                switch ($SpellID) {
-                    case 198:
-                    case 199:
-                    case 3714:
-                    case 34091:
-                    case 42650:
-                    case 45524:
-                    case 45529:
-                    case 46584:
-                    case 46628:
-                    case 47476:
-                    case 47528:
-                    case 47568:
-                    case 48263:
-                    case 48265:
-                    case 48707:
-                    case 48743:
-                    case 48778:
-                    case 48792:
-                    case 48982:
-                    case 49005:
-                    case 49016:
-                    case 49028:
-                    case 49393:
-                    case 49395:
-                    case 49480:
-                    case 49489:
-                    case 49491:
-                    case 49501:
-                    case 49504:
-                    case 49509:
-                    case 49530:
-                    case 49534:
-                    case 49543:
-                    case 49562:
-                    case 49568:
-                    case 49589:
-                    case 49895:
-                    case 49909:
-                    case 49921:
-                    case 49924:
-                    case 49930:
-                    case 49938:
-                    case 49941:
-                    case 50029:
-                    case 50034:
-                    case 50111:
-                    case 50150:
-                    case 50371:
-                    case 50842:
-                    case 51425:
-                    case 51456:
-                    case 51746:
-                    case 52286:
-                    case 53138:
-                    case 53323:
-                    case 53331:
-                    case 53341:
-                    case 53342:
-                    case 53343:
-                    case 53344:
-                    case 54197:
-                    case 54446:
-                    case 54447:
-                    case 55108:
-                    case 55133:
-                    case 55233:
-                    case 55262:
-                    case 56222:
-                    case 56815:
-                    case 57623:
-                    case 59568:
-                    case 61158:
-                    case 61278:
-                    case 61999:
-                    case 62158:
-                    case 62908:
-                    case 63644:
-                    case 63645:
-                    case 66:
-                    case 130:
-                    case 201:
-                    case 475:
-                    case 1180:
-                    case 1953:
-                    case 2139:
-                    case 3563:
-                    case 3566:
-                    case 3567:
-                    case 7301:
-                    case 11417:
-                    case 11418:
-                    case 11420:
-                    case 12051:
-                    case 12826:
-                    case 26054:
-                    case 27090:
-                    case 28272:
-                    case 30449:
-                    case 32267:
-                    case 32272:
-                    case 33717:
-                    case 35715:
-                    case 35717:
-                    case 41513:
-                    case 42833:
-                    case 42842:
-                    case 42846:
-                    case 42859:
-                    case 42873:
-                    case 42897:
-                    case 42914:
-                    case 42917:
-                    case 42921:
-                    case 42926:
-                    case 42931:
-                    case 42940:
-                    case 42956:
-                    case 42985:
-                    case 42995:
-                    case 43002:
-                    case 43008:
-                    case 43010:
-                    case 43012:
-                    case 43015:
-                    case 43017:
-                    case 43020:
-                    case 43024:
-                    case 43046:
-                    case 45438:
-                    case 47610:
-                    case 49358:
-                    case 49361:
-                    case 51412:
-                    case 53140:
-                    case 53142:
-                    case 55342:
-                    case 58659:
-                    case 50977:
-                    case 53428:
-                        return true;
-                    default:
-                        return false;
-                }
+            switch ($SpellID) {
+                case 198:
+                case 199:
+                case 3714:
+                case 34091:
+                case 42650:
+                case 45524:
+                case 45529:
+                case 46584:
+                case 46628:
+                case 47476:
+                case 47528:
+                case 47568:
+                case 48263:
+                case 48265:
+                case 48707:
+                case 48743:
+                case 48778:
+                case 48792:
+                case 48982:
+                case 49005:
+                case 49016:
+                case 49028:
+                case 49393:
+                case 49395:
+                case 49480:
+                case 49489:
+                case 49491:
+                case 49501:
+                case 49504:
+                case 49509:
+                case 49530:
+                case 49534:
+                case 49543:
+                case 49562:
+                case 49568:
+                case 49589:
+                case 49895:
+                case 49909:
+                case 49921:
+                case 49924:
+                case 49930:
+                case 49938:
+                case 49941:
+                case 50029:
+                case 50034:
+                case 50111:
+                case 50150:
+                case 50371:
+                case 50842:
+                case 51425:
+                case 51456:
+                case 51746:
+                case 52286:
+                case 53138:
+                case 53323:
+                case 53331:
+                case 53341:
+                case 53342:
+                case 53343:
+                case 53344:
+                case 54197:
+                case 54446:
+                case 54447:
+                case 55108:
+                case 55133:
+                case 55233:
+                case 55262:
+                case 56222:
+                case 56815:
+                case 57623:
+                case 59568:
+                case 61158:
+                case 61278:
+                case 61999:
+                case 62158:
+                case 62908:
+                case 63644:
+                case 63645:
+                case 66:
+                case 130:
+                case 201:
+                case 475:
+                case 1180:
+                case 1953:
+                case 2139:
+                case 3563:
+                case 3566:
+                case 3567:
+                case 7301:
+                case 11417:
+                case 11418:
+                case 11420:
+                case 12051:
+                case 12826:
+                case 26054:
+                case 27090:
+                case 28272:
+                case 30449:
+                case 32267:
+                case 32272:
+                case 33717:
+                case 35715:
+                case 35717:
+                case 41513:
+                case 42833:
+                case 42842:
+                case 42846:
+                case 42859:
+                case 42873:
+                case 42897:
+                case 42914:
+                case 42917:
+                case 42921:
+                case 42926:
+                case 42931:
+                case 42940:
+                case 42956:
+                case 42985:
+                case 42995:
+                case 43002:
+                case 43008:
+                case 43010:
+                case 43012:
+                case 43015:
+                case 43017:
+                case 43020:
+                case 43024:
+                case 43046:
+                case 45438:
+                case 47610:
+                case 49358:
+                case 49361:
+                case 51412:
+                case 53140:
+                case 53142:
+                case 55342:
+                case 58659:
+                case 50977:
+                case 53428:
+                    return true;
+                default:
+                    return false;
             }
+        }
         case 7: { // Shaman
-                switch ($SpellID) {
-                    case 131:
-                    case 196:
-                    case 197:
-                    case 199:
-                    case 526:
-                    case 546:
-                    case 556:
-                    case 1180:
-                    case 2062:
-                    case 2484:
-                    case 2645:
-                    case 2825:
-                    case 2894:
-                    case 3738:
-                    case 6196:
-                    case 6495:
-                    case 8012:
-                    case 8143:
-                    case 8170:
-                    case 8177:
-                    case 8512:
-                    case 8737:
-                    case 10399:
-                    case 15590:
-                    case 16041:
-                    case 16108:
-                    case 16109:
-                    case 16116:
-                    case 16161:
-                    case 16164:
-                    case 16166:
-                    case 16305:
-                    case 16582:
-                    case 17489:
-                    case 20608:
-                    case 24242:
-                    case 29065:
-                    case 30666:
-                    case 30674:
-                    case 30679:
-                    case 34091:
-                    case 36936:
-                    case 43338:
-                    case 49231:
-                    case 49233:
-                    case 49236:
-                    case 49238:
-                    case 49271:
-                    case 49273:
-                    case 49276:
-                    case 49277:
-                    case 49281:
-                    case 51470:
-                    case 51482:
-                    case 51486:
-                    case 51514:
-                    case 51881:
-                    case 51994:
-                    case 54197:
-                    case 55459:
-                    case 57722:
-                    case 57960:
-                    case 57994:
-                    case 58582:
-                    case 58643:
-                    case 58656:
-                    case 58704:
-                    case 58734:
-                    case 58739:
-                    case 58745:
-                    case 58749:
-                    case 58753:
-                    case 58757:
-                    case 58774:
-                    case 58790:
-                    case 58796:
-                    case 58804:
-                    case 59159:
-                    case 59568:
-                    case 60043:
-                    case 60188:
-                    case 61657:
-                    case 62101:
-                    case 63372:
-                    case 63644:
-                    case 63645:
-                    case 66842:
-                    case 66843:
-                    case 66844:
-                    case 32182:
-                        return true;
-                    default:
-                        return false;
-                }
+            switch ($SpellID) {
+                case 131:
+                case 196:
+                case 197:
+                case 199:
+                case 526:
+                case 546:
+                case 556:
+                case 1180:
+                case 2062:
+                case 2484:
+                case 2645:
+                case 2825:
+                case 2894:
+                case 3738:
+                case 6196:
+                case 6495:
+                case 8012:
+                case 8143:
+                case 8170:
+                case 8177:
+                case 8512:
+                case 8737:
+                case 10399:
+                case 15590:
+                case 16041:
+                case 16108:
+                case 16109:
+                case 16116:
+                case 16161:
+                case 16164:
+                case 16166:
+                case 16305:
+                case 16582:
+                case 17489:
+                case 20608:
+                case 24242:
+                case 29065:
+                case 30666:
+                case 30674:
+                case 30679:
+                case 34091:
+                case 36936:
+                case 43338:
+                case 49231:
+                case 49233:
+                case 49236:
+                case 49238:
+                case 49271:
+                case 49273:
+                case 49276:
+                case 49277:
+                case 49281:
+                case 51470:
+                case 51482:
+                case 51486:
+                case 51514:
+                case 51881:
+                case 51994:
+                case 54197:
+                case 55459:
+                case 57722:
+                case 57960:
+                case 57994:
+                case 58582:
+                case 58643:
+                case 58656:
+                case 58704:
+                case 58734:
+                case 58739:
+                case 58745:
+                case 58749:
+                case 58753:
+                case 58757:
+                case 58774:
+                case 58790:
+                case 58796:
+                case 58804:
+                case 59159:
+                case 59568:
+                case 60043:
+                case 60188:
+                case 61657:
+                case 62101:
+                case 63372:
+                case 63644:
+                case 63645:
+                case 66842:
+                case 66843:
+                case 66844:
+                case 32182:
+                    return true;
+                default:
+                    return false;
             }
+        }
         case 8: { // Mage
-                switch ($SpellID) {
-                    case 66:
-                    case 130:
-                    case 201:
-                    case 475:
-                    case 1180:
-                    case 1953:
-                    case 2139:
-                    case 3563:
-                    case 3566:
-                    case 3567:
-                    case 7301:
-                    case 11080:
-                    case 11417:
-                    case 11418:
-                    case 11420:
-                    case 11958:
-                    case 12042:
-                    case 12043:
-                    case 12051:
-                    case 12469:
-                    case 12472:
-                    case 12490:
-                    case 12497:
-                    case 12503:
-                    case 12519:
-                    case 12571:
-                    case 12577:
-                    case 12592:
-                    case 12598:
-                    case 12605:
-                    case 12606:
-                    case 12826:
-                    case 12840:
-                    case 12847:
-                    case 12953:
-                    case 12983:
-                    case 15047:
-                    case 15060:
-                    case 16758:
-                    case 16766:
-                    case 16770:
-                    case 18464:
-                    case 27090:
-                    case 28272:
-                    case 29440:
-                    case 29444:
-                    case 30449:
-                    case 31570:
-                    case 31571:
-                    case 31583:
-                    case 31588:
-                    case 31589:
-                    case 31678:
-                    case 31683:
-                    case 31687:
-                    case 32267:
-                    case 32272:
-                    case 33717:
-                    case 34091:
-                    case 35581:
-                    case 35715:
-                    case 35717:
-                    case 42833:
-                    case 42842:
-                    case 42846:
-                    case 42859:
-                    case 42873:
-                    case 42897:
-                    case 42914:
-                    case 42917:
-                    case 42921:
-                    case 42926:
-                    case 42931:
-                    case 42940:
-                    case 42956:
-                    case 42985:
-                    case 42995:
-                    case 43002:
-                    case 43008:
-                    case 43010:
-                    case 43012:
-                    case 43015:
-                    case 43017:
-                    case 43020:
-                    case 43024:
-                    case 43039:
-                    case 43046:
-                    case 44379:
-                    case 44396:
-                    case 44403:
-                    case 44545:
-                    case 44549:
-                    case 44561:
-                    case 44571:
-                    case 44572:
-                    case 44781:
-                    case 45438:
-                    case 47610:
-                    case 49358:
-                    case 49361:
-                    case 51412:
-                    case 53140:
-                    case 53142:
-                    case 54197:
-                    case 54354:
-                    case 54490:
-                    case 54646:
-                    case 54659:
-                    case 54734:
-                    case 54749:
-                    case 54787:
-                    case 55092:
-                    case 55094:
-                    case 55340:
-                    case 55342:
-                    case 58659:
-                    case 59568:
-                    case 63644:
-                    case 63645:
-                    case 3561:
-                    case 3562:
-                    case 3565:
-                    case 10059:
-                    case 11416:
-                    case 11419:
-                    case 12952:
-                    case 16765:
-                    case 16769:
-                    case 24242:
-                    case 28332:
-                    case 28593:
-                    case 32266:
-                    case 32271:
-                    case 33690:
-                    case 33691:
-                    case 44557:
-                    case 49359:
-                    case 49360:
-                    case 59571:
-                        return true;
-                    default:
-                        return false;
-                }
+            switch ($SpellID) {
+                case 66:
+                case 130:
+                case 201:
+                case 475:
+                case 1180:
+                case 1953:
+                case 2139:
+                case 3563:
+                case 3566:
+                case 3567:
+                case 7301:
+                case 11080:
+                case 11417:
+                case 11418:
+                case 11420:
+                case 11958:
+                case 12042:
+                case 12043:
+                case 12051:
+                case 12469:
+                case 12472:
+                case 12490:
+                case 12497:
+                case 12503:
+                case 12519:
+                case 12571:
+                case 12577:
+                case 12592:
+                case 12598:
+                case 12605:
+                case 12606:
+                case 12826:
+                case 12840:
+                case 12847:
+                case 12953:
+                case 12983:
+                case 15047:
+                case 15060:
+                case 16758:
+                case 16766:
+                case 16770:
+                case 18464:
+                case 27090:
+                case 28272:
+                case 29440:
+                case 29444:
+                case 30449:
+                case 31570:
+                case 31571:
+                case 31583:
+                case 31588:
+                case 31589:
+                case 31678:
+                case 31683:
+                case 31687:
+                case 32267:
+                case 32272:
+                case 33717:
+                case 34091:
+                case 35581:
+                case 35715:
+                case 35717:
+                case 42833:
+                case 42842:
+                case 42846:
+                case 42859:
+                case 42873:
+                case 42897:
+                case 42914:
+                case 42917:
+                case 42921:
+                case 42926:
+                case 42931:
+                case 42940:
+                case 42956:
+                case 42985:
+                case 42995:
+                case 43002:
+                case 43008:
+                case 43010:
+                case 43012:
+                case 43015:
+                case 43017:
+                case 43020:
+                case 43024:
+                case 43039:
+                case 43046:
+                case 44379:
+                case 44396:
+                case 44403:
+                case 44545:
+                case 44549:
+                case 44561:
+                case 44571:
+                case 44572:
+                case 44781:
+                case 45438:
+                case 47610:
+                case 49358:
+                case 49361:
+                case 51412:
+                case 53140:
+                case 53142:
+                case 54197:
+                case 54354:
+                case 54490:
+                case 54646:
+                case 54659:
+                case 54734:
+                case 54749:
+                case 54787:
+                case 55092:
+                case 55094:
+                case 55340:
+                case 55342:
+                case 58659:
+                case 59568:
+                case 63644:
+                case 63645:
+                case 3561:
+                case 3562:
+                case 3565:
+                case 10059:
+                case 11416:
+                case 11419:
+                case 12952:
+                case 16765:
+                case 16769:
+                case 24242:
+                case 28332:
+                case 28593:
+                case 32266:
+                case 32271:
+                case 33690:
+                case 33691:
+                case 44557:
+                case 49359:
+                case 49360:
+                case 59571:
+                    return true;
+                default:
+                    return false;
             }
+        }
         case 9: { // Warlock
-                switch ($SpellID) {
-                    case 126:
-                    case 132:
-                    case 201:
-                    case 688:
-                    case 691:
-                    case 696:
-                    case 697:
-                    case 698:
-                    case 712:
-                    case 1122:
-                    case 2331:
-                    case 2332:
-                    case 2334:
-                    case 2337:
-                    case 3170:
-                    case 3171:
-                    case 3173:
-                    case 3176:
-                    case 3177:
-                    case 3447:
-                    case 3448:
-                    case 3450:
-                    case 3452:
-                    case 5138:
-                    case 5500:
-                    case 5697:
-                    case 5784:
-                    case 6215:
-                    case 7179:
-                    case 7181:
-                    case 7836:
-                    case 7837:
-                    case 7841:
-                    case 7845:
-                    case 11448:
-                    case 11449:
-                    case 11450:
-                    case 11451:
-                    case 11457:
-                    case 11460:
-                    case 11461:
-                    case 11465:
-                    case 11467:
-                    case 11478:
-                    case 11719:
-                    case 12609:
-                    case 15833:
-                    case 17551:
-                    case 17552:
-                    case 17553:
-                    case 17555:
-                    case 17556:
-                    case 17557:
-                    case 17572:
-                    case 17573:
-                    case 17780:
-                    case 17785:
-                    case 17792:
-                    case 17805:
-                    case 17814:
-                    case 17834:
-                    case 17918:
-                    case 17928:
-                    case 17958:
-                    case 17962:
-                    case 18095:
-                    case 18120:
-                    case 18130:
-                    case 18136:
-                    case 18174:
-                    case 18183:
-                    case 18219:
-                    case 18275:
-                    case 18540:
-                    case 18647:
-                    case 18693:
-                    case 18695:
-                    case 18699:
-                    case 18704:
-                    case 18708:
-                    case 18710:
-                    case 18744:
-                    case 18768:
-                    case 18773:
-                    case 18829:
-                    case 19028:
-                    case 22808:
-                    case 23161:
-                    case 23825:
-                    case 25953:
-                    case 26055:
-                    case 26056:
-                    case 28581:
-                    case 28582:
-                    case 28584:
-                    case 28585:
-                    case 28586:
-                    case 28587:
-                    case 28588:
-                    case 28589:
-                    case 28590:
-                    case 28591:
-                    case 29858:
-                    case 30064:
-                    case 30145:
-                    case 30146:
-                    case 30248:
-                    case 30292:
-                    case 30296:
-                    case 30302:
-                    case 32295:
-                    case 32383:
-                    case 32394:
-                    case 32484:
-                    case 33732:
-                    case 33738:
-                    case 33740:
-                    case 34091:
-                    case 34939:
-                    case 35693:
-                    case 44744:
-                    case 46628:
-                    case 47193:
-                    case 47195:
-                    case 47200:
-                    case 47202:
-                    case 47231:
-                    case 47240:
-                    case 47241:
-                    case 47247:
-                    case 47260:
-                    case 47270:
-                    case 47809:
-                    case 47811:
-                    case 47813:
-                    case 47815:
-                    case 47820:
-                    case 47823:
-                    case 47825:
-                    case 47827:
-                    case 47836:
-                    case 47838:
-                    case 47843:
-                    case 47847:
-                    case 47855:
-                    case 47856:
-                    case 47857:
-                    case 47860:
-                    case 47864:
-                    case 47865:
-                    case 47867:
-                    case 47878:
-                    case 47884:
-                    case 47888:
-                    case 47889:
-                    case 47891:
-                    case 47893:
-                    case 48018:
-                    case 48020:
-                    case 50511:
-                    case 50581:
-                    case 51304:
-                    case 51309:
-                    case 53042:
-                    case 53812:
-                    case 53836:
-                    case 53837:
-                    case 53838:
-                    case 53839:
-                    case 53841:
-                    case 53842:
-                    case 53848:
-                    case 53899:
-                    case 53900:
-                    case 53901:
-                    case 53902:
-                    case 53903:
-                    case 54197:
-                    case 54213:
-                    case 55642:
-                    case 56007:
-                    case 57946:
-                    case 58435:
-                    case 58887:
-                    case 59164:
-                    case 59172:
-                    case 59571:
-                    case 59672:
-                    case 59673:
-                    case 59741:
-                    case 60220:
-                    case 60893:
-                    case 60990:
-                    case 60993:
-                    case 60994:
-                    case 61191:
-                    case 61290:
-                    case 61294:
-                    case 62409:
-                    case 63108:
-                    case 63123:
-                    case 63158:
-                    case 63245:
-                    case 63351:
-                    case 63644:
-                    case 63645:
-                    case 63732:
-                    case 64731:
-                    case 6213:
-                    case 11672:
-                    case 11675:
-                    case 11688:
-                    case 11700:
-                    case 11708:
-                    case 11712:
-                    case 11721:
-                    case 17925:
-                    case 18709:
-                    case 50589:
-                    case 54785:
-                    case 59671:
-                    case 17803:
-                    case 18697:
-                    case 54118:
-                    case 196:
-                    case 200:
-                    case 202:
-                    case 227:
-                    case 266:
-                    case 674:
-                    case 781:
-                    case 883:
-                    case 982:
-                    case 1002:
-                    case 1462:
-                    case 1494:
-                    case 1515:
-                    case 1543:
-                    case 2567:
-                    case 2641:
-                    case 2974:
-                    case 3034:
-                    case 3043:
-                    case 3045:
-                    case 3127:
-                    case 5011:
-                    case 5116:
-                    case 5118:
-                    case 5384:
-                    case 6197:
-                    case 6991:
-                    case 8737:
-                    case 13159:
-                    case 13161:
-                    case 13163:
-                    case 13809:
-                    case 14311:
-                    case 14327:
-                    case 15590:
-                    case 19184:
-                    case 19259:
-                    case 19263:
-                    case 19373:
-                    case 19431:
-                    case 19490:
-                    case 19500:
-                    case 19503:
-                    case 19801:
-                    case 19878:
-                    case 19879:
-                    case 19880:
-                    case 19882:
-                    case 19883:
-                    case 19884:
-                    case 19885:
-                    case 20736:
-                    case 24283:
-                    case 24297:
-                    case 27044:
-                    case 34026:
-                    case 34074:
-                    case 34477:
-                    case 34484:
-                    case 34493:
-                    case 34496:
-                    case 34499:
-                    case 34503:
-                    case 34600:
-                    case 34839:
-                    case 48990:
-                    case 48996:
-                    case 49001:
-                    case 49012:
-                    case 49045:
-                    case 49048:
-                    case 49050:
-                    case 49052:
-                    case 49056:
-                    case 49067:
-                    case 49071:
-                    case 52785:
-                    case 53271:
-                    case 53292:
-                    case 53338:
-                    case 53339:
-                    case 56337:
-                    case 56341:
-                    case 56344:
-                    case 58434:
-                    case 60053:
-                    case 60118:
-                    case 60192:
-                    case 61006:
-                    case 61847:
-                    case 63458:
-                    case 63672:
-                    case 18176:
-                    case 18223:
-                    case 18288:
-                    case 30057:
-                    case 47197:
-                    case 47199:
-                    case 47205:
-                    case 53754:
-                    case 34090:
-                    case 54753:
-                    case 693:
-                    case 17877:
-                    case 17930:
-                    case 18127:
-                    case 18135:
-                    case 30283:
-                    case 30291:
-                    case 30295:
-                    case 47223:
-                    case 50796:
-                    case 59739:
-                    case 63350:
-                        return true;
-                    default:
-                        return false;
-                }
+            switch ($SpellID) {
+                case 126:
+                case 132:
+                case 201:
+                case 688:
+                case 691:
+                case 696:
+                case 697:
+                case 698:
+                case 712:
+                case 1122:
+                case 2331:
+                case 2332:
+                case 2334:
+                case 2337:
+                case 3170:
+                case 3171:
+                case 3173:
+                case 3176:
+                case 3177:
+                case 3447:
+                case 3448:
+                case 3450:
+                case 3452:
+                case 5138:
+                case 5500:
+                case 5697:
+                case 5784:
+                case 6215:
+                case 7179:
+                case 7181:
+                case 7836:
+                case 7837:
+                case 7841:
+                case 7845:
+                case 11448:
+                case 11449:
+                case 11450:
+                case 11451:
+                case 11457:
+                case 11460:
+                case 11461:
+                case 11465:
+                case 11467:
+                case 11478:
+                case 11719:
+                case 12609:
+                case 15833:
+                case 17551:
+                case 17552:
+                case 17553:
+                case 17555:
+                case 17556:
+                case 17557:
+                case 17572:
+                case 17573:
+                case 17780:
+                case 17785:
+                case 17792:
+                case 17805:
+                case 17814:
+                case 17834:
+                case 17918:
+                case 17928:
+                case 17958:
+                case 17962:
+                case 18095:
+                case 18120:
+                case 18130:
+                case 18136:
+                case 18174:
+                case 18183:
+                case 18219:
+                case 18275:
+                case 18540:
+                case 18647:
+                case 18693:
+                case 18695:
+                case 18699:
+                case 18704:
+                case 18708:
+                case 18710:
+                case 18744:
+                case 18768:
+                case 18773:
+                case 18829:
+                case 19028:
+                case 22808:
+                case 23161:
+                case 23825:
+                case 25953:
+                case 26055:
+                case 26056:
+                case 28581:
+                case 28582:
+                case 28584:
+                case 28585:
+                case 28586:
+                case 28587:
+                case 28588:
+                case 28589:
+                case 28590:
+                case 28591:
+                case 29858:
+                case 30064:
+                case 30145:
+                case 30146:
+                case 30248:
+                case 30292:
+                case 30296:
+                case 30302:
+                case 32295:
+                case 32383:
+                case 32394:
+                case 32484:
+                case 33732:
+                case 33738:
+                case 33740:
+                case 34091:
+                case 34939:
+                case 35693:
+                case 44744:
+                case 46628:
+                case 47193:
+                case 47195:
+                case 47200:
+                case 47202:
+                case 47231:
+                case 47240:
+                case 47241:
+                case 47247:
+                case 47260:
+                case 47270:
+                case 47809:
+                case 47811:
+                case 47813:
+                case 47815:
+                case 47820:
+                case 47823:
+                case 47825:
+                case 47827:
+                case 47836:
+                case 47838:
+                case 47843:
+                case 47847:
+                case 47855:
+                case 47856:
+                case 47857:
+                case 47860:
+                case 47864:
+                case 47865:
+                case 47867:
+                case 47878:
+                case 47884:
+                case 47888:
+                case 47889:
+                case 47891:
+                case 47893:
+                case 48018:
+                case 48020:
+                case 50511:
+                case 50581:
+                case 51304:
+                case 51309:
+                case 53042:
+                case 53812:
+                case 53836:
+                case 53837:
+                case 53838:
+                case 53839:
+                case 53841:
+                case 53842:
+                case 53848:
+                case 53899:
+                case 53900:
+                case 53901:
+                case 53902:
+                case 53903:
+                case 54197:
+                case 54213:
+                case 55642:
+                case 56007:
+                case 57946:
+                case 58435:
+                case 58887:
+                case 59164:
+                case 59172:
+                case 59571:
+                case 59672:
+                case 59673:
+                case 59741:
+                case 60220:
+                case 60893:
+                case 60990:
+                case 60993:
+                case 60994:
+                case 61191:
+                case 61290:
+                case 61294:
+                case 62409:
+                case 63108:
+                case 63123:
+                case 63158:
+                case 63245:
+                case 63351:
+                case 63644:
+                case 63645:
+                case 63732:
+                case 64731:
+                case 6213:
+                case 11672:
+                case 11675:
+                case 11688:
+                case 11700:
+                case 11708:
+                case 11712:
+                case 11721:
+                case 17925:
+                case 18709:
+                case 50589:
+                case 54785:
+                case 59671:
+                case 17803:
+                case 18697:
+                case 54118:
+                case 196:
+                case 200:
+                case 202:
+                case 227:
+                case 266:
+                case 674:
+                case 781:
+                case 883:
+                case 982:
+                case 1002:
+                case 1462:
+                case 1494:
+                case 1515:
+                case 1543:
+                case 2567:
+                case 2641:
+                case 2974:
+                case 3034:
+                case 3043:
+                case 3045:
+                case 3127:
+                case 5011:
+                case 5116:
+                case 5118:
+                case 5384:
+                case 6197:
+                case 6991:
+                case 8737:
+                case 13159:
+                case 13161:
+                case 13163:
+                case 13809:
+                case 14311:
+                case 14327:
+                case 15590:
+                case 19184:
+                case 19259:
+                case 19263:
+                case 19373:
+                case 19431:
+                case 19490:
+                case 19500:
+                case 19503:
+                case 19801:
+                case 19878:
+                case 19879:
+                case 19880:
+                case 19882:
+                case 19883:
+                case 19884:
+                case 19885:
+                case 20736:
+                case 24283:
+                case 24297:
+                case 27044:
+                case 34026:
+                case 34074:
+                case 34477:
+                case 34484:
+                case 34493:
+                case 34496:
+                case 34499:
+                case 34503:
+                case 34600:
+                case 34839:
+                case 48990:
+                case 48996:
+                case 49001:
+                case 49012:
+                case 49045:
+                case 49048:
+                case 49050:
+                case 49052:
+                case 49056:
+                case 49067:
+                case 49071:
+                case 52785:
+                case 53271:
+                case 53292:
+                case 53338:
+                case 53339:
+                case 56337:
+                case 56341:
+                case 56344:
+                case 58434:
+                case 60053:
+                case 60118:
+                case 60192:
+                case 61006:
+                case 61847:
+                case 63458:
+                case 63672:
+                case 18176:
+                case 18223:
+                case 18288:
+                case 30057:
+                case 47197:
+                case 47199:
+                case 47205:
+                case 53754:
+                case 34090:
+                case 54753:
+                case 693:
+                case 17877:
+                case 17930:
+                case 18127:
+                case 18135:
+                case 30283:
+                case 30291:
+                case 30295:
+                case 47223:
+                case 50796:
+                case 59739:
+                case 63350:
+                    return true;
+                default:
+                    return false;
             }
+        }
         case 11: {// Druid
-                switch ($SpellID) {
-                    case 768:
-                    case 770:
-                    case 783:
-                    case 1066:
-                    case 2782:
-                    case 2893:
-                    case 5209:
-                    case 5215:
-                    case 5225:
-                    case 5229:
-                    case 5420:
-                    case 6795:
-                    case 8983:
-                    case 16081:
-                    case 16835:
-                    case 16857:
-                    case 16864:
-                    case 17051:
-                    case 17061:
-                    case 17066:
-                    case 17073:
-                    case 17078:
-                    case 17108:
-                    case 17113:
-                    case 17116:
-                    case 17120:
-                    case 17124:
-                    case 18562:
-                    case 18658:
-                    case 20719:
-                    case 22812:
-                    case 22842:
-                    case 24242:
-                    case 24946:
-                    case 24972:
-                    case 26995:
-                    case 29166:
-                    case 33357:
-                    case 33786:
-                    case 33880:
-                    case 33883:
-                    case 33890:
-                    case 33891:
-                    case 34091:
-                    case 34153:
-                    case 40120:
-                    case 48378:
-                    case 48412:
-                    case 48441:
-                    case 48443:
-                    case 48447:
-                    case 48451:
-                    case 48461:
-                    case 48463:
-                    case 48465:
-                    case 48467:
-                    case 48469:
-                    case 48470:
-                    case 48477:
-                    case 48480:
-                    case 48500:
-                    case 48545:
-                    case 48560:
-                    case 48562:
-                    case 48568:
-                    case 48570:
-                    case 48572:
-                    case 48574:
-                    case 48575:
-                    case 48577:
-                    case 48579:
-                    case 49800:
-                    case 49802:
-                    case 49803:
-                    case 50213:
-                    case 50464:
-                    case 50763:
-                    case 52610:
-                    case 53251:
-                    case 53307:
-                    case 53308:
-                    case 53312:
-                    case 54197:
-                    case 59571:
-                    case 59793:
-                    case 61467:
-                    case 62078:
-                    case 62600:
-                    case 63410:
-                    case 63680:
-                    case 65139:
-                    case 9634:
-                    case 24858:
-                    case 33876:
-                    case 33878:
-                        return true;
-                    default:
-                        return false;
-                }
+            switch ($SpellID) {
+                case 768:
+                case 770:
+                case 783:
+                case 1066:
+                case 2782:
+                case 2893:
+                case 5209:
+                case 5215:
+                case 5225:
+                case 5229:
+                case 5420:
+                case 6795:
+                case 8983:
+                case 16081:
+                case 16835:
+                case 16857:
+                case 16864:
+                case 17051:
+                case 17061:
+                case 17066:
+                case 17073:
+                case 17078:
+                case 17108:
+                case 17113:
+                case 17116:
+                case 17120:
+                case 17124:
+                case 18562:
+                case 18658:
+                case 20719:
+                case 22812:
+                case 22842:
+                case 24242:
+                case 24946:
+                case 24972:
+                case 26995:
+                case 29166:
+                case 33357:
+                case 33786:
+                case 33880:
+                case 33883:
+                case 33890:
+                case 33891:
+                case 34091:
+                case 34153:
+                case 40120:
+                case 48378:
+                case 48412:
+                case 48441:
+                case 48443:
+                case 48447:
+                case 48451:
+                case 48461:
+                case 48463:
+                case 48465:
+                case 48467:
+                case 48469:
+                case 48470:
+                case 48477:
+                case 48480:
+                case 48500:
+                case 48545:
+                case 48560:
+                case 48562:
+                case 48568:
+                case 48570:
+                case 48572:
+                case 48574:
+                case 48575:
+                case 48577:
+                case 48579:
+                case 49800:
+                case 49802:
+                case 49803:
+                case 50213:
+                case 50464:
+                case 50763:
+                case 52610:
+                case 53251:
+                case 53307:
+                case 53308:
+                case 53312:
+                case 54197:
+                case 59571:
+                case 59793:
+                case 61467:
+                case 62078:
+                case 62600:
+                case 63410:
+                case 63680:
+                case 65139:
+                case 9634:
+                case 24858:
+                case 33876:
+                case 33878:
+                    return true;
+                default:
+                    return false;
             }
+        }
     }
 }
 
@@ -6998,299 +6998,334 @@ function pTypeItemCheck($pType, $ID) {
         // quests in character_queststatus
     }     
     */
-    
-    
+
+
     if ($pType == PBASIC || $pType == PFREE) {
-            switch ($ID) {
+        switch ($ID) {
                 // special
-                case 49623: return 50070;   // Shadowmourne 284 -> Glorenzelg, High-Blade of the Silver Hand 271
-                case 49888: return 49919;   // 	Shadow's Edge	264	-->	Cryptmaker	264
-                case 46017: return 50028;   // 	Val'anyr\, Hammer of Ancient Kings	245	-->	Trauma	264
+            case 49623: return 50070;   // Shadowmourne 284 -> Glorenzelg, High-Blade of the Silver Hand 271
+            case 49888: return 49919;   // 	Shadow's Edge	264	-->	Cryptmaker	264
+            case 46017: return 50028;   // 	Val'anyr\, Hammer of Ancient Kings	245	-->	Trauma	264
                 // 284 - 271
                 // RUBY SANCTUM
-                case 54583: return 53489;   // Clock of burning Dust
-                case 54582: return 53486;   // Bracers of fiery night 
-                case 54584: return 53134;   // Phaseshifter's bracers
-                case 54580: return 53126;   // Umbrage armbands
-                case 54587: return 53488;   // Split shape belt
-                case 54577: return 53127;   // Returning Footfalls 
-                case 54578: return 53125;   // Apocalypse's advance  
-                case 54586: return 53487;   // Foreshadow steps  
-                case 54579: return 53129;   // Treads of impeding resurection 
-                case 54581: return 53132;   // penumbra pendant
-                case 54585: return 53490;   // Ring of phased regeneration
-                case 54576: return 53133;   // Sighet of twilight
-                case 54588: return 54572;   // Charred twilight scale
-                case 54589: return 54573;   // Glowing twilight scale
-                case 54591: return 54571;   // Petrifed twilight scale
-                case 54590: return 54569;   // Sharpned twilight scale 
+            case 54583: return 53489;   // Clock of burning Dust
+            case 54582: return 53486;   // Bracers of fiery night
+            case 54584: return 53134;   // Phaseshifter's bracers
+            case 54580: return 53126;   // Umbrage armbands
+            case 54587: return 53488;   // Split shape belt
+            case 54577: return 53127;   // Returning Footfalls
+            case 54578: return 53125;   // Apocalypse's advance
+            case 54586: return 53487;   // Foreshadow steps
+            case 54579: return 53129;   // Treads of impeding resurection
+            case 54581: return 53132;   // penumbra pendant
+            case 54585: return 53490;   // Ring of phased regeneration
+            case 54576: return 53133;   // Sighet of twilight
+            case 54588: return 54572;   // Charred twilight scale
+            case 54589: return 54573;   // Glowing twilight scale
+            case 54591: return 54571;   // Petrifed twilight scale
+            case 54590: return 54569;   // Sharpned twilight scale
                 // ICC
-                case 50737: return 50012;   // Sharpned twilight scale 
-                case 50733: return 49981;   // Fal'inrush, defender of quel'thalas
-                case 50730: return 50070;   // Glorenzelg, high-blade of the silver hand
-                case 50735: return 50425;   // Oathbrinder, charge of the ranger-general 
-                case 50734: return 50428;   // Royal scepter of terenas 
-                case 50731: return 50429;   // Archeus,Greatstaff of antonidas 
-                case 50732: return 50427;   // Bloodsurge , Kel'thusad's Blade of agony
-                case 50736: return 50426;   // Heaven's fall, kryss of a thousend lies
-                case 50738: return 49997;   // Mithrios, bronzebeard's legacy 
-            }
+            case 50737: return 50012;   // Sharpned twilight scale
+            case 50733: return 49981;   // Fal'inrush, defender of quel'thalas
+            case 50730: return 50070;   // Glorenzelg, high-blade of the silver hand
+            case 50735: return 50425;   // Oathbrinder, charge of the ranger-general
+            case 50734: return 50428;   // Royal scepter of terenas
+            case 50731: return 50429;   // Archeus,Greatstaff of antonidas
+            case 50732: return 50427;   // Bloodsurge , Kel'thusad's Blade of agony
+            case 50736: return 50426;   // Heaven's fall, kryss of a thousend lies
+            case 50738: return 49997;   // Mithrios, bronzebeard's legacy
+        }
     }
-    
+
     if ($pType==PFREE) {
-            switch($ID) {
-                case 50679 : return 50026; // 	Helm of the Elder Moon	277	-->	Helm of the Elder Moon	264
-                case 51236 : return 51203; // 	Sanctified Frost Witch's Kilt	277	-->	Sanctified Frost Witch's Kilt	264
-                case 50727 : return 50178; // 	Bloodfall	277	-->	Bloodfall	264
-                case 51432 : return 51431; // 	Wrathful Gladiator's Greatstaff	277	-->	Wrathful Gladiator's Staff	264
-                case 50644 : return 49990; // 	Ring of Maddening Whispers	277	-->	Ring of Maddening Whispers	264
-                case 50695 : return 50040; // 	Distant Land	277	-->	Distant Land	264
-                case 51252 : return 51187; // 	Sanctified Shadowblade Helmet	277	-->	Sanctified Shadowblade Helmet	264
-                case 50610 : return 49967; // 	Marrowgar's Frigid Eye	277	-->	Marrowgar's Frigid Eye	264
-                case 51287 : return 51152; // 	Sanctified Ahn'Kahar Blood Hunter's Legguards	277	-->	Sanctified Ahn'Kahar Blood Hunter's Legguards	264
-                case 51526 : return 51525; // 	Wrathful Gladiator's Splitter	277	-->	Wrathful Gladiator's Chopper	264
-                case 50660 : return 50003; // 	Boneguard Commander's Pauldrons	277	-->	Boneguard Commander's Pauldrons	264
-                case 51220 : return 51219; // 	Sanctified Ymirjar Lord's Breastplate	277	-->	Sanctified Ymirjar Lord's Breastplate	264
-                case 50711 : return 50071; // 	Treads of the Wasteland	277	-->	Treads of the Wasteland	264
-                case 51268 : return 51171; // 	Sanctified Lightsworn Legguards	277	-->	Sanctified Lightsworn Legguards	264
-                case 50626 : return 50202; // 	Snowstorm Helm	277	-->	Snowstorm Helm	264
-                case 51303 : return 51136; // 	Sanctified Lasherweave Legplates	277	-->	Sanctified Lasherweave Legplates	264
-                case 50680 : return 50027; // 	Rot-Resistant Breastplate	277	-->	Rot-Resistant Breastplate	264
-                case 51237 : return 51202; // 	Sanctified Frost Witch's Helm	277	-->	Sanctified Frost Witch's Helm	264
-                case 50728 : return 50180; // 	Lana'thel's Chain of Flagellation	277	-->	Lana'thel's Chain of Flagellation	264
-                case 51440 : return 51439; // 	Wrathful Gladiator's Dicer	277	-->	Wrathful Gladiator's Hacker	264
-                case 50645 : return 49988; // 	Leggings of Northern Lights	277	-->	Leggings of Northern Lights	264
-                case 50696 : return 50041; // 	Leather of Stitched Scourge Parts	277	-->	Leather of Stitched Scourge Parts	264
-                case 51253 : return 51186; // 	Sanctified Shadowblade Legplates	277	-->	Sanctified Shadowblade Legplates	264
-                case 50611 : return 49960; // 	Bracers of Dark Reckoning	277	-->	Bracers of Dark Reckoning	264
-                case 51288 : return 51151; // 	Sanctified Ahn'Kahar Blood Hunter's Spaulders	277	-->	Sanctified Ahn'Kahar Blood Hunter's Spaulders	264
-                case 51528 : return 51527; // 	Wrathful Gladiator's Eviscerator	277	-->	Wrathful Gladiator's Mutilator	264
-                case 50661 : return 50006; // 	Corp'rethar Ceremonial Crown	277	-->	Corp'rethar Ceremonial Crown	264
-                case 51221 : return 51218; // 	Sanctified Ymirjar Lord's Greathelm	277	-->	Sanctified Ymirjar Lord's Greathelm	264
-                case 50712 : return 50072; // 	Landsoul's Horned Greathelm	277	-->	Landsoul's Horned Greathelm	264
-                case 51269 : return 51170; // 	Sanctified Lightsworn Shoulderguards	277	-->	Sanctified Lightsworn Shoulderguards	264
-                case 50627 : return 50195; // 	Noose of Malachite	277	-->	Noose of Malachite	264
-                case 51304 : return 51135; // 	Sanctified Lasherweave Pauldrons	277	-->	Sanctified Lasherweave Pauldrons	264
-                case 50681 : return 50024; // 	Blightborne Warplate	277	-->	Blightborne Warplate	264
-                case 51238 : return 51201; // 	Sanctified Frost Witch's Gloves	277	-->	Sanctified Frost Witch's Gloves	264
-                case 50729 : return 50065; // 	Icecrown Glacial Wall	277	-->	Icecrown Glacial Wall	264
-                case 51442 : return 51441; // 	Wrathful Gladiator's Dirk	277	-->	Wrathful Gladiator's Shiv	264
-                case 50646 : return 49987; // 	Cultist's Bloodsoaked Spaulders	277	-->	Cultist's Bloodsoaked Spaulders	264
-                case 50697 : return 50042; // 	Gangrenous Leggings	277	-->	Gangrenous Leggings	264
-                case 51254 : return 51185; // 	Sanctified Shadowblade Pauldrons	277	-->	Sanctified Shadowblade Pauldrons	264
-                case 50612 : return 49964; // 	Legguards of Lost Hope	277	-->	Legguards of Lost Hope	264
-                case 51289 : return 51150; // 	Sanctified Ahn'Kahar Blood Hunter's Tunic	277	-->	Sanctified Ahn'Kahar Blood Hunter's Tunic	264
-                case 51529 : return 51530; // 	Wrathful Gladiator's Left Claw	277	-->	Wrathful Gladiator's Left Render	264
-                case 50663 : return 50011; // 	Gunship Captain's Mittens	277	-->	Gunship Captain's Mittens	264
-                case 51222 : return 51217; // 	Sanctified Ymirjar Lord's Handguards	277	-->	Sanctified Ymirjar Lord's Handguards	264
-                case 50713 : return 50073; // 	Geistlord's Punishment Sack	277	-->	Geistlord's Punishment Sack	264
-                case 51270 : return 51169; // 	Sanctified Lightsworn Gloves	277	-->	Sanctified Lightsworn Gloves	264
-                case 50628 : return 50205; // 	Frostbinder's Shredded Cape	277	-->	Frostbinder's Shredded Cape	264
-                case 51305 : return 51134; // 	Sanctified Scourgelord Chestguard	277	-->	Sanctified Scourgelord Chestguard	264
-                case 51306 : return 51133; // 	Sanctified Scourgelord Faceguard	277	-->	Sanctified Scourgelord Faceguard	264
-                case 51239 : return 51200; // 	Sanctified Frost Witch's Hauberk	277	-->	Sanctified Frost Witch's Hauberk	264
-                case 50348 : return 50353; // 	Dislodged Foreign Object	277	-->	Dislodged Foreign Object	264
-                case 51274 : return 51165; // 	Sanctified Lightsworn Tunic	277	-->	Sanctified Lightsworn Tunic	264
-                case 51444 : return 51443; // 	Wrathful Gladiator's Left Razor	277	-->	Wrathful Gladiator's Left Ripper	264
-                case 50647 : return 49989; // 	Ahn'kahar Onyx Neckguard	277	-->	Ahn'kahar Onyx Neckguard	264
-                case 50698 : return 50059; // 	Horrific Flesh Epaulets	277	-->	Horrific Flesh Epaulets	264
-                case 51255 : return 51184; // 	Sanctified Crimson Acolyte Cowl	277	-->	Sanctified Crimson Acolyte Cowl	264
-                case 50613 : return 49978; // 	Crushing Coldwraith Belt	277	-->	Crushing Coldwraith Belt	264
-                case 51290 : return 51149; // 	Sanctified Lasherweave Cover	277	-->	Sanctified Lasherweave Cover	264
-                case 50664 : return 50008; // 	Ring of Rapid Ascent	277	-->	Ring of Rapid Ascent	264
-                case 51223 : return 51216; // 	Sanctified Ymirjar Lord's Legguards	277	-->	Sanctified Ymirjar Lord's Legguards	264
-                case 50714 : return 50170; // 	Valanar's Other Signet Ring	277	-->	Valanar's Other Signet Ring	264
-                case 51271 : return 51168; // 	Sanctified Lightsworn Greaves	277	-->	Sanctified Lightsworn Greaves	264
-                case 50629 : return 50418; // 	Robe of the Waking Nightmare	277	-->	Robe of the Waking Nightmare	264
-                case 50630 : return 50417; // 	Bracers of Eternal Dreaming	277	-->	Bracers of Eternal Dreaming	264
-                case 51307 : return 51132; // 	Sanctified Scourgelord Handguards	277	-->	Sanctified Scourgelord Handguards	264
-                case 50682 : return 50023; // 	Bile-Encrusted Medallion	277	-->	Bile-Encrusted Medallion	264
-                case 51240 : return 51199; // 	Sanctified Frost Witch's Shoulderguards	277	-->	Sanctified Frost Witch's Shoulderguards	264
-                case 50349 : return 50352; // 	Corpse Tongue Coin	277	-->	Corpse Tongue Coin	264
-                case 51275 : return 51164; // 	Sanctified Lightsworn Battleplate	277	-->	Sanctified Lightsworn Battleplate	264
-                case 51446 : return 51445; // 	Wrathful Gladiator's Punisher	277	-->	Wrathful Gladiator's Bonecracker	264
-                case 50648 : return 49992; // 	Nibelung	277	-->	Nibelung	264
-                case 50699 : return 50062; // 	Plague Scientist's Boots	277	-->	Plague Scientist's Boots	264
-                case 51256 : return 51183; // 	Sanctified Crimson Acolyte Handwraps	277	-->	Sanctified Crimson Acolyte Handwraps	264
-                case 50614 : return 49977; // 	Loop of the Endless Labyrinth	277	-->	Loop of the Endless Labyrinth	264
-                case 51291 : return 51148; // 	Sanctified Lasherweave Gloves	277	-->	Sanctified Lasherweave Gloves	264
-                case 50665 : return 50009; // 	Boots of Unnatural Growth	277	-->	Boots of Unnatural Growth	264
-                case 51224 : return 51215; // 	Sanctified Ymirjar Lord's Pauldrons	277	-->	Sanctified Ymirjar Lord's Pauldrons	264
-                case 50715 : return 50171; // 	Shoulders of Frost-Tipped Thorns	277	-->	Shoulders of Frost-Tipped Thorns	264
-                case 51272 : return 51167; // 	Sanctified Lightsworn Headpiece	277	-->	Sanctified Lightsworn Headpiece	264
-                case 50631 : return 50472; // 	Nightmare Ender	277	-->	Nightmare Ender	264
-                case 51308 : return 51131; // 	Sanctified Scourgelord Legguards	277	-->	Sanctified Scourgelord Legguards	264
-                case 50684 : return 50033; // 	Corpse-Impaling Spike	277	-->	Corpse-Impaling Spike	264
-                case 51241 : return 51198; // 	Sanctified Frost Witch's War-Kilt	277	-->	Sanctified Frost Witch's War-Kilt	264
-                case 50363 : return 50362; // 	Deathbringer's Will	277	-->	Deathbringer's Will	264
-                case 51276 : return 51163; // 	Sanctified Lightsworn Gauntlets	277	-->	Sanctified Lightsworn Gauntlets	264
-                case 51448 : return 51447; // 	Wrathful Gladiator's Swiftblade	277	-->	Wrathful Gladiator's Quickblade	264
-                case 50649 : return 49996; // 	Deathwhisper Raiment	277	-->	Deathwhisper Raiment	264
-                case 50700 : return 50061; // 	Holiday's Grace	277	-->	Holiday's Grace	264
-                case 51257 : return 51182; // 	Sanctified Crimson Acolyte Mantle	277	-->	Sanctified Crimson Acolyte Mantle	264
-                case 50615 : return 49979; // 	Handguards of Winter's Respite	277	-->	Handguards of Winter's Respite	264
-                case 51292 : return 51147; // 	Sanctified Lasherweave Mantle	277	-->	Sanctified Lasherweave Mantle	264
-                case 50667 : return 50010; // 	Waistband of Righteous Fury	277	-->	Waistband of Righteous Fury	264
-                case 51225 : return 51214; // 	Sanctified Ymirjar Lord's Battleplate	277	-->	Sanctified Ymirjar Lord's Battleplate	264
-                case 50716 : return 50075; // 	Taldaram's Plated Fists	277	-->	Taldaram's Plated Fists	264
-                case 51273 : return 51166; // 	Sanctified Lightsworn Spaulders	277	-->	Sanctified Lightsworn Spaulders	264
-                case 51389 : return 51388; // 	Wrathful Gladiator's Sunderer	277	-->	Wrathful Gladiator's Decapitator	264
-                case 50632 : return 50416; // 	Boots of the Funeral March	277	-->	Boots of the Funeral March	264
-                case 50685 : return 50028; // 	Trauma	277	-->	Trauma	264
-                case 51242 : return 51197; // 	Sanctified Frost Witch's Faceguard	277	-->	Sanctified Frost Witch's Faceguard	264
-                case 50364 : return 50361; // 	Sindragosa's Flawless Fang	277	-->	Sindragosa's Flawless Fang	264
-                case 51277 : return 51162; // 	Sanctified Lightsworn Helmet	277	-->	Sanctified Lightsworn Helmet	264
-                case 51450 : return 51449; // 	Wrathful Gladiator's Shotgun	277	-->	Wrathful Gladiator's Rifle	264
-                case 50650 : return 49995; // 	Fallen Lord's Handguards	277	-->	Fallen Lord's Handguards	264
-                case 50701 : return 50060; // 	Faceplate of the Forgotten	277	-->	Faceplate of the Forgotten	264
-                case 51258 : return 51181; // 	Sanctified Crimson Acolyte Pants	277	-->	Sanctified Crimson Acolyte Pants	264
-                case 50616 : return 49976; // 	Bulwark of Smouldering Steel	277	-->	Bulwark of Smouldering Steel	264
-                case 51293 : return 51146; // 	Sanctified Lasherweave Trousers	277	-->	Sanctified Lasherweave Trousers	264
-                case 50668 : return 50014; // 	Greatcloak of the Turned Champion	277	-->	Greatcloak of the Turned Champion	264
-                case 51226 : return 51213; // 	Sanctified Ymirjar Lord's Gauntlets	277	-->	Sanctified Ymirjar Lord's Gauntlets	264
-                case 50717 : return 50172; // 	Sanguine Silk Robes	277	-->	Sanguine Silk Robes	264
-                case 51391 : return 51390; // 	Wrathful Gladiator's Crusher	277	-->	Wrathful Gladiator's Bonegrinder	264
-                case 50633 : return 50421; // 	Sindragosa's Cruel Claw	277	-->	Sindragosa's Cruel Claw	264
-                case 50686 : return 50032; // 	Death Surgeon's Sleeves	277	-->	Death Surgeon's Sleeves	264
-                case 51243 : return 51196; // 	Sanctified Frost Witch's Grips	277	-->	Sanctified Frost Witch's Grips	264
-                case 50365 : return 50360; // 	Phylactery of the Nameless Lich	277	-->	Phylactery of the Nameless Lich	264
-                case 51278 : return 51161; // 	Sanctified Lightsworn Legplates	277	-->	Sanctified Lightsworn Legplates	264
-                case 51454 : return 51453; // 	Wrathful Gladiator's Salvation	277	-->	Wrathful Gladiator's Gavel	264
-                case 50651 : return 49994; // 	The Lady's Brittle Bracers	277	-->	The Lady's Brittle Bracers	264
-                case 50702 : return 50063; // 	Lingering Illness	277	-->	Lingering Illness	264
-                case 51259 : return 51180; // 	Sanctified Crimson Acolyte Raiments	277	-->	Sanctified Crimson Acolyte Raiments	264
-                case 50617 : return 49980; // 	Rusted Bonespike Pauldrons	277	-->	Rusted Bonespike Pauldrons	264
-                case 51294 : return 51145; // 	Sanctified Lasherweave Vestment	277	-->	Sanctified Lasherweave Vestment	264
-                case 50670 : return 50333; // 	Toskk's Maximized Wristguards	277	-->	Toskk's Maximized Wristguards	264
-                case 51227 : return 51212; // 	Sanctified Ymirjar Lord's Helmet	277	-->	Sanctified Ymirjar Lord's Helmet	264
-                case 50718 : return 50074; // 	Royal Crimson Cloak	277	-->	Royal Crimson Cloak	264
-                case 51393 : return 51392; // 	Wrathful Gladiator's Claymore	277	-->	Wrathful Gladiator's Greatsword	264
-                case 50635 : return 50423; // 	Sundial of Eternal Dusk	277	-->	Sundial of Eternal Dusk	264
-                case 50687 : return 50030; // 	Bloodsunder's Bracers	277	-->	Bloodsunder's Bracers	264
-                case 51244 : return 51195; // 	Sanctified Frost Witch's Chestguard	277	-->	Sanctified Frost Witch's Chestguard	264
-                case 50366 : return 50359; // 	Althor's Abacus	277	-->	Althor's Abacus	264
-                case 51279 : return 51160; // 	Sanctified Lightsworn Shoulderplates	277	-->	Sanctified Lightsworn Shoulderplates	264
-                case 51457 : return 51456; // 	Wrathful Gladiator's Light Staff	277	-->	Wrathful Gladiator's Energy Staff	264
-                case 50652 : return 49993; // 	Necrophotic Greaves	277	-->	Necrophotic Greaves	264
-                case 50703 : return 50064; // 	Unclean Surgical Gloves	277	-->	Unclean Surgical Gloves	264
-                case 51260 : return 51179; // 	Sanctified Crimson Acolyte Gloves	277	-->	Sanctified Crimson Acolyte Gloves	264
-                case 50618 : return 50186; // 	Frostbrood Sapphire Ring	277	-->	Frostbrood Sapphire Ring	264
-                case 51295 : return 51144; // 	Sanctified Lasherweave Handgrips	277	-->	Sanctified Lasherweave Handgrips	264
-                case 50671 : return 50015; // 	Belt of the Blood Nova	277	-->	Belt of the Blood Nova	264
-                case 51228 : return 51211; // 	Sanctified Ymirjar Lord's Legplates	277	-->	Sanctified Ymirjar Lord's Legplates	264
-                case 50719 : return 50173; // 	Shadow Silk Spindle	277	-->	Shadow Silk Spindle	264
-                case 50720 : return 50174; // 	Incarnadine Band of Mending	277	-->	Incarnadine Band of Mending	264
-                case 51395 : return 51394; // 	Wrathful Gladiator's Recurve	277	-->	Wrathful Gladiator's Longbow	264
-                case 50636 : return 50424; // 	Memory of Malygos	277	-->	Memory of Malygos	264
-                case 50688 : return 50413; // 	Nerub'ar Stalker's Cord	277	-->	Nerub'ar Stalker's Cord	264
-                case 51245 : return 51194; // 	Sanctified Frost Witch's Spaulders	277	-->	Sanctified Frost Witch's Spaulders	264
-                case 50603 : return 49919; // 	Cryptmaker	277	-->	Cryptmaker	264
-                case 51280 : return 51159; // 	Sanctified Bloodmage Gloves	277	-->	Sanctified Bloodmage Gloves	264
-                case 51481 : return 51480; // 	Wrathful Gladiator's Halberd	277	-->	Wrathful Gladiator's Pike	264
-                case 50653 : return 49998; // 	Shadowvault Slayer's Cloak	277	-->	Shadowvault Slayer's Cloak	264
-                case 50704 : return 50068; // 	Rigormortis	277	-->	Rigormortis	264
-                case 51261 : return 51178; // 	Sanctified Crimson Acolyte Hood	277	-->	Sanctified Crimson Acolyte Hood	264
-                case 50619 : return 50188; // 	Anub'ar Stalker's Gloves	277	-->	Anub'ar Stalker's Gloves	264
-                case 51296 : return 51143; // 	Sanctified Lasherweave Headguard	277	-->	Sanctified Lasherweave Headguard	264
-                case 50672 : return 50412; // 	Bloodvenom Blade	277	-->	Bloodvenom Blade	264
-                case 51229 : return 51210; // 	Sanctified Ymirjar Lord's Shoulderplates	277	-->	Sanctified Ymirjar Lord's Shoulderplates	264
-                case 50721 : return 50175; // 	Crypt Keeper's Bracers	277	-->	Crypt Keeper's Bracers	264
-                case 51398 : return 51406; // 	Wrathful Gladiator's Blade of Celerity	277	-->	Wrathful Gladiator's Blade of Alacrity	264
-                case 50638 : return 50034; // 	Zod's Repeating Longbow	277	-->	Zod's Repeating Longbow	264
-                case 50689 : return 50038; // 	Carapace of Forgotten Kings	277	-->	Carapace of Forgotten Kings	264
-                case 51246 : return 51193; // 	Sanctified Frost Witch's Legguards	277	-->	Sanctified Frost Witch's Legguards	264
-                case 50604 : return 49949; // 	Band of the Bone Colossus	277	-->	Band of the Bone Colossus	264
-                case 51281 : return 51158; // 	Sanctified Bloodmage Hood	277	-->	Sanctified Bloodmage Hood	264
-                case 51516 : return 51515; // 	Wrathful Gladiator's Handaxe	277	-->	Wrathful Gladiator's Cleaver	264
-                case 50654 : return 50411; // 	Scourgeborne Waraxe	277	-->	Scourgeborne Waraxe	264
-                case 51309 : return 51130; // 	Sanctified Scourgelord Pauldrons	277	-->	Sanctified Scourgelord Pauldrons	264
-                case 50705 : return 50069; // 	Professor's Bloodied Smock	277	-->	Professor's Bloodied Smock	264
-                case 51262 : return 51177; // 	Sanctified Crimson Acolyte Leggings	277	-->	Sanctified Crimson Acolyte Leggings	264
-                case 50620 : return 50187; // 	Coldwraith Links	277	-->	Coldwraith Links	264
-                case 51297 : return 51142; // 	Sanctified Lasherweave Legguards	277	-->	Sanctified Lasherweave Legguards	264
-                case 50673 : return 50022; // 	Dual-Bladed Pauldrons	277	-->	Dual-Bladed Pauldrons	264
-                case 51230 : return 51209; // 	Sanctified Dark Coven Gloves	277	-->	Sanctified Dark Coven Gloves	264
-                case 51231 : return 51208; // 	Sanctified Dark Coven Hood	277	-->	Sanctified Dark Coven Hood	264
-                case 50722 : return 50176; // 	San'layn Ritualist Gloves	277	-->	San'layn Ritualist Gloves	264
-                case 51399 : return 51397; // 	Wrathful Gladiator's Mageblade	277	-->	Wrathful Gladiator's Spellblade	264
-                case 50639 : return 49983; // 	Blood-Soaked Saronite Stompers	277	-->	Blood-Soaked Saronite Stompers	264
-                case 50690 : return 50037; // 	Fleshrending Gauntlets	277	-->	Fleshrending Gauntlets	264
-                case 51247 : return 51192; // 	Sanctified Frost Witch's Headpiece	277	-->	Sanctified Frost Witch's Headpiece	264
-                case 50605 : return 49952; // 	Snowserpent Mail Helm	277	-->	Snowserpent Mail Helm	264
-                case 51282 : return 51157; // 	Sanctified Bloodmage Leggings	277	-->	Sanctified Bloodmage Leggings	264
-                case 51518 : return 51517; // 	Wrathful Gladiator's Spike	277	-->	Wrathful Gladiator's Shanker	264
-                case 50655 : return 50000; // 	Scourge Hunter's Vambraces	277	-->	Scourge Hunter's Vambraces	264
-                case 51310 : return 51129; // 	Sanctified Scourgelord Battleplate	277	-->	Sanctified Scourgelord Battleplate	264
-                case 50706 : return 50351; // 	Tiny Abomination in a Jar	277	-->	Tiny Abomination in a Jar	264
-                case 51263 : return 51176; // 	Sanctified Crimson Acolyte Robe	277	-->	Sanctified Crimson Acolyte Robe	264
-                case 50621 : return 50183; // 	Lungbreaker	277	-->	Lungbreaker	264
-                case 51298 : return 51141; // 	Sanctified Lasherweave Raiment	277	-->	Sanctified Lasherweave Raiment	264
-                case 50674 : return 50020; // 	Raging Behemoth's Shoulderplates	277	-->	Raging Behemoth's Shoulderplates	264
-                case 51232 : return 51207; // 	Sanctified Dark Coven Leggings	277	-->	Sanctified Dark Coven Leggings	264
-                case 50723 : return 50177; // 	Mail of Crimson Coins	277	-->	Mail of Crimson Coins	264
-                case 51401 : return 51400; // 	Wrathful Gladiator's Combat Staff	277	-->	Wrathful Gladiator's War Staff	264
-                case 50640 : return 49986; // 	Broken Ram Skull Helm	277	-->	Broken Ram Skull Helm	264
-                case 50691 : return 50036; // 	Belt of Broken Bones	277	-->	Belt of Broken Bones	264
-                case 51248 : return 51191; // 	Sanctified Frost Witch's Handguards	277	-->	Sanctified Frost Witch's Handguards	264
-                case 50606 : return 49951; // 	Gendarme's Cuirass	277	-->	Gendarme's Cuirass	264
-                case 51283 : return 51156; // 	Sanctified Bloodmage Robe	277	-->	Sanctified Bloodmage Robe	264
-                case 50656 : return 50001; // 	Ikfirus's Sack of Wonder	277	-->	Ikfirus's Sack of Wonder	264
-                case 51311 : return 51128; // 	Sanctified Scourgelord Gauntlets	277	-->	Sanctified Scourgelord Gauntlets	264
-                case 50707 : return 50067; // 	Astrylian's Sutured Cinch	277	-->	Astrylian's Sutured Cinch	264
-                case 51264 : return 51175; // 	Sanctified Crimson Acolyte Shoulderpads	277	-->	Sanctified Crimson Acolyte Shoulderpads	264
-                case 50622 : return 50185; // 	Devium's Eternally Cold Ring	277	-->	Devium's Eternally Cold Ring	264
-                case 51299 : return 51140; // 	Sanctified Lasherweave Shoulderpads	277	-->	Sanctified Lasherweave Shoulderpads	264
-                case 50675 : return 50021; // 	Aldriana's Gloves of Secrecy	277	-->	Aldriana's Gloves of Secrecy	264
-                case 51233 : return 51206; // 	Sanctified Dark Coven Robe	277	-->	Sanctified Dark Coven Robe	264
-                case 50724 : return 50182; // 	Blood Queen's Crimson Choker	277	-->	Blood Queen's Crimson Choker	264
-                case 51403 : return 51402; // 	Wrathful Gladiator's Acute Staff	277	-->	Wrathful Gladiator's Focus Staff	264
-                case 50641 : return 49982; // 	Heartpierce	277	-->	Heartpierce	264
-                case 50692 : return 50035; // 	Black Bruise	277	-->	Black Bruise	264
-                case 51249 : return 51190; // 	Sanctified Frost Witch's Tunic	277	-->	Sanctified Frost Witch's Tunic	264
-                case 50607 : return 49950; // 	Frostbitten Fur Boots	277	-->	Frostbitten Fur Boots	264
-                case 51284 : return 51155; // 	Sanctified Bloodmage Shoulderpads	277	-->	Sanctified Bloodmage Shoulderpads	264
-                case 51520 : return 51519; // 	Wrathful Gladiator's Truncheon	277	-->	Wrathful Gladiator's Pummeler	264
-                case 50657 : return 49999; // 	Skeleton Lord's Circle	277	-->	Skeleton Lord's Circle	264
-                case 51312 : return 51127; // 	Sanctified Scourgelord Helmet	277	-->	Sanctified Scourgelord Helmet	264
-                case 50708 : return 50179; // 	Last Word	277	-->	Last Word	264
-                case 51265 : return 51174; // 	Sanctified Lightsworn Chestguard	277	-->	Sanctified Lightsworn Chestguard	264
-                case 50623 : return 50199; // 	Leggings of Dying Candles	277	-->	Leggings of Dying Candles	264
-                case 51300 : return 51139; // 	Sanctified Lasherweave Robes	277	-->	Sanctified Lasherweave Robes	264
-                case 50676 : return 50016; // 	Rib Spreader	277	-->	Rib Spreader	264
-                case 50677 : return 50019; // 	Winding Sheet	277	-->	Winding Sheet	264
-                case 51234 : return 51205; // 	Sanctified Dark Coven Shoulderpads	277	-->	Sanctified Dark Coven Shoulderpads	264
-                case 50725 : return 50181; // 	Dying Light	277	-->	Dying Light	264
-                case 51405 : return 51404; // 	Wrathful Gladiator's Skirmish Staff	277	-->	Wrathful Gladiator's Battle Staff	264
-                case 50642 : return 49985; // 	Juggernaut Band	277	-->	Juggernaut Band	264
-                case 50693 : return 50414; // 	Might of Blight	277	-->	Might of Blight	264
-                case 51250 : return 51189; // 	Sanctified Shadowblade Breastplate	277	-->	Sanctified Shadowblade Breastplate	264
-                case 50608 : return 49968; // 	Frozen Bonespike	277	-->	Frozen Bonespike	264
-                case 51285 : return 51154; // 	Sanctified Ahn'Kahar Blood Hunter's Handguards	277	-->	Sanctified Ahn'Kahar Blood Hunter's Handguards	264
-                case 51522 : return 51521; // 	Wrathful Gladiator's Longblade	277	-->	Wrathful Gladiator's Slicer	264
-                case 50658 : return 50005; // 	Amulet of the Silent Eulogy	277	-->	Amulet of the Silent Eulogy	264
-                case 51313 : return 51126; // 	Sanctified Scourgelord Legplates	277	-->	Sanctified Scourgelord Legplates	264
-                case 50709 : return 50415; // 	Bryntroll\, the Bone Arbiter	277	-->	Bryntroll\, the Bone Arbiter	264
-                case 51266 : return 51173; // 	Sanctified Lightsworn Faceguard	277	-->	Sanctified Lightsworn Faceguard	264
-                case 50624 : return 50192; // 	Scourge Reaver's Legplates	277	-->	Scourge Reaver's Legplates	264
-                case 51301 : return 51138; // 	Sanctified Lasherweave Gauntlets	277	-->	Sanctified Lasherweave Gauntlets	264
-                case 50678 : return 50025; // 	Seal of Many Mouths	277	-->	Seal of Many Mouths	264
-                case 51235 : return 51204; // 	Sanctified Frost Witch's Shoulderpads	277	-->	Sanctified Frost Witch's Shoulderpads	264
-                case 50726 : return 50354; // 	Bauble of True Blood	277	-->	Bauble of True Blood	264
-                case 51412 : return 51411; // 	Wrathful Gladiator's Repeater	277	-->	Wrathful Gladiator's Heavy Crossbow	264
-                case 50643 : return 49991; // 	Shoulders of Mercy Killing	277	-->	Shoulders of Mercy Killing	264
-                case 50694 : return 50056; // 	Plaguebringer's Stained Pants	277	-->	Plaguebringer's Stained Pants	264
-                case 51251 : return 51188; // 	Sanctified Shadowblade Gauntlets	277	-->	Sanctified Shadowblade Gauntlets	264
-                case 50609 : return 49975; // 	Bone Sentinel's Amulet	277	-->	Bone Sentinel's Amulet	264
-                case 51286 : return 51153; // 	Sanctified Ahn'Kahar Blood Hunter's Headpiece	277	-->	Sanctified Ahn'Kahar Blood Hunter's Headpiece	264
-                case 51524 : return 51523; // 	Wrathful Gladiator's Grasp	277	-->	Wrathful Gladiator's Right Ripper	264
-                case 50659 : return 50002; // 	Polar Bear Claw Bracers	277	-->	Polar Bear Claw Bracers	264
-                case 51314 : return 51125; // 	Sanctified Scourgelord Shoulderplates	277	-->	Sanctified Scourgelord Shoulderplates	264
-                case 50710 : return 50184; // 	Keleseth's Seducer	277	-->	Keleseth's Seducer	264
-                case 51267 : return 51172; // 	Sanctified Lightsworn Handguards	277	-->	Sanctified Lightsworn Handguards	264
-                case 50625 : return 50190; // 	Grinning Skull Greatboots	277	-->	Grinning Skull Greatboots	264
-                case 51302 : return 51137; // 	Sanctified Lasherweave Helmet	277	-->	Sanctified Lasherweave Helmet	264
-            }
+        switch($ID) {
+            case 50679 : return 50026; // 	Helm of the Elder Moon	277	-->	Helm of the Elder Moon	264
+            case 51236 : return 51203; // 	Sanctified Frost Witch's Kilt	277	-->	Sanctified Frost Witch's Kilt	264
+            case 50727 : return 50178; // 	Bloodfall	277	-->	Bloodfall	264
+            case 51432 : return 51431; // 	Wrathful Gladiator's Greatstaff	277	-->	Wrathful Gladiator's Staff	264
+            case 50644 : return 49990; // 	Ring of Maddening Whispers	277	-->	Ring of Maddening Whispers	264
+            case 50695 : return 50040; // 	Distant Land	277	-->	Distant Land	264
+            case 51252 : return 51187; // 	Sanctified Shadowblade Helmet	277	-->	Sanctified Shadowblade Helmet	264
+            case 50610 : return 49967; // 	Marrowgar's Frigid Eye	277	-->	Marrowgar's Frigid Eye	264
+            case 51287 : return 51152; // 	Sanctified Ahn'Kahar Blood Hunter's Legguards	277	-->	Sanctified Ahn'Kahar Blood Hunter's Legguards	264
+            case 51526 : return 51525; // 	Wrathful Gladiator's Splitter	277	-->	Wrathful Gladiator's Chopper	264
+            case 50660 : return 50003; // 	Boneguard Commander's Pauldrons	277	-->	Boneguard Commander's Pauldrons	264
+            case 51220 : return 51219; // 	Sanctified Ymirjar Lord's Breastplate	277	-->	Sanctified Ymirjar Lord's Breastplate	264
+            case 50711 : return 50071; // 	Treads of the Wasteland	277	-->	Treads of the Wasteland	264
+            case 51268 : return 51171; // 	Sanctified Lightsworn Legguards	277	-->	Sanctified Lightsworn Legguards	264
+            case 50626 : return 50202; // 	Snowstorm Helm	277	-->	Snowstorm Helm	264
+            case 51303 : return 51136; // 	Sanctified Lasherweave Legplates	277	-->	Sanctified Lasherweave Legplates	264
+            case 50680 : return 50027; // 	Rot-Resistant Breastplate	277	-->	Rot-Resistant Breastplate	264
+            case 51237 : return 51202; // 	Sanctified Frost Witch's Helm	277	-->	Sanctified Frost Witch's Helm	264
+            case 50728 : return 50180; // 	Lana'thel's Chain of Flagellation	277	-->	Lana'thel's Chain of Flagellation	264
+            case 51440 : return 51439; // 	Wrathful Gladiator's Dicer	277	-->	Wrathful Gladiator's Hacker	264
+            case 50645 : return 49988; // 	Leggings of Northern Lights	277	-->	Leggings of Northern Lights	264
+            case 50696 : return 50041; // 	Leather of Stitched Scourge Parts	277	-->	Leather of Stitched Scourge Parts	264
+            case 51253 : return 51186; // 	Sanctified Shadowblade Legplates	277	-->	Sanctified Shadowblade Legplates	264
+            case 50611 : return 49960; // 	Bracers of Dark Reckoning	277	-->	Bracers of Dark Reckoning	264
+            case 51288 : return 51151; // 	Sanctified Ahn'Kahar Blood Hunter's Spaulders	277	-->	Sanctified Ahn'Kahar Blood Hunter's Spaulders	264
+            case 51528 : return 51527; // 	Wrathful Gladiator's Eviscerator	277	-->	Wrathful Gladiator's Mutilator	264
+            case 50661 : return 50006; // 	Corp'rethar Ceremonial Crown	277	-->	Corp'rethar Ceremonial Crown	264
+            case 51221 : return 51218; // 	Sanctified Ymirjar Lord's Greathelm	277	-->	Sanctified Ymirjar Lord's Greathelm	264
+            case 50712 : return 50072; // 	Landsoul's Horned Greathelm	277	-->	Landsoul's Horned Greathelm	264
+            case 51269 : return 51170; // 	Sanctified Lightsworn Shoulderguards	277	-->	Sanctified Lightsworn Shoulderguards	264
+            case 50627 : return 50195; // 	Noose of Malachite	277	-->	Noose of Malachite	264
+            case 51304 : return 51135; // 	Sanctified Lasherweave Pauldrons	277	-->	Sanctified Lasherweave Pauldrons	264
+            case 50681 : return 50024; // 	Blightborne Warplate	277	-->	Blightborne Warplate	264
+            case 51238 : return 51201; // 	Sanctified Frost Witch's Gloves	277	-->	Sanctified Frost Witch's Gloves	264
+            case 50729 : return 50065; // 	Icecrown Glacial Wall	277	-->	Icecrown Glacial Wall	264
+            case 51442 : return 51441; // 	Wrathful Gladiator's Dirk	277	-->	Wrathful Gladiator's Shiv	264
+            case 50646 : return 49987; // 	Cultist's Bloodsoaked Spaulders	277	-->	Cultist's Bloodsoaked Spaulders	264
+            case 50697 : return 50042; // 	Gangrenous Leggings	277	-->	Gangrenous Leggings	264
+            case 51254 : return 51185; // 	Sanctified Shadowblade Pauldrons	277	-->	Sanctified Shadowblade Pauldrons	264
+            case 50612 : return 49964; // 	Legguards of Lost Hope	277	-->	Legguards of Lost Hope	264
+            case 51289 : return 51150; // 	Sanctified Ahn'Kahar Blood Hunter's Tunic	277	-->	Sanctified Ahn'Kahar Blood Hunter's Tunic	264
+            case 51529 : return 51530; // 	Wrathful Gladiator's Left Claw	277	-->	Wrathful Gladiator's Left Render	264
+            case 50663 : return 50011; // 	Gunship Captain's Mittens	277	-->	Gunship Captain's Mittens	264
+            case 51222 : return 51217; // 	Sanctified Ymirjar Lord's Handguards	277	-->	Sanctified Ymirjar Lord's Handguards	264
+            case 50713 : return 50073; // 	Geistlord's Punishment Sack	277	-->	Geistlord's Punishment Sack	264
+            case 51270 : return 51169; // 	Sanctified Lightsworn Gloves	277	-->	Sanctified Lightsworn Gloves	264
+            case 50628 : return 50205; // 	Frostbinder's Shredded Cape	277	-->	Frostbinder's Shredded Cape	264
+            case 51305 : return 51134; // 	Sanctified Scourgelord Chestguard	277	-->	Sanctified Scourgelord Chestguard	264
+            case 51306 : return 51133; // 	Sanctified Scourgelord Faceguard	277	-->	Sanctified Scourgelord Faceguard	264
+            case 51239 : return 51200; // 	Sanctified Frost Witch's Hauberk	277	-->	Sanctified Frost Witch's Hauberk	264
+            case 50348 : return 50353; // 	Dislodged Foreign Object	277	-->	Dislodged Foreign Object	264
+            case 51274 : return 51165; // 	Sanctified Lightsworn Tunic	277	-->	Sanctified Lightsworn Tunic	264
+            case 51444 : return 51443; // 	Wrathful Gladiator's Left Razor	277	-->	Wrathful Gladiator's Left Ripper	264
+            case 50647 : return 49989; // 	Ahn'kahar Onyx Neckguard	277	-->	Ahn'kahar Onyx Neckguard	264
+            case 50698 : return 50059; // 	Horrific Flesh Epaulets	277	-->	Horrific Flesh Epaulets	264
+            case 51255 : return 51184; // 	Sanctified Crimson Acolyte Cowl	277	-->	Sanctified Crimson Acolyte Cowl	264
+            case 50613 : return 49978; // 	Crushing Coldwraith Belt	277	-->	Crushing Coldwraith Belt	264
+            case 51290 : return 51149; // 	Sanctified Lasherweave Cover	277	-->	Sanctified Lasherweave Cover	264
+            case 50664 : return 50008; // 	Ring of Rapid Ascent	277	-->	Ring of Rapid Ascent	264
+            case 51223 : return 51216; // 	Sanctified Ymirjar Lord's Legguards	277	-->	Sanctified Ymirjar Lord's Legguards	264
+            case 50714 : return 50170; // 	Valanar's Other Signet Ring	277	-->	Valanar's Other Signet Ring	264
+            case 51271 : return 51168; // 	Sanctified Lightsworn Greaves	277	-->	Sanctified Lightsworn Greaves	264
+            case 50629 : return 50418; // 	Robe of the Waking Nightmare	277	-->	Robe of the Waking Nightmare	264
+            case 50630 : return 50417; // 	Bracers of Eternal Dreaming	277	-->	Bracers of Eternal Dreaming	264
+            case 51307 : return 51132; // 	Sanctified Scourgelord Handguards	277	-->	Sanctified Scourgelord Handguards	264
+            case 50682 : return 50023; // 	Bile-Encrusted Medallion	277	-->	Bile-Encrusted Medallion	264
+            case 51240 : return 51199; // 	Sanctified Frost Witch's Shoulderguards	277	-->	Sanctified Frost Witch's Shoulderguards	264
+            case 50349 : return 50352; // 	Corpse Tongue Coin	277	-->	Corpse Tongue Coin	264
+            case 51275 : return 51164; // 	Sanctified Lightsworn Battleplate	277	-->	Sanctified Lightsworn Battleplate	264
+            case 51446 : return 51445; // 	Wrathful Gladiator's Punisher	277	-->	Wrathful Gladiator's Bonecracker	264
+            case 50648 : return 49992; // 	Nibelung	277	-->	Nibelung	264
+            case 50699 : return 50062; // 	Plague Scientist's Boots	277	-->	Plague Scientist's Boots	264
+            case 51256 : return 51183; // 	Sanctified Crimson Acolyte Handwraps	277	-->	Sanctified Crimson Acolyte Handwraps	264
+            case 50614 : return 49977; // 	Loop of the Endless Labyrinth	277	-->	Loop of the Endless Labyrinth	264
+            case 51291 : return 51148; // 	Sanctified Lasherweave Gloves	277	-->	Sanctified Lasherweave Gloves	264
+            case 50665 : return 50009; // 	Boots of Unnatural Growth	277	-->	Boots of Unnatural Growth	264
+            case 51224 : return 51215; // 	Sanctified Ymirjar Lord's Pauldrons	277	-->	Sanctified Ymirjar Lord's Pauldrons	264
+            case 50715 : return 50171; // 	Shoulders of Frost-Tipped Thorns	277	-->	Shoulders of Frost-Tipped Thorns	264
+            case 51272 : return 51167; // 	Sanctified Lightsworn Headpiece	277	-->	Sanctified Lightsworn Headpiece	264
+            case 50631 : return 50472; // 	Nightmare Ender	277	-->	Nightmare Ender	264
+            case 51308 : return 51131; // 	Sanctified Scourgelord Legguards	277	-->	Sanctified Scourgelord Legguards	264
+            case 50684 : return 50033; // 	Corpse-Impaling Spike	277	-->	Corpse-Impaling Spike	264
+            case 51241 : return 51198; // 	Sanctified Frost Witch's War-Kilt	277	-->	Sanctified Frost Witch's War-Kilt	264
+            case 50363 : return 50362; // 	Deathbringer's Will	277	-->	Deathbringer's Will	264
+            case 51276 : return 51163; // 	Sanctified Lightsworn Gauntlets	277	-->	Sanctified Lightsworn Gauntlets	264
+            case 51448 : return 51447; // 	Wrathful Gladiator's Swiftblade	277	-->	Wrathful Gladiator's Quickblade	264
+            case 50649 : return 49996; // 	Deathwhisper Raiment	277	-->	Deathwhisper Raiment	264
+            case 50700 : return 50061; // 	Holiday's Grace	277	-->	Holiday's Grace	264
+            case 51257 : return 51182; // 	Sanctified Crimson Acolyte Mantle	277	-->	Sanctified Crimson Acolyte Mantle	264
+            case 50615 : return 49979; // 	Handguards of Winter's Respite	277	-->	Handguards of Winter's Respite	264
+            case 51292 : return 51147; // 	Sanctified Lasherweave Mantle	277	-->	Sanctified Lasherweave Mantle	264
+            case 50667 : return 50010; // 	Waistband of Righteous Fury	277	-->	Waistband of Righteous Fury	264
+            case 51225 : return 51214; // 	Sanctified Ymirjar Lord's Battleplate	277	-->	Sanctified Ymirjar Lord's Battleplate	264
+            case 50716 : return 50075; // 	Taldaram's Plated Fists	277	-->	Taldaram's Plated Fists	264
+            case 51273 : return 51166; // 	Sanctified Lightsworn Spaulders	277	-->	Sanctified Lightsworn Spaulders	264
+            case 51389 : return 51388; // 	Wrathful Gladiator's Sunderer	277	-->	Wrathful Gladiator's Decapitator	264
+            case 50632 : return 50416; // 	Boots of the Funeral March	277	-->	Boots of the Funeral March	264
+            case 50685 : return 50028; // 	Trauma	277	-->	Trauma	264
+            case 51242 : return 51197; // 	Sanctified Frost Witch's Faceguard	277	-->	Sanctified Frost Witch's Faceguard	264
+            case 50364 : return 50361; // 	Sindragosa's Flawless Fang	277	-->	Sindragosa's Flawless Fang	264
+            case 51277 : return 51162; // 	Sanctified Lightsworn Helmet	277	-->	Sanctified Lightsworn Helmet	264
+            case 51450 : return 51449; // 	Wrathful Gladiator's Shotgun	277	-->	Wrathful Gladiator's Rifle	264
+            case 50650 : return 49995; // 	Fallen Lord's Handguards	277	-->	Fallen Lord's Handguards	264
+            case 50701 : return 50060; // 	Faceplate of the Forgotten	277	-->	Faceplate of the Forgotten	264
+            case 51258 : return 51181; // 	Sanctified Crimson Acolyte Pants	277	-->	Sanctified Crimson Acolyte Pants	264
+            case 50616 : return 49976; // 	Bulwark of Smouldering Steel	277	-->	Bulwark of Smouldering Steel	264
+            case 51293 : return 51146; // 	Sanctified Lasherweave Trousers	277	-->	Sanctified Lasherweave Trousers	264
+            case 50668 : return 50014; // 	Greatcloak of the Turned Champion	277	-->	Greatcloak of the Turned Champion	264
+            case 51226 : return 51213; // 	Sanctified Ymirjar Lord's Gauntlets	277	-->	Sanctified Ymirjar Lord's Gauntlets	264
+            case 50717 : return 50172; // 	Sanguine Silk Robes	277	-->	Sanguine Silk Robes	264
+            case 51391 : return 51390; // 	Wrathful Gladiator's Crusher	277	-->	Wrathful Gladiator's Bonegrinder	264
+            case 50633 : return 50421; // 	Sindragosa's Cruel Claw	277	-->	Sindragosa's Cruel Claw	264
+            case 50686 : return 50032; // 	Death Surgeon's Sleeves	277	-->	Death Surgeon's Sleeves	264
+            case 51243 : return 51196; // 	Sanctified Frost Witch's Grips	277	-->	Sanctified Frost Witch's Grips	264
+            case 50365 : return 50360; // 	Phylactery of the Nameless Lich	277	-->	Phylactery of the Nameless Lich	264
+            case 51278 : return 51161; // 	Sanctified Lightsworn Legplates	277	-->	Sanctified Lightsworn Legplates	264
+            case 51454 : return 51453; // 	Wrathful Gladiator's Salvation	277	-->	Wrathful Gladiator's Gavel	264
+            case 50651 : return 49994; // 	The Lady's Brittle Bracers	277	-->	The Lady's Brittle Bracers	264
+            case 50702 : return 50063; // 	Lingering Illness	277	-->	Lingering Illness	264
+            case 51259 : return 51180; // 	Sanctified Crimson Acolyte Raiments	277	-->	Sanctified Crimson Acolyte Raiments	264
+            case 50617 : return 49980; // 	Rusted Bonespike Pauldrons	277	-->	Rusted Bonespike Pauldrons	264
+            case 51294 : return 51145; // 	Sanctified Lasherweave Vestment	277	-->	Sanctified Lasherweave Vestment	264
+            case 50670 : return 50333; // 	Toskk's Maximized Wristguards	277	-->	Toskk's Maximized Wristguards	264
+            case 51227 : return 51212; // 	Sanctified Ymirjar Lord's Helmet	277	-->	Sanctified Ymirjar Lord's Helmet	264
+            case 50718 : return 50074; // 	Royal Crimson Cloak	277	-->	Royal Crimson Cloak	264
+            case 51393 : return 51392; // 	Wrathful Gladiator's Claymore	277	-->	Wrathful Gladiator's Greatsword	264
+            case 50635 : return 50423; // 	Sundial of Eternal Dusk	277	-->	Sundial of Eternal Dusk	264
+            case 50687 : return 50030; // 	Bloodsunder's Bracers	277	-->	Bloodsunder's Bracers	264
+            case 51244 : return 51195; // 	Sanctified Frost Witch's Chestguard	277	-->	Sanctified Frost Witch's Chestguard	264
+            case 50366 : return 50359; // 	Althor's Abacus	277	-->	Althor's Abacus	264
+            case 51279 : return 51160; // 	Sanctified Lightsworn Shoulderplates	277	-->	Sanctified Lightsworn Shoulderplates	264
+            case 51457 : return 51456; // 	Wrathful Gladiator's Light Staff	277	-->	Wrathful Gladiator's Energy Staff	264
+            case 50652 : return 49993; // 	Necrophotic Greaves	277	-->	Necrophotic Greaves	264
+            case 50703 : return 50064; // 	Unclean Surgical Gloves	277	-->	Unclean Surgical Gloves	264
+            case 51260 : return 51179; // 	Sanctified Crimson Acolyte Gloves	277	-->	Sanctified Crimson Acolyte Gloves	264
+            case 50618 : return 50186; // 	Frostbrood Sapphire Ring	277	-->	Frostbrood Sapphire Ring	264
+            case 51295 : return 51144; // 	Sanctified Lasherweave Handgrips	277	-->	Sanctified Lasherweave Handgrips	264
+            case 50671 : return 50015; // 	Belt of the Blood Nova	277	-->	Belt of the Blood Nova	264
+            case 51228 : return 51211; // 	Sanctified Ymirjar Lord's Legplates	277	-->	Sanctified Ymirjar Lord's Legplates	264
+            case 50719 : return 50173; // 	Shadow Silk Spindle	277	-->	Shadow Silk Spindle	264
+            case 50720 : return 50174; // 	Incarnadine Band of Mending	277	-->	Incarnadine Band of Mending	264
+            case 51395 : return 51394; // 	Wrathful Gladiator's Recurve	277	-->	Wrathful Gladiator's Longbow	264
+            case 50636 : return 50424; // 	Memory of Malygos	277	-->	Memory of Malygos	264
+            case 50688 : return 50413; // 	Nerub'ar Stalker's Cord	277	-->	Nerub'ar Stalker's Cord	264
+            case 51245 : return 51194; // 	Sanctified Frost Witch's Spaulders	277	-->	Sanctified Frost Witch's Spaulders	264
+            case 50603 : return 49919; // 	Cryptmaker	277	-->	Cryptmaker	264
+            case 51280 : return 51159; // 	Sanctified Bloodmage Gloves	277	-->	Sanctified Bloodmage Gloves	264
+            case 51481 : return 51480; // 	Wrathful Gladiator's Halberd	277	-->	Wrathful Gladiator's Pike	264
+            case 50653 : return 49998; // 	Shadowvault Slayer's Cloak	277	-->	Shadowvault Slayer's Cloak	264
+            case 50704 : return 50068; // 	Rigormortis	277	-->	Rigormortis	264
+            case 51261 : return 51178; // 	Sanctified Crimson Acolyte Hood	277	-->	Sanctified Crimson Acolyte Hood	264
+            case 50619 : return 50188; // 	Anub'ar Stalker's Gloves	277	-->	Anub'ar Stalker's Gloves	264
+            case 51296 : return 51143; // 	Sanctified Lasherweave Headguard	277	-->	Sanctified Lasherweave Headguard	264
+            case 50672 : return 50412; // 	Bloodvenom Blade	277	-->	Bloodvenom Blade	264
+            case 51229 : return 51210; // 	Sanctified Ymirjar Lord's Shoulderplates	277	-->	Sanctified Ymirjar Lord's Shoulderplates	264
+            case 50721 : return 50175; // 	Crypt Keeper's Bracers	277	-->	Crypt Keeper's Bracers	264
+            case 51398 : return 51406; // 	Wrathful Gladiator's Blade of Celerity	277	-->	Wrathful Gladiator's Blade of Alacrity	264
+            case 50638 : return 50034; // 	Zod's Repeating Longbow	277	-->	Zod's Repeating Longbow	264
+            case 50689 : return 50038; // 	Carapace of Forgotten Kings	277	-->	Carapace of Forgotten Kings	264
+            case 51246 : return 51193; // 	Sanctified Frost Witch's Legguards	277	-->	Sanctified Frost Witch's Legguards	264
+            case 50604 : return 49949; // 	Band of the Bone Colossus	277	-->	Band of the Bone Colossus	264
+            case 51281 : return 51158; // 	Sanctified Bloodmage Hood	277	-->	Sanctified Bloodmage Hood	264
+            case 51516 : return 51515; // 	Wrathful Gladiator's Handaxe	277	-->	Wrathful Gladiator's Cleaver	264
+            case 50654 : return 50411; // 	Scourgeborne Waraxe	277	-->	Scourgeborne Waraxe	264
+            case 51309 : return 51130; // 	Sanctified Scourgelord Pauldrons	277	-->	Sanctified Scourgelord Pauldrons	264
+            case 50705 : return 50069; // 	Professor's Bloodied Smock	277	-->	Professor's Bloodied Smock	264
+            case 51262 : return 51177; // 	Sanctified Crimson Acolyte Leggings	277	-->	Sanctified Crimson Acolyte Leggings	264
+            case 50620 : return 50187; // 	Coldwraith Links	277	-->	Coldwraith Links	264
+            case 51297 : return 51142; // 	Sanctified Lasherweave Legguards	277	-->	Sanctified Lasherweave Legguards	264
+            case 50673 : return 50022; // 	Dual-Bladed Pauldrons	277	-->	Dual-Bladed Pauldrons	264
+            case 51230 : return 51209; // 	Sanctified Dark Coven Gloves	277	-->	Sanctified Dark Coven Gloves	264
+            case 51231 : return 51208; // 	Sanctified Dark Coven Hood	277	-->	Sanctified Dark Coven Hood	264
+            case 50722 : return 50176; // 	San'layn Ritualist Gloves	277	-->	San'layn Ritualist Gloves	264
+            case 51399 : return 51397; // 	Wrathful Gladiator's Mageblade	277	-->	Wrathful Gladiator's Spellblade	264
+            case 50639 : return 49983; // 	Blood-Soaked Saronite Stompers	277	-->	Blood-Soaked Saronite Stompers	264
+            case 50690 : return 50037; // 	Fleshrending Gauntlets	277	-->	Fleshrending Gauntlets	264
+            case 51247 : return 51192; // 	Sanctified Frost Witch's Headpiece	277	-->	Sanctified Frost Witch's Headpiece	264
+            case 50605 : return 49952; // 	Snowserpent Mail Helm	277	-->	Snowserpent Mail Helm	264
+            case 51282 : return 51157; // 	Sanctified Bloodmage Leggings	277	-->	Sanctified Bloodmage Leggings	264
+            case 51518 : return 51517; // 	Wrathful Gladiator's Spike	277	-->	Wrathful Gladiator's Shanker	264
+            case 50655 : return 50000; // 	Scourge Hunter's Vambraces	277	-->	Scourge Hunter's Vambraces	264
+            case 51310 : return 51129; // 	Sanctified Scourgelord Battleplate	277	-->	Sanctified Scourgelord Battleplate	264
+            case 50706 : return 50351; // 	Tiny Abomination in a Jar	277	-->	Tiny Abomination in a Jar	264
+            case 51263 : return 51176; // 	Sanctified Crimson Acolyte Robe	277	-->	Sanctified Crimson Acolyte Robe	264
+            case 50621 : return 50183; // 	Lungbreaker	277	-->	Lungbreaker	264
+            case 51298 : return 51141; // 	Sanctified Lasherweave Raiment	277	-->	Sanctified Lasherweave Raiment	264
+            case 50674 : return 50020; // 	Raging Behemoth's Shoulderplates	277	-->	Raging Behemoth's Shoulderplates	264
+            case 51232 : return 51207; // 	Sanctified Dark Coven Leggings	277	-->	Sanctified Dark Coven Leggings	264
+            case 50723 : return 50177; // 	Mail of Crimson Coins	277	-->	Mail of Crimson Coins	264
+            case 51401 : return 51400; // 	Wrathful Gladiator's Combat Staff	277	-->	Wrathful Gladiator's War Staff	264
+            case 50640 : return 49986; // 	Broken Ram Skull Helm	277	-->	Broken Ram Skull Helm	264
+            case 50691 : return 50036; // 	Belt of Broken Bones	277	-->	Belt of Broken Bones	264
+            case 51248 : return 51191; // 	Sanctified Frost Witch's Handguards	277	-->	Sanctified Frost Witch's Handguards	264
+            case 50606 : return 49951; // 	Gendarme's Cuirass	277	-->	Gendarme's Cuirass	264
+            case 51283 : return 51156; // 	Sanctified Bloodmage Robe	277	-->	Sanctified Bloodmage Robe	264
+            case 50656 : return 50001; // 	Ikfirus's Sack of Wonder	277	-->	Ikfirus's Sack of Wonder	264
+            case 51311 : return 51128; // 	Sanctified Scourgelord Gauntlets	277	-->	Sanctified Scourgelord Gauntlets	264
+            case 50707 : return 50067; // 	Astrylian's Sutured Cinch	277	-->	Astrylian's Sutured Cinch	264
+            case 51264 : return 51175; // 	Sanctified Crimson Acolyte Shoulderpads	277	-->	Sanctified Crimson Acolyte Shoulderpads	264
+            case 50622 : return 50185; // 	Devium's Eternally Cold Ring	277	-->	Devium's Eternally Cold Ring	264
+            case 51299 : return 51140; // 	Sanctified Lasherweave Shoulderpads	277	-->	Sanctified Lasherweave Shoulderpads	264
+            case 50675 : return 50021; // 	Aldriana's Gloves of Secrecy	277	-->	Aldriana's Gloves of Secrecy	264
+            case 51233 : return 51206; // 	Sanctified Dark Coven Robe	277	-->	Sanctified Dark Coven Robe	264
+            case 50724 : return 50182; // 	Blood Queen's Crimson Choker	277	-->	Blood Queen's Crimson Choker	264
+            case 51403 : return 51402; // 	Wrathful Gladiator's Acute Staff	277	-->	Wrathful Gladiator's Focus Staff	264
+            case 50641 : return 49982; // 	Heartpierce	277	-->	Heartpierce	264
+            case 50692 : return 50035; // 	Black Bruise	277	-->	Black Bruise	264
+            case 51249 : return 51190; // 	Sanctified Frost Witch's Tunic	277	-->	Sanctified Frost Witch's Tunic	264
+            case 50607 : return 49950; // 	Frostbitten Fur Boots	277	-->	Frostbitten Fur Boots	264
+            case 51284 : return 51155; // 	Sanctified Bloodmage Shoulderpads	277	-->	Sanctified Bloodmage Shoulderpads	264
+            case 51520 : return 51519; // 	Wrathful Gladiator's Truncheon	277	-->	Wrathful Gladiator's Pummeler	264
+            case 50657 : return 49999; // 	Skeleton Lord's Circle	277	-->	Skeleton Lord's Circle	264
+            case 51312 : return 51127; // 	Sanctified Scourgelord Helmet	277	-->	Sanctified Scourgelord Helmet	264
+            case 50708 : return 50179; // 	Last Word	277	-->	Last Word	264
+            case 51265 : return 51174; // 	Sanctified Lightsworn Chestguard	277	-->	Sanctified Lightsworn Chestguard	264
+            case 50623 : return 50199; // 	Leggings of Dying Candles	277	-->	Leggings of Dying Candles	264
+            case 51300 : return 51139; // 	Sanctified Lasherweave Robes	277	-->	Sanctified Lasherweave Robes	264
+            case 50676 : return 50016; // 	Rib Spreader	277	-->	Rib Spreader	264
+            case 50677 : return 50019; // 	Winding Sheet	277	-->	Winding Sheet	264
+            case 51234 : return 51205; // 	Sanctified Dark Coven Shoulderpads	277	-->	Sanctified Dark Coven Shoulderpads	264
+            case 50725 : return 50181; // 	Dying Light	277	-->	Dying Light	264
+            case 51405 : return 51404; // 	Wrathful Gladiator's Skirmish Staff	277	-->	Wrathful Gladiator's Battle Staff	264
+            case 50642 : return 49985; // 	Juggernaut Band	277	-->	Juggernaut Band	264
+            case 50693 : return 50414; // 	Might of Blight	277	-->	Might of Blight	264
+            case 51250 : return 51189; // 	Sanctified Shadowblade Breastplate	277	-->	Sanctified Shadowblade Breastplate	264
+            case 50608 : return 49968; // 	Frozen Bonespike	277	-->	Frozen Bonespike	264
+            case 51285 : return 51154; // 	Sanctified Ahn'Kahar Blood Hunter's Handguards	277	-->	Sanctified Ahn'Kahar Blood Hunter's Handguards	264
+            case 51522 : return 51521; // 	Wrathful Gladiator's Longblade	277	-->	Wrathful Gladiator's Slicer	264
+            case 50658 : return 50005; // 	Amulet of the Silent Eulogy	277	-->	Amulet of the Silent Eulogy	264
+            case 51313 : return 51126; // 	Sanctified Scourgelord Legplates	277	-->	Sanctified Scourgelord Legplates	264
+            case 50709 : return 50415; // 	Bryntroll\, the Bone Arbiter	277	-->	Bryntroll\, the Bone Arbiter	264
+            case 51266 : return 51173; // 	Sanctified Lightsworn Faceguard	277	-->	Sanctified Lightsworn Faceguard	264
+            case 50624 : return 50192; // 	Scourge Reaver's Legplates	277	-->	Scourge Reaver's Legplates	264
+            case 51301 : return 51138; // 	Sanctified Lasherweave Gauntlets	277	-->	Sanctified Lasherweave Gauntlets	264
+            case 50678 : return 50025; // 	Seal of Many Mouths	277	-->	Seal of Many Mouths	264
+            case 51235 : return 51204; // 	Sanctified Frost Witch's Shoulderpads	277	-->	Sanctified Frost Witch's Shoulderpads	264
+            case 50726 : return 50354; // 	Bauble of True Blood	277	-->	Bauble of True Blood	264
+            case 51412 : return 51411; // 	Wrathful Gladiator's Repeater	277	-->	Wrathful Gladiator's Heavy Crossbow	264
+            case 50643 : return 49991; // 	Shoulders of Mercy Killing	277	-->	Shoulders of Mercy Killing	264
+            case 50694 : return 50056; // 	Plaguebringer's Stained Pants	277	-->	Plaguebringer's Stained Pants	264
+            case 51251 : return 51188; // 	Sanctified Shadowblade Gauntlets	277	-->	Sanctified Shadowblade Gauntlets	264
+            case 50609 : return 49975; // 	Bone Sentinel's Amulet	277	-->	Bone Sentinel's Amulet	264
+            case 51286 : return 51153; // 	Sanctified Ahn'Kahar Blood Hunter's Headpiece	277	-->	Sanctified Ahn'Kahar Blood Hunter's Headpiece	264
+            case 51524 : return 51523; // 	Wrathful Gladiator's Grasp	277	-->	Wrathful Gladiator's Right Ripper	264
+            case 50659 : return 50002; // 	Polar Bear Claw Bracers	277	-->	Polar Bear Claw Bracers	264
+            case 51314 : return 51125; // 	Sanctified Scourgelord Shoulderplates	277	-->	Sanctified Scourgelord Shoulderplates	264
+            case 50710 : return 50184; // 	Keleseth's Seducer	277	-->	Keleseth's Seducer	264
+            case 51267 : return 51172; // 	Sanctified Lightsworn Handguards	277	-->	Sanctified Lightsworn Handguards	264
+            case 50625 : return 50190; // 	Grinning Skull Greatboots	277	-->	Grinning Skull Greatboots	264
+            case 51302 : return 51137; // 	Sanctified Lasherweave Helmet	277	-->	Sanctified Lasherweave Helmet	264
+
+            /* Spalline Head Wrathful -> Relentles */
+            case 51460 : return 41158; //	Wrathful Gladiator's Chain Helm --> Relentless Gladiator's Chain Helm
+            case 51462 : return 41218; //	Wrathful Gladiator's Chain Spaulders --> Relentless Gladiator's Chain Spaulders
+            case 51427 : return 41679; //	Wrathful Gladiator's Dragonhide Helm --> Relentless Gladiator's Dragonhide Helm
+            case 51430 : return 41716; //	Wrathful Gladiator's Dragonhide Spaulders --> Relentless Gladiator's Dragonhide Spaulders
+            case 51415 : return 40830; //	Wrathful Gladiator's Dreadplate Helm --> Relentless Gladiator's Dreadplate Helm
+            case 51418 : return 40871; //	Wrathful Gladiator's Dreadplate Shoulders --> Relentless Gladiator's Dreadplate Shoulders
+            case 51540 : return 42012; //	Wrathful Gladiator's Felweave Amice --> Relentless Gladiator's Felweave Amice
+            case 51538 : return 41994; //	Wrathful Gladiator's Felweave Cowl --> Relentless Gladiator's Felweave Cowl
+            case 51421 : return 41322; //	Wrathful Gladiator's Kodohide Helm --> Relentless Gladiator's Kodohide Helm
+            case 51424 : return 41276; //	Wrathful Gladiator's Kodohide Spaulders --> Relentless Gladiator's Kodohide Spaulders
+            case 51494 : return 41673; //	Wrathful Gladiator's Leather Helm --> Relentless Gladiator's Leather Helm
+            case 51496 : return 41684; //	Wrathful Gladiator's Leather Spaulders --> Relentless Gladiator's Leather Spaulders
+            case 51505 : return 41152; //	Wrathful Gladiator's Linked Helm --> Relentless Gladiator's Linked Helm
+            case 51508 : return 41212; //	Wrathful Gladiator's Linked Spaulders --> Relentless Gladiator's Linked Spaulders
+            case 51511 : return 41020; //	Wrathful Gladiator's Mail Helm --> Relentless Gladiator's Mail Helm
+            case 51514 : return 41045; //	Wrathful Gladiator's Mail Spaulders --> Relentless Gladiator's Mail Spaulders
+            case 51484 : return 41855; //	Wrathful Gladiator's Mooncloth Hood --> Relentless Gladiator's Mooncloth Hood
+            case 51486 : return 41870; //	Wrathful Gladiator's Mooncloth Mantle --> Relentless Gladiator's Mooncloth Mantle
+            case 51470 : return 40934; //	Wrathful Gladiator's Ornamented Headcover --> Relentless Gladiator's Ornamented Headcover
+            case 51473 : return 40964; //	Wrathful Gladiator's Ornamented Spaulders --> Relentless Gladiator's Ornamented Spaulders
+            case 51543 : return 40829; //	Wrathful Gladiator's Plate Helm --> Relentless Gladiator's Plate Helm
+            case 51545 : return 40870; //	Wrathful Gladiator's Plate Shoulders --> Relentless Gladiator's Plate Shoulders
+            case 51499 : return 41014; //	Wrathful Gladiator's Ringmail Helm --> Relentless Gladiator's Ringmail Helm
+            case 51502 : return 41039; //	Wrathful Gladiator's Ringmail Spaulders --> Relentless Gladiator's Ringmail Spaulders
+            case 51489 : return 41916; //	Wrathful Gladiator's Satin Hood --> Relentless Gladiator's Satin Hood
+            case 51491 : return 41935; //	Wrathful Gladiator's Satin Mantle --> Relentless Gladiator's Satin Mantle
+            case 51476 : return 40831; //	Wrathful Gladiator's Scaled Helm --> Relentless Gladiator's Scaled Helm
+            case 51479 : return 40872; //	Wrathful Gladiator's Scaled Shoulders --> Relentless Gladiator's Scaled Shoulders
+            case 51467 : return 41966; //	Wrathful Gladiator's Silk Amice --> Relentless Gladiator's Silk Amice
+            case 51465 : return 41947; //	Wrathful Gladiator's Silk Cowl --> Relentless Gladiator's Silk Cowl
+            case 51435 : return 41328; //	Wrathful Gladiator's Wyrmhide Helm --> Relentless Gladiator's Wyrmhide Helm
+            case 51438 : return 41282; //	Wrathful Gladiator's Wyrmhide Spaulders --> Relentless Gladiator's Wyrmhide Spaulders
+        }; //
     }
 
     return false;
 }
+   
