@@ -13,8 +13,14 @@ function _ServerOn($SOAPUser, $SOAPPassword, $SOAPPort, $SOAPHost, $URI) {
     return true;
 }
 
+/**
+ * 
+ * @param type $DBuild
+ * @param type $DServer
+ * @return boolean true if error, false if not
+ */
 function CheckGameBuild($DBuild, $DServer) {
-    return in_array($DBuild, $DServer) ? true : false;
+    return !in_array($DBuild, $DServer);
 }
 
 function _CheckCurrency($ID) {

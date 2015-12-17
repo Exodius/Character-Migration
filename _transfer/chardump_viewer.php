@@ -72,7 +72,7 @@ require_once("definitions.php");
         ++$AchievementsCount;
       }
       if (CheckGameBuild($json['ginf']['clientbuild'], $GAMEBUILD)) {
-        $reason = _RT($write[50] . " " . implode(",",$GAMEBUILD));
+        $reason = _RT($write[50] . ": ".$json['ginf']['clientbuild']. " supportate: " . implode(",",$GAMEBUILD));
       } else if (((10 + $CharLevel > $AchievementsCount) || ($AchievementsCount > $AchievementsMinCount)) && $AchievementsCheck == 1)       {
         $reason = _RT("Seems bad characters, not enought achievements!");
       }/*

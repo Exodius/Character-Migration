@@ -42,7 +42,6 @@ function private.GetSpellData()
             if spellInfo ~= nil then
                 for spellid in string.gmatch(GetSpellLink(s, BOOKTYPE_SPELL),".-Hspell:(%d+).*") do 
                     retTbl[spellid] = i;
-                    private.ILog("id " .. spellid); 
                 end 
             end
         end
@@ -148,6 +147,7 @@ function private.GetIData()
     private.ILog("Inventory DONE...");    
     return retTbl;
 end
+
 function private.GetSkillData()
     local retTbl = {}
     for i = 1, GetNumSkillLines() do 
