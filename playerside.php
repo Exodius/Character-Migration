@@ -14,7 +14,7 @@ else if (isset($_POST['viewer']))
     $step = 5;
 else
     $step = 3;
-    
+
 
 if (!isset($_SESSION['loged']))
     Header('Location: index.php');
@@ -28,11 +28,10 @@ include_once("_transfer/t_config.php");
 $ID = $_SESSION['id'];
 
 /* //maintenance advice
-echo "
-    <h1>IL TOOL DEL PORTING ATTUALMENTE IN MANUTENZIONE, NON UTILIZZARLO!</h1>
-    <h2>Torna più tardi</h2>";
-*/
-
+  echo "
+  <h1>IL TOOL DEL PORTING ATTUALMENTE IN MANUTENZIONE, NON UTILIZZARLO!</h1>
+  <h2>Torna più tardi</h2>";
+ */
 ?>
 
 <table width = "800" align = "center" cellpadding = "0" cellspacing = "0">
@@ -145,10 +144,10 @@ if (!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $Allo
                 }
             });
         }
-        
-        function popUp(content) {
-            var win = window.open("", "Items", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=780, height=200, top="+(screen.height-400)+", left="+(screen.width-840));
-            win.document.body.innerHTML = "<span style='word-wrap: break-word;'>"+content+"</span>";
+
+        function popUp (content) {
+            var win = window.open("", "Items", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=780, height=200, top=" + (screen.height - 400) + ", left=" + (screen.width - 840));
+            win.document.body.innerHTML = "<span style='word-wrap: break-word;'>" + content + "</span>";
         }
 
     <?php
@@ -181,7 +180,7 @@ ob_end_flush();
 
 function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels, $TEXT1, $TEXT2, $TEXT3, $TEXT4, $TEXT5, $TEXT6, $TEXT7, $TEXT8, $TEXT9, $TEXT10, $TEXT11, $TEXT12, $TEXT13) {
     global $transferType;
-    
+
     if (_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels)) {
         echo "
         <a href='http://azerothshard.ga/wow-char-migration/_transfer/chardump_viewer.php'>Vai al visualizzatore dei dumps</a>
@@ -260,9 +259,9 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
                         <td>" . $row["oPassword"] . "</td>
                         <td>" . $row["oServer"] . "</td>
                         <td>" . $transferType[$row["tType"]]["Type"] . "</td>
-                        <td>Addon Rev: ".($row["addonVersion"] ? $row["addonVersion"] : "<Empty>")." <br><br>
-                        <button onclick='popUp(\"" . str_replace(' ',"<br>",$row["cItemRow"]) . "\")'>Item List</button><br>
-                        <button onclick='popUp(\"CHDMP_DATA = \\\"" . $row["cDump"]. "\\\" \")'>Dump</button></td>
+                        <td>Addon Rev: " . ($row["addonVersion"] ? $row["addonVersion"] : "<Empty>") . " <br><br>
+                        <button onclick='popUp(\"" . str_replace(' ', "<br>", $row["cItemRow"]) . "\")'>Item List</button><br>
+                        <button onclick='popUp(\"CHDMP_DATA = \\\"" . $row["cDump"] . "\\\" \")'>Dump</button></td>
                         <td>" . $row["date_created"] . "</td>
                         <td>" . $row["cAccount"] . "</td>
                         <td align = center>

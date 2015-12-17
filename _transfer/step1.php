@@ -1,5 +1,4 @@
 <?php
-
 include_once("t_dbfunctions.php");
 include_once("t_functions.php");
 include_once("t_config.php");
@@ -26,21 +25,21 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
     unlink($file);
     $part = explode('"', $buffer);
     if (isset($part[1])) {
-        $DUMP = $part[1];      
-        $arrDump=parse_ini_string ( $buffer  );
+        $DUMP = $part[1];
+        $arrDump = parse_ini_string($buffer);
 
         $VER = isset($arrDump["CHDMP_VER"]) ? $arrDump["CHDMP_VER"] : "Unknown";
-        
-        if (!in_array($VER, $addonVers) && (!isset($_POST["obsolete"]) || $_POST["obsolete"]!="enable")) {
-        ?>
+
+        if (!in_array($VER, $addonVers) && (!isset($_POST["obsolete"]) || $_POST["obsolete"] != "enable")) {
+            ?>
             <script>
-            alert("!!ATTENZIONE!!\n\nLa versione dell'addon con cui è stato estratto questo chardump è obsoleta:<?=$VER?>\n\n Potresti avere problemi al termine del porting!\n\nSe vuoi comunque proseguire, premi su ok ed abilita il caricamento dei chardump obsoleti nella pagina precedente!");
-            window.location.href = "playerside.php";
+                alert("!!ATTENZIONE!!\n\nLa versione dell'addon con cui è stato estratto questo chardump è obsoleta:<?= $VER ?>\n\n Potresti avere problemi al termine del porting!\n\nSe vuoi comunque proseguire, premi su ok ed abilita il caricamento dei chardump obsoleti nella pagina precedente!");
+                window.location.href = "playerside.php";
             </script>
-        <?php
+            <?php
             die();
         }
-        
+
         $REALM_NAME = $_POST['RealmlistList'];
         $DECODED_DUMP = _DECRYPT($DUMP);
         $CHAR_REALM = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $REALM_NAME);
@@ -75,20 +74,20 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
                 $ACHMAXTime = $value['D'];
             ++$AchievementsCount;
         }
-        
-        $delay=checkDelay();
 
-        $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB,_CharacterDBSwitch($CHAR_REALM), $pType);
-        if ($limit==0) {
+        $delay = checkDelay();
+
+        $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB, _CharacterDBSwitch($CHAR_REALM), $pType);
+        if ($limit == 0) {
             $reason = "Questa tipologia di porting non è disponibile per il tuo account!";
         } else if (CheckGameBuild($json['ginf']['clientbuild'], $GAMEBUILD)) {
-            $reason = _RT($write[50] . " " . implode(",",$GAMEBUILD));
+            $reason = _RT($write[50] . " " . implode(",", $GAMEBUILD));
         } else if (((10 + $CharLevel > $AchievementsCount) || ($AchievementsCount > $AchievementsMinCount)) && $AchievementsCheck == 1) {
             $reason = _RT("Seems bad characters, not enought achievements!");
         } else if (CHECKDAY($ACHMAXTime, $ACHMINTime) < $PLAYTIME) {
             $reason = _RT("Small playtime!");
         } else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST, $O_REALM, $o_URL)) {
-            $reason = _RT($write[57]." [ realm: ".(empty($O_REALMLIST) ? "No realmlist" : $O_REALMLIST)." --- ".(empty($O_REALM) ? "No realmn name" : $O_REALM)." ]");
+            $reason = _RT($write[57] . " [ realm: " . (empty($O_REALMLIST) ? "No realmlist" : $O_REALMLIST) . " --- " . (empty($O_REALM) ? "No realmn name" : $O_REALM) . " ]");
         } else if (CanOrNoTransferPlayer(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $AccountDB, $CHAR_ACCOUNT_ID)) {
             $reason = _RT($write[52] . " " . $REALM_NAME . ". " . $write[53]);
         } else if ($PLAYER_TRANSFER_STACKS < 0) {
@@ -97,11 +96,11 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             $reason = _RT($write[99]);
         } else if (!_ServerOn($SOAPUser, $SOAPPassword, _SOAPPSwitch($CHAR_REALM), _SOAPHSwitch($CHAR_REALM), _SOAPURISwitch($CHAR_REALM))) {
             $reason = _RT("Realm: \"" . $REALM_NAME . "\" <u>OFFLINE!</u>");
-        } else if (checkDuplicate($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_NAME,$O_REALM,$O_REALMLIST) ) { 
+        } else if (checkDuplicate($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_NAME, $O_REALM, $O_REALMLIST)) {
             $reason = _RT("Questo personaggio è già stato importato!");
-        } else if ($delay<0) {
-            $reason = _RT("Un altro porting è in corso, riprovare tra ".abs($delay)." secondi");
-        } 
+        } else if ($delay < 0) {
+            $reason = _RT("Un altro porting è in corso, riprovare tra " . abs($delay) . " secondi");
+        }
 
         $GUID = CheckCharacterGuid($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, GetCharacterGuid(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM)));
 
@@ -136,7 +135,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         // it will be updated after
         mysql_query("
         INSERT INTO `characters`(`guid`,`name`,`level`,`gender`,`totalHonorPoints`,`arenaPoints`,`totalKills`,`money`,`class`,`race`,`at_login`,`account`,`deleteInfos_Account`,`deleteInfos_Name`,`taximask`, `talentGroupsCount`, `online`) VALUES (
-        " . $GUID . ",\"".$ID."\"," . (int) $CharLevel . "," . (int) $char_gender . "," . (int) $char_honorpoints . "," . (int) $char_arenapoints . ",
+        " . $GUID . ",\"" . $ID . "\"," . (int) $CharLevel . "," . (int) $char_gender . "," . (int) $char_honorpoints . "," . (int) $char_arenapoints . ",
         " . (int) $char_totalkills . "," . (int) $char_money . "," . $ClassID . "," . $RaceID . ", 0x180, $STORAGE, $CHAR_ACCOUNT_ID, \"" . _X($CHAR_NAME) . "\", \"0 0 0 0 0 0 0 0 0 0 0 0 0 0\"," . (int) $char_speccount . ", 0);", $connection);
         $QUERYFOREXECUTE = $QUERYFOREXECUTE . "
         INSERT INTO `character_transfer` VALUES (" . $GUID . "," . $CHAR_ACCOUNT_ID . "," . $PLAYER_TRANSFER_STACKS . "," . $ID . ");
@@ -184,11 +183,11 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             if ($faction < 1 || $reputation < 1)
                 continue;
             $flag = $value['F'] + 1;
-            
+
             // give ALL Sons of Hodir chain quests only when honored ( top of friendly )
-            if ($faction == 1119 && $reputation >= 6000) 
+            if ($faction == 1119 && $reputation >= 6000)
                 $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n " . SonsOfHordirTransfer($GUID);
-            
+
             $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* REPUTATION */ INTO `character_reputation` VALUES (" . $GUID . ", " . $faction . ", " . (int) $reputation . "," . (int) $flag . ");";
         }
 
@@ -273,7 +272,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             include("step2.php");
         } else {
             saveLastPortingTime();
-            
+
             UpdateDumpStatus($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, 0);
             UpdateCharacterName(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $CHAR_NAME, $GUID);
             _PreparateMails($row, $CHAR_NAME, $TransferLetterTitle, $TransferLetterMessage, $SOAPUser, $SOAPPassword, _SOAPPSwitch($CHAR_REALM), _SOAPHSwitch($CHAR_REALM), _SOAPURISwitch($CHAR_REALM));
@@ -290,21 +289,19 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             window.location.href = "playerside.php";
         </script>
         <?php
-
         die();
     }
 
 
-    $delay=checkDelay();
-    
-    if ($delay<0) {
+    $delay = checkDelay();
+
+    if ($delay < 0) {
         ?>
         <script type="text/javascript">
-            alert("Un altro porting è in corso, Riprovare tra <?=abs($delay)?> secondi");
+            alert("Un altro porting è in corso, Riprovare tra <?= abs($delay) ?> secondi");
             window.location.href = "playerside.php";
         </script>
         <?php
-
         die();
     }
 
@@ -316,7 +313,6 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             window.location.href = "playerside.php";
         </script>
         <?php
-
         die();
     }
 
@@ -341,7 +337,7 @@ function Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $TEXT1, $TE
     mysql_close($connection);
     while ($row = mysql_fetch_array($result))
         echo "<option name=\"" . $row['id'] . "\">" . $row['name'] . "</option>";
-        echo "</select><tr><td>
+    echo "</select><tr><td>
                 <br><br>
                 <tr><td><br><br><div align = left class = \"MythTable\">" . $TEXT5 . "</div></td></tr>
                 <tr><td><b>Server URL ( Sito ): </b><input required name=\"ServerUrl\" type=\"text\" size=\"60\" style = \"float: right;\"></td></tr>
@@ -366,14 +362,13 @@ function HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) {
 
     for ($i = 0; $i < count($transferType); $i++) {
         $CHAR_REALM = GetRealmID($AccountDBHost, $DBUser, $DBPassword, $AccountDB, REALM_NAME);
-        $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB,_CharacterDBSwitch($CHAR_REALM), $i);
+        $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB, _CharacterDBSwitch($CHAR_REALM), $i);
         $isDisabled = $limit == 0 ? "disabled" : "";
         if ($limit == 0)
             $dCnt++;
 
         $output .= "<input type='radio' name='PortingType' value='$i' $isDisabled required/> <b><span class='porting-type'>" . $transferType[$i]['Type'] . "</span></b> ( Slot disponibili: " . ($limit < 0 ? "∞" : $limit) . ")<br>";
-        $output .= $transferType[$i]['Descr']."<br><br>";
-        
+        $output .= $transferType[$i]['Descr'] . "<br><br>";
     }
 
     if ($dCnt == count($transferType)) {

@@ -1,10 +1,10 @@
 <?php
 
-define("PFREE",0);
-define("PBASIC",1);
-define("PFULL",2);
+define("PFREE", 0);
+define("PBASIC", 1);
+define("PFULL", 2);
 
-$addonVers=array("335.705","434.701");
+$addonVers = array("335.705", "434.701");
 
 $transferType = array();
 // FREE

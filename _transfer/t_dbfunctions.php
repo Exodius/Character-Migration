@@ -37,8 +37,8 @@ function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $charDb, $type) {
     $query1 = mysql_query("SELECT COUNT(*) FROM `account_transfer` WHERE `cAccount` = " . (int) $account . " AND ( cStatus = 1 OR cStatus = 0 ) AND tType = $type ;", $connection) or die(mysql_error());
     $result1 = mysql_fetch_array($query1);
 
-    $result2=false;
-    
+    $result2 = false;
+
     // skip db check if we've this feature disabled
     if ($limitTransfer) {
         $query2 = mysql_query("SELECT quantity FROM `account_transfer_slots` WHERE `account` = " . (int) $account . " AND type = $type;", $connection) or die(mysql_error());
@@ -46,8 +46,8 @@ function checkLimit($DBHost, $DBUser, $DBPassword, $AccountDB, $charDb, $type) {
     }
 
     mysql_close($connection);
-    
-    if ($result2[0]<0)
+
+    if ($result2[0] < 0)
         return -1;
 
     if ($result2 === false) {
@@ -155,7 +155,7 @@ function CanOrNoTransferServer($DBHost, $DBUser, $DBPassword, $AccountDB, $Realm
     }
 }
 
-function checkDuplicate($DBHost, $DBUser, $DBPassword, $AccountDB, $charNameOld,$realm,$realmlist) {
+function checkDuplicate($DBHost, $DBUser, $DBPassword, $AccountDB, $charNameOld, $realm, $realmlist) {
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);
     $query = mysql_query("SELECT count(*) "
@@ -164,32 +164,32 @@ function checkDuplicate($DBHost, $DBUser, $DBPassword, $AccountDB, $charNameOld,
             . "AND oRealm = '$realm' "
             . "AND oRealmList != 'azerothshard.servegame.com' AND  oRealmList = '$realmlist' "
             . "AND ( cStatus = 1 OR cStatus = 0 )", $connection) or die(mysql_error());
-    
+
     $row = mysql_fetch_array($query);
     mysql_close($connection);
-    
-    return $row[0]>0;
+
+    return $row[0] > 0;
 }
 
 function checkHas80($DBHost, $DBUser, $DBPassword, $charDB, $accountId) {
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($charDB, $connection);
-    $sql="SELECT COUNT(*) FROM `characters` WHERE level = 80 AND account = $accountId;";
+    $sql = "SELECT COUNT(*) FROM `characters` WHERE level = 80 AND account = $accountId;";
     $query = mysql_query($sql, $connection) or die(mysql_error());
     $row = mysql_fetch_array($query);
     mysql_close($connection);
 
-    return $row[0]>0;
+    return $row[0] > 0;
 }
 
-function _CheckBlackList($DBHost, $DBUser, $DBPassword, $AccountDB, $realmlist,$realm,$url) {
+function _CheckBlackList($DBHost, $DBUser, $DBPassword, $AccountDB, $realmlist, $realm, $url) {
     if (empty($realmlist) || empty($realm)) // localhost case
         return false;
-    
+
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);
-    $sql="SELECT * FROM `account_transfer_blacklist` WHERE "
-            . " ( `b_address` = '" . _X($realmlist) . "' AND ( `b_realmName` = '*' OR `b_realmName` = '"._X($realm)."'))" 
+    $sql = "SELECT * FROM `account_transfer_blacklist` WHERE "
+            . " ( `b_address` = '" . _X($realmlist) . "' AND ( `b_realmName` = '*' OR `b_realmName` = '" . _X($realm) . "'))"
             . " OR `b_url` LIKE '%" . _X(trim($url)) . "%';";
     $query = mysql_query($sql, $connection) or die(mysql_error());
     $row = mysql_fetch_array($query);
@@ -407,7 +407,7 @@ function WriteDumpFromFileInDB($DBHost, $DBUser, $DBPassword, $AccountDB, $DUMP,
     $query = mysql_query("INSERT INTO `account_transfer`(
         `cStatus`,`cRealm`,`oAccount`,`oPassword`,`oRealmlist`,`oRealm`,`oServer`,`cDump`,`cNameOLD`,`cNameNEW`,`cAccount`,`addonVersion`,`GUID`,`gmAccount`,`tType`) VALUES (
         5,\"" . _X($CHAR_REALM) . "\",\"" . _X($o_Account) . "\",\"" . _X($o_Password) . "\",\"" . _X($O_REALMLIST) . "\",\"" . _X($O_REALM) . "\",\"" . _X($o_URL) . "\"
-        ,\"" . _X($DUMP) . "\",\"" . _X($CHAR_NAME) . "\",\"" . _X($CHAR_NAME) . "\"," . $CHAR_ACCOUNT_ID . ",\""._X($VER)."\"," . $GUID . "," . $GM_ACCOUNT . "," . $PTYPE . ");", $connection) or die(mysql_error());
+        ,\"" . _X($DUMP) . "\",\"" . _X($CHAR_NAME) . "\",\"" . _X($CHAR_NAME) . "\"," . $CHAR_ACCOUNT_ID . ",\"" . _X($VER) . "\"," . $GUID . "," . $GM_ACCOUNT . "," . $PTYPE . ");", $connection) or die(mysql_error());
     $ID = mysql_insert_id($connection);
     mysql_close($connection);
     return $ID;

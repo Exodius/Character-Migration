@@ -1,5 +1,4 @@
 ﻿<?php
-
 require_once("item_list.php");
 require_once("definitions.php");
 
@@ -32,7 +31,6 @@ function _CheckCurrency($ID) {
     }
 }
 
-
 function CHECKDAY($TIME1, $TIME2) {
     $DIFF = floor(($TIME1 - $TIME2) / 86400);
     return $DIFF;
@@ -45,8 +43,8 @@ function CheckItemCount($count) {
 }
 
 function checkDelay() {
-    $delay=DELAY_TIME;
-    
+    $delay = DELAY_TIME;
+
     $timeFile = "./storage/lastporting.txt";
     $handle = fopen($timeFile, 'r');
 
@@ -68,7 +66,7 @@ function checkDelay() {
         return true;
     }
 
-    $remain= -1*abs($delay-$diff);
+    $remain = -1 * abs($delay - $diff);
 
     return $remain;
 }
@@ -85,17 +83,17 @@ function _PreparateMails($row, $PlayerName, $TransferLetterTitle, $TransferLette
     $by10 = 1;
     $toSend = "";
     $needSend = count($item_array);
-    $skip=false;
+    $skip = false;
     for ($i = 0; $i < count($item_array); $i++) {
-        $item=explode(":", $item_array[$i]);
-        if ($item[0]<0) {
-            echo "Questo item non esiste o non è consentito sul nostro server e pertanto non può essere importato: ".abs($id)."<br>\n";
+        $item = explode(":", $item_array[$i]);
+        if ($item[0] < 0) {
+            echo "Questo item non esiste o non è consentito sul nostro server e pertanto non può essere importato: " . abs($id) . "<br>\n";
             $needSend--;
-            $skip=true;
+            $skip = true;
         } else {
             $toSend .= $item_array[$i];
             $toSend .= " ";
-            $skip=false;
+            $skip = false;
         }
 
         usleep(100000); // slow down process to avoid world freeze
