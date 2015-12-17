@@ -307,6 +307,8 @@ require_once("definitions.php");
 
       echo '</div>';
 
+      $quests="";
+      
       /* REPUTATIONS */
       echo "<b class=\"text-warning\">Reputations</b><br>";
       $locale = trim(strtoupper($json['ginf']['locale']));
@@ -317,7 +319,18 @@ require_once("definitions.php");
                 continue;
         
         echo ($value['V'] != 0 ? "<i style=\"color: #777;\">".$value['V']."</i> <a href=\"http://wotlk.openwow.com/faction=".$value['V']."\">" . $value['N']."</a><br>" : "");
+        
+        if ($faction == 1119 && $reputation >= 6000) {
+            $quests.="- Sons of Hodir chain<br>";
+        } 
+        
       }
+      
+      if ($ClassID == 6)
+          $quests.="- Death Knight chain<br>";
+      
+      if ($quests != "")
+        echo "<b class=\"text-warning\">Quests</b><br>".$quests."<br><br>";
         
       echo "<br><br><br></div>";
   ?>

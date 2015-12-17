@@ -184,8 +184,11 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             if ($faction < 1 || $reputation < 1)
                 continue;
             $flag = $value['F'] + 1;
-            if ($faction == 1119 && $reputation > 1)
+            
+            // give ALL Sons of Hodir chain quests only when honored ( top of friendly )
+            if ($faction == 1119 && $reputation >= 6000) 
                 $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n " . SonsOfHordirTransfer($GUID);
+            
             $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* REPUTATION */ INTO `character_reputation` VALUES (" . $GUID . ", " . $faction . ", " . (int) $reputation . "," . (int) $flag . ");";
         }
 
