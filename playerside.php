@@ -193,9 +193,9 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
         mysql_close($connection);
     } else {
         echo "
-            <center><h1>Visualizzatore Chardump ( Beta )</h1></center>
+            <center><h1>Visualizzatore Chardump</h1></center>
             <br>
-            <div style = \"font-size:17px\">Prima di iniziare, controlla cosa verrà importato utilizzando questo visualizzatore</div>
+            <div style = \"font-size:17px\"><b>Prima di iniziare, controlla cosa verrà importato utilizzando questo visualizzatore!</b></div>
             <br>
             <br>
             <div class = \"MythInput\">

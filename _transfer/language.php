@@ -251,11 +251,13 @@ switch ($language) {
             $write[75] = '<span style="font-size:18px"><ol>'
                     . '<li>Scarica l\'addon del gioco per estrarre il personaggio QUI: '
                     . '<br><b> <a href = "addons/wotlk/chardump.zip">  Addon versione '.$addonVers[0].' ( Per Wrath of the lich King )</a>'
-                    . '<br><b> <a href = "addons/cata/chardump.zip">  Addon versione '.$addonVers[1].' ( Per Cataclysm )</a> '
-                    . '<br>installalo nel tuo client, avvia il gioco ed abilitalo </b> <br> </li>'
+                    . '<br><br><b> <a href = "addons/cata/chardump.zip">  Addon versione '.$addonVers[1].' ( Per Cataclysm ) ATTENZIONE: QUESTO ADDON E\' IN TEST, NON UTILIZZARE PER EFFETTUARE IL PORTING!</a> '
+                    . '<br><br>installalo nel tuo client, avvia il gioco ed abilitalo </b> <br> <br>'
+                    . '</li>'
                     . '<li>Per estrarre "alcune" delle <b>ricette delle professioni</b> aprite le finestre delle professioni e delle ricette per "mostrarle all\'addon" e poi chiudetele</li> <br><li> Aprite la finestra dell\'equip per mostrare gli items che avete indossato all\'addon <br></li>'
                     . '<li>Per estrarre gli oggetti della <b>banca</b> , aprire la finestra della banca e tutte le borse all\'interno ( questa deve restare aperta mentre si lancia il successivo comando ). <br></li><li> Scrivere <b>/chardump</b> nella finestra della chat in gioco. <br></li>'
                     . '<li> Effettuare il logout e il file dump verrà salvato dove avete installato il gioco, esattamente nella sottocartella <b>WTF\Account\%username%\SavedVariables\chardump.lua</b> <br> </a> dove %username% è il nome del tuo vecchio account </li>'
+                    . '<li> ATTENZIONE: i vostri items vengono conservati nella mailbox in game per pochi giorni, assicuratevi di entrare subito dopo che il vostro porting è stato accettato, altrimenti essi verranno definitivamente eliminati dal sistema!</li>'
                     . '</ol>'
                     . '</span>';
             $write[77] = 'Avvia il trasferimento, FASE 2';
