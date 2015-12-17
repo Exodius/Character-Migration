@@ -33,7 +33,7 @@ end
 function private.GetSpellData()
     local retTbl = {}
     for i = 1, MAX_SKILLLINE_TABS do
-        local name, _, _, offset, numSpells = GetSpellTabInfo(i);
+        local name, _, offset, numSpells = GetSpellTabInfo(i);
         if not name then
             break;
         end
@@ -42,6 +42,7 @@ function private.GetSpellData()
             if spellInfo ~= nil then
                 for spellid in string.gmatch(GetSpellLink(s, BOOKTYPE_SPELL),".-Hspell:(%d+).*") do 
                     retTbl[spellid] = i;
+                    private.ILog("id " .. spellid); 
                 end 
             end
         end

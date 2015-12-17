@@ -40,10 +40,10 @@ require_once("definitions.php");
       $DUMP = $part[1];      
       $arrDump=parse_ini_string ( $buffer  );
 
-      $VER = isset($arrDump["CHDMP_VER"]) ? $arrDump["CHDMP_VER"] : "<335.700";
-      if ($VER!=ADDON_VER)
+      $VER = isset($arrDump["CHDMP_VER"]) ? $arrDump["CHDMP_VER"] : "Unknown";
+      if (!in_array($VER, $addonVers))
         echo "<h2 class=\"text-warning\">!!ATTENZIONE!!</h2>
-        <p class=\"text-danger\">La versione dell'addon con cui è stato estratto questo chardump è obsoleta: $VER <br> La nuova versione è la: ".ADDON_VER."<br><br>Potresti avere problemi al termine del porting!.<br><br></p>";
+        <p class=\"text-danger\">La versione dell'addon con cui è stato estratto questo chardump è obsoleta: $VER <br><br>Potresti avere problemi al termine del porting!.<br><br></p>";
 
       $REALM_NAME = REALM_NAME;
       $DECODED_DUMP = _DECRYPT($DUMP);
@@ -53,7 +53,10 @@ require_once("definitions.php");
       $CharLevel = _MaxValue($json['uinf']['level'], $MaxCL);
       $O_REALMLIST = $json['ginf']['realmlist'];
       $O_REALM = $json['ginf']['realm'];
+      $ClassID = _GetClassID(strtoupper($json['uinf']['class']));
+      $RaceID = _GetRaceID(strtoupper($json['uinf']['race']));
       $pType = $_POST["PortingType"];
+      $locale = trim(strtoupper($json['ginf']['locale']));
 
 
       $AchievementsCount = 0;
@@ -112,31 +115,26 @@ require_once("definitions.php");
       echo "<b class=\"text-info\">clientbuild:</b>".$json['ginf']['clientbuild']."<br><br>";
 
       /* CHARACTER */
-      /* apply some filters */
-      if ($json['uinf']['honor']> $MaxHP) $json['uinf']['honor'] = $MaxHP;
-      if ($json['uinf']['arenapoints']> $MaxAP) $json['uinf']['arenapoints'] = $MaxAP;
-      if ($json['uinf']['level']> $MaxCL) $json['uinf']['level'] = $MaxCL;
 
       echo '<b class="text-warning">Character</b><br>';
       echo "<b class=\"text-info\">Name:</b> ".$json['uinf']['name']."<br>";
-      echo "<b class=\"text-info\">Level:</b> ".$json['uinf']['level']."<br>";
+      echo "<b class=\"text-info\">Level:</b> ".$CharLevel."<br>";
       echo "<b class=\"text-info\">Race:</b> ".$json['uinf']['race']."<br>";
+      echo "<b class=\"text-info\">Gender:</b> ".$char_gender."<br>";
       echo "<b class=\"text-info\">Class:</b> ".$json['uinf']['class']."<br>";
-      echo "<b class=\"text-info\">ArenaPoints:</b> ".$json['uinf']['arenapoints']."<br>";
-      echo "<b class=\"text-info\">Honor:</b> ".$json['uinf']['honor']."<br>";
-      echo "<b class=\"text-info\">Kills:</b> ".$json['uinf']['kills']."<br>";
+      echo "<b class=\"text-info\">ArenaPoints:</b> ".$char_arenapoints."<br>";
+      echo "<b class=\"text-info\">Honor:</b> ".$char_honorpoints."<br>";
+      echo "<b class=\"text-info\">Kills:</b> ".$char_totalkills."<br>";
 
       /* MONEY */
-      $money = $json['uinf']['money'];
-      if ($money > $MaxMoney)
-        $money = $MaxMoney;
-      if ($money > 9999)
-        $money = substr($money, 0, -4) . " <span style=\"color: yellow;\">gold</span> " . substr($money, -4, 2) . " <span style=\"color: grey;\">silver</span> " . substr($money, -2) . " <span class=\"text-danger\">copper</span>";
-      elseif ($money > 99)
-        $money = "00 <span style=\"color: yellow;\">gold</span> " . substr($money, -4, 2) . " <span style=\"color: grey;\">silver</span> " . substr($money, -2) . " <span class=\"text-danger\">copper</span>";
+
+      if ($char_money > 9999)
+        $char_money = substr($char_money, 0, -4) . " <span style=\"color: yellow;\">gold</span> " . substr($char_money, -4, 2) . " <span style=\"color: grey;\">silver</span> " . substr($char_money, -2) . " <span class=\"text-danger\">copper</span>";
+      elseif ($char_money > 99)
+        $char_money = "00 <span style=\"color: yellow;\">gold</span> " . substr($char_money, -4, 2) . " <span style=\"color: grey;\">silver</span> " . substr($char_money, -2) . " <span class=\"text-danger\">copper</span>";
       else
-        $money = "00 <span style=\"color: yellow;\">gold</span> 00 <span style=\"color: grey;\">silver</span> " . substr($money, -2) . " <span class=\"text-danger\">copper</span>";
-      echo "<b class=\"text-info\">Money:</b> ".$money."<br>";
+        $char_money = "00 <span style=\"color: yellow;\">gold</span> 00 <span style=\"color: grey;\">silver</span> " . substr($char_money, -2) . " <span class=\"text-danger\">copper</span>";
+      echo "<b class=\"text-info\">Money:</b> ".$char_money."<br>";
       echo "<br><br>";
 
 
@@ -208,10 +206,34 @@ require_once("definitions.php");
       echo '<div class="col-xs-12">';
       /* SKILLS */
       echo "<br><b class=\"text-warning\">Skills</b>";
-      foreach ($json['skills'] as $key => $value)
+      foreach ($json['skills'] as $key => $value) {
+        $SkillName = mb_strtoupper($value['N'], 'UTF-8');  
+
+        $SkillID = GetSkillID($SkillName, $locale);
+        if ($SkillID < 1)
+            continue;
+
+        $max = _MaxValue(RemoveRaceBonus($RaceID, $SkillID, $value['M']), 450);
+        $cur = _MaxValue(RemoveRaceBonus($RaceID, $SkillID, $value['C']), 450);
+        $SpellID = GetSpellIDForSkill($SkillID, $max);
+          
         if ($value['M'] != 0 and $value['M'] != 1 and strpos($value['N'], "Language") === false)
           echo "<br><span class=\"text-success\">".$value['N']."</span> <span class=\"text-info\">".$value['M']." ".$value['C']."</span>";
-
+      }
+      
+      
+      // SPELLS
+      $spells = "";
+      foreach ($json['spells'] as $SpellID => $value) {
+          if (_isSpellValid($SpellID, $ClassID))
+             $spells .= '<a href="http://wotlk.openwow.com/spell='.$SpellID.'">'.$SpellID.'</a> ';
+      }
+        
+      if ($spells != "")
+        echo "<br><br><b class=\"text-warning\">Spells<br></b><br>$spells";
+        
+      echo "<br>";
+      
       /* RECIPES */
       $recipes = "";
       foreach ($json['recipes'] as $SpellID)
@@ -287,9 +309,16 @@ require_once("definitions.php");
 
       /* REPUTATIONS */
       echo "<b class=\"text-warning\">Reputations</b><br>";
-      foreach ($json['rep'] as $key => $value)
+      $locale = trim(strtoupper($json['ginf']['locale']));
+      foreach ($json['rep'] as $key => $value) {
+        $reputation = $value['V'];
+        $faction = GetFactionID(mb_strtoupper($value['N'], 'UTF-8'), $locale);
+        if ($faction < 1 || $reputation < 1)
+                continue;
+        
         echo ($value['V'] != 0 ? "<i style=\"color: #777;\">".$value['V']."</i> <a href=\"http://wotlk.openwow.com/faction=".$value['V']."\">" . $value['N']."</a><br>" : "");
-
+      }
+        
       echo "<br><br><br></div>";
   ?>
 

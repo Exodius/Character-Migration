@@ -29,12 +29,12 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         $DUMP = $part[1];      
         $arrDump=parse_ini_string ( $buffer  );
 
-        $VER = isset($arrDump["CHDMP_VER"]) ? $arrDump["CHDMP_VER"] : "<335.700";
+        $VER = isset($arrDump["CHDMP_VER"]) ? $arrDump["CHDMP_VER"] : "Unknown";
         
-        if ($VER!=ADDON_VER && (!isset($_POST["obsolete"]) || $_POST["obsolete"]!="enable")) {
+        if (!in_array($VER, $addonVers) && (!isset($_POST["obsolete"]) || $_POST["obsolete"]!="enable")) {
         ?>
             <script>
-            alert("!!ATTENZIONE!!\n\nLa versione dell'addon con cui è stato estratto questo chardump è obsoleta:<?=$VER?>\n\n La nuova versione è la: <?=ADDON_VER?>\n\nPotresti avere problemi al termine del porting!\n\nSe vuoi comunque proseguire, premi su ok ed abilita il caricamento dei chardump obsoleti nella pagina precedente!");
+            alert("!!ATTENZIONE!!\n\nLa versione dell'addon con cui è stato estratto questo chardump è obsoleta:<?=$VER?>\n\n Potresti avere problemi al termine del porting!\n\nSe vuoi comunque proseguire, premi su ok ed abilita il caricamento dei chardump obsoleti nella pagina precedente!");
             window.location.href = "playerside.php";
             </script>
         <?php
