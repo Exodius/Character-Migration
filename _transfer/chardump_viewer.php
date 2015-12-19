@@ -310,11 +310,11 @@ require_once("definitions.php");
 
                 echo ($value['V'] != 0 ? "<i style=\"color: #777;\">" . $value['V'] . "</i> <a href=\"http://wotlk.openwow.com/faction=" . $value['V'] . "\">" . $value['N'] . "</a><br>" : "");
 
-                if ($faction == 1119 && $reputation >= 6000) {
+                if ($faction == 1119 && $reputation >= 9000) {
                     $quests.="- Sons of Hodir chain<br>";
                 }
 
-                if ($faction == 1119 && $reputation >= 6000) {
+                if ($faction == 1098 && $reputation >= 1600) {
                     $quests.="- Ebon Blade chain<br>";
                 }
             }
