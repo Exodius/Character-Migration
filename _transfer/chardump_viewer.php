@@ -52,7 +52,6 @@ require_once("definitions.php");
             $O_REALM = $json['ginf']['realm'];
             $ClassID = _GetClassID(strtoupper($json['uinf']['class']));
             $RaceID = _GetRaceID(strtoupper($json['uinf']['race']));
-            echo "Razza: $RaceID";
             $pType = $_POST["PortingType"];
             $locale = trim(strtoupper($json['ginf']['locale']));
 
