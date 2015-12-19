@@ -188,6 +188,10 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             if ($faction == 1119 && $reputation >= 6000)
                 $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n " . SonsOfHordirTransfer($GUID);
 
+            // give ALL Ebon Blade chain quests only when honored ( top of friendly )
+            if ($faction == 1098 && $reputation >= 6000)
+                $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n " . EbonBladeTransfer($GUID, getFactionByRace($RaceID));
+
             $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* REPUTATION */ INTO `character_reputation` VALUES (" . $GUID . ", " . $faction . ", " . (int) $reputation . "," . (int) $flag . ");";
         }
 

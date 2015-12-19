@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once('t_config.php');
 include_once('language.php');
 include_once('t_functions.php');
@@ -561,4 +561,28 @@ function SonsOfHordirTransfer($GUID) {
             (" . $GUID . ", 12997),   (" . $GUID . ", 13061),   (" . $GUID . ", 13062),   (" . $GUID . ", 13063),
             (" . $GUID . ", 13064);";
 }
-?>
+
+function EbonBladeTransfer($GUID, $faction)
+{
+    if ($faction == 1) // Alliance
+       return "INSERT INTO `character_queststatus_rewarded`(`guid`,`quest`) VALUES
+        (" . $GUID . ", 12891),   (" . $GUID . ", 12893),   (" . $GUID . ", 12938),   (" . $GUID . ", 12939),
+        (" . $GUID . ", 12943),   (" . $GUID . ", 12949),   (" . $GUID . ", 12951),   (" . $GUID . ", 12887),
+        (" . $GUID . ", 12896),   (" . $GUID . ", 12898);";
+    else if ($faction == 0) // Horde
+       return "INSERT INTO `character_queststatus_rewarded`(`guid`,`quest`) VALUES
+        (" . $GUID . ", 12891),   (" . $GUID . ", 12893),   (" . $GUID . ", 12938),   (" . $GUID . ", 12939),
+        (" . $GUID . ", 12943),   (" . $GUID . ", 12949),   (" . $GUID . ", 12951),   (" . $GUID . ", 12892),
+        (" . $GUID . ", 12897),   (" . $GUID . ", 12899);";
+    
+    return "Faction value is invalid";
+}
+
+function getFactionByRace($race) {
+    if ($race == 1 || $race == 3 || $race == 4 || $race == 7 || $race == 11 || $race == 22)
+        return 1;
+
+    return 0;
+}
+
+?>   

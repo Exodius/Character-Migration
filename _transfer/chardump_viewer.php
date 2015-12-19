@@ -52,6 +52,7 @@ require_once("definitions.php");
             $O_REALM = $json['ginf']['realm'];
             $ClassID = _GetClassID(strtoupper($json['uinf']['class']));
             $RaceID = _GetRaceID(strtoupper($json['uinf']['race']));
+            echo "Razza: $RaceID";
             $pType = $_POST["PortingType"];
             $locale = trim(strtoupper($json['ginf']['locale']));
 
@@ -216,7 +217,7 @@ require_once("definitions.php");
             }
 
 
-            // SPELLS
+            /* SPELLS */
             $spells = "";
             foreach ($json['spells'] as $SpellID => $value) {
                 if (_isSpellValid($SpellID, $ClassID))
@@ -312,6 +313,10 @@ require_once("definitions.php");
 
                 if ($faction == 1119 && $reputation >= 6000) {
                     $quests.="- Sons of Hodir chain<br>";
+                }
+
+                if ($faction == 1119 && $reputation >= 6000) {
+                    $quests.="- Ebon Blade chain<br>";
                 }
             }
 
