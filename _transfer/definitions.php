@@ -1,5 +1,7 @@
 <?php
 
+define("BASE_URL",'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']));
+
 define("PFREE", 0);
 define("PBASIC", 1);
 define("PFULL", 2);

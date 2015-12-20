@@ -150,6 +150,12 @@ if (!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $Allo
             win.document.body.innerHTML = "<span style='word-wrap: break-word;'>" + content + "</span>";
         }
 
+        function viewDump ($dump, $type) {
+            $("#chardump").val($dump);
+            $("#PortingType").val($type);
+            $("#viewer_form").submit();
+        }
+
     <?php
 }
 ?>
@@ -181,11 +187,19 @@ ob_end_flush();
 function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels, $TEXT1, $TEXT2, $TEXT3, $TEXT4, $TEXT5, $TEXT6, $TEXT7, $TEXT8, $TEXT9, $TEXT10, $TEXT11, $TEXT12, $TEXT13) {
     global $transferType;
 
+    $chardump_viewer_url = BASE_URL . "/_transfer/chardump_viewer.php";
+
     if (_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels)) {
-        echo "
-        <a href='http://azerothshard.ga/wow-char-migration/_transfer/chardump_viewer.php'>Vai al visualizzatore dei dumps</a>
-        <div align = right class = \"MythTable\" style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma';\">" . $TEXT1 . "</div>
-            <br>";
+        ?>
+        <form style="display: hidden" action="<?= $chardump_viewer_url ?>" method="POST" id="viewer_form" target="_blank">
+            <input type="hidden" id="PortingType" name="PortingType" value="0"/>
+            <input type="hidden" id="chardump" name="chardump" value=""/>
+        </form>
+
+        <a href='<?= $chardump_viewer_url ?>'>Vai al visualizzatore dei dumps</a>
+        <div align = right class = "MythTable" style = "width: 100%; padding-right: 2px;font-family: 'Tahoma';"><?= $TEXT1 ?></div>
+        <br>
+        <?php
         $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
         _SelectDB($AccountDB, $connection);
         $query = mysql_query("SELECT * FROM `account_transfer` WHERE `gmAccount` = " . $ACCOUNT_ID . " ORDER BY `id` DESC LIMIT 25;", $connection);
@@ -229,39 +243,42 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
             <table width = 100% align = center class = 'gm-character-list'>
                 <tr bgcolor = #FFEAC7>";
     if (_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels)) {
-
-        echo "
-                <td>\"OUR\" & <br>\"OLD\" Name: </td>
-                <td>\"OUR\" & <br>\"OLD\" Realm:</td>
-                <td>Realmlist:              </td>
-                <td>Account:                </td>
-                <td>Password:               </td>
-                <td>Server URL:             </td>
-                <td>Type:                   </td>
-                <td>Info:                  </td>
-                <td>Date:                   </td>
-                <td>To Account:                </td>
-                <td>Admin Options:          </td>
-            </tr>";
-
+        ?>
+        <td>\"OUR\" & <br>\"OLD\" Name: </td>
+        <td>\"OUR\" & <br>\"OLD\" Realm:</td>
+        <td>Realmlist:              </td>
+        <td>Account:                </td>
+        <td>Password:               </td>
+        <td>Server URL:             </td>
+        <td>Type:                   </td>
+        <td>Info:                  </td>
+        <td>Date:                   </td>
+        <td>To Account:                </td>
+        <td>Admin Options:          </td>
+        </tr>
+        <?php
         $ids = array();
         $guids = array();
         $realms = array();
 
+        $count = 0;
+        $toApprove = "";
+        $prev = "";
         while ($row = mysql_fetch_array($query)) {
+
             if ($row["cStatus"] == 0) {
-                echo "
+                $toApprove.= "
                     <tr bgcolor = #FFFFCC>
                         <td>" . $row["cNameNEW"] . " / <br> " . $row["cNameOLD"] . "</td>
                         <td>" . _CheckRealm($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $row["cRealm"]) . " / " . $row["oRealm"] . "</td>
                         <td>" . $row["oRealmlist"] . "</td>
                         <td>" . $row["oAccount"] . "</td>
                         <td>" . $row["oPassword"] . "</td>
-                        <td>" . $row["oServer"] . "</td>
+                        <td style='max-width: 40px; word-wrap: break-word'>" . $row["oServer"] . "</td>
                         <td>" . $transferType[$row["tType"]]["Type"] . "</td>
                         <td>Addon Rev: " . ($row["addonVersion"] ? $row["addonVersion"] : "<Empty>") . " <br><br>
                         <button onclick='popUp(\"" . str_replace(' ', "<br>", $row["cItemRow"]) . "\")'>Item List</button><br>
-                        <button onclick='popUp(\"CHDMP_DATA = \\\"" . $row["cDump"] . "\\\" \")'>Dump</button></td>
+                        <button onclick='viewDump(\"CHDMP_DATA = \\\"" . $row["cDump"] . "\\\" \"," . $row["tType"] . ")'>View Dump</button></td>
                         <td>" . $row["date_created"] . "</td>
                         <td>" . $row["cAccount"] . "</td>
                         <td align = center>
@@ -274,8 +291,37 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
                 array_push($ids, $row["id"]);
                 array_push($realms, $row["cRealm"]);
                 array_push($guids, $row["GUID"]);
+            } else {
+                if ($count < 30) {
+                    $prev.= "
+                    <tr bgcolor = #FFFFCC>
+                        <td>" . $row["cNameNEW"] . " / <br> " . $row["cNameOLD"] . "</td>
+                        <td>" . _CheckRealm($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $row["cRealm"]) . " / " . $row["oRealm"] . "</td>
+                        <td>" . $row["oRealmlist"] . "</td>
+                        <td>" . $row["oAccount"] . "</td>
+                        <td>" . $row["oPassword"] . "</td>
+                        <td style='max-width: 40px; word-wrap: break-word'>" . $row["oServer"] . "</td>
+                        <td>" . $transferType[$row["tType"]]["Type"] . "</td>
+                        <td>Addon Rev: " . ($row["addonVersion"] ? $row["addonVersion"] : "<Empty>") . " <br><br>
+                        <button onclick='popUp(\"" . str_replace(' ', "<br>", $row["cItemRow"]) . "\")'>Item List</button><br>
+                        <button onclick='viewDump(\"CHDMP_DATA = \\\"" . $row["cDump"] . "\\\" \"," . $row["tType"] . ")'>View Dump</button></td>
+                        <td>" . $row["date_created"] . "</td>
+                        <td>" . $row["cAccount"] . "</td>
+                        <td bgcolor = #FFEAC7 " . _CheckReason($row["cStatus"], $row["Reason"]) . ">" . _CheckStatus($row["cStatus"], $TEXT8, $TEXT9, $TEXT10, $TEXT11, $TEXT12, $row["Reason"]) . "</td>
+                    </tr>";
+                }
+
+                $count++;
             }
         }
+
+        echo $toApprove;
+        ?>
+        <tr>
+            <td colspan="11" align = center><h1>Previous portings</h1></td>
+        </tr>
+        <?php
+        echo $prev;
 
         echo "<button name = \"ApproveAll\" id = \"" . $row["id"] . "\" onclick = 'javascript:DoApproveAll(" . json_encode($ids) . ", " . json_encode($realms) . ", " . json_encode($guids) . ");' style = \"font-size:10px\"><font color = \"green\">Approve All</font></button><br>";
         echo "</table></div>";

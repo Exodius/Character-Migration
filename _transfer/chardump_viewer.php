@@ -73,7 +73,7 @@ require_once("definitions.php");
 
             if (CheckGameBuild($json['ginf']['clientbuild'], $GAMEBUILD)) {
                 $reason = _RT($write[50] . ": " . $json['ginf']['clientbuild'] . " supportate: " . implode(",", $GAMEBUILD));
-            } else if (((10 + $CharLevel < $AchievementsCount) || ($AchievementsCount < $AchievementsMinCount)) && $AchievementsCheck == 1) {
+            } else if (((ceil($CharLevel / 10) > $AchievementsCount) || ($AchievementsCount < $AchievementsMinCount)) && $AchievementsCheck == 1) {
                 $reason = _RT("Not enought achievements! ".$AchievementsCount);
             } else if ($playedTime < $PLAYTIME) {
                 $reason = _RT("Small playtime! : " . $playedTime);
