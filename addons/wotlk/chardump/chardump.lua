@@ -16,6 +16,7 @@ end
 function private.GetUnitInfo()
     local retTbl            = {}
     retTbl.name             = UnitName("player");
+    retTbl.guid             = UnitGUID(retTbl.name);
     local _, class          = UnitClass("player");
     retTbl.class            = class;
     retTbl.level            = UnitLevel("player");

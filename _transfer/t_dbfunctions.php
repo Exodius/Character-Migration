@@ -189,8 +189,8 @@ function _CheckBlackList($DBHost, $DBUser, $DBPassword, $AccountDB, $realmlist, 
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);
     $sql = "SELECT * FROM `account_transfer_blacklist` WHERE "
-            . " ( `b_address` = '" . _X($realmlist) . "' AND ( `b_realmName` = '*' OR `b_realmName` = '" . _X($realm) . "'))"
-            . " OR `b_url` LIKE '%" . _X(trim($url)) . "%';";
+            . " ( `b_address` = '" . _X($realmlist) . "' AND ( `b_realmName` = '*' OR `b_realmName` = '" . _X($realm) . "'))";
+            //. " OR `b_url` LIKE '%" . _X(trim($url)) . "%';";
     $query = mysql_query($sql, $connection) or die(mysql_error());
     $row = mysql_fetch_array($query);
     mysql_close($connection);

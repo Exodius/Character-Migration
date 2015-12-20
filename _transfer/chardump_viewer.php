@@ -68,18 +68,18 @@ require_once("definitions.php");
                     $ACHMAXTime = $value['D'];
                 ++$AchievementsCount;
             }
+
+            $playedTime = CHECKDAY($ACHMAXTime, $ACHMINTime);
+
             if (CheckGameBuild($json['ginf']['clientbuild'], $GAMEBUILD)) {
                 $reason = _RT($write[50] . ": " . $json['ginf']['clientbuild'] . " supportate: " . implode(",", $GAMEBUILD));
-            } else if (((10 + $CharLevel > $AchievementsCount) || ($AchievementsCount > $AchievementsMinCount)) && $AchievementsCheck == 1) {
-                $reason = _RT("Seems bad characters, not enought achievements!");
-            }/*
-              else if (CHECKDAY($ACHMAXTime, $ACHMINTime) < $PLAYTIME) {
-              $reason = _RT("Small playtime!");
-              }/*
-              else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST, $O_REALM, $o_URL)) {
-              $reason = _RT($write[57]." [ realm: ".(empty($O_REALMLIST) ? "No realmlist" : $O_REALMLIST)." --- ".(empty($O_REALM) ? "No realmn name" : $O_REALM)." ]");
-              }
-             */
+            } else if (((10 + $CharLevel < $AchievementsCount) || ($AchievementsCount < $AchievementsMinCount)) && $AchievementsCheck == 1) {
+                $reason = _RT("Not enought achievements! ".$AchievementsCount);
+            } else if ($playedTime < $PLAYTIME) {
+                $reason = _RT("Small playtime! : " . $playedTime);
+            } else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST, $O_REALM, $o_URL)) {
+                $reason = _RT($write[57] . " [ realm: " . (empty($O_REALMLIST) ? "No realmlist" : $O_REALMLIST) . " --- " . (empty($O_REALM) ? "No realmn name" : $O_REALM) . " ]");
+            }
 
             $GUID = CheckCharacterGuid($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, GetCharacterGuid(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM)));
         } else if (!isset($part[1]))
@@ -121,6 +121,8 @@ require_once("definitions.php");
             echo "<b class=\"text-info\">ArenaPoints:</b> " . $char_arenapoints . "<br>";
             echo "<b class=\"text-info\">Honor:</b> " . $char_honorpoints . "<br>";
             echo "<b class=\"text-info\">Kills:</b> " . $char_totalkills . "<br>";
+            echo "<b class=\"text-info\">Played Time:</b> " . $playedTime . " days<br>";
+            echo "<b class=\"text-info\">Achievements count:</b> " . $AchievementsCount . "<br>";
 
             /* MONEY */
 
@@ -146,8 +148,8 @@ require_once("definitions.php");
                     $ach_valid .= $achievement . " ";
             }
 
-            if ($ach_invalid != "" and $ach_valid != "") {
-                echo "<br><b class=\"text-warning\">Achievements</b><br>";
+            if ($ach_invalid != "" || $ach_valid != "") {
+                echo "<br><b class=\"text-warning\">Achievements ($AchievementsCount)</b><br>";
                 echo "$ach_valid <br>";
                 if ($ach_invalid != "")
                     echo "$ach_invalid <br><br>";
