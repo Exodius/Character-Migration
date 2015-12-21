@@ -39,7 +39,7 @@ if (isset($_POST['rename'])) {
         $reason = $write[96] . $CHAR_NAME . $write[97];
     } else if (!_ServerOn($SOAPUser, $SOAPPassword, _SOAPPSwitch($RealmID), _SOAPHSwitch($RealmID), _SOAPURISwitch($RealmID))) {
         $reason = "Realm: \"" . $SNA . "\" <u>OFFLINE!</u>";
-    } else if (checkDuplicate($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_NAME, $O_REALM, $O_REALMLIST)) {
+    } else if (checkDuplicate($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_NAME, $O_GUID, $O_REALM, $O_REALMLIST)) {
         $reason = _RT("Questo personaggio è già stato importato!");
     } else if ($delay < 0) {
         $reason = _RT("Un altro porting è in corso, riprovare tra " . abs($delay) . " secondi");

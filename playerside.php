@@ -206,23 +206,25 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
         $query = mysql_query("SELECT * FROM `account_transfer` WHERE `gmAccount` = " . $ACCOUNT_ID . " ORDER BY `id` DESC LIMIT 25;", $connection);
         mysql_close($connection);
     } else {
-        echo "
+        echo "       
+            <center><h1>Porting Standard</h1></center>
+            <div align = left style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma'; \">" . $TEXT2 . "</div>
+            <br>
+            <div style = \"font-size:17px\">" . $TEXT3 . "</div>
+            <br>
+            <br>
             <center><h1>Visualizzatore Chardump</h1></center>
             <br>
             <div style = \"font-size:17px\"><b>Prima di iniziare, controlla cosa verrà importato utilizzando questo visualizzatore!</b></div>
             <br>
             <br>
             <div class = \"MythInput\">
-                <form action=\"" . $_SERVER["SCRIPT_NAME"] . "\" method=\"post\" enctype=\"multipart/form-data\">
-                    <input type='submit' name = 'viewer' value='Avvia Visualizzatore'/>
+                <form action=\"" . $_SERVER["SCRIPT_NAME"] . "\" method=\"post\" enctype=\"multipart/form-data\" target='_blank'>
+                    <input type='submit' name = 'viewer' value='Avvia Visualizzatore, FASE PRE-PORTING' />
                 </form>
                 <br>
-            </div>
-        
-            <center><h1>Porting Standard</h1></center>
-            <div align = left style = \"width: 100%; padding-right: 2px;font-family: 'Tahoma'; \">" . $TEXT2 . "</div>
-            <br>
-            <div style = \"font-size:17px\">" . $TEXT3 . "</div>
+            </div>            
+            <div style = \"font-size:17px\"><b>Dopo aver controllato ed esserti assicurato di ciò che ti verrà importato, sei pronto per proseguire</b></div>
             <br>
             <br>
             <div class = \"MythInput\">

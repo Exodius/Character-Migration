@@ -27,7 +27,7 @@ $transferType[PFREE]["Descr"] = "<ul>"
         . "</ul>";
 // BASIC
 $transferType[PBASIC]["Quantity"] = 2;
-$transferType[PBASIC]["Type"] = "Basic";
+$transferType[PBASIC]["Type"] = "Basic - Solo WOTLK";
 $transferType[PBASIC]["Descr"] = "<ul>"
         . "<li>Downgrading items lvl <b>284</b> -> <b>271</b></li>"
         . "<li>Cambio <b>Shadow's Edge</b> -> <b>Cryptmaker</b></li>"
@@ -35,6 +35,6 @@ $transferType[PBASIC]["Descr"] = "<ul>"
         . "</ul>";
 // FULL
 $transferType[PFULL]["Quantity"] = 0;
-$transferType[PFULL]["Type"] = "Full";
+$transferType[PFULL]["Type"] = "Full - Solo WOTLK";
 $transferType[PFULL]["Descr"] = "Tutto ciò che il sistema è in grado di importare sarà importato!";
 

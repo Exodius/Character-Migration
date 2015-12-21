@@ -238,7 +238,7 @@ switch ($language) {
             $write[54] = 'Per Realm:';
             $write[55] = 'tutte le code sono al completo COMPLETO! Spiacenti, è necessario attendere, finchè uno dei revisori non sarà libero, grazie per la pazienza! ';
             $write[57] = 'Il trasferimento da questo server è stato rifiutato. Contattare lo staff per maggiori informazioni.';
-            $write[60] = 'Segui le istruzioni, poi carica il DUMP';
+            $write[60] = 'Segui le istruzioni, poi prosegui';
             $write[61] = 'Dopo aver caricato  il DUMP, il personaggio apparirà sull\' account del <b> Game Master </b>, non sul tuo! dopo la revisione sarà <font color = "verde"> Approvato </font> o <font color = "red"> Negato </font>, è possibile <font color = "purle"> Annullare </font> annullare il porting manualmente, se volete ';
             $write[63] = 'File selezionato:';
             $write[65] = 'Avvia trasferimento, FASE 1';

@@ -40,7 +40,7 @@ require_once("definitions.php");
             $VER = isset($arrDump["CHDMP_VER"]) ? $arrDump["CHDMP_VER"] : "Unknown";
             if (!in_array($VER, $addonVers))
                 echo "<h2 class=\"text-warning\">!!ATTENZIONE!!</h2>
-        <p class=\"text-danger\">La versione dell'addon con cui è stato estratto questo chardump è obsoleta: $VER <br><br>Potresti avere problemi al termine del porting!.<br><br></p>";
+        <p class=\"text-danger\">La versione dell'addon con cui è stato estratto questo chardump è obsoleta: $VER <br><br></p>";
 
             $REALM_NAME = REALM_NAME;
             $DECODED_DUMP = _DECRYPT($DUMP);

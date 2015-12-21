@@ -30,7 +30,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
 
         $VER = isset($arrDump["CHDMP_VER"]) ? $arrDump["CHDMP_VER"] : "Unknown";
 
-        if (!in_array($VER, $addonVers) /*&& (!isset($_POST["obsolete"]) || $_POST["obsolete"] != "enable")*/) {
+        if (!in_array($VER, $addonVers) /* && (!isset($_POST["obsolete"]) || $_POST["obsolete"] != "enable") */) {
             ?>
             <script>
                 alert("!!ATTENZIONE!!\n\nLa versione dell'addon con cui è stato estratto questo chardump è obsoleta:<?= $VER ?>\n\n Scarica la nuova versione e riesegui il dump!");
@@ -47,13 +47,18 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         $PLAYER_TRANSFER_STACKS = CanOrNoTransferServer($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, $AllowedGMLevels, _CharacterDBSwitch($CHAR_REALM));
         $json = json_decode(stripslashes($DECODED_DUMP), true);
         $CHAR_NAME = mb_convert_case(mb_strtolower($json['uinf']['name'], 'UTF-8'), MB_CASE_TITLE, 'UTF-8');
-        $O_GUID=$json['uinf']['guid'];
+        $O_GUID = $json['uinf']['guid'];
         $O_REALMLIST = $json['ginf']['realmlist'];
         $O_REALM = $json['ginf']['realm'];
         $RaceID = _GetRaceID(strtoupper($json['uinf']['race']));
         $ClassID = _GetClassID(strtoupper($json['uinf']['class']));
         $CharLevel = _MaxValue($json['uinf']['level'], $MaxCL);
         $pType = $_POST["PortingType"];
+
+        // options
+        $changefr = isset($_POST["changefr"]) && $_POST["changefr"] == "enable";
+
+        $atLogin = $changefr ? "0x180" : "0x192";
 
         $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
         _SelectDB($AccountDB, $connection);
@@ -97,7 +102,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             $reason = _RT($write[99]);
         } else if (!_ServerOn($SOAPUser, $SOAPPassword, _SOAPPSwitch($CHAR_REALM), _SOAPHSwitch($CHAR_REALM), _SOAPURISwitch($CHAR_REALM))) {
             $reason = _RT("Realm: \"" . $REALM_NAME . "\" <u>OFFLINE!</u>");
-        } else if (checkDuplicate($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_NAME, $O_REALM, $O_REALMLIST)) {
+        } else if (checkDuplicate($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_NAME, $O_GUID, $O_REALM, $O_REALMLIST)) {
             $reason = _RT("Questo personaggio è già stato importato!");
         } else if ($delay < 0) {
             $reason = _RT("Un altro porting è in corso, riprovare tra " . abs($delay) . " secondi");
@@ -139,7 +144,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         mysql_query("
         INSERT INTO `characters`(`guid`,`name`,`level`,`gender`,`totalHonorPoints`,`arenaPoints`,`totalKills`,`money`,`class`,`race`,`at_login`,`account`,`deleteInfos_Account`,`deleteInfos_Name`,`taximask`, `talentGroupsCount`, `online`) VALUES (
         " . $GUID . ",\"" . $ID . "\"," . (int) $CharLevel . "," . (int) $char_gender . "," . (int) $char_honorpoints . "," . (int) $char_arenapoints . ",
-        " . (int) $char_totalkills . "," . (int) $char_money . "," . $ClassID . "," . $RaceID . ", 0x180, $STORAGE, $CHAR_ACCOUNT_ID, \"" . _X($CHAR_NAME) . "\", \"0 0 0 0 0 0 0 0 0 0 0 0 0 0\"," . (int) $char_speccount . ", 0);", $connection);
+        " . (int) $char_totalkills . "," . (int) $char_money . "," . $ClassID . "," . $RaceID . ", $atLogin, $STORAGE, $CHAR_ACCOUNT_ID, \"" . _X($CHAR_NAME) . "\", \"0 0 0 0 0 0 0 0 0 0 0 0 0 0\"," . (int) $char_speccount . ", 0);", $connection);
         $QUERYFOREXECUTE = $QUERYFOREXECUTE . "
         INSERT INTO `character_transfer` VALUES (" . $GUID . "," . $CHAR_ACCOUNT_ID . "," . $PLAYER_TRANSFER_STACKS . "," . $ID . ");
 
@@ -348,8 +353,9 @@ function Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $TEXT1, $TE
                 <br><br>
                 <tr><td><br><br><div align = left class = \"MythTable\">" . $TEXT5 . "</div></td></tr>
                 <tr><td><b>Server URL ( Sito ): </b><input required name=\"ServerUrl\" type=\"text\" size=\"60\" style = \"float: right;\"></td></tr>
-                <tr><td><br><br><div align = left class = \"MythTable\">( Sconsigliato ) Abilita il caricamento di chardump effettuati con un addon obsoleto:</div></td></tr>
+                <tr><td><br><br><div align = left class = \"MythTable\">Opzioni:</div></td></tr>
                 <!--<tr><td><b>Abilita chardump obsoleti:</b> <input type='checkbox' name='obsolete' value='enable'/></tr></td>-->
+                <tr><td><b>Attiva cambio fazione e razza:</b> <input type='checkbox' name='changefr' value='enable' checked/></tr></td>
                 <tr><td><div align = left class = \"MythTable\"> Scegli la tipologia di porting da effettuare:</div></td></tr>
                 <tr><td><b>Tipologia di porting: </b>" . HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) . "</td></tr>
             <tr><td><div align = right class = \"MythTable\">" . $TEXT6 . "</div></td></tr>
