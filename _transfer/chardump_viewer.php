@@ -48,12 +48,14 @@ require_once("definitions.php");
             $json = json_decode(stripslashes($DECODED_DUMP), true);
             $CHAR_NAME = mb_convert_case(mb_strtolower($json['uinf']['name'], 'UTF-8'), MB_CASE_TITLE, 'UTF-8');
             $CharLevel = _MaxValue($json['uinf']['level'], $MaxCL);
+            $O_GUID=$json['uinf']['guid'];
             $O_REALMLIST = $json['ginf']['realmlist'];
             $O_REALM = $json['ginf']['realm'];
             $ClassID = _GetClassID(strtoupper($json['uinf']['class']));
             $RaceID = _GetRaceID(strtoupper($json['uinf']['race']));
             $pType = $_POST["PortingType"];
             $locale = trim(strtoupper($json['ginf']['locale']));
+            $client=$json['ginf']['clientbuild'];
 
 
             $AchievementsCount = 0;
@@ -71,14 +73,18 @@ require_once("definitions.php");
 
             $playedTime = CHECKDAY($ACHMAXTime, $ACHMINTime);
 
-            if (CheckGameBuild($json['ginf']['clientbuild'], $GAMEBUILD)) {
-                $reason = _RT($write[50] . ": " . $json['ginf']['clientbuild'] . " supportate: " . implode(",", $GAMEBUILD));
-            } else if (((ceil($CharLevel / 10) > $AchievementsCount) || ($AchievementsCount < $AchievementsMinCount)) && $AchievementsCheck == 1) {
-                $reason = _RT("Not enought achievements! ".$AchievementsCount);
-            } else if ($playedTime < $PLAYTIME) {
-                $reason = _RT("Small playtime! : " . $playedTime);
-            } else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST, $O_REALM, $o_URL)) {
-                $reason = _RT($write[57] . " [ realm: " . (empty($O_REALMLIST) ? "No realmlist" : $O_REALMLIST) . " --- " . (empty($O_REALM) ? "No realmn name" : $O_REALM) . " ]");
+            if (!isset($_POST["gm_skip_check"])) {
+                if (CheckGameBuild($client, $GAMEBUILD)) {
+                    $reason = _RT($write[50] . ": " . $json['ginf']['clientbuild'] . " supportate: " . implode(",", $GAMEBUILD));
+                } else if (((ceil($CharLevel / 10) > $AchievementsCount) || ($AchievementsCount < $AchievementsMinCount)) && $AchievementsCheck == 1) {
+                    $reason = _RT("Non hai abbastanza achievements: ".$AchievementsCount);
+                } else if ($playedTime < $PLAYTIME) {
+                    $reason = _RT("Il tempo di gioco è troppo basso: " . $playedTime. " day");
+                } else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST, $O_REALM, $o_URL)) {
+                    $reason = _RT($write[57] . " [ realm: " . (empty($O_REALMLIST) ? "No realmlist" : $O_REALMLIST) . " --- " . (empty($O_REALM) ? "No realmn name" : $O_REALM) . " ]");
+                } else if ($pType!=WOTLK_BUILD && $pType>0) {
+                    $reason = _RT("I Porting non FREE non sono disponibili per le versioni di gioco diverse dalla WOTLK");
+                }
             }
 
             $GUID = CheckCharacterGuid($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, GetCharacterGuid(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM)));
@@ -108,7 +114,7 @@ require_once("definitions.php");
             echo "<b class=\"text-info\">Realm:</b> " . $json['ginf']['realm'] . "<br>";
             echo "<b class=\"text-info\">realmlist:</b> " . $json['ginf']['realmlist'] . "<br>";
             echo "<b class=\"text-info\">locale:</b> " . $json['ginf']['locale'] . "<br>";
-            echo "<b class=\"text-info\">clientbuild:</b>" . $json['ginf']['clientbuild'] . "<br><br>";
+            echo "<b class=\"text-info\">clientbuild:</b>" . $client . "<br><br>";
 
             /* CHARACTER */
 

@@ -192,6 +192,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
     if (_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels)) {
         ?>
         <form style="display: hidden" action="<?= $chardump_viewer_url ?>" method="POST" id="viewer_form" target="_blank">
+            <input type="hidden" name="gm_skip_check" value="1"/>
             <input type="hidden" id="PortingType" name="PortingType" value="0"/>
             <input type="hidden" id="chardump" name="chardump" value=""/>
         </form>

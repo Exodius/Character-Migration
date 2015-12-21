@@ -32,6 +32,7 @@ CREATE TABLE `account_transfer` (
   `oRealm` varchar(32) DEFAULT NULL,
   `oRealmlist` text,
   `addonVersion` text,
+  `oGUID` VARCHAR(100) DEFAULT NULL,
   `GUID` int(11) unsigned NOT NULL DEFAULT '0',
   `Reason` text,
   `tType` tinyint(8) NOT NULL DEFAULT '0' COMMENT 'Type of transfer',

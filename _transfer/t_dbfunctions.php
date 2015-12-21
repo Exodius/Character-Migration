@@ -155,12 +155,12 @@ function CanOrNoTransferServer($DBHost, $DBUser, $DBPassword, $AccountDB, $Realm
     }
 }
 
-function checkDuplicate($DBHost, $DBUser, $DBPassword, $AccountDB, $charNameOld, $realm, $realmlist) {
+function checkDuplicate($DBHost, $DBUser, $DBPassword, $AccountDB, $O_GUID, $realm, $realmlist) {
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);
     $query = mysql_query("SELECT count(*) "
             . "FROM `account_transfer` "
-            . "WHERE `cNameOLD` = '$charNameOld' "
+            . "WHERE `oGUID` = '$O_GUID' "
             . "AND oRealm = '$realm' "
             . "AND oRealmList != 'azerothshard.servegame.com' AND  oRealmList = '$realmlist' "
             . "AND ( cStatus = 1 OR cStatus = 0 )", $connection) or die(mysql_error());
@@ -190,7 +190,7 @@ function _CheckBlackList($DBHost, $DBUser, $DBPassword, $AccountDB, $realmlist, 
     _SelectDB($AccountDB, $connection);
     $sql = "SELECT * FROM `account_transfer_blacklist` WHERE "
             . " ( `b_address` = '" . _X($realmlist) . "' AND ( `b_realmName` = '*' OR `b_realmName` = '" . _X($realm) . "'))";
-            //. " OR `b_url` LIKE '%" . _X(trim($url)) . "%';";
+    //. " OR `b_url` LIKE '%" . _X(trim($url)) . "%';";
     $query = mysql_query($sql, $connection) or die(mysql_error());
     $row = mysql_fetch_array($query);
     mysql_close($connection);
@@ -401,13 +401,13 @@ function LoadDump($DBHost, $DBUser, $DBPassword, $AccountDB, $ID) {
     return $row[0];
 }
 
-function WriteDumpFromFileInDB($DBHost, $DBUser, $DBPassword, $AccountDB, $DUMP, $CHAR_NAME, $CHAR_ACCOUNT_ID, $CHAR_REALM, $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $VER, $GUID, $GM_ACCOUNT, $PTYPE, $ERROR) {
+function WriteDumpFromFileInDB($DBHost, $DBUser, $DBPassword, $AccountDB, $DUMP, $CHAR_NAME, $CHAR_ACCOUNT_ID, $CHAR_REALM, $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $VER, $O_GUID, $GUID, $GM_ACCOUNT, $PTYPE, $ERROR) {
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);
     $query = mysql_query("INSERT INTO `account_transfer`(
-        `cStatus`,`cRealm`,`oAccount`,`oPassword`,`oRealmlist`,`oRealm`,`oServer`,`cDump`,`cNameOLD`,`cNameNEW`,`cAccount`,`addonVersion`,`GUID`,`gmAccount`,`tType`) VALUES (
+        `cStatus`,`cRealm`,`oAccount`,`oPassword`,`oRealmlist`,`oRealm`,`oServer`,`cDump`,`cNameOLD`,`cNameNEW`,`cAccount`,`addonVersion`,`oGUID`,`GUID`,`gmAccount`,`tType`) VALUES (
         5,\"" . _X($CHAR_REALM) . "\",\"" . _X($o_Account) . "\",\"" . _X($o_Password) . "\",\"" . _X($O_REALMLIST) . "\",\"" . _X($O_REALM) . "\",\"" . _X($o_URL) . "\"
-        ,\"" . _X($DUMP) . "\",\"" . _X($CHAR_NAME) . "\",\"" . _X($CHAR_NAME) . "\"," . $CHAR_ACCOUNT_ID . ",\"" . _X($VER) . "\"," . $GUID . "," . $GM_ACCOUNT . "," . $PTYPE . ");", $connection) or die(mysql_error());
+        ,\"" . _X($DUMP) . "\",\"" . _X($CHAR_NAME) . "\",\"" . _X($CHAR_NAME) . "\"," . $CHAR_ACCOUNT_ID . ",\"" . _X($VER) . "\"," . $O_GUID . "," . $GUID . "," . $GM_ACCOUNT . "," . $PTYPE . ");", $connection) or die(mysql_error());
     $ID = mysql_insert_id($connection);
     mysql_close($connection);
     return $ID;
@@ -562,19 +562,18 @@ function SonsOfHordirTransfer($GUID) {
             (" . $GUID . ", 13064);";
 }
 
-function EbonBladeTransfer($GUID, $faction)
-{
+function EbonBladeTransfer($GUID, $faction) {
     if ($faction == 1) // Alliance
-       return "INSERT INTO `character_queststatus_rewarded`(`guid`,`quest`) VALUES
+        return "INSERT INTO `character_queststatus_rewarded`(`guid`,`quest`) VALUES
         (" . $GUID . ", 12891),   (" . $GUID . ", 12893),   (" . $GUID . ", 12938),   (" . $GUID . ", 12939),
         (" . $GUID . ", 12943),   (" . $GUID . ", 12949),   (" . $GUID . ", 12951),   (" . $GUID . ", 12887),
         (" . $GUID . ", 12896),   (" . $GUID . ", 12898);";
     else if ($faction == 0) // Horde
-       return "INSERT INTO `character_queststatus_rewarded`(`guid`,`quest`) VALUES
+        return "INSERT INTO `character_queststatus_rewarded`(`guid`,`quest`) VALUES
         (" . $GUID . ", 12891),   (" . $GUID . ", 12893),   (" . $GUID . ", 12938),   (" . $GUID . ", 12939),
         (" . $GUID . ", 12943),   (" . $GUID . ", 12949),   (" . $GUID . ", 12951),   (" . $GUID . ", 12892),
         (" . $GUID . ", 12897),   (" . $GUID . ", 12899);";
-    
+
     return "Faction value is invalid";
 }
 
