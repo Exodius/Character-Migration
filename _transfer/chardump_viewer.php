@@ -82,8 +82,8 @@ require_once("definitions.php");
                     $reason = _RT("Il tempo di gioco è troppo basso: " . $playedTime. " day");
                 } else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST, $O_REALM, $o_URL)) {
                     $reason = _RT($write[57] . " [ realm: " . (empty($O_REALMLIST) ? "No realmlist" : $O_REALMLIST) . " --- " . (empty($O_REALM) ? "No realmn name" : $O_REALM) . " ]");
-                } else if ($pType!=WOTLK_BUILD && $pType>0) {
-                    $reason = _RT("I Porting non FREE non sono disponibili per le versioni di gioco diverse dalla WOTLK");
+                } else if ($client!=WOTLK_BUILD && $pType>0) {
+                    $reason = _RT("La tipologia di porting scelto (".$transferType[$pType]['Type'].") non è disponibile per le versioni di gioco diverse dalla WOTLK");
                 }
             }
 
@@ -119,6 +119,7 @@ require_once("definitions.php");
             /* CHARACTER */
 
             echo '<b class="text-warning">Character</b><br>';
+            echo "<b class=\"text-info\">GUID:</b> " . $json['uinf']['guid'] . "<br>";
             echo "<b class=\"text-info\">Name:</b> " . $json['uinf']['name'] . "<br>";
             echo "<b class=\"text-info\">Level:</b> " . $CharLevel . "<br>";
             echo "<b class=\"text-info\">Race:</b> " . $json['uinf']['race'] . "<br>";
@@ -344,10 +345,14 @@ require_once("definitions.php");
         <form action="" method="POST" enctype="multipart/form-data">
             <h1 class="text-success">Visualizzatore Chardump</h1>
             <div>
-                <b class="text-primary">Tipologia di porting: </b><br><input name="PortingType" value="0" required type="radio">
-                <b><span class="porting-type text-info">Free</span></b>
-                <input name="PortingType" value="1" required type="radio"> <b><span class="porting-type text-success">Basic</span></b>
-                <input name="PortingType" value="2" required type="radio"> <b><span class="porting-type text-danger">Full</span></b>
+                <b class="text-primary">Tipologia di porting: 
+                </b>
+                <br>
+                <input name="PortingType" value="0" required type="radio"> <b><span class="porting-type text-info">Free</span></b>
+                <br>
+                <input name="PortingType" value="1" required type="radio"> <b><span class="porting-type text-success">Basic - WOTLK</span></b>
+                <br>
+                <input name="PortingType" value="2" required type="radio"> <b><span class="porting-type text-danger">Full - WOTLK</span></b>
             </div>
             <br>
             <div class="MythInput">

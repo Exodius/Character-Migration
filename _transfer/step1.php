@@ -54,6 +54,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         $ClassID = _GetClassID(strtoupper($json['uinf']['class']));
         $CharLevel = _MaxValue($json['uinf']['level'], $MaxCL);
         $pType = $_POST["PortingType"];
+        $client=$json['ginf']['clientbuild'];
 
         // options
         $changefr = isset($_POST["changefr"]) && $_POST["changefr"] == "enable";
@@ -86,7 +87,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB, _CharacterDBSwitch($CHAR_REALM), $pType);
         if ($limit == 0) {
             $reason = "Questa tipologia di porting non è disponibile per il tuo account!";
-        } else if (CheckGameBuild($json['ginf']['clientbuild'], $GAMEBUILD)) {
+        } else if (CheckGameBuild($client, $GAMEBUILD)) {
             $reason = _RT($write[50] . " " . implode(",", $GAMEBUILD));
         } else if (((ceil($CharLevel / 10) > $AchievementsCount) || ($AchievementsCount < $AchievementsMinCount)) && $AchievementsCheck == 1) {
             $reason = _RT("Seems bad characters, not enought achievements!");
@@ -106,8 +107,8 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             $reason = _RT("Questo personaggio è già stato importato!");
         } else if ($delay < 0) {
             $reason = _RT("Un altro porting è in corso, riprovare tra " . abs($delay) . " secondi");
-        } else if ($pType != WOTLK_BUILD && $pType > 0) {
-            $reason = _RT("I Porting non FREE non sono disponibili per le versioni di gioco diverse dalla WOTLK");
+        } else if ($client != WOTLK_BUILD && $pType > 0) {
+            $reason = _RT("La tipologia di porting scelto (".$transferType[$pType]['Type'].") non è disponibile per le versioni di gioco diverse dalla WOTLK");
         }
 
         $GUID = CheckCharacterGuid($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, GetCharacterGuid(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM)));

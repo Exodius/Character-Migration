@@ -170,7 +170,7 @@ function checkDuplicate($DBHost, $DBUser, $DBPassword, $AccountDB, $charNameOld,
             . "FROM `account_transfer` "
             . "WHERE ( `oGUID` = '$O_GUID' OR `cNameOLD` = '$charNameOld' )"
             . "AND oRealm = '$realm' "
-            . "AND oRealmList != 'azerothshard.servegame.com' AND  oRealmList = '$realmlist' "
+            . "AND oRealmList = '$realmlist' "
             . "AND ( cStatus = 1 OR cStatus = 0 )", $connection) or die(mysql_error());
 
     $row = mysql_fetch_array($query);
@@ -415,7 +415,7 @@ function WriteDumpFromFileInDB($DBHost, $DBUser, $DBPassword, $AccountDB, $DUMP,
     $query = mysql_query("INSERT INTO `account_transfer`(
         `cStatus`,`cRealm`,`oAccount`,`oPassword`,`oRealmlist`,`oRealm`,`oServer`,`cDump`,`cNameOLD`,`cNameNEW`,`cAccount`,`addonVersion`,`oGUID`,`GUID`,`gmAccount`,`tType`) VALUES (
         5,\"" . _X($CHAR_REALM) . "\",\"" . _X($o_Account) . "\",\"" . _X($o_Password) . "\",\"" . _X($O_REALMLIST) . "\",\"" . _X($O_REALM) . "\",\"" . _X($o_URL) . "\"
-        ,\"" . _X($DUMP) . "\",\"" . _X($CHAR_NAME) . "\",\"" . _X($CHAR_NAME) . "\"," . $CHAR_ACCOUNT_ID . ",\"" . _X($VER) . "\"," . $O_GUID . "," . $GUID . "," . $GM_ACCOUNT . "," . $PTYPE . ");", $connection) or die(mysql_error());
+        ,\"" . _X($DUMP) . "\",\"" . _X($CHAR_NAME) . "\",\"" . _X($CHAR_NAME) . "\"," . $CHAR_ACCOUNT_ID . ",\"" . _X($VER) . "\",'" . $O_GUID . "'," . $GUID . "," . $GM_ACCOUNT . "," . $PTYPE . ");", $connection) or die(mysql_error());
     $ID = mysql_insert_id($connection);
     mysql_close($connection);
     return $ID;
