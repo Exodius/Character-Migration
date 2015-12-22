@@ -206,8 +206,8 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         }
 
         $mSkills = $json['skills'];
-        //if (count($json['skilllink']) > 0)
-        //    $mSkills = array_merge($json['skills'], $json['skilllink']);
+        if (count($json['skilllink']) > 0)
+            $mSkills = array_merge($json['skills'], $json['skilllink']);
 
         $primaryCnt = 0;
         foreach ($mSkills as $key => $value) {

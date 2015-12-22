@@ -87,7 +87,7 @@ function _PreparateMails($row, $PlayerName, $TransferLetterTitle, $TransferLette
     for ($i = 0; $i < count($item_array); $i++) {
         $item = explode(":", $item_array[$i]);
         if ($item[0] < 0) {
-            echo "Questo item non esiste o non è consentito sul nostro server e pertanto non può essere importato: " . abs($id) . "<br>\n";
+            //echo "Questo item non esiste o non è consentito sul nostro server e pertanto non può essere importato: " . abs($id) . "<br>\n";
             $needSend--;
             $skip = true;
         } else {
@@ -207,6 +207,8 @@ function GetExtraSpellForSkill($skill, $cur, $char_guid, $connection) {
         case 773: // Inscription
             return 51005;
     }
+
+    return -1;
 }
 
 function _GetCharacterAccountID() {
