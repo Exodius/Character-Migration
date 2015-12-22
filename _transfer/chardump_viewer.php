@@ -79,7 +79,7 @@ require_once("definitions.php");
                 } else if (((ceil($CharLevel / 10) > $AchievementsCount) || ($AchievementsCount < $AchievementsMinCount)) && $AchievementsCheck == 1) {
                     $reason = _RT("Non hai abbastanza achievements: " . $AchievementsCount);
                 } else if ($playedTime < $PLAYTIME) {
-                    $reason = _RT("Il tempo di gioco è troppo basso: " . $playedTime . " day");
+                    $reason = _RT("Il tempo di vita del personaggio è troppo basso: " . $playedTime . " day");
                 } else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST, $O_REALM, $o_URL)) {
                     $reason = _RT($write[57] . " [ realm: " . (empty($O_REALMLIST) ? "No realmlist" : $O_REALMLIST) . " --- " . (empty($O_REALM) ? "No realmn name" : $O_REALM) . " ]");
                 } else if ($client != WOTLK_BUILD && $pType > 0) {
@@ -129,7 +129,7 @@ require_once("definitions.php");
             echo "<b class=\"text-info\">ArenaPoints:</b> " . $char_arenapoints . "<br>";
             echo "<b class=\"text-info\">Honor:</b> " . $char_honorpoints . "<br>";
             echo "<b class=\"text-info\">Kills:</b> " . $char_totalkills . "<br>";
-            echo "<b class=\"text-info\">Played Time:</b> " . $playedTime . " days<br>";
+            echo "<b class=\"text-info\">Life Time:</b> " . $playedTime . " days<br>";
             echo "<b class=\"text-info\">Achievements count:</b> " . $AchievementsCount . "<br>";
 
             /* MONEY */
