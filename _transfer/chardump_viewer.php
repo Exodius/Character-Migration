@@ -140,7 +140,7 @@ require_once("definitions.php");
                 $char_money = "00 <span style=\"color: yellow;\">gold</span> " . substr($char_money, -4, 2) . " <span style=\"color: grey;\">silver</span> " . substr($char_money, -2) . " <span class=\"text-danger\">copper</span>";
             else
                 $char_money = "00 <span style=\"color: yellow;\">gold</span> 00 <span style=\"color: grey;\">silver</span> " . substr($char_money, -2) . " <span class=\"text-danger\">copper</span>";
-            echo "<b class=\"text-info\">Money:</b> " . $char_money . " + bonus porting: ".$bonus_money." <span style=\"color: yellow;\">gold</span><br>";
+            echo "<b class=\"text-info\">Money:</b> " . $char_money . "   <b> [ + bonus porting: ".$bonus_money." <span style=\"color: yellow;\">gold</span> ]</b><br>";
             echo "<br><br>";
 
 

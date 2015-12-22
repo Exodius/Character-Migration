@@ -52,7 +52,6 @@ if (isset($_POST['rename'])) {
 
         $_SESSION['STEP2'] = "NO";
         UpdateCharacterName(_HostDBSwitch($RealmID), $DBUser, $DBPassword, _CharacterDBSwitch($RealmID), $CHAR_NAME, $GUID);
-        _TalentsReset(_HostDBSwitch($RealmID), $DBUser, $DBPassword, _CharacterDBSwitch($RealmID), $GUID);
         _PreparateMails(LoadItemRoW($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID), $CHAR_NAME, $TransferLetterTitle, $TransferLetterMessage, $SOAPUser, $SOAPPassword, _SOAPPSwitch($RealmID), _SOAPHSwitch($RealmID), _SOAPURISwitch($RealmID));
         UpdateDumpSTATUSandNAME($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $CHAR_NAME, 0);
         MoveToGMAccount(_HostDBSwitch($RealmID), $DBUser, $DBPassword, _CharacterDBSwitch($RealmID), $GUID);

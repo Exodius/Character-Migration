@@ -507,13 +507,6 @@ class SOAP {
 
 }
 
-function _TalentsReset($DBHost, $DBUser, $DBPassword, $CharactersDB, $GUID) {
-    $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
-    _SelectDB($CharactersDB, $connection);
-    $query = mysql_query("UPDATE `characters` SET `at_login` = `at_login`|4|16 WHERE `guid` = " . $GUID . ";", $connection) or die(mysql_error());
-    mysql_close($connection);
-}
-
 function _CheckRiding($SKILL, $CUR, $connection, $GUID, $LEVEL) {
     $SpellID = -1;
     switch ($SKILL) {

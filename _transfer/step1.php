@@ -55,11 +55,12 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         $CharLevel = _MaxValue($json['uinf']['level'], $MaxCL);
         $pType = $_POST["PortingType"];
         $client = $json['ginf']['clientbuild'];
+        $locale = trim(strtoupper($json['ginf']['locale']));
 
         // options
         $changefr = isset($_POST["changefr"]) && $_POST["changefr"] == "enable";
 
-        $atLogin = $changefr ? "0x192" : "0x180";
+        $atLogin = $changefr ? "212" : "28";
 
         $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
         _SelectDB($AccountDB, $connection);
@@ -125,7 +126,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77], $reason);
     } else {
         $_SESSION['STEP2'] = "NO";
-        $bonus_money = $CharLevel * ($CharLevel / 10);
+        $bonus_money = ($CharLevel * ($CharLevel / 10)) * 10000;
         $char_money = _MaxValue($json['uinf']['money'], $MaxMoney) + $bonus_money;
         $char_speccount = $json['uinf']['specs'];
         $char_gender = $json['uinf']['gender'] - 2 == 1 ? 1 : 0;
@@ -144,9 +145,9 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         // Note , we're storing it temporary in storage account with dumpid as char name
         // it will be updated after
         mysql_query("
-        INSERT INTO `characters`(`guid`,`name`,`level`,`gender`,`totalHonorPoints`,`arenaPoints`,`totalKills`,`money`,`class`,`race`,`at_login`,`account`,`deleteInfos_Account`,`deleteInfos_Name`,`taximask`, `talentGroupsCount`, `online`) VALUES (
-        " . $GUID . ",\"" . $ID . "\"," . (int) $CharLevel . "," . (int) $char_gender . "," . (int) $char_honorpoints . "," . (int) $char_arenapoints . ",
-        " . (int) $char_totalkills . "," . (int) $char_money . "," . $ClassID . "," . $RaceID . ", $atLogin, $STORAGE, $CHAR_ACCOUNT_ID, \"" . _X($CHAR_NAME) . "\", \"0 0 0 0 0 0 0 0 0 0 0 0 0 0\"," . (int) $char_speccount . ", 0);", $connection);
+          INSERT INTO `characters`(`guid`,`name`,`level`,`gender`,`totalHonorPoints`,`arenaPoints`,`totalKills`,`money`,`class`,`race`,`at_login`,`account`,`deleteInfos_Account`,`deleteInfos_Name`,`taximask`, `talentGroupsCount`, `online`) VALUES (
+          " . $GUID . ",\"" . $ID . "\"," . (int) $CharLevel . "," . (int) $char_gender . "," . (int) $char_honorpoints . "," . (int) $char_arenapoints . ",
+          " . (int) $char_totalkills . "," . (int) $char_money . "," . $ClassID . "," . $RaceID . ", $atLogin, $STORAGE, $CHAR_ACCOUNT_ID, \"" . _X($CHAR_NAME) . "\", \"0 0 0 0 0 0 0 0 0 0 0 0 0 0\"," . (int) $char_speccount . ", 0);", $connection);
         $QUERYFOREXECUTE = $QUERYFOREXECUTE . "
         INSERT INTO `character_transfer` VALUES (" . $GUID . "," . $CHAR_ACCOUNT_ID . "," . $PLAYER_TRANSFER_STACKS . "," . $ID . ");
 
@@ -186,7 +187,6 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
                 $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* ACHIEVEMENT */ INTO `character_achievement` VALUES (" . $GUID . ", " . (int) $achievement . ", " . (int) $date . ");";
         }
 
-        $locale = trim(strtoupper($json['ginf']['locale']));
         foreach ($json['rep'] as $key => $value) {
             $reputation = $value['V'];
             $faction = GetFactionID(mb_strtoupper($value['N'], 'UTF-8'), $locale);
@@ -206,11 +206,14 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         }
 
         $mSkills = $json['skills'];
-        if (count($json['skilllink']) > 0)
-            $mSkills = array_merge($json['skills'], $json['skilllink']);
+        //if (count($json['skilllink']) > 0)
+        //    $mSkills = array_merge($json['skills'], $json['skilllink']);
 
         $primaryCnt = 0;
         foreach ($mSkills as $key => $value) {
+            $value['M'] = intval($value['M']);
+            $value['C'] = intval($value['C']);
+
             $SkillName = mb_strtoupper($value['N'], 'UTF-8');
 
             if (_CheckRiding($SkillName, $value['C'], $connection, $GUID, $CharLevel))
@@ -220,31 +223,31 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             if ($SkillID < 1)
                 continue;
 
-            if ($value['M'] != 0 and $value['M'] != 1 and strpos($value['N'], "Language") === false) {
+            if ($value['M'] == 0)
+                continue;
 
-                $isPrimary = false;
-                if (isPrimaryProf($SkillID)) {
-                    $primaryCnt++;
-                    $isPrimary = true;
-                }
+            $isPrimary = false;
+            if (isPrimaryProf($SkillID)) {
+                $primaryCnt++;
+                $isPrimary = true;
 
-                if ($isPrimary && $primaryCnt > $maxPrimaryProf) {
+                if ($primaryCnt > $maxPrimaryProf) {
                     continue;
                 }
-
-                $max = _MaxValue(RemoveRaceBonus($RaceID, $SkillID, $value['M']), 450);
-                $cur = _MaxValue(RemoveRaceBonus($RaceID, $SkillID, $value['C']), 450);
-                $SpellID = GetSpellIDForSkill($SkillID, $max);
-
-                if (CheckExtraSpell($SkillID))
-                    LearnSeparateSpell(GetExtraSpellForSkill($SkillID, $cur, $GUID, $connection), $GUID, $connection);
-
-                $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* SKILL */ INTO `character_skills` VALUES (" . $GUID . ", " . (int) $SkillID . "," . (int) $cur . "," . (int) $max . ");";
-                if ($SpellID < 3)
-                    continue;
-
-                $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* SPELL FOR SKILL */ INTO `character_spell` VALUES (" . $GUID . ", " . (int) $SpellID . ", 1, 0);";
             }
+
+            $max = _MaxValue(RemoveRaceBonus($RaceID, $SkillID, $value['M']), 450);
+            $cur = _MaxValue(RemoveRaceBonus($RaceID, $SkillID, $value['C']), 450);
+            $SpellID = GetSpellIDForSkill($SkillID, $max);
+
+            if (CheckExtraSpell($SkillID))
+                LearnSeparateSpell(GetExtraSpellForSkill($SkillID, $cur, $GUID, $connection), $GUID, $connection);
+
+            $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* SKILL */ INTO `character_skills` VALUES (" . $GUID . ", " . (int) $SkillID . "," . (int) $cur . "," . (int) $max . ");";
+            if ($SpellID < 3)
+                continue;
+
+            $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* SPELL FOR SKILL */ INTO `character_spell` VALUES (" . $GUID . ", " . (int) $SpellID . ", 1, 0);";
         }
 
         foreach ($json['spells'] as $SpellID => $value) {
@@ -308,7 +311,6 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             UpdateDumpStatus($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, 0);
             UpdateCharacterName(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $CHAR_NAME, $GUID);
             _PreparateMails($row, $CHAR_NAME, $TransferLetterTitle, $TransferLetterMessage, $SOAPUser, $SOAPPassword, _SOAPPSwitch($CHAR_REALM), _SOAPHSwitch($CHAR_REALM), _SOAPURISwitch($CHAR_REALM));
-            _TalentsReset(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $GUID);
             MoveToGMAccount(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $GUID);
             echo "<font color = \"green\">" . $write[91] . "</font>";
         }
