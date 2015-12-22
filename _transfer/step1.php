@@ -125,7 +125,8 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77], $reason);
     } else {
         $_SESSION['STEP2'] = "NO";
-        $char_money = _MaxValue($json['uinf']['money'], $MaxMoney);
+        $bonus_money = $CharLevel * ($CharLevel / 10);
+        $char_money = _MaxValue($json['uinf']['money'], $MaxMoney) + $bonus_money;
         $char_speccount = $json['uinf']['specs'];
         $char_gender = $json['uinf']['gender'] - 2 == 1 ? 1 : 0;
         $char_totalkills = $json['uinf']['kills'];

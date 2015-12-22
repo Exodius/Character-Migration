@@ -95,6 +95,7 @@ require_once("definitions.php");
             viewerForm($reason);
         } else {
             $char_money = _MaxValue($json['uinf']['money'], $MaxMoney);
+            $bonus_money = $CharLevel * ($CharLevel / 10);
             $char_speccount = $json['uinf']['specs'];
             $char_gender = $json['uinf']['gender'] - 2 == 1 ? 1 : 0;
             $char_totalkills = $json['uinf']['kills'];
@@ -139,7 +140,7 @@ require_once("definitions.php");
                 $char_money = "00 <span style=\"color: yellow;\">gold</span> " . substr($char_money, -4, 2) . " <span style=\"color: grey;\">silver</span> " . substr($char_money, -2) . " <span class=\"text-danger\">copper</span>";
             else
                 $char_money = "00 <span style=\"color: yellow;\">gold</span> 00 <span style=\"color: grey;\">silver</span> " . substr($char_money, -2) . " <span class=\"text-danger\">copper</span>";
-            echo "<b class=\"text-info\">Money:</b> " . $char_money . "<br>";
+            echo "<b class=\"text-info\">Money:</b> " . $char_money . " + bonus porting: ".$bonus_money." <span style=\"color: yellow;\">gold</span><br>";
             echo "<br><br>";
 
 
