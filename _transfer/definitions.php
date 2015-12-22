@@ -7,8 +7,8 @@ define("PBASIC", 1);
 define("PFULL", 2);
 
 $addonVers = array(
-    "335.706",
-    "434.702"
+    "335.707",
+    "434.703"
 );
 
 define("WOTLK_BUILD",12340);

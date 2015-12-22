@@ -156,16 +156,16 @@ function CanOrNoTransferServer($DBHost, $DBUser, $DBPassword, $AccountDB, $Realm
 }
 
 function checkDuplicate($DBHost, $DBUser, $DBPassword, $AccountDB, $charNameOld, $O_GUID, $realm, $realmlist) {
-    $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
-    _SelectDB($AccountDB, $connection);
-
     // special cases ( if server merged )
     // wowsoc -> firestorm
     if ($realmlist == "cata.logon.firestorm-servers.com" && $realm == "Deathwing") {
         if (checkDuplicate($DBHost, $DBUser, $DBPassword, $AccountDB, $charNameOld, $O_GUID, "Cellar Door", "wowsoc.game-host.org"))
             return true;
     }
-
+    
+    $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
+    _SelectDB($AccountDB, $connection);
+    
     $query = mysql_query("SELECT count(*) "
             . "FROM `account_transfer` "
             . "WHERE ( `oGUID` = '$O_GUID' OR `cNameOLD` = '$charNameOld' )"

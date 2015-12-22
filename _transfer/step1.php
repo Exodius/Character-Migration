@@ -54,12 +54,12 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         $ClassID = _GetClassID(strtoupper($json['uinf']['class']));
         $CharLevel = _MaxValue($json['uinf']['level'], $MaxCL);
         $pType = $_POST["PortingType"];
-        $client=$json['ginf']['clientbuild'];
+        $client = $json['ginf']['clientbuild'];
 
         // options
         $changefr = isset($_POST["changefr"]) && $_POST["changefr"] == "enable";
 
-        $atLogin = $changefr ? "0x180" : "0x192";
+        $atLogin = $changefr ? "0x192" : "0x180";
 
         $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
         _SelectDB($AccountDB, $connection);
@@ -85,6 +85,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         $delay = checkDelay();
 
         $limit = checkLimit($AccountDBHost, $DBUser, $DBPassword, $AccountDB, _CharacterDBSwitch($CHAR_REALM), $pType);
+
         if ($limit == 0) {
             $reason = "Questa tipologia di porting non è disponibile per il tuo account!";
         } else if (CheckGameBuild($client, $GAMEBUILD)) {
@@ -108,7 +109,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         } else if ($delay < 0) {
             $reason = _RT("Un altro porting è in corso, riprovare tra " . abs($delay) . " secondi");
         } else if ($client != WOTLK_BUILD && $pType > 0) {
-            $reason = _RT("La tipologia di porting scelto (".$transferType[$pType]['Type'].") non è disponibile per le versioni di gioco diverse dalla WOTLK");
+            $reason = _RT("La tipologia di porting scelto (" . $transferType[$pType]['Type'] . ") non è disponibile per le versioni di gioco diverse dalla WOTLK");
         }
 
         $GUID = CheckCharacterGuid($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, GetCharacterGuid(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM)));
@@ -139,7 +140,6 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         $connection = mysql_connect(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword);
 
         _SelectDB(_CharacterDBSwitch($CHAR_REALM), $connection);
-
         // Note , we're storing it temporary in storage account with dumpid as char name
         // it will be updated after
         mysql_query("
@@ -204,7 +204,12 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* REPUTATION */ INTO `character_reputation` VALUES (" . $GUID . ", " . $faction . ", " . (int) $reputation . "," . (int) $flag . ");";
         }
 
-        foreach ($json['skills'] as $key => $value) {
+        $mSkills = $json['skills'];
+        if (count($json['skilllink']) > 0)
+            $mSkills = array_merge($json['skills'], $json['skilllink']);
+
+        $primaryCnt = 0;
+        foreach ($mSkills as $key => $value) {
             $SkillName = mb_strtoupper($value['N'], 'UTF-8');
 
             if (_CheckRiding($SkillName, $value['C'], $connection, $GUID, $CharLevel))
@@ -214,18 +219,31 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             if ($SkillID < 1)
                 continue;
 
-            $max = _MaxValue(RemoveRaceBonus($RaceID, $SkillID, $value['M']), 450);
-            $cur = _MaxValue(RemoveRaceBonus($RaceID, $SkillID, $value['C']), 450);
-            $SpellID = GetSpellIDForSkill($SkillID, $max);
+            if ($value['M'] != 0 and $value['M'] != 1 and strpos($value['N'], "Language") === false) {
 
-            if (CheckExtraSpell($SkillID))
-                LearnSeparateSpell(GetExtraSpellForSkill($SkillID, $cur, $GUID, $connection), $GUID, $connection);
+                $isPrimary = false;
+                if (isPrimaryProf($SkillID)) {
+                    $primaryCnt++;
+                    $isPrimary = true;
+                }
 
-            $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* SKILL */ INTO `character_skills` VALUES (" . $GUID . ", " . (int) $SkillID . "," . (int) $cur . "," . (int) $max . ");";
-            if ($SpellID < 3)
-                continue;
+                if ($isPrimary && $primaryCnt > $maxPrimaryProf) {
+                    continue;
+                }
 
-            $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* SPELL FOR SKILL */ INTO `character_spell` VALUES (" . $GUID . ", " . (int) $SpellID . ", 1, 0);";
+                $max = _MaxValue(RemoveRaceBonus($RaceID, $SkillID, $value['M']), 450);
+                $cur = _MaxValue(RemoveRaceBonus($RaceID, $SkillID, $value['C']), 450);
+                $SpellID = GetSpellIDForSkill($SkillID, $max);
+
+                if (CheckExtraSpell($SkillID))
+                    LearnSeparateSpell(GetExtraSpellForSkill($SkillID, $cur, $GUID, $connection), $GUID, $connection);
+
+                $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* SKILL */ INTO `character_skills` VALUES (" . $GUID . ", " . (int) $SkillID . "," . (int) $cur . "," . (int) $max . ");";
+                if ($SpellID < 3)
+                    continue;
+
+                $QUERYFOREXECUTE = $QUERYFOREXECUTE . "\n INSERT IGNORE /* SPELL FOR SKILL */ INTO `character_spell` VALUES (" . $GUID . ", " . (int) $SpellID . ", 1, 0);";
+            }
         }
 
         foreach ($json['spells'] as $SpellID => $value) {

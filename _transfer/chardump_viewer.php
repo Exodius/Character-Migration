@@ -48,14 +48,14 @@ require_once("definitions.php");
             $json = json_decode(stripslashes($DECODED_DUMP), true);
             $CHAR_NAME = mb_convert_case(mb_strtolower($json['uinf']['name'], 'UTF-8'), MB_CASE_TITLE, 'UTF-8');
             $CharLevel = _MaxValue($json['uinf']['level'], $MaxCL);
-            $O_GUID=$json['uinf']['guid'];
+            $O_GUID = $json['uinf']['guid'];
             $O_REALMLIST = $json['ginf']['realmlist'];
             $O_REALM = $json['ginf']['realm'];
             $ClassID = _GetClassID(strtoupper($json['uinf']['class']));
             $RaceID = _GetRaceID(strtoupper($json['uinf']['race']));
             $pType = $_POST["PortingType"];
             $locale = trim(strtoupper($json['ginf']['locale']));
-            $client=$json['ginf']['clientbuild'];
+            $client = $json['ginf']['clientbuild'];
 
 
             $AchievementsCount = 0;
@@ -77,13 +77,13 @@ require_once("definitions.php");
                 if (CheckGameBuild($client, $GAMEBUILD)) {
                     $reason = _RT($write[50] . ": " . $json['ginf']['clientbuild'] . " supportate: " . implode(",", $GAMEBUILD));
                 } else if (((ceil($CharLevel / 10) > $AchievementsCount) || ($AchievementsCount < $AchievementsMinCount)) && $AchievementsCheck == 1) {
-                    $reason = _RT("Non hai abbastanza achievements: ".$AchievementsCount);
+                    $reason = _RT("Non hai abbastanza achievements: " . $AchievementsCount);
                 } else if ($playedTime < $PLAYTIME) {
-                    $reason = _RT("Il tempo di gioco è troppo basso: " . $playedTime. " day");
+                    $reason = _RT("Il tempo di gioco è troppo basso: " . $playedTime . " day");
                 } else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST, $O_REALM, $o_URL)) {
                     $reason = _RT($write[57] . " [ realm: " . (empty($O_REALMLIST) ? "No realmlist" : $O_REALMLIST) . " --- " . (empty($O_REALM) ? "No realmn name" : $O_REALM) . " ]");
-                } else if ($client!=WOTLK_BUILD && $pType>0) {
-                    $reason = _RT("La tipologia di porting scelto (".$transferType[$pType]['Type'].") non è disponibile per le versioni di gioco diverse dalla WOTLK");
+                } else if ($client != WOTLK_BUILD && $pType > 0) {
+                    $reason = _RT("La tipologia di porting scelto (" . $transferType[$pType]['Type'] . ") non è disponibile per le versioni di gioco diverse dalla WOTLK");
                 }
             }
 
@@ -209,7 +209,13 @@ require_once("definitions.php");
             echo '<div class="col-xs-12">';
             /* SKILLS */
             echo "<br><b class=\"text-warning\">Skills</b>";
-            foreach ($json['skills'] as $key => $value) {
+
+            $mSkills=$json['skills'];
+            if (count($json['skilllink'])>0)
+                $mSkills = array_merge($json['skills'], $json['skilllink']);
+
+            $primaryCnt = 0;
+            foreach ($mSkills as $key => $value) {
                 $SkillName = mb_strtoupper($value['N'], 'UTF-8');
 
                 $SkillID = GetSkillID($SkillName, $locale);
@@ -220,8 +226,21 @@ require_once("definitions.php");
                 $cur = _MaxValue(RemoveRaceBonus($RaceID, $SkillID, $value['C']), 450);
                 $SpellID = GetSpellIDForSkill($SkillID, $max);
 
-                if ($value['M'] != 0 and $value['M'] != 1 and strpos($value['N'], "Language") === false)
-                    echo "<br><span class=\"text-success\">" . $value['N'] . "</span> <span class=\"text-info\">" . $value['M'] . " " . $value['C'] . "</span>";
+                if ($value['M'] == 0 || $value['M'] == 1)
+                    continue;
+                
+                $isPrimary = false;
+                if (isPrimaryProf($SkillID)) {
+                    $primaryCnt++;
+                    $isPrimary = true;
+                }
+
+                if ($isPrimary && $primaryCnt > $maxPrimaryProf) {
+                    echo "<br><span class=\"text-success\">" . $value['N'] . "</span> <span class=\"text-info\"> Hai superato il limite massimo di $maxPrimaryProf professioni primarie</span>";
+                    continue;
+                }
+
+                echo "<br><span class=\"text-success\">" . $value['N'] . "</span> <span class=\"text-info\">" . $max . " " . $cur . "</span>";
             }
 
 
@@ -289,16 +308,20 @@ require_once("definitions.php");
                 echo "<b class=\"text-warning\">Gems</b><br>" . $GEMrow . "<br><br>";
 
             /* CURRENCY */
-            foreach ($json['currency'] as $key => $value) {
-                $CurrencyID = $value['I'];
-                $COUNT = $value['C'];
-                if ($COUNT < 1)
-                    continue;
+            if ($client == WOTLK_BUILD) {
+                foreach ($json['currency'] as $key => $value) {
+                    $CurrencyID = $value['I'];
+                    $COUNT = $value['C'];
+                    if ($COUNT < 1)
+                        continue;
 
-                // questi dovrebbero essere tutti i token / emblemi del player
-                // l'unico filtro che fa è sugli arena / honor points che vengono aggiunti già prima
-                if (_CheckCurrency($CurrencyID))
-                    $CURrow .= '<a href="http://wotlk.openwow.com/item=' . $CurrencyID . '">' . $CurrencyID . '</a>' . "<span class=\"text-danger\">x" . $COUNT . "</span> ";
+                    // questi dovrebbero essere tutti i token / emblemi del player
+                    // l'unico filtro che fa è sugli arena / honor points che vengono aggiunti già prima
+                    if (_CheckCurrency($CurrencyID))
+                        $CURrow .= '<a href="http://wotlk.openwow.com/item=' . $CurrencyID . '">' . $CurrencyID . '</a>' . "<span class=\"text-danger\">x" . $COUNT . "</span> ";
+                }
+            } else {
+                $CURrow .= "Gli emblemi e le altre currency non possono essere importate dalle espansioni diverse dalla WOTLK poichè il sistema non è compatibile";
             }
 
             if ($CURrow != "")

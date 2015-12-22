@@ -13,6 +13,7 @@ function private.GetGlobalInfo()
     retTbl.clientbuild      = build;
     return retTbl;
 end
+
 function private.GetUnitInfo()
     local retTbl            = {}
     retTbl.name             = UnitName("player");
@@ -31,6 +32,7 @@ function private.GetUnitInfo()
     retTbl.specs            = GetNumTalentGroups();
     return retTbl;
 end
+
 function private.GetSpellData()
     local retTbl = {}
     for i = 1, MAX_SKILLLINE_TABS do
@@ -50,6 +52,7 @@ function private.GetSpellData()
     private.ILog("Spells DONE..."); 
     return retTbl;
 end
+
 function private.GetGlyphData()
     local retTbl = {}
     for i = 1, GetNumTalentGroups() do
@@ -70,6 +73,7 @@ function private.GetGlyphData()
     private.ILog("Glyphs DONE..."); 
     return retTbl;
 end
+
 function private.GetCurrencyData()
     local retTbl = {}
     for i = 1, GetCurrencyListSize() do
@@ -78,6 +82,7 @@ function private.GetCurrencyData()
     end 
     return retTbl;
 end
+
 function private.GetMACData()
     local retTbl = {}
     for i = 1, GetNumCompanions("MOUNT") do
@@ -91,6 +96,7 @@ function private.GetMACData()
     private.ILog("Mounts & Critters DONE...");    
     return retTbl;
 end
+
 function private.GetAchievements()
     local retTbl = {}
     for _, j in pairs(CHDMP.AchievementIds) do
@@ -105,6 +111,7 @@ function private.GetAchievements()
     private.ILog("Achievements DONE...");
     return retTbl;
 end
+
 function private.GetRepData()
     local retTbl = {}
     for i = 1, GetNumFactions() do 
@@ -114,6 +121,7 @@ function private.GetRepData()
     private.ILog("Reputations DONE...");
     return retTbl;
 end
+
 function private.GetIData()
     local retTbl = {}
     for i = 1, 74 do 
@@ -153,7 +161,7 @@ function private.GetSkillData()
     local retTbl = {}
     for i = 1, GetNumSkillLines() do 
         local skillName, isHeader, _, skillRank, _, _, skillMaxRank, _, _, _, _, _, _ = GetSkillLineInfo(i)
-        retTbl[i] = {["N"] = skillName,["C"] = skillRank,["M"] = skillMaxRank}
+        retTbl[skillName] = {["N"] = skillName,["C"] = skillRank,["M"] = skillMaxRank}
     end
     return retTbl;
 end
@@ -170,20 +178,25 @@ function private.CreateCharDump()
     private.dmp.currency    = private.trycall(private.GetCurrencyData, private.ErrLog)  or {private.ErrLog};
     return b64_enc(myJSON.encode(private.dmp));
 end
+
 function private.Log(str_in)
     print("\124c0080C0FF  "..str_in.."\124r");
 end
+
 function private.ErrLog(err_in)
     private.errlog = private.errlog or ""
     private.errlog = private.errlog .. "err=" .. b64_enc(err_in) .. "\n"
     print("\124c00FF0000"..(err_in or "nil").."\124r");
 end
+
 function private.GetCharDump()
     return b64_enc(private.CreateCharDump());
 end
+
 function private.ILog(str_in)
     print("\124c0080FF80"..str_in.."\124r");
 end
+
 function private.trycall(f,herr)
     local status, result = xpcall(f,herr)
     if status then 
@@ -191,43 +204,53 @@ function private.trycall(f,herr)
     end
     return status;
 end
+
 function private.SaveCharData(data_in)
     private.ILog("AzerothShard chardump DONE: you can find dump here: WoW Folder \\WTF\\Account\\%Username%\\SavedVariables\\chardump.lua ");    
     CHDMP_DATA  = data_in
     CHDMP_KEY   = "f7519722aa975a5dab2e49c18d9b175cd8047a36"
     CHDMP_VER   = GetAddOnMetadata("chardump", "Version")
 end
+
 function private.TradeSkillFrame_OnShow_Hook(frame, force)
     if private.done == true then
         return
     end
 
     if frame and frame.GetName and frame:GetName() == "TradeSkillFrame" then
-		private.dmp.recipes = private.dmp.recipes or {};
-		for i=1, GetNumTradeSkills() do
-			local link = GetTradeSkillRecipeLink(i);
-			if link then
-				local spellId = tonumber(link:match("enchant:(%d+)")); 
-				private.dmp.recipes[spellId] = spellId;
-			end
-		end
-
-		print("Profession scanned!")
-
 
         local isLink, _ = IsTradeSkillLinked();
         if isLink == nil then
             local link = GetTradeSkillListLink();
+            
             if link then
-		        local skillname = link:match("%[(.-)%]");
-		        private.dmp = private.dmp or {};
-		        private.dmp.skilllink = private.dmp.skilllink or {};
-				private.dmp.skilllink[skillname] = link;
-				print("AzerothShard chardump: TradeSkillFrame_Show",skillname,link)
+                local TradeSpellID,CurrentLevel,MaxLevel,PlayerID,Recipes, LinkText = string.match(link,"|Htrade:(%d+):(%d+):(%d+):([0-9a-fA-F]+):([A-Za-z0-9+/]+)|h%[([^]]+)%]|h|r");
+
+                local myGuid=tonumber(UnitGUID(UnitName("player")));
+                local linkGuid=tonumber(PlayerID,16);
+                -- only collect data from trade skills of current player
+                if myGuid == linkGuid then  
+                    local skillname = link:match("%[(.-)%]");
+                    private.dmp = private.dmp or {};
+                    private.dmp.skilllink = private.dmp.skilllink or {};
+                    private.dmp.skilllink[skillname] = { ['N'] = skillname, ['C'] = CurrentLevel, ['M'] = MaxLevel , ['L'] = link};
+                    print("AzerothShard chardump: TradeSkillFrame_Show",skillname,link);
+
+                    private.dmp.recipes = private.dmp.recipes or {};
+                    for i=1, GetNumTradeSkills() do
+                            local link = GetTradeSkillRecipeLink(i);
+                            if link then
+                                    local spellId = tonumber(link:match("enchant:(%d+)")); 
+                                    private.dmp.recipes[spellId] = spellId;
+                            end
+                    end
+                end
             end
         end
 
-		private.SaveCharData(private.GetCharDump())
+        print("Profession scanned!")
+
+        private.SaveCharData(private.GetCharDump());
     end 
 end
 

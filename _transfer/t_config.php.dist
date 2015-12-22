@@ -17,7 +17,8 @@ error_reporting(E_ERROR | E_PARSE);
     $AchievementsCheck      = 0;            // ENABLE (1) / DISABLE (0) FORMULA: must have more then Level > 10 OR AchievementsMinCount param
     $AchievementsMinCount   = 50;           // Minimum ammount of Achievements.
     $PLAYTIME               = 10;           // Minimum Playtime (days). Counted as: last archievment date - first archievment date
-
+    $maxPrimaryProf         = 2;            // limit primary professions
+    
     $AccountDB          = "wow_335a_login"; // Your Account DB Name
     $AccountDBHost      = "127.0.0.1";      // Your Account DB Host
     $DBUser             = "root";           // Your DB User

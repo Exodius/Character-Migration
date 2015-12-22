@@ -221,6 +221,12 @@ function GetSkillID($skill, $locale) {
     }
 }
 
+function isPrimaryProf($skillId) {
+    $primary = array(164, 165, 171, 182, 186, 197, 202, 333, 393, 755, 773);
+
+    return in_array($skillId, $primary);
+}
+
 function _GetGlyphID($GlyphID) {
     switch ($GlyphID) {
         case 52084: return 2;
