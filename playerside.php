@@ -111,7 +111,7 @@ if (!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $Allo
                     Deny: id,
                     RealmlistList: Realm,
                     GUID: Guid,
-                    REALSON: Reason,
+                    REASON: Reason,
                 },
                 success: function (data) {
                     $('#' + id).hide( );
@@ -295,7 +295,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
                 array_push($realms, $row["cRealm"]);
                 array_push($guids, $row["GUID"]);
             } else {
-                if ($count < 30) {
+                if ($count < 50) {
                     $prev.= "
                     <tr bgcolor = #FFFFCC>
                         <td>" . $row["cNameNEW"] . " / <br> " . $row["cNameOLD"] . "</td>

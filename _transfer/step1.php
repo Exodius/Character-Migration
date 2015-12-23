@@ -15,6 +15,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
     $fileopen = fopen($file, 'r');
     $buffer = '';
     $reason = '';
+    $log = '';
 
     while (!feof($fileopen)) {
         $buffer2 = fgets($fileopen);
@@ -92,11 +93,11 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         } else if (CheckGameBuild($client, $GAMEBUILD)) {
             $reason = _RT($write[50] . " " . implode(",", $GAMEBUILD));
         } else if (((ceil($CharLevel / 10) > $AchievementsCount) || ($AchievementsCount < $AchievementsMinCount)) && $AchievementsCheck == 1) {
-            $reason = _RT("Seems bad characters, not enought achievements!");
+            $log=$reason = _RT("Seems bad characters, not enought achievements!");
         } else if (CHECKDAY($ACHMAXTime, $ACHMINTime) < $PLAYTIME) {
-            $reason = _RT("Small playtime!");
+            $log=$reason = _RT("Small playtime!");
         } else if (_CheckBlackList($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_REALMLIST, $O_REALM, $o_URL)) {
-            $reason = _RT($write[57] . " [ realm: " . (empty($O_REALMLIST) ? "No realmlist" : $O_REALMLIST) . " --- " . (empty($O_REALM) ? "No realmn name" : $O_REALM) . " ]");
+            $log=$reason = _RT($write[57] . " [ realm: " . (empty($O_REALMLIST) ? "No realmlist" : $O_REALMLIST) . " --- " . (empty($O_REALM) ? "No realmn name" : $O_REALM) . " ]");
         } else if (CanOrNoTransferPlayer(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM), $AccountDB, $CHAR_ACCOUNT_ID)) {
             $reason = _RT($write[52] . " " . $REALM_NAME . ". " . $write[53]);
         } else if ($PLAYER_TRANSFER_STACKS < 0) {
@@ -106,7 +107,10 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         } else if (!_ServerOn($SOAPUser, $SOAPPassword, _SOAPPSwitch($CHAR_REALM), _SOAPHSwitch($CHAR_REALM), _SOAPURISwitch($CHAR_REALM))) {
             $reason = _RT("Realm: \"" . $REALM_NAME . "\" <u>OFFLINE!</u>");
         } else if (checkDuplicate($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_NAME, $O_GUID, $O_REALM, $O_REALMLIST)) {
-            $reason = _RT("Questo personaggio è già stato importato!");
+            $log= $reason = _RT(
+                    "Questo personaggio è già stato importato oppure il file è stato manomesso.<br>"
+                    . "E' stato creato un report riguardo questa problematica e verrà presto analizzata dagli amministratori<br>"
+                    . "In caso di tentato abuso, verranno presi provvedimenti. Contatta lo staff per maggiori informazioni.<br>");
         } else if ($delay < 0) {
             $reason = _RT("Un altro porting è in corso, riprovare tra " . abs($delay) . " secondi");
         } else if ($client != WOTLK_BUILD && $pType > 0) {
@@ -115,9 +119,9 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
 
         $GUID = CheckCharacterGuid($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_REALM, GetCharacterGuid(_HostDBSwitch($CHAR_REALM), $DBUser, $DBPassword, _CharacterDBSwitch($CHAR_REALM)));
 
-        if (empty($reason)) {
+        if (empty($reason) || $log) {
             $ID = 0;
-            $ID = WriteDumpFromFileInDB($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $DUMP, $CHAR_NAME, $CHAR_ACCOUNT_ID, $CHAR_REALM, $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $VER, $O_GUID, $GUID, $PLAYER_TRANSFER_STACKS, $pType, $write[20]);
+            $ID = WriteDumpFromFileInDB($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $DUMP, $CHAR_NAME, $CHAR_ACCOUNT_ID, $CHAR_REALM, $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $VER, $O_GUID, $GUID, $PLAYER_TRANSFER_STACKS, $pType, $log);
         }
     } else if (!isset($part[1]))
         $reason = _RT($write[51]);

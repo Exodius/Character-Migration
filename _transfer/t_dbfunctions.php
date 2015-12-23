@@ -156,16 +156,19 @@ function CanOrNoTransferServer($DBHost, $DBUser, $DBPassword, $AccountDB, $Realm
 }
 
 function checkDuplicate($DBHost, $DBUser, $DBPassword, $AccountDB, $charNameOld, $O_GUID, $realm, $realmlist) {
+    if (!$O_GUID || $O_GUID == "")
+        return true;
+
     // special cases ( if server merged )
     // wowsoc -> firestorm
     if ($realmlist == "cata.logon.firestorm-servers.com" && $realm == "Deathwing") {
         if (checkDuplicate($DBHost, $DBUser, $DBPassword, $AccountDB, $charNameOld, $O_GUID, "Cellar Door", "wowsoc.game-host.org"))
             return true;
     }
-    
+
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);
-    
+
     $query = mysql_query("SELECT count(*) "
             . "FROM `account_transfer` "
             . "WHERE ( `oGUID` = '$O_GUID' OR `cNameOLD` = '$charNameOld' )"
@@ -306,8 +309,9 @@ function _CheckStatus($VALUE, $P1, $P2, $P3, $P4, $P5, $COMMENT = "") {
     switch ($VALUE) {
         case 0: return "<font color = \"blue\">" . $P1 . "</font>";
         case 1: return "<font color = \"green\">" . $P2 . "</font>";
-        case 2: return "<font color = \"red\">" . $P3 . " | Realson: " . $COMMENT . "</font>";
+        case 2: return "<font color = \"red\">" . $P3 . " | Reason: " . $COMMENT . "</font>";
         case 3: return "<font color = \"purple\">" . $P4 . "</font>";
+        case 4: return "<font color = \"red\">" . $COMMENT . "</font>";
         default: return "<font color = \"orange\">" . $P5 . "</font>";
     }
 }
@@ -409,13 +413,17 @@ function LoadDump($DBHost, $DBUser, $DBPassword, $AccountDB, $ID) {
     return $row[0];
 }
 
-function WriteDumpFromFileInDB($DBHost, $DBUser, $DBPassword, $AccountDB, $DUMP, $CHAR_NAME, $CHAR_ACCOUNT_ID, $CHAR_REALM, $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $VER, $O_GUID, $GUID, $GM_ACCOUNT, $PTYPE, $ERROR) {
+function WriteDumpFromFileInDB($DBHost, $DBUser, $DBPassword, $AccountDB, $DUMP, $CHAR_NAME, $CHAR_ACCOUNT_ID, $CHAR_REALM, $o_Account, $o_Password, $O_REALMLIST, $O_REALM, $o_URL, $ID, $VER, $O_GUID, $GUID, $GM_ACCOUNT, $PTYPE, $LOG) {
+    global $status;
+
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);
+    $status = $LOG && $LOG != "" ? $status["REPORT"] : $status["ERROR"];
+
     $query = mysql_query("INSERT INTO `account_transfer`(
-        `cStatus`,`cRealm`,`oAccount`,`oPassword`,`oRealmlist`,`oRealm`,`oServer`,`cDump`,`cNameOLD`,`cNameNEW`,`cAccount`,`addonVersion`,`oGUID`,`GUID`,`gmAccount`,`tType`) VALUES (
-        5,\"" . _X($CHAR_REALM) . "\",\"" . _X($o_Account) . "\",\"" . _X($o_Password) . "\",\"" . _X($O_REALMLIST) . "\",\"" . _X($O_REALM) . "\",\"" . _X($o_URL) . "\"
-        ,\"" . _X($DUMP) . "\",\"" . _X($CHAR_NAME) . "\",\"" . _X($CHAR_NAME) . "\"," . $CHAR_ACCOUNT_ID . ",\"" . _X($VER) . "\",'" . $O_GUID . "'," . $GUID . "," . $GM_ACCOUNT . "," . $PTYPE . ");", $connection) or die(mysql_error());
+        `cStatus`,`cRealm`,`oAccount`,`oPassword`,`oRealmlist`,`oRealm`,`oServer`,`cDump`,`cNameOLD`,`cNameNEW`,`cAccount`,`addonVersion`,`oGUID`,`GUID`,`gmAccount`,`Reason`,`tType`) VALUES (
+        $status,\"" . _X($CHAR_REALM) . "\",\"" . _X($o_Account) . "\",\"" . _X($o_Password) . "\",\"" . _X($O_REALMLIST) . "\",\"" . _X($O_REALM) . "\",\"" . _X($o_URL) . "\"
+        ,\"" . _X($DUMP) . "\",\"" . _X($CHAR_NAME) . "\",\"" . _X($CHAR_NAME) . "\"," . $CHAR_ACCOUNT_ID . ",\"" . _X($VER) . "\",'" . $O_GUID . "'," . $GUID . "," . $GM_ACCOUNT . ",\"" . $LOG . "\"," . $PTYPE . ");", $connection) or die(mysql_error());
     $ID = mysql_insert_id($connection);
     mysql_close($connection);
     return $ID;

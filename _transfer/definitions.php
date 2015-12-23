@@ -6,6 +6,15 @@ define("PFREE", 0);
 define("PBASIC", 1);
 define("PFULL", 2);
 
+$status=array(
+    "PENDING"=>0,
+    "ACCEPTED"=>1,
+    "DENIED"=>2,
+    "CANCELLED"=>3,
+    "REPORT"=>4,
+    "ERROR"=>5
+);
+
 $addonVers = array(
     "335.707",
     "434.703"

@@ -12,7 +12,7 @@ if (isset($_POST['Deny']) && isset($_POST['RealmlistList']) && isset($_POST['GUI
     $ID = $_POST['Deny'];
     $RealmID = $_POST['RealmlistList'];
     $GUID = $_POST['GUID'];
-    $REASON = $_POST['REALSON'];
+    $REASON = $_POST['REASON'];
 
     if (!isset($REASON) || empty($REASON))
         $REASON = "Not meet requeriments.";

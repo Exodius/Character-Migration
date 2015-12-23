@@ -13,6 +13,8 @@ require_once("definitions.php");
 <script src="../template/libs/js/bootstrap.min.js"></script>
 <div class="container">
     <?php
+    $isGm = isset($_SESSION['id']) && _CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevels);
+
     if (isset($_POST["PortingType"])) {
         ?><script type="text/javascript" src="http://cdn.openwow.com/api/tooltip.js"></script><?php
         if (isset($_POST['chardump']) && !empty($_POST['chardump']))
@@ -30,6 +32,12 @@ require_once("definitions.php");
 
             fclose($fileopen);
             unlink($file);
+        }
+
+        if ($isGm) {
+            ?>
+            <a href='data:application/octet-stream,<?= $buffer ?>'>Scarica chardump</a>
+            <?php
         }
 
         $part = explode('"', $buffer);
@@ -73,7 +81,7 @@ require_once("definitions.php");
 
             $playedTime = CHECKDAY($ACHMAXTime, $ACHMINTime);
 
-            if (!isset($_POST["gm_skip_check"])) {
+            if (!isset($_POST["gm_skip_check"]) || $isGm) {
                 if (CheckGameBuild($client, $GAMEBUILD)) {
                     $reason = _RT($write[50] . ": " . $json['ginf']['clientbuild'] . " supportate: " . implode(",", $GAMEBUILD));
                 } else if (((ceil($CharLevel / 10) > $AchievementsCount) || ($AchievementsCount < $AchievementsMinCount)) && $AchievementsCheck == 1) {
@@ -120,7 +128,9 @@ require_once("definitions.php");
             /* CHARACTER */
 
             echo '<b class="text-warning">Character</b><br>';
-            echo "<b class=\"text-info\">GUID:</b> " . $json['uinf']['guid'] . "<br>";
+            if ($isGm)
+                echo "<b class=\"text-info\">GUID:</b> " . $json['uinf']['guid'] . "<br>";
+
             echo "<b class=\"text-info\">Name:</b> " . $json['uinf']['name'] . "<br>";
             echo "<b class=\"text-info\">Level:</b> " . $CharLevel . "<br>";
             echo "<b class=\"text-info\">Race:</b> " . $json['uinf']['race'] . "<br>";
@@ -140,7 +150,7 @@ require_once("definitions.php");
                 $char_money = "00 <span style=\"color: yellow;\">gold</span> " . substr($char_money, -4, 2) . " <span style=\"color: grey;\">silver</span> " . substr($char_money, -2) . " <span class=\"text-danger\">copper</span>";
             else
                 $char_money = "00 <span style=\"color: yellow;\">gold</span> 00 <span style=\"color: grey;\">silver</span> " . substr($char_money, -2) . " <span class=\"text-danger\">copper</span>";
-            echo "<b class=\"text-info\">Money:</b> " . $char_money . "   <b> [ + bonus porting: ".$bonus_money." <span style=\"color: yellow;\">gold</span> ]</b><br>";
+            echo "<b class=\"text-info\">Money:</b> " . $char_money . "   <b> [ + bonus porting: " . $bonus_money . " <span style=\"color: yellow;\">gold</span> ]</b><br>";
             echo "<br><br>";
 
 
@@ -211,8 +221,8 @@ require_once("definitions.php");
             /* SKILLS */
             echo "<br><b class=\"text-warning\">Skills</b>";
 
-            $mSkills=$json['skills'];
-            if (count($json['skilllink'])>0)
+            $mSkills = $json['skills'];
+            if (count($json['skilllink']) > 0)
                 $mSkills = array_merge($json['skills'], $json['skilllink']);
 
             $primaryCnt = 0;
@@ -229,7 +239,7 @@ require_once("definitions.php");
 
                 if ($value['M'] == 0 || $value['M'] == 1)
                     continue;
-                
+
                 $isPrimary = false;
                 if (isPrimaryProf($SkillID)) {
                     $primaryCnt++;
@@ -381,7 +391,7 @@ require_once("definitions.php");
             <br>
             <div class="MythInput">
                 <input name="file" id="file" accept=".lua" type="file" class="text-warning">
-                <?php if (isset($_SESSION['id']) and _CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevels)) { ?>
+                <?php if ($isGm) { ?>
                     <br><br>
                     <span class="text-warning">Inserisci il contenuto del file chardump.lua</span>
                     <textarea rows="5" class="form-control" name="chardump"></textarea>
