@@ -3138,6 +3138,7 @@ function _isClassSpellValid($SpellID, $ClassID) {
                     case 5225:
                     case 5229:
                     case 5420:
+                    case 5487:
                     case 6795:
                     case 8983:
                     case 16081:
@@ -3232,16 +3233,16 @@ function _isClassSpellValid($SpellID, $ClassID) {
 
 function _GetClassID($class) {
     switch ($class) {
-        case "WARRIOR": return 1;
-        case "PALADIN": return 2;
-        case "HUNTER": return 3;
-        case "ROGUE": return 4;
-        case "PRIEST": return 5;
-        case "DEATHKNIGHT": return 6;
-        case "SHAMAN": return 7;
-        case "MAGE": return 8;
-        case "WARLOCK": return 9;
-        case "DRUID": return 11;
+        case "WARRIOR": return CLASS_WARRIOR;
+        case "PALADIN": return CLASS_PALADIN;
+        case "HUNTER": return CLASS_HUNTER;
+        case "ROGUE": return CLASS_ROGUE;
+        case "PRIEST": return CLASS_PRIEST;
+        case "DEATHKNIGHT": return CLASS_DEATHKNIGHT;
+        case "SHAMAN": return CLASS_SHAMAN;
+        case "MAGE": return CLASS_MAGE;
+        case "WARLOCK": return CLASS_WARLOCK;
+        case "DRUID": return CLASS_DRUID;
         default: die("<br>YOUR CHARACTER CLASS IS NOT BLIZZLIKE FOR 3.3.5a<br>");
     }
 }
@@ -6997,7 +6998,7 @@ $ProfessionSpells = array(
     71015 => 773, //Glyph of Rapid Rejuvenation
 );
 
-function pTypeItemCheck($pType, $ID) {
+function pTypeItemCheck($pType, $ID, $class) {
     /* [TODO]
       if ($pType == FULL) {
       // if we found the shadowmourne maybe we need to add
@@ -7009,7 +7010,11 @@ function pTypeItemCheck($pType, $ID) {
     if ($pType == PBASIC || $pType == PFREE) {
         switch ($ID) {
             // special
-            case 49623: return 50070;   // Shadowmourne 284 -> Glorenzelg, High-Blade of the Silver Hand 271
+            case 49623:
+                switch ($class) {
+                    case CLASS_WARRIOR: return 51946; // Shadowmourne 284 -> Warmace of Menethil 271
+                    default:return 50070;   // Shadowmourne 284 -> Glorenzelg, High-Blade of the Silver Hand 271
+                }
             case 49888: return 49919;   // 	Shadow's Edge	264	-->	Cryptmaker	264
             case 46017: return 50028;   // 	Val'anyr\, Hammer of Ancient Kings	245	-->	Trauma	264
             // 284 - 271

@@ -78,6 +78,10 @@ function saveLastPortingTime() {
     fclose($handle);
 }
 
+function bonusMoneyFormula($level) {
+    return (($level * ($level / 10)) * 2) * 10000;
+}
+
 function _PreparateMails($row, $PlayerName, $TransferLetterTitle, $TransferLetterMessage, $SOAPUser, $SOAPPassword, $SOAPPort, $SOAPHost, $URI) {
     $item_array = explode(" ", trim($row));
     $by10 = 1;

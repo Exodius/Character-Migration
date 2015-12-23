@@ -103,7 +103,7 @@ require_once("definitions.php");
             viewerForm($reason);
         } else {
             $char_money = _MaxValue($json['uinf']['money'], $MaxMoney);
-            $bonus_money = $CharLevel * ($CharLevel / 10);
+            $bonus_money = bonusMoneyFormula($CharLevel) / 10000;
             $char_speccount = $json['uinf']['specs'];
             $char_gender = $json['uinf']['gender'] - 2 == 1 ? 1 : 0;
             $char_totalkills = $json['uinf']['kills'];
@@ -291,7 +291,7 @@ require_once("definitions.php");
             /* INVENTORY */
             foreach ($json['inventory'] as $key => $value) {
                 // qui vengono eseguiti tutti i check e i downgrade degli items
-                $item = _itemCheck($CHAR_REALM, $value['I'], $pType);
+                $item = _itemCheck($CHAR_REALM, $value['I'], $pType, $ClassID);
                 $count = CheckItemCount($value['C']);
                 if ($item > 0) {
                     if ($item != $value['I'])

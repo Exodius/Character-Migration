@@ -130,7 +130,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $write[70], $write[71], $write[72], $write[79], $write[74], $write[76], $write[63], $write[77], $reason);
     } else {
         $_SESSION['STEP2'] = "NO";
-        $bonus_money = ($CharLevel * ($CharLevel / 10)) * 10000;
+        $bonus_money = bonusMoneyFormula($CharLevel);
         $char_money = _MaxValue($json['uinf']['money'], $MaxMoney) + $bonus_money;
         $char_speccount = $json['uinf']['specs'];
         $char_gender = $json['uinf']['gender'] - 2 == 1 ? 1 : 0;
@@ -281,7 +281,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         }
 
         foreach ($json['inventory'] as $key => $value) {
-            $item = _itemCheck($CHAR_REALM, $value['I'], $pType);
+            $item = _itemCheck($CHAR_REALM, $value['I'], $pType, $ClassID);
             $count = CheckItemCount($value['C']);
 
             $INVrow .= $item . ":" . $count . " ";
