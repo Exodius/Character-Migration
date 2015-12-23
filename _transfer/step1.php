@@ -59,9 +59,9 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
         $locale = trim(strtoupper($json['ginf']['locale']));
 
         // options
-        $changefr = isset($_POST["changefr"]) && $_POST["changefr"] == "enable";
+        $changerace = isset($_POST["changerace"]) && $_POST["changerace"] == "enable";
 
-        $atLogin = $changefr ? "212" : "28";
+        $atLogin = $changerace ? "148" : "28";
 
         $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
         _SelectDB($AccountDB, $connection);
@@ -381,7 +381,7 @@ function Step1Form($AccountDB, $AccountDBHost, $DBUser, $DBPassword, $TEXT1, $TE
                 <tr><td><b>Server URL ( Sito ): </b><input required name=\"ServerUrl\" type=\"text\" size=\"60\" style = \"float: right;\"></td></tr>
                 <tr><td><br><br><div align = left class = \"MythTable\">Opzioni:</div></td></tr>
                 <!--<tr><td><b>Abilita chardump obsoleti:</b> <input type='checkbox' name='obsolete' value='enable'/></tr></td>-->
-                <tr><td><b>Attiva cambio fazione e razza:</b> <input type='checkbox' name='changefr' value='enable' checked/></tr></td>
+                <tr><td><b>Attiva cambio razza della stessa fazione:</b> <input type='checkbox' name='changerace' value='enable' checked/></tr></td>
                 <tr><td><div align = left class = \"MythTable\"> Scegli la tipologia di porting da effettuare:</div></td></tr>
                 <tr><td><b>Tipologia di porting: </b>" . HtmlPortingChoice($AccountDB, $AccountDBHost, $DBUser, $DBPassword) . "</td></tr>
             <tr><td><div align = right class = \"MythTable\">" . $TEXT6 . "</div></td></tr>
