@@ -188,7 +188,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
     global $transferType, $status;
 
     $chardump_viewer_url = BASE_URL . "/_transfer/chardump_viewer.php";
-    $chardump_viewer_url = BASE_URL . "/search.php";
+    $chardump_search = BASE_URL . "/search.php";
     $limit = 50;
 
     if (_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevelsForRead)) {
@@ -196,7 +196,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
         <a href='<?= $chardump_viewer_url ?>'>Vai al visualizzatore dei dumps</a>
         <br>
         <br>
-        <a href='<?= $chardump_viewer_url ?>'>Vai al modulo ricerca</a>
+        <a href='<?= $chardump_search ?>'>Vai al modulo ricerca</a>
         <div align = right class = "MythTable" style = "width: 100%; padding-right: 2px;font-family: 'Tahoma';"><?= $TEXT1 ?></div>
         <br>
         <?php

@@ -289,11 +289,13 @@ require_once("definitions.php");
 
             echo '<div id="items">';
             /* INVENTORY */
+            $itemCnt = 0;
             foreach ($json['inventory'] as $key => $value) {
                 // qui vengono eseguiti tutti i check e i downgrade degli items
                 $item = _itemCheck($CHAR_REALM, $value['I'], $pType, $ClassID);
                 $count = CheckItemCount($value['C']);
                 if ($item > 0) {
+                    $itemCnt++;
                     if ($item != $value['I'])
                         $downgrade .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . $value['I'] . '</a>' . "<span class=\"text-danger\">x" . $count . "</span> => " . '<a href="http://wotlk.openwow.com/item=' . $item . '">' . $item . '</a>' . "<span class=\"text-danger\">x" . $count . "</span><br>";
                     else {
@@ -310,7 +312,9 @@ require_once("definitions.php");
                     }
                 }
             }
-            echo "<br><br><b class=\"text-warning\">Inventory</b><br>" . $INVrow . "<br><br>";
+
+
+            echo "<br><br><b class=\"text-warning\">Inventory ( count: $itemCnt )</b><br>" . $INVrow . "<br><br>";
 
             if ($downgrade != "<b class=\"text-warning\">Downgrade:</b> <br>")
                 echo "$downgrade<br><br>";
