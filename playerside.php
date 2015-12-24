@@ -172,7 +172,7 @@ if (!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $Allo
                                 break;
                             case 5: header("Location: _transfer/chardump_viewer.php");
                                 break;
-                            case 3: FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevels, $write[78], $write[75], $write[60], $write[65], $write[61], $write[85], $write[86], $write[30], $write[31], $write[32], $write[33], $write[34], $write[84]);
+                            case 3: FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevels, $AllowedGMLevelsForRead, $write[78], $write[75], $write[60], $write[65], $write[61], $write[85], $write[86], $write[30], $write[31], $write[32], $write[33], $write[34], $write[84]);
                                 break;
                         }
                         ?>
@@ -184,10 +184,23 @@ if (!_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $Allo
 include ('template/t_footer.php');
 ob_end_flush();
 
-function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels, $TEXT1, $TEXT2, $TEXT3, $TEXT4, $TEXT5, $TEXT6, $TEXT7, $TEXT8, $TEXT9, $TEXT10, $TEXT11, $TEXT12, $TEXT13) {
-    global $transferType;
+function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels, $AllowedGMLevelsForRead, $TEXT1, $TEXT2, $TEXT3, $TEXT4, $TEXT5, $TEXT6, $TEXT7, $TEXT8, $TEXT9, $TEXT10, $TEXT11, $TEXT12, $TEXT13) {
+    global $transferType, $status;
 
     $chardump_viewer_url = BASE_URL . "/_transfer/chardump_viewer.php";
+    $chardump_viewer_url = BASE_URL . "/search.php";
+    $limit = 50;
+
+    if (_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevelsForRead)) {
+        ?>
+        <a href='<?= $chardump_viewer_url ?>'>Vai al visualizzatore dei dumps</a>
+        <br>
+        <br>
+        <a href='<?= $chardump_viewer_url ?>'>Vai al modulo ricerca</a>
+        <div align = right class = "MythTable" style = "width: 100%; padding-right: 2px;font-family: 'Tahoma';"><?= $TEXT1 ?></div>
+        <br>
+        <?php
+    }
 
     if (_CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ACCOUNT_ID, $AllowedGMLevels)) {
         ?>
@@ -196,14 +209,10 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
             <input type="hidden" id="PortingType" name="PortingType" value="0"/>
             <input type="hidden" id="chardump" name="chardump" value=""/>
         </form>
-
-        <a href='<?= $chardump_viewer_url ?>'>Vai al visualizzatore dei dumps</a>
-        <div align = right class = "MythTable" style = "width: 100%; padding-right: 2px;font-family: 'Tahoma';"><?= $TEXT1 ?></div>
-        <br>
         <?php
         $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
         _SelectDB($AccountDB, $connection);
-        $query = mysql_query("SELECT * FROM `account_transfer` WHERE `gmAccount` = " . $ACCOUNT_ID . " ORDER BY `id` DESC LIMIT 25;", $connection);
+        $query = mysql_query("SELECT * FROM `account_transfer` WHERE `gmAccount` = " . $ACCOUNT_ID . " AND ( cStatus = " . $status["PENDING"] . " OR cStatus = " . $status["REPORT"] . " ) ORDER BY `id` DESC LIMIT $limit;", $connection);
         mysql_close($connection);
     } else {
         echo "       
@@ -238,7 +247,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
 
         $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
         _SelectDB($AccountDB, $connection);
-        $query = mysql_query("SELECT * FROM `account_transfer` WHERE `cAccount` = " . $ACCOUNT_ID . " ORDER BY `id` DESC LIMIT 25;", $connection);
+        $query = mysql_query("SELECT * FROM `account_transfer` WHERE `cAccount` = " . $ACCOUNT_ID . " ORDER BY `id` DESC LIMIT $limit;", $connection);
         mysql_close($connection);
     }
     echo "
@@ -272,7 +281,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
             if ($row["cStatus"] == 0) {
                 $toApprove.= "
                     <tr bgcolor = #FFFFCC>
-                        <td>" . $row["cNameNEW"] . " / <br> " . $row["cNameOLD"] . "</td>
+                        <td>" . $row["cNameNEW"] . " / <br> " . $row["cNameOLD"] . " / <br> " . $row["GUID"] . "</td>
                         <td>" . _CheckRealm($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $row["cRealm"]) . " / " . $row["oRealm"] . "</td>
                         <td>" . $row["oRealmlist"] . "</td>
                         <td>" . $row["oAccount"] . "</td>
@@ -295,24 +304,22 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
                 array_push($realms, $row["cRealm"]);
                 array_push($guids, $row["GUID"]);
             } else {
-                if ($count < 50) {
-                    $prev.= "
-                    <tr bgcolor = #FFFFCC>
-                        <td>" . $row["cNameNEW"] . " / <br> " . $row["cNameOLD"] . "</td>
-                        <td>" . _CheckRealm($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $row["cRealm"]) . " / " . $row["oRealm"] . "</td>
-                        <td>" . $row["oRealmlist"] . "</td>
-                        <td>" . $row["oAccount"] . "</td>
-                        <td>" . $row["oPassword"] . "</td>
-                        <td style='max-width: 40px; word-wrap: break-word'>" . $row["oServer"] . "</td>
-                        <td>" . $transferType[$row["tType"]]["Type"] . "</td>
-                        <td>Addon Rev: " . ($row["addonVersion"] ? $row["addonVersion"] : "<Empty>") . " <br><br>
-                        <button onclick='popUp(\"" . str_replace(' ', "<br>", $row["cItemRow"]) . "\")'>Item List</button><br>
-                        <button onclick='viewDump(\"CHDMP_DATA = \\\"" . $row["cDump"] . "\\\" \"," . $row["tType"] . ")'>View Dump</button></td>
-                        <td>" . $row["date_created"] . "</td>
-                        <td>" . $row["cAccount"] . "</td>
-                        <td bgcolor = #FFEAC7 " . _CheckReason($row["cStatus"], $row["Reason"]) . ">" . _CheckStatus($row["cStatus"], $TEXT8, $TEXT9, $TEXT10, $TEXT11, $TEXT12, $row["Reason"]) . "</td>
-                    </tr>";
-                }
+                $prev.= "
+                <tr bgcolor = #FFFFCC>
+                    <td>" . $row["cNameNEW"] . " / <br> " . $row["cNameOLD"] . " / <br> " . $row["GUID"] . "</td>
+                    <td>" . _CheckRealm($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $row["cRealm"]) . " / " . $row["oRealm"] . "</td>
+                    <td>" . $row["oRealmlist"] . "</td>
+                    <td>" . $row["oAccount"] . "</td>
+                    <td>" . $row["oPassword"] . "</td>
+                    <td style='max-width: 40px; word-wrap: break-word'>" . $row["oServer"] . "</td>
+                    <td>" . $transferType[$row["tType"]]["Type"] . "</td>
+                    <td>Addon Rev: " . ($row["addonVersion"] ? $row["addonVersion"] : "<Empty>") . " <br><br>
+                    <button onclick='popUp(\"" . str_replace(' ', "<br>", $row["cItemRow"]) . "\")'>Item List</button><br>
+                    <button onclick='viewDump(\"CHDMP_DATA = \\\"" . $row["cDump"] . "\\\" \"," . $row["tType"] . ")'>View Dump</button></td>
+                    <td>" . $row["date_created"] . "</td>
+                    <td>" . $row["cAccount"] . "</td>
+                    <td bgcolor = #FFEAC7 " . _CheckReason($row["cStatus"], $row["Reason"]) . ">" . _CheckStatus($row["cStatus"], $TEXT8, $TEXT9, $TEXT10, $TEXT11, $TEXT12, $row["Reason"]) . "</td>
+                </tr>";
 
                 $count++;
             }
@@ -321,7 +328,7 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
         echo $toApprove;
         ?>
         <tr>
-            <td colspan="11" align = center><h1>Previous portings</h1></td>
+            <td colspan="11" align = center><h1>Reported portings</h1></td>
         </tr>
         <?php
         echo $prev;

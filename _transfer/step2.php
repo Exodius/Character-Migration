@@ -12,7 +12,9 @@ if (isset($_POST['rename'])) {
     $ID = $_SESSION['dumpID'];
     $O_REALM = $_SESSION['oRealm'];
     $O_REALMLIST = $_SESSION['oRealmList'];
+    $O_GUID = $_SESSION['oGuid'];
     $reason = "";
+    $log = NULL;
 
     $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);
     _SelectDB($AccountDB, $connection);
@@ -40,12 +42,16 @@ if (isset($_POST['rename'])) {
     } else if (!_ServerOn($SOAPUser, $SOAPPassword, _SOAPPSwitch($RealmID), _SOAPHSwitch($RealmID), _SOAPURISwitch($RealmID))) {
         $reason = "Realm: \"" . $SNA . "\" <u>OFFLINE!</u>";
     } else if (checkDuplicate($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_NAME, $O_GUID, $O_REALM, $O_REALMLIST)) {
-        $reason = _RT("Questo personaggio è già stato importato!");
+        $log = $reason = _RT("Questo personaggio è già stato importato! Un report di abuso è stato inviato all'amministrazione. Contatta lo staff per maggiori info!");
     } else if ($delay < 0) {
         $reason = _RT("Un altro porting è in corso, riprovare tra " . abs($delay) . " secondi");
     }
 
     if (!empty($reason)) {
+        if ($log) {
+            UpdateDumpSTATUSandNAME($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $CHAR_NAME, $status["REPORT"], $reason);
+        }
+
         Step2Form($reason, $write[90]);
     } else {
         saveLastPortingTime();

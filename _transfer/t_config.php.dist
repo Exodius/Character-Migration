@@ -26,8 +26,9 @@ error_reporting(E_ERROR | E_PARSE);
 
     $SOAPUser           = "admin";          // SOAP USER
     $SOAPPassword       = "admin";          // SOAP USER PASSWORD
-    $AllowedGMLevels    = "(3,4,5,6,7)";    // GM LEVEL ACCESS AVAIBLE CHECK TRANSFERS. IN BRACKETS AND SEPARATE WITH COMMA. EXAMPLE: "(3,4)"
-
+    $AllowedGMLevels    = "(3,4,5,6,7)";    // GM LEVELS ACCESS AVAIBLE CHECK TRANSFERS. IN BRACKETS AND SEPARATE WITH COMMA. EXAMPLE: "(3,4)"
+    $AllowedGMLevelsForRead = "(2)";        // GM LEVELS FOR READ-ONLY ADMIN PAGES
+    
     $GAMEBUILD          = array(12340);            // Game Build for available transfer. that mean transfers accept only from this build. DO NOT TOUCH.
     $STORAGE            = 0;                // Account Where story Rejected or Canceled Transfers
     $MaxMoney           = 200000000;        // Max Money, if more then it, then only this. put values in copper coins

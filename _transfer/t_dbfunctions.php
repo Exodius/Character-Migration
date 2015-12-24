@@ -381,10 +381,10 @@ function UpdateDumpStatus($DBHost, $DBUser, $DBPassword, $AccountDB, $ID, $STATU
     mysql_close($connection);
 }
 
-function UpdateDumpSTATUSandNAME($DBHost, $DBUser, $DBPassword, $AccountDB, $ID, $NAME, $STATUS) {
+function UpdateDumpSTATUSandNAME($DBHost, $DBUser, $DBPassword, $AccountDB, $ID, $NAME, $STATUS, $reason="") {
     $connection = mysql_connect($DBHost, $DBUser, $DBPassword) or die(mysql_error());
     _SelectDB($AccountDB, $connection);
-    mysql_query("UPDATE `account_transfer` SET `cNameNew` = \"" . _X($NAME) . "\", `cStatus` = " . (int) $STATUS . " WHERE `id` = " . (int) $ID . ";", $connection) or die(mysql_error());
+    mysql_query("UPDATE `account_transfer` SET `cNameNew` = \"" . _X($NAME) . "\", `cStatus` = " . (int) $STATUS . ", `Reason` = \"$reason\" WHERE `id` = " . (int) $ID . ";", $connection) or die(mysql_error());
     mysql_close($connection);
 }
 

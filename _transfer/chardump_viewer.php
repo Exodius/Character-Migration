@@ -13,7 +13,7 @@ require_once("definitions.php");
 <script src="../template/libs/js/bootstrap.min.js"></script>
 <div class="container">
     <?php
-    $isGm = isset($_SESSION['id']) && _CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevels);
+    $isGm = isset($_SESSION['id']) && _CheckGMAccess($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $ID, $AllowedGMLevelsForRead);
 
     if (isset($_POST["PortingType"])) {
         ?><script type="text/javascript" src="http://cdn.openwow.com/api/tooltip.js"></script><?php

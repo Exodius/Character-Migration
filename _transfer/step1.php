@@ -307,6 +307,7 @@ if (isset($_POST['Account']) && !empty($_POST['Account']) && isset($_POST['Passw
             $_SESSION['dumpID'] = $ID;
             $_SESSION['oRealm'] = $O_REALM;
             $_SESSION['oRealmList'] = $O_REALMLIST;
+            $_SESSION['oGuid'] = $O_GUID;
             $_SESSION['STEP2'] = "YES";
             include("step2.php");
         } else {
