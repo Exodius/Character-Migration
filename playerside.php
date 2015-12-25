@@ -226,6 +226,10 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
             <br>
             <div style = \"font-size:17px\"><b>Prima di iniziare, controlla cosa verrà importato utilizzando questo visualizzatore!</b></div>
             <br>
+            <div style = \"font-size:17px\"><b>Possiamo eventualmente recuperare ESCLUSIVAMENTE oggetti/informazioni che avete nel dump ma non vi sono pervenute dopo il porting.</b></div>
+            <br>
+            <div style = \"font-size:17px\"><b>Dunque è di fondamentale importanza controllare bene il vostro dump prima di procedere. Non ci assumiamo responsabilità di perdite non pervenute e non forniamo una seconda possibilità di rieffettuare lo stesso porting.</b></div>
+            <br>
             <br>
             <div class = \"MythInput\">
                 <form action=\"" . $_SERVER["SCRIPT_NAME"] . "\" method=\"post\" enctype=\"multipart/form-data\" target='_blank'>

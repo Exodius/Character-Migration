@@ -181,8 +181,8 @@ function FlushStatisticTable($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $
     
     $searchQuery="";
     if (isset($_GET["search"])) {
-        $search=$_GET["search"];
-        $searchQuery=" AND ( cNameOLD LIKE '%$search%' OR cNameNEW LIKE '%search%' )";
+        $search=rtrim($_GET["search"]);
+        $searchQuery=" AND ( cNameOLD LIKE '%$search%' OR cNameNEW LIKE '%$search%' OR GUID = '$search' OR oGUID = '$search' OR cAccount LIKE '%$search%' )";
     }
     
     $connection = mysql_connect($AccountDBHost, $DBUser, $DBPassword);

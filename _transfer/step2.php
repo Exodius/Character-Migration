@@ -13,6 +13,7 @@ if (isset($_POST['rename'])) {
     $O_REALM = $_SESSION['oRealm'];
     $O_REALMLIST = $_SESSION['oRealmList'];
     $O_GUID = $_SESSION['oGuid'];
+    $O_NAME = $_SESSION['oName'];
     $reason = "";
     $log = NULL;
 
@@ -41,7 +42,7 @@ if (isset($_POST['rename'])) {
         $reason = $write[96] . $CHAR_NAME . $write[97];
     } else if (!_ServerOn($SOAPUser, $SOAPPassword, _SOAPPSwitch($RealmID), _SOAPHSwitch($RealmID), _SOAPURISwitch($RealmID))) {
         $reason = "Realm: \"" . $SNA . "\" <u>OFFLINE!</u>";
-    } else if (checkDuplicate($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $CHAR_NAME, $O_GUID, $O_REALM, $O_REALMLIST)) {
+    } else if (checkDuplicate($AccountDBHost, $DBUser, $DBPassword, $AccountDB, $O_NAME, $O_GUID, $O_REALM, $O_REALMLIST)) {
         $log = $reason = _RT("Questo personaggio è già stato importato! Un report di abuso è stato inviato all'amministrazione. Contatta lo staff per maggiori info!");
     } else if ($delay < 0) {
         $reason = _RT("Un altro porting è in corso, riprovare tra " . abs($delay) . " secondi");
