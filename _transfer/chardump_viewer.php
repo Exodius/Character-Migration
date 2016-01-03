@@ -65,7 +65,7 @@ require_once("definitions.php");
             $locale = trim(strtoupper($json['ginf']['locale']));
             $client = $json['ginf']['clientbuild'];
 
-            $API_path = "CONFIG API_PATH";
+            $API_path = "http://localhost/apiclean/public/index.php/"; // http://api/path/public/index.php/
 
             $AchievementsCount = 0;
             $ACHMINTime = 0;
@@ -288,53 +288,63 @@ require_once("definitions.php");
                 echo "<br><b class=\"text-warning\">Mounts/Companions<br></b><br>$Mounts";
 
 
-            /* GET ITEMS ICONS */
-            $item_entries = "";
-            foreach ($json['inventory'] as $key => $value)
+            if ($API_path != "")
             {
-                $item_entries .= $value['I'] . ",";
-
-                /* DOWNGRADE */
-                $item_downgrade = _itemCheck($CHAR_REALM, $value['I'], $pType, $ClassID);
-                if ($item_downgrade != $value['I'])
-                    $item_entries .= $item_downgrade . ",";
-
-                /* GEMS */
-                if (_GetGemID($value['G1']) > 1)
-                    $item_entries .= _GetGemID($value['G1']) . ",";
-                
-                if (_GetGemID($value['G2']) > 1)
-                    $item_entries .= _GetGemID($value['G2']) . ",";
-                
-                if (_GetGemID($value['G3']) > 1)
-                    $item_entries .= _GetGemID($value['G3']) . ",";
-            }
-            
-            /* CURRENCY ICONS */
-            if ($client == WOTLK_BUILD)
-            {
-                foreach ($json['currency'] as $key => $value)
+                /* GET ITEMS ICONS */
+                $item_entries = "";
+                foreach ($json['inventory'] as $key => $value)
                 {
-                    $CurrencyID = $value['I'];
-                    $COUNT = $value['C'];
-                    if ($COUNT < 1)
-                        continue;
+                    $item_entries .= $value['I'] . ",";
 
-                    // questi dovrebbero essere tutti i token / emblemi del player
-                    // l'unico filtro che fa è sugli arena / honor points che vengono aggiunti già prima
-                    if (_CheckCurrency($CurrencyID))
-                        $item_entries .= $CurrencyID . ',';
+                    /* DOWNGRADE */
+                    $item_downgrade = _itemCheck($CHAR_REALM, $value['I'], $pType, $ClassID);
+                    if ($item_downgrade != $value['I'])
+                        $item_entries .= $item_downgrade . ",";
+
+                    /* GEMS */
+                    if (_GetGemID($value['G1']) > 1)
+                        $item_entries .= _GetGemID($value['G1']) . ",";
+
+                    if (_GetGemID($value['G2']) > 1)
+                        $item_entries .= _GetGemID($value['G2']) . ",";
+
+                    if (_GetGemID($value['G3']) > 1)
+                        $item_entries .= _GetGemID($value['G3']) . ",";
+                }
+
+                /* CURRENCY ICONS */
+                if ($client == WOTLK_BUILD)
+                {
+                    foreach ($json['currency'] as $key => $value)
+                    {
+                        $CurrencyID = $value['I'];
+                        $COUNT = $value['C'];
+                        if ($COUNT < 1)
+                            continue;
+
+                        // questi dovrebbero essere tutti i token / emblemi del player
+                        // l'unico filtro che fa è sugli arena / honor points che vengono aggiunti già prima
+                        if (_CheckCurrency($CurrencyID))
+                            $item_entries .= $CurrencyID . ',';
+                    }
+                }
+
+                $item_entries = substr($item_entries, 0, -1);
+                $data = json_decode(file_get_contents($API_path . "item/template/icon/" . $item_entries), true);
+
+                $obj = array();
+                foreach ($data as $key => $value) {
+                    $obj[$value['entry']][] = $value['icon'];
                 }
             }
             
-            $item_entries = substr($item_entries, 0, -1);
-            $data = json_decode(file_get_contents($API_path . "item/template/icon/" . $item_entries), true);
+            function show_item($entry, $icons, $api)
+            {
+                if ($api != "")
+                    return '<img src="http://wow.zamimg.com/images/wow/icons/medium/' . $icons[$entry][0] . '.jpg">';
 
-            $obj = array();
-            foreach ($data as $key => $value) {
-                $obj[$value['entry']][] = $value['icon'];
+                return $entry;
             }
-
             
             echo '<div id="items">';
             /* INVENTORY */
@@ -346,18 +356,18 @@ require_once("definitions.php");
                 if ($item > 0) {
                     $itemCnt++;
                     if ($item != $value['I'])
-                        $downgrade .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '"><img src="http://wow.zamimg.com/images/wow/icons/medium/' . $obj[$value['I']][0] . '.jpg"></a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '"><img src="http://wow.zamimg.com/images/wow/icons/medium/' . $obj[$item][0] . '.jpg"></a>' . " x" . $count . " <br><br>";
+                        $downgrade .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . show_item($value['I'], $obj, $API_path) . '</a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '"><img src="http://wow.zamimg.com/images/wow/icons/medium/' . $obj[$item][0] . '.jpg"></a>' . " x" . $count . " <br><br>";
                     else {
-                        $INVrow .= '<a href="http://wotlk.openwow.com/item=' . $item . '"><img src="http://wow.zamimg.com/images/wow/icons/medium/' . $obj[$item][0] . '.jpg"></a>' . " x" . $count . "&nbsp;&nbsp; ";
+                        $INVrow .= '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($item, $obj, $API_path) . '</a>' . " x" . $count . "&nbsp;&nbsp; ";
                         $GEM1 = _GetGemID($value['G1']);
                         $GEM2 = _GetGemID($value['G2']);
                         $GEM3 = _GetGemID($value['G3']);
                         if ($GEM1 > 1)
-                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM1 . '"><img src="http://wow.zamimg.com/images/wow/icons/medium/' . $obj[$GEM1][0] . '.jpg"></a> x1 ';
+                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM1 . '">' . show_item($GEM1, $obj, $API_path) . '</a> x1 ';
                         if ($GEM2 > 1)
-                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM2 . '"><img src="http://wow.zamimg.com/images/wow/icons/medium/' . $obj[$GEM2][0] . '.jpg"></a> x1 ';
+                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM2 . '">' . show_item($GEM2, $obj, $API_path) . '</a> x1 ';
                         if ($GEM3 > 1)
-                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM3 . '"><img src="http://wow.zamimg.com/images/wow/icons/medium/' . $obj[$GEM3][0] . '.jpg"></a> x1 ';
+                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM3 . '">' . show_item($GEM3, $obj, $API_path) . '</a> x1 ';
                     }
                 }
             }
@@ -382,7 +392,7 @@ require_once("definitions.php");
                     // questi dovrebbero essere tutti i token / emblemi del player
                     // l'unico filtro che fa è sugli arena / honor points che vengono aggiunti già prima
                     if (_CheckCurrency($CurrencyID))
-                        $CURrow .= '<a href="http://wotlk.openwow.com/item=' . $CurrencyID . '"><img src="http://wow.zamimg.com/images/wow/icons/medium/' . $obj[$CurrencyID][0] . '.jpg"></a>' . "&nbsp; x" . $COUNT . " &nbsp;&nbsp;";
+                        $CURrow .= '<a href="http://wotlk.openwow.com/item=' . $CurrencyID . '">' . show_item($CurrencyID, $obj, $API_path) . '</a>' . "&nbsp; x" . $COUNT . " &nbsp;&nbsp;";
                 }
             } else {
                 $CURrow .= "Gli emblemi e le altre currency non possono essere importate dalle espansioni diverse dalla WOTLK poichè il sistema non è compatibile";
