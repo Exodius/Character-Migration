@@ -340,7 +340,7 @@ require_once("definitions.php");
             function show_item($entry, $icons, $api)
             {
                 if ($api != "")
-                    return '<img src="http://wow.zamimg.com/images/wow/icons/medium/' . $icons[$entry][0] . '.jpg">';
+                    return '<img src="http://cdn.openwow.com/wotlk/icons/medium/' . $icons[$entry][0] . '.jpg">';
 
                 return $entry;
             }
