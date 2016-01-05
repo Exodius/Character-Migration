@@ -65,8 +65,6 @@ require_once("definitions.php");
             $locale = trim(strtoupper($json['ginf']['locale']));
             $client = $json['ginf']['clientbuild'];
 
-            $API_path = "http://localhost/apiclean/public/index.php/"; // http://api/path/public/index.php/
-
             $AchievementsCount = 0;
             $ACHMINTime = 0;
             $ACHMAXTime = 0;
@@ -288,6 +286,7 @@ require_once("definitions.php");
                 echo "<br><b class=\"text-warning\">Mounts/Companions<br></b><br>$Mounts";
 
 
+            echo $API_path;
             if ($API_path != "")
             {
                 /* GET ITEMS ICONS */
