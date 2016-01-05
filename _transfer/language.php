@@ -251,7 +251,7 @@ switch ($language) {
             $write[75] = '<span style="font-size:18px"><ol>'
                     . '<li>Scarica l\'addon del gioco per estrarre il personaggio QUI: '
                     . '<br><b> <a href = "addons/wotlk/chardump.zip">  Addon versione ' . $addonVers[0] . ' ( Per Wrath of the lich King )</a>'
-                    . '<br><br><b> <a href = "addons/cata/chardump.zip">  Addon versione ' . $addonVers[1] . ' ( Per Cataclysm ) ATTENZIONE: QUESTO ADDON E\' IN TEST, NON UTILIZZARE PER EFFETTUARE IL PORTING!</a> '
+                    . '<br><br><b> <a href = "addons/cata/chardump.zip">  Addon versione ' . $addonVers[1] . ' ( Per Cataclysm )</a> '
                     . '<br><br>installalo nel tuo client, avvia il gioco ed abilitalo </b> <br> <br>'
                     . '</li>'
                     . '<br><li>Per estrarre "alcune" delle <b>ricette delle professioni</b> aprite le finestre delle professioni e delle ricette per "mostrarle all\'addon" e poi chiudetele</li> <br><li> Aprite la finestra dell\'equip per mostrare gli items che avete indossato all\'addon <br></li>'
