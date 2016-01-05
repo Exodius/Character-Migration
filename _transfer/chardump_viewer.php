@@ -65,8 +65,6 @@ require_once("definitions.php");
             $locale = trim(strtoupper($json['ginf']['locale']));
             $client = $json['ginf']['clientbuild'];
 
-            $API_path = ""; // http://api/path/public/index.php/
-
             $AchievementsCount = 0;
             $ACHMINTime = 0;
             $ACHMAXTime = 0;
@@ -288,6 +286,7 @@ require_once("definitions.php");
                 echo "<br><b class=\"text-warning\">Mounts/Companions<br></b><br>$Mounts";
 
 
+            echo $API_path;
             if ($API_path != "")
             {
                 /* GET ITEMS ICONS */
@@ -357,6 +356,8 @@ require_once("definitions.php");
                     $itemCnt++;
                     if ($item != $value['I'])
                         $downgrade .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . show_item($value['I'], $obj, $API_path) . '</a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($item, $obj, $API_path) . '</a>' . " x" . $count . " <br><br>";
+
+
                     else {
                         $INVrow .= '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($item, $obj, $API_path) . '</a>' . " x" . $count . "&nbsp;&nbsp; ";
                         $GEM1 = _GetGemID($value['G1']);
