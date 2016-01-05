@@ -356,7 +356,7 @@ require_once("definitions.php");
                 if ($item > 0) {
                     $itemCnt++;
                     if ($item != $value['I'])
-                        $downgrade .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . show_item($value['I'], $obj, $API_path) . '</a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($value['I'], $obj, $API_path) . '</a>' . " x" . $count . " <br><br>";
+                        $downgrade .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . show_item($value['I'], $obj, $API_path) . '</a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($item, $obj, $API_path) . '</a>' . " x" . $count . " <br><br>";
                     else {
                         $INVrow .= '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($item, $obj, $API_path) . '</a>' . " x" . $count . "&nbsp;&nbsp; ";
                         $GEM1 = _GetGemID($value['G1']);
@@ -375,7 +375,7 @@ require_once("definitions.php");
 
             echo "<br><br><b class=\"text-warning\">Inventory ( count: $itemCnt )</b><br><br>" . $INVrow . "<br><br>";
 
-            if ($downgrade != "<b class=\"text-warning\">Downgrade:</b> <br>")
+            if ($downgrade != "<b class=\"text-warning\">Downgrade:</b> <br><br>")
                 echo "$downgrade<br><br>";
 
             if ($GEMrow != "")
