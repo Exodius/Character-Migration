@@ -65,7 +65,7 @@ require_once("definitions.php");
             $locale = trim(strtoupper($json['ginf']['locale']));
             $client = $json['ginf']['clientbuild'];
 
-            $API_path = "http://localhost/apiclean/public/index.php/"; // http://api/path/public/index.php/
+            $API_path = ""; // http://api/path/public/index.php/
 
             $AchievementsCount = 0;
             $ACHMINTime = 0;
@@ -356,7 +356,7 @@ require_once("definitions.php");
                 if ($item > 0) {
                     $itemCnt++;
                     if ($item != $value['I'])
-                        $downgrade .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . show_item($value['I'], $obj, $API_path) . '</a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '"><img src="http://wow.zamimg.com/images/wow/icons/medium/' . $obj[$item][0] . '.jpg"></a>' . " x" . $count . " <br><br>";
+                        $downgrade .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . show_item($value['I'], $obj, $API_path) . '</a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($value['I'], $obj, $API_path) . '</a>' . " x" . $count . " <br><br>";
                     else {
                         $INVrow .= '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($item, $obj, $API_path) . '</a>' . " x" . $count . "&nbsp;&nbsp; ";
                         $GEM1 = _GetGemID($value['G1']);
