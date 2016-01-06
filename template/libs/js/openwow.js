@@ -5,9 +5,10 @@ var AzthOpenwow = function () {
     var _bak = $oWoWTooltip.init;
 
     $oWoWTooltip.init = function () {
-        _loaded = true;
         _bak();
-    }
+
+        _loaded = true;
+    };
 
     this.loadItem = function (currentType, currentId, currentLocale, currentParams, currentExpansion, callback) {
         var that = this;
@@ -34,15 +35,15 @@ var AzthOpenwow = function () {
         }
 
         _loadItem(callback);
-    }
+    };
 
     this.loadIcon = function (imgTarget, currentType, currentId, currentLocale, currentParams, currentExpansion) {
         this.loadItem(currentType, currentId, currentLocale, currentParams, currentExpansion, function (item) {
             var img = "";
             if (item["icon"])
-                img = "http://cdn.openwow.com/wotlk/icons/medium/" + item["icon"] + ".jpg"
+                img = "http://cdn.openwow.com/wotlk/icons/medium/" + item["icon"] + ".jpg";
 
             document.getElementById(imgTarget).src = img;
         });
-    }
-}
+    };
+};
