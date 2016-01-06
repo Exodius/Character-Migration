@@ -2,9 +2,6 @@
 
 error_reporting(E_ERROR | E_PARSE);
 
-    
-    $API_path = ""; // http://domain/tc-json-api/public/index.php/
-
     // AZTH hacks ;)
     define("PORTING_ACCOUNT",523);       // force porting to this account
     define("DELAY_TIME",120);            // delay time between portings 
