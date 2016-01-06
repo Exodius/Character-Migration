@@ -143,7 +143,9 @@ require_once("definitions.php");
             $char_arenapoints = _MaxValue($json['uinf']['arenapoints'], $MaxAP);
             $char_honorpoints = _MaxValue($json['uinf']['honor'], $MaxHP);
             $INVrow = "";
-            $downgrade = "<b class=\"text-warning\">Downgrade:</b> <br><br>";
+            $INVid = "";
+            $downgrade = "";
+            $downgradeId = "";
             $GEMrow = "";
             $CURrow = "";
 
@@ -329,10 +331,13 @@ require_once("definitions.php");
                 if ($item > 0) {
                     $itemCnt++;
                     if ($item != $value['I'])
+                    {
                         $downgrade .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . show_icon($value['I'], "item", $itemCnt) . '</a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_icon($item, $itemCnt) . '</a>' . " x" . $count . " <br><br>";
-
-
+                    
+                    $downgradeId .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . $value['I'] . '</a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '">' . $item . '</a>' . " x" . $count . " <br>";
+                    }
                     else {
+                        $INVid .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $item . '">' . $item . '</a>' . " x" . $count . "</div>&nbsp;&nbsp; ";
                         $INVrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $item . '">' . show_icon($item, "item", $itemCnt) . '</a>' . " x" . $count . "</div>&nbsp;&nbsp; ";
                         $GEM1 = _GetGemID($value['G1']);
                         $GEM2 = _GetGemID($value['G2']);
@@ -347,11 +352,14 @@ require_once("definitions.php");
                 }
             }
 
+            echo "<br><br><b class=\"text-warning\">Inventory ( count: $itemCnt )</b> &nbsp;&nbsp; <button class=\"btn-sm btn-warning\" OnClick='document.getElementById(\"invid\").style.display = \"block\";'>Mostra ID</button> <br><br>" . $INVrow . " <br><br>";
 
-            echo "<br><br><b class=\"text-warning\">Inventory ( count: $itemCnt )</b><br><br>" . $INVrow . "<br><br>";
+            echo '<div id="invid" style="display: none;">' . $INVid .'</div><br><br>';
 
-            if ($downgrade != "<b class=\"text-warning\">Downgrade:</b> <br><br>")
-                echo "$downgrade<br><br>";
+            if ($downgrade != "")
+                echo "<b class=\"text-warning\">Downgrade:</b> &nbsp;&nbsp; <button class=\"btn-sm btn-warning\" OnClick='document.getElementById(\"inviddown\").style.display = \"block\";'>Mostra ID</button> <br><br>  $downgrade<br><br>";
+            
+            echo '<div id="inviddown" style="display: none;">'. $downgradeId .'</div> <br>';
 
             if ($GEMrow != "")
                 echo "<b class=\"text-warning\">Gems</b><br><br>" . $GEMrow . "<br><br>";
