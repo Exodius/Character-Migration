@@ -72,6 +72,33 @@ require_once("definitions.php");
             $locale = trim(strtoupper($json['ginf']['locale']));
             $client = $json['ginf']['clientbuild'];
 
+            /*
+             * @param type $entry
+             * @param type $type -> type of icon "item", "spell" or "achievement" ("item" as default)
+             * @param type $n -> this is the item count , solving duplicates
+             * @return String
+             */
+            function show_icon($entry, $type, $n) {
+                ob_start();
+
+                $option = 3; // default: item
+                if ($type == "spell") { $option = 6; }
+                else if ($type == "achievement") { $option = 10; }
+
+                ?>
+                    <img id="<?= $type ?>-<?= $entry ?>-<?=$n?>" src="" alt="<?= $entry ?>">
+                    <script type="text/javascript">
+                        <?php 
+            echo '      $azthOpenwow.loadIcon("' . $type . '-' . $entry . '-' . $n .'", ' . $option . ' /* ' . $type .' */, ' . $entry . ', "enus", {}, 2 /* wotlk */)';
+                        ?>
+                    </script>
+                <?php
+
+                return ob_get_clean();
+            }
+            
+            
+            
             $AchievementsCount = 0;
             $ACHMINTime = 0;
             $ACHMAXTime = 0;
@@ -164,7 +191,7 @@ require_once("definitions.php");
             $ach_invalid = "";
             $ach_valid = "";
             foreach ($json['achiev'] as $key => $value) {
-                $achievement = '<a href="http://wotlk.openwow.com/achievement=' . $value['I'] . '">' . $value['I'] . '</a>';
+                $achievement = '<a href="http://wotlk.openwow.com/achievement=' . $value['I'] . '">' . show_icon($value['I'], "achievement") . '</a>';
                 $date = $value['D'];
                 if (_CheckWrongOrNoAchievement($achievement))
                     $ach_invalid .= $achievement . " ";
@@ -260,32 +287,12 @@ require_once("definitions.php");
                 echo "<br><span class=\"text-success\">" . $value['N'] . "</span> <span class=\"text-info\">" . $max . " " . $cur . "</span>";
             }
 
-             /**
-             * @param type $entry
-             * @param type $n -> this is the item count , solving duplicates
-             * @return String
-             */
-            function show_spell($entry, $n) {
-                ob_start();
-                ?>
-                <img id="spell-<?= $entry ?>-<?=$n?>" src="" alt="<?= $entry ?>">
-                <script type="text/javascript">
-                    $azthOpenwow.loadIcon("spell-<?= $entry ?>-<?=$n?>", 6 /* spell */, <?= $entry ?>, "enus", {}, 2 /* wotlk */);
-                </script>
-                <?php
-                return ob_get_clean();
-            }
-          
 
             /* SPELLS */
             $spells = "";
-            $SpellCnt = 0;
             foreach ($json['spells'] as $SpellID => $value) {
                 if (_isSpellValid($SpellID, $ClassID))
-                {
-                    $SpellCnt++;
-                    $spells .= '<a href="http://wotlk.openwow.com/spell=' . $SpellID . '">' . show_spell($SpellID, $SpellCnt) . '</a> ';
-                }
+                    $spells .= '<a href="http://wotlk.openwow.com/spell=' . $SpellID . '">' . show_icon($SpellID, "spell") . '</a> ';
             }
 
             if ($spells != "")
@@ -297,7 +304,7 @@ require_once("definitions.php");
             $recipes = "";
             foreach ($json['recipes'] as $SpellID)
                 if (_isProfessionSpell($SpellID))
-                    $recipes .= '<a href="http://wotlk.openwow.com/spell=' . $SpellID . '">' . $SpellID . '</a> ';
+                    $recipes .= '<a href="http://wotlk.openwow.com/spell=' . $SpellID . '">' . show_icon($SpellID, "spell") . '</a> ';
 
             if ($recipes != "")
                 echo "<br><br><b class=\"text-warning\">Recipes<br></b><br>$recipes";
@@ -307,27 +314,10 @@ require_once("definitions.php");
             /* MOUNTS/COMPANIONS */
             $Mounts = "";
             foreach ($json['creature'] as $key => $SpellID)
-                $Mounts .= '<a href="http://wotlk.openwow.com/spell=' . $SpellID . '">' . $SpellID . '</a> ';
+                $Mounts .= '<a href="http://wotlk.openwow.com/spell=' . $SpellID . '">' . show_icon($SpellID, "spell") . '</a> ';
 
             if ($Mounts != "")
                 echo "<br><b class=\"text-warning\">Mounts/Companions<br></b><br>$Mounts";
-
-            /**
-             * 
-             * @param type $entry
-             * @param type $n -> this is the item count , solving duplicates
-             * @return String
-             */
-            function show_item($entry, $n) {
-                ob_start();
-                ?>
-                <img id="item-<?= $entry ?>-<?=$n?>" src="" alt="<?= $entry ?>">
-                <script type="text/javascript">
-                    $azthOpenwow.loadIcon("item-<?= $entry ?>-<?=$n?>", 3 /* item */, <?= $entry ?>, "enus", {}, 2 /* wotlk */);
-                </script>
-                <?php
-                return ob_get_clean();
-            }
 
             echo '<div id="items">';
             /* INVENTORY */
@@ -339,20 +329,20 @@ require_once("definitions.php");
                 if ($item > 0) {
                     $itemCnt++;
                     if ($item != $value['I'])
-                        $downgrade .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . show_item($value['I'], $itemCnt) . '</a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($item, $itemCnt) . '</a>' . " x" . $count . " <br><br>";
+                        $downgrade .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . show_icon($value['I'], "item", $itemCnt) . '</a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_icon($item, $itemCnt) . '</a>' . " x" . $count . " <br><br>";
 
 
                     else {
-                        $INVrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($item, $itemCnt) . '</a>' . " x" . $count . "</div>&nbsp;&nbsp; ";
+                        $INVrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $item . '">' . show_icon($item, "item", $itemCnt) . '</a>' . " x" . $count . "</div>&nbsp;&nbsp; ";
                         $GEM1 = _GetGemID($value['G1']);
                         $GEM2 = _GetGemID($value['G2']);
                         $GEM3 = _GetGemID($value['G3']);
                         if ($GEM1 > 1)
-                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM1 . '">' . show_item($GEM1, $itemCnt . "-gem1") . '</a> x1</div> ';
+                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM1 . '">' . show_icon($GEM1, "item", $itemCnt . "-gem1") . '</a> x1</div> ';
                         if ($GEM2 > 1)
-                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM2 . '">' . show_item($GEM2, $itemCnt . "-gem2") . '</a> x1</div> ';
+                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM2 . '">' . show_icon($GEM2, "item", $itemCnt . "-gem2") . '</a> x1</div> ';
                         if ($GEM3 > 1)
-                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM3 . '">' . show_item($GEM3, $itemCnt . "-gem3") . '</a> x1</div> ';
+                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM3 . '">' . show_icon($GEM3, "item", $itemCnt . "-gem3") . '</a> x1</div> ';
                     }
                 }
             }
@@ -377,7 +367,7 @@ require_once("definitions.php");
                     // questi dovrebbero essere tutti i token / emblemi del player
                     // l'unico filtro che fa è sugli arena / honor points che vengono aggiunti già prima
                     if (_CheckCurrency($CurrencyID))
-                        $CURrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $CurrencyID . '">' . show_item($CurrencyID) . '</a>' . "&nbsp; x" . $COUNT . "</div> &nbsp;&nbsp;";
+                        $CURrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $CurrencyID . '">' . show_icon($CurrencyID, "item") . '</a>' . "&nbsp; x" . $COUNT . "</div> &nbsp;&nbsp;";
                 }
             } else {
                 $CURrow .= "Gli emblemi e le altre currency non possono essere importate dalle espansioni diverse dalla WOTLK poichè il sistema non è compatibile";

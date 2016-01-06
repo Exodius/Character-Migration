@@ -41,7 +41,7 @@ var AzthOpenwow = function () {
             if (item["icon"])
                 img = "http://cdn.openwow.com/wotlk/icons/medium/" + item["icon"] + ".jpg";
 
-            document.getElementById(imgTarget).src = img;
+            document.getElementById(imgTarget).src = img.toLowerCase();
         });
     };
 };
