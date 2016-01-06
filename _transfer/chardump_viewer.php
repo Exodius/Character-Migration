@@ -323,16 +323,16 @@ require_once("definitions.php");
 
 
                     else {
-                        $INVrow .= '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($item, $itemCnt) . '</a>' . " x" . $count . "&nbsp;&nbsp; ";
+                        $INVrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($item, $itemCnt) . '</a>' . " x" . $count . "</div>&nbsp;&nbsp; ";
                         $GEM1 = _GetGemID($value['G1']);
                         $GEM2 = _GetGemID($value['G2']);
                         $GEM3 = _GetGemID($value['G3']);
                         if ($GEM1 > 1)
-                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM1 . '">' . show_item($GEM1, $itemCnt) . '</a> x1 ';
+                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM1 . '">' . show_item($GEM1, $itemCnt) . '</a> x1</div> ';
                         if ($GEM2 > 1)
-                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM2 . '">' . show_item($GEM2, $itemCnt) . '</a> x1 ';
+                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM2 . '">' . show_item($GEM2, $itemCnt) . '</a> x1</div> ';
                         if ($GEM3 > 1)
-                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM3 . '">' . show_item($GEM3, $itemCnt) . '</a> x1 ';
+                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM3 . '">' . show_item($GEM3, $itemCnt) . '</a> x1</div> ';
                     }
                 }
             }
@@ -357,7 +357,7 @@ require_once("definitions.php");
                     // questi dovrebbero essere tutti i token / emblemi del player
                     // l'unico filtro che fa è sugli arena / honor points che vengono aggiunti già prima
                     if (_CheckCurrency($CurrencyID))
-                        $CURrow .= '<a href="http://wotlk.openwow.com/item=' . $CurrencyID . '">' . show_item($CurrencyID) . '</a>' . "&nbsp; x" . $COUNT . " &nbsp;&nbsp;";
+                        $CURrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $CurrencyID . '">' . show_item($CurrencyID) . '</a>' . "&nbsp; x" . $COUNT . "</div> &nbsp;&nbsp;";
                 }
             } else {
                 $CURrow .= "Gli emblemi e le altre currency non possono essere importate dalle espansioni diverse dalla WOTLK poichè il sistema non è compatibile";
