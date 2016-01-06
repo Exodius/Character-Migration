@@ -21,7 +21,7 @@ require_once("definitions.php");
         <script type="text/javascript" src="http://cdn.openwow.com/api/tooltip.js"></script>
         <script src="../template/libs/js/openwow.js"></script>
         <script type="text/javascript">
-            $azthOpenwow = new AzthOpenwow();
+            $azthOpenwow = new AzthOpenwow(); // init right after tooltip.js
         </script>
         <?php
         if (isset($_POST['chardump']) && !empty($_POST['chardump']))
@@ -78,27 +78,27 @@ require_once("definitions.php");
              * @param type $n -> this is the item count , solving duplicates
              * @return String
              */
+
             function show_icon($entry, $type, $n) {
                 ob_start();
 
                 $option = 3; // default: item
-                if ($type == "spell") { $option = 6; }
-                else if ($type == "achievement") { $option = 10; }
-
+                if ($type == "spell") {
+                    $option = 6;
+                } else if ($type == "achievement") {
+                    $option = 10;
+                }
                 ?>
-                    <img id="<?= $type ?>-<?= $entry ?>-<?=$n?>" src="" alt="<?= $entry ?>">
-                    <script type="text/javascript">
-                        <?php 
-            echo '      $azthOpenwow.loadIcon("' . $type . '-' . $entry . '-' . $n .'", ' . $option . ' /* ' . $type .' */, ' . $entry . ', "enus", {}, 2 /* wotlk */)';
-                        ?>
-                    </script>
+                <img id="<?= $type ?>-<?= $entry ?>-<?= $n ?>" src="" alt="<?= $entry ?>">
+                <script type="text/javascript">
                 <?php
-
+                    echo '      $azthOpenwow.loadIcon("' . $type . '-' . $entry . '-' . $n . '", ' . $option . ' /* ' . $type . ' */, ' . $entry . ', 0, {}, 2 /* wotlk */)';
+                ?>
+                </script>
+                <?php
                 return ob_get_clean();
             }
-            
-            
-            
+
             $AchievementsCount = 0;
             $ACHMINTime = 0;
             $ACHMAXTime = 0;
