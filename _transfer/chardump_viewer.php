@@ -260,12 +260,32 @@ require_once("definitions.php");
                 echo "<br><span class=\"text-success\">" . $value['N'] . "</span> <span class=\"text-info\">" . $max . " " . $cur . "</span>";
             }
 
+             /**
+             * @param type $entry
+             * @param type $n -> this is the item count , solving duplicates
+             * @return String
+             */
+            function show_spell($entry, $n) {
+                ob_start();
+                ?>
+                <img id="spell-<?= $entry ?>-<?=$n?>" src="" alt="<?= $entry ?>">
+                <script type="text/javascript">
+                    $azthOpenwow.loadIcon("spell-<?= $entry ?>-<?=$n?>", 6 /* spell */, <?= $entry ?>, "enus", {}, 2 /* wotlk */);
+                </script>
+                <?php
+                return ob_get_clean();
+            }
+          
 
             /* SPELLS */
             $spells = "";
+            $SpellCnt = 0;
             foreach ($json['spells'] as $SpellID => $value) {
                 if (_isSpellValid($SpellID, $ClassID))
-                    $spells .= '<a href="http://wotlk.openwow.com/spell=' . $SpellID . '">' . $SpellID . '</a> ';
+                {
+                    $SpellCnt++;
+                    $spells .= '<a href="http://wotlk.openwow.com/spell=' . $SpellID . '">' . show_spell($SpellID, $SpellCnt) . '</a> ';
+                }
             }
 
             if ($spells != "")
@@ -300,7 +320,6 @@ require_once("definitions.php");
              */
             function show_item($entry, $n) {
                 ob_start();
-                // we are using onerror just as workaround to run js after img 
                 ?>
                 <img id="item-<?= $entry ?>-<?=$n?>" src="" alt="<?= $entry ?>">
                 <script type="text/javascript">
@@ -329,11 +348,11 @@ require_once("definitions.php");
                         $GEM2 = _GetGemID($value['G2']);
                         $GEM3 = _GetGemID($value['G3']);
                         if ($GEM1 > 1)
-                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM1 . '">' . show_item($GEM1, $itemCnt) . '</a> x1</div> ';
+                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM1 . '">' . show_item($GEM1, $itemCnt . "-gem1") . '</a> x1</div> ';
                         if ($GEM2 > 1)
-                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM2 . '">' . show_item($GEM2, $itemCnt) . '</a> x1</div> ';
+                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM2 . '">' . show_item($GEM2, $itemCnt . "-gem2") . '</a> x1</div> ';
                         if ($GEM3 > 1)
-                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM3 . '">' . show_item($GEM3, $itemCnt) . '</a> x1</div> ';
+                            $GEMrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $GEM3 . '">' . show_item($GEM3, $itemCnt . "-gem3") . '</a> x1</div> ';
                     }
                 }
             }
