@@ -291,11 +291,20 @@ require_once("definitions.php");
             if ($Mounts != "")
                 echo "<br><b class=\"text-warning\">Mounts/Companions<br></b><br>$Mounts";
 
-            function show_item($entry) {
+            /**
+             * 
+             * @param type $entry
+             * @param type $n -> this is the item count , solving duplicates
+             * @return String
+             */
+            function show_item($entry, $n) {
                 ob_start();
                 // we are using onerror just as workaround to run js after img 
                 ?>
-                <img class="item-<?= $entry ?>" src="" alt="<?= $entry ?>" onerror='$azthOpenwow.loadIcon(this, 3 /* item */, <?= $entry ?>, "enus", {}, 2 /* wotlk */);'>
+                <img id="item-<?= $entry ?>-<?=$n?>" src="" alt="<?= $entry ?>">
+                <script type="text/javascript">
+                    $azthOpenwow.loadIcon("item-<?= $entry ?>-<?=$n?>", 3 /* item */, <?= $entry ?>, "enus", {}, 2 /* wotlk */);
+                </script>
                 <?php
                 return ob_get_clean();
             }
@@ -310,20 +319,20 @@ require_once("definitions.php");
                 if ($item > 0) {
                     $itemCnt++;
                     if ($item != $value['I'])
-                        $downgrade .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . show_item($value['I']) . '</a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($item) . '</a>' . " x" . $count . " <br><br>";
+                        $downgrade .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . show_item($value['I'], $itemCnt) . '</a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($item, $itemCnt) . '</a>' . " x" . $count . " <br><br>";
 
 
                     else {
-                        $INVrow .= '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($item) . '</a>' . " x" . $count . "&nbsp;&nbsp; ";
+                        $INVrow .= '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_item($item, $itemCnt) . '</a>' . " x" . $count . "&nbsp;&nbsp; ";
                         $GEM1 = _GetGemID($value['G1']);
                         $GEM2 = _GetGemID($value['G2']);
                         $GEM3 = _GetGemID($value['G3']);
                         if ($GEM1 > 1)
-                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM1 . '">' . show_item($GEM1) . '</a> x1 ';
+                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM1 . '">' . show_item($GEM1, $itemCnt) . '</a> x1 ';
                         if ($GEM2 > 1)
-                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM2 . '">' . show_item($GEM2) . '</a> x1 ';
+                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM2 . '">' . show_item($GEM2, $itemCnt) . '</a> x1 ';
                         if ($GEM3 > 1)
-                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM3 . '">' . show_item($GEM3) . '</a> x1 ';
+                            $GEMrow .= '<a href="http://wotlk.openwow.com/item=' . $GEM3 . '">' . show_item($GEM3, $itemCnt) . '</a> x1 ';
                     }
                 }
             }

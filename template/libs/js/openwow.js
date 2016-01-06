@@ -38,7 +38,11 @@ var AzthOpenwow = function () {
 
     this.loadIcon = function (imgTarget, currentType, currentId, currentLocale, currentParams, currentExpansion) {
         this.loadItem(currentType, currentId, currentLocale, currentParams, currentExpansion, function (item) {
-            imgTarget.src = "http://cdn.openwow.com/wotlk/icons/medium/" + item["icon"] + ".jpg";
+            var img = "";
+            if (item["icon"])
+                img = "http://cdn.openwow.com/wotlk/icons/medium/" + item["icon"] + ".jpg"
+
+            document.getElementById(imgTarget).src = img;
         });
     }
 }
