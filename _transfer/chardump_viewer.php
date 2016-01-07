@@ -142,9 +142,7 @@ require_once("definitions.php");
             $char_arenapoints = _MaxValue($json['uinf']['arenapoints'], $MaxAP);
             $char_honorpoints = _MaxValue($json['uinf']['honor'], $MaxHP);
             $INVrow = "";
-            $INVid = "";
             $downgrade = "";
-            $downgradeId = "";
             $GEMrow = "";
             $CURrow = "";
 
@@ -346,10 +344,10 @@ require_once("definitions.php");
                 }
             }
 
-            echo "<br><br><b class=\"text-warning\">Inventory ( count: $itemCnt )</b> &nbsp;&nbsp;" . $INVrow . " <br><br>";
+            echo "<br><br><b class=\"text-warning\">Inventory ( count: $itemCnt )</b> <br><br>" . $INVrow . " <br><br>";
 
             if ($downgrade != "")
-                echo "<b class=\"text-warning\">Downgrade:</b> &nbsp;&nbsp;  $downgrade<br><br>";
+                echo "<b class=\"text-warning\">Downgrade:</b> <br><br> $downgrade<br><br>";
 
             if ($GEMrow != "")
                 echo "<b class=\"text-warning\">Gems</b><br><br>" . $GEMrow . "<br><br>";
