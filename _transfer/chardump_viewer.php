@@ -131,9 +131,12 @@ require_once("definitions.php");
         } else if (!isset($part[1]))
             $reason = _RT($write[51]);
 
-        if (!empty($reason)) {
+        if (!empty($reason) && !$isGm) {
             viewerForm($reason);
         } else {
+            if (!empty($reason) && $isGm)
+                echo $reason . "<br>";
+
             $char_money = _MaxValue($json['uinf']['money'], $MaxMoney);
             $bonus_money = bonusMoneyFormula($CharLevel) / 10000;
             $char_speccount = $json['uinf']['specs'];
