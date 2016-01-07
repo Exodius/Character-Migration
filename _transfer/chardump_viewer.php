@@ -90,10 +90,9 @@ require_once("definitions.php");
                 }
                 ?>
                 <img id="<?= $type ?>-<?= $entry ?>-<?= $n ?>" src="" alt="<?= $entry ?>">
+                <span class="hidden-id" style="display:none">  <?= $entry ?> &nbsp;&nbsp; </span>
                 <script type="text/javascript">
-                <?php
-                    echo '      $azthOpenwow.loadIcon("' . $type . '-' . $entry . '-' . $n . '", ' . $option . ' /* ' . $type . ' */, ' . $entry . ', 0, {}, 2 /* wotlk */)';
-                ?>
+                    $azthOpenwow.loadIcon("<?= $type ?>-<?= $entry ?>-<?= $n ?>", <?= $option ?>, <?= $entry ?>, 0, {}, 2 /* wotlk */);
                 </script>
                 <?php
                 return ob_get_clean();
@@ -188,7 +187,7 @@ require_once("definitions.php");
             echo "<b class=\"text-info\">Money:</b> " . $char_money . "   <b> [ + bonus porting: " . $bonus_money . " <span style=\"color: yellow;\">gold</span> ]</b><br>";
             echo "<br><br>";
 
-
+            echo "<button class=\"btn-sm btn-warning\" OnClick='$(\".hidden-id\").show();'>Mostra tutti gli ID</button><br><br>";
             /* ACHIEVEMENTS */
             $ach_invalid = "";
             $ach_valid = "";
@@ -330,14 +329,9 @@ require_once("definitions.php");
                 $count = CheckItemCount($value['C']);
                 if ($item > 0) {
                     $itemCnt++;
-                    if ($item != $value['I'])
-                    {
+                    if ($item != $value['I']) {
                         $downgrade .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . show_icon($value['I'], "item", $itemCnt) . '</a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '">' . show_icon($item, $itemCnt) . '</a>' . " x" . $count . " <br><br>";
-                    
-                    $downgradeId .= '<a href="http://wotlk.openwow.com/item=' . $value['I'] . '">' . $value['I'] . '</a>' . " x" . $count . "  &nbsp;=>&nbsp;  " . '<a href="http://wotlk.openwow.com/item=' . $item . '">' . $item . '</a>' . " x" . $count . " <br>";
-                    }
-                    else {
-                        $INVid .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $item . '">' . $item . '</a>' . " x" . $count . "</div>&nbsp;&nbsp; ";
+                    } else {
                         $INVrow .= '<div style="display: inline-block;"><a href="http://wotlk.openwow.com/item=' . $item . '">' . show_icon($item, "item", $itemCnt) . '</a>' . " x" . $count . "</div>&nbsp;&nbsp; ";
                         $GEM1 = _GetGemID($value['G1']);
                         $GEM2 = _GetGemID($value['G2']);
@@ -352,14 +346,10 @@ require_once("definitions.php");
                 }
             }
 
-            echo "<br><br><b class=\"text-warning\">Inventory ( count: $itemCnt )</b> &nbsp;&nbsp; <button class=\"btn-sm btn-warning\" OnClick='document.getElementById(\"invid\").style.display = \"block\";'>Mostra ID</button> <br><br>" . $INVrow . " <br><br>";
-
-            echo '<div id="invid" style="display: none;">' . $INVid .'</div><br><br>';
+            echo "<br><br><b class=\"text-warning\">Inventory ( count: $itemCnt )</b> &nbsp;&nbsp;" . $INVrow . " <br><br>";
 
             if ($downgrade != "")
-                echo "<b class=\"text-warning\">Downgrade:</b> &nbsp;&nbsp; <button class=\"btn-sm btn-warning\" OnClick='document.getElementById(\"inviddown\").style.display = \"block\";'>Mostra ID</button> <br><br>  $downgrade<br><br>";
-            
-            echo '<div id="inviddown" style="display: none;">'. $downgradeId .'</div> <br>';
+                echo "<b class=\"text-warning\">Downgrade:</b> &nbsp;&nbsp;  $downgrade<br><br>";
 
             if ($GEMrow != "")
                 echo "<b class=\"text-warning\">Gems</b><br><br>" . $GEMrow . "<br><br>";
